@@ -1,0 +1,500 @@
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:75: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+INFO:     Started server process [5666]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+hora /Users/pranjay/Public added to system path ['/Users/pranjay/Public/AstroPinchV2.0/backend', '/opt/anaconda3/lib/python313.zip', '/opt/anaconda3/lib/python3.13', '/opt/anaconda3/lib/python3.13/lib-dynload', '/opt/anaconda3/lib/python3.13/site-packages', '/opt/anaconda3/lib/python3.13/site-packages/aeosa', '/Users/pranjay/Public']
+INFO:     127.0.0.1:54715 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54717 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54728 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54740 - "OPTIONS /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54741 - "OPTIONS /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54740 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54741 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54745 - "GET /muhurat/vivah?year=2026&month=4&type=Vivah HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54745 - "GET /muhurat/vivah?year=2026&month=4&type=Vivah HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54745 - "GET /muhurat/vivah?year=2026&month=4&type=Griha%20Pravesh HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54745 - "GET /muhurat/vivah?year=2026&month=4&type=Vehicle HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54745 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54747 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54753 - "OPTIONS /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54754 - "OPTIONS /astropinch_daily HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:54753 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:54754 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54760 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54760 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54760 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54762 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54766 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54769 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54771 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54772 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54786 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54797 - "GET /users HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:54798 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:54799 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54888 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54888 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54888 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54888 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54888 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54888 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54888 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54888 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54888 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54898 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54902 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54904 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54906 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54907 - "POST /calculate HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:54908 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:54909 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:54910 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:54911 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:54911 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:54910 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54921 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54924 - "GET /users HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:54925 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:54926 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:54927 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:54928 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:54928 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:54927 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54930 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54948 - "GET /users HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:54949 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:54950 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:54950 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:54949 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54952 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54963 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54964 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54965 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54952 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55002 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55004 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55006 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55007 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55004 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55004 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55004 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55007 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55007 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55007 - "GET /users HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55012 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55013 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55013 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55012 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55018 - "GET /users HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55019 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55020 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55036 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55048 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55049 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55050 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55048 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55049 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55050 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55036 - "GET /users HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55051 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55052 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55036 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55056 - "GET /users HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55059 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55060 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55073 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55076 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55076 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55092 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55092 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55106 - "OPTIONS /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55107 - "OPTIONS /astropinch_daily HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55106 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55107 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55107 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55106 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55112 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55113 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55116 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55127 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55128 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55129 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55116 - "GET /users HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55130 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55131 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55136 - "GET /users HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55137 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55138 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55149 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55150 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55151 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55136 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55136 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55136 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55163 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55164 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55165 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55136 - "GET /users HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55166 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55167 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55173 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55185 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55186 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55187 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55173 - "GET /users HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55194 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55195 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55198 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55202 - "GET /users HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55203 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55204 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55207 - "GET /users HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55208 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55209 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55209 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55208 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55222 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55230 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55235 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55279 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55282 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55283 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55277 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55277 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55283 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55283 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55283 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55283 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55283 - "GET /users HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55291 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55292 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55292 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55291 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55301 - "GET /users HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55307 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55308 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55321 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55321 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55331 - "GET /users HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55334 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55335 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55340 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55346 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55351 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55367 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55369 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55370 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55351 - "GET /users HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55371 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55372 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55372 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55371 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55378 - "OPTIONS /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55379 - "OPTIONS /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55378 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55379 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55379 - "GET /muhurat/vivah?year=2026&month=4&type=Vivah HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55378 - "GET /muhurat/vivah?year=2026&month=4&type=Vivah HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55378 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55379 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55386 - "GET /muhurat/vivah?year=2026&month=4&type=Vivah HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55386 - "GET /muhurat/vivah?year=2026&month=4&type=Vivah HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55388 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55388 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55398 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55400 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55402 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55412 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55412 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55412 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55412 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55417 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55419 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55412 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55417 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55421 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55419 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55417 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55412 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55421 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55424 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55425 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55432 - "GET /users HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55433 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55434 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55449 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55452 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55453 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55447 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55461 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55498 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55501 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55502 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55496 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55496 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55496 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55502 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55496 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55529 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55534 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55534 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55534 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55536 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55540 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55541 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55543 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55544 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55547 - "OPTIONS /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55548 - "OPTIONS /astropinch_daily HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Isha Kumari
+INFO:     127.0.0.1:55547 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Isha Kumari
+INFO:     127.0.0.1:55548 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55563 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55564 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55569 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55572 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55582 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55582 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55582 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55582 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55587 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55592 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55592 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55592 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55592 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55592 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55599 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55614 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55614 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55616 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55614 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55620 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55625 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55629 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55629 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55631 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55629 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55638 - "POST /horoscope/sign?sign=scorpio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55640 - "POST /horoscope/sign?sign=scorpio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55652 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55655 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55655 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55655 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55655 - "POST /horoscope/sign?sign=taurus HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55657 - "POST /horoscope/sign?sign=taurus HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55657 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55668 - "POST /horoscope/sign?sign=taurus HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55657 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55683 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55692 - "POST /horoscope/sign?sign=taurus HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55683 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55692 - "POST /horoscope/sign?sign=taurus HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55683 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55697 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55707 - "POST /horoscope/sign?sign=gemini HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55709 - "POST /horoscope/sign?sign=gemini HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55713 - "POST /horoscope/sign?sign=leo HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55714 - "POST /horoscope/sign?sign=leo HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55722 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55731 - "POST /horoscope/sign?sign=leo HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55722 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55731 - "POST /horoscope/sign?sign=leo HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55722 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55738 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55747 - "POST /horoscope/sign?sign=leo HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55738 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55749 - "GET /static/avatars/IMG_0152.jpeg HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:55749 - "GET /static/avatars/IMG_1394.jpeg HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:55738 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55747 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55747 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55738 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55753 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55755 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55758 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55759 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55759 - "OPTIONS /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55758 - "OPTIONS /astropinch_daily HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55759 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55758 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55761 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55775 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55775 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55783 - "POST /horoscope/sign?sign=gemini HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55784 - "POST /horoscope/sign?sign=gemini HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55794 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55803 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55803 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55805 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55803 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55803 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55878 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55878 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55878 - "POST /horoscope/sign?sign=taurus HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55883 - "POST /horoscope/sign?sign=taurus HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55900 - "POST /horoscope/sign?sign=taurus HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55898 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55898 - "GET /users HTTP/1.1" 200 OK
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  res = await service.get_daily_horoscope(req.dict())
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55906 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55908 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55908 - "POST /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:55906 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55910 - "POST /horoscope/sign?sign=gemini HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55912 - "POST /horoscope/sign?sign=gemini HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55916 - "POST /horoscope/sign?sign=gemini HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55918 - "POST /horoscope/sign?sign=gemini HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55930 - "POST /horoscope/sign?sign=scorpio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55932 - "POST /horoscope/sign?sign=scorpio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56038 - "GET /horoscope/sign?sign=scorpio HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:56038 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:56091 - "GET /horoscope/sign?sign=scorpio HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:56091 - "GET /horoscope/sign?sign=scorpio HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:56091 - "GET /horoscope/sign?sign=scorpio HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:56091 - "GET /horoscope/sign?sign=scorpio HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:56091 - "GET /horoscope/sign?sign=scorpio HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:56104 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:56104 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:56139 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:56139 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:56156 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:56156 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:56167 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:56167 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:56167 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:56167 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:56181 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:56181 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:56187 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:56190 - "GET /horoscope/sign?sign=sagittarius HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:56191 - "GET /horoscope/sign?sign=sagittarius HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:56191 - "GET /horoscope/sign?sign=sagittarius HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:56198 - "OPTIONS /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56198 - "OPTIONS /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56200 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56198 - "POST /panchang HTTP/1.1" 200 OK
