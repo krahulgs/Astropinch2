@@ -1,0 +1,31 @@
+# Environment
+.env
+backend/.env
+frontend/.env
+frontend/.env.local
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.venv/
+venv/
+dist/
+
+# Logs & Sessions
+backend/logs/
+backend/scratch/
+
+# Node / Next.js
+node_modules/
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+
+# OS
+.DS_Store
+Thumbs.db

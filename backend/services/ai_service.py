@@ -176,7 +176,7 @@ class AIService:
                 [One simple, practical ritual. Max 15 words.]
                 """
                 response = await client.chat.completions.create(
-                    model="gpt-3.5-turbo",
+                    model="gpt-4o",
                     messages=[{"role": "system", "content": "You are a friendly, expert astrologer. Use 'Easy English' that is simple to understand. No jargon. Explain things as a life mentor would."},
                               {"role": "user", "content": prompt}],
                     temperature=0.2
@@ -319,11 +319,15 @@ class AIService:
             risk_label, risk_score = "Low", 28
             cautions = ["Avoid minor distractions.", "Stay focused on your primary goal."]
 
-        # Default values for pillars/remedy
+        # Default values for pillars/remedy/actions
         wealth = "Focus on conservation of resources today."
         career = "Steady progress; focus on administrative excellence."
         health = "Prioritize restorative practices and balanced diet."
         remedy = "Recite 'Om Namah Shivaya' 11 times or light a sandalwood incense to harmonize your lunar energy."
+        power_actions = ["Plan your day carefully", "Stay hydrated", "Avoid unnecessary arguments"]
+        citation = f"Grounded in Gochara Logic & {moon_data['sign']} Lunar Alignment."
+        soul_essence = f"As a {sign_name}, you are experiencing the Moon's influence in your {moon_h} house today."
+        current_season = "A period of steady growth and reflection."
 
         # LLM Synthesis
         if ai_client:
@@ -349,7 +353,7 @@ class AIService:
                 CRITICAL: Use ONLY the SECTION: label format. Keep each section short and punchy.
                 """
                 response = await ai_client.chat.completions.create(
-                    model="gpt-3.5-turbo",
+                    model="gpt-4o",
                     messages=[{"role": "system", "content": "You are a friendly mentor providing daily insights. Use very simple, 'Easy English.' Explain the vibe simply and avoid all technical terms."},
                               {"role": "user", "content": prompt}],
                     temperature=0.2
@@ -362,7 +366,7 @@ class AIService:
                 # But to ensure it's fully AI, let's ask for the season specifically
                 season_prompt = f"Explain the 'Current Season' for {sign_name} based on Moon in {moon_data['sign']} and risk {risk_label}. No jargon. Max 40 words."
                 season_res = await ai_client.chat.completions.create(
-                    model="gpt-3.5-turbo",
+                    model="gpt-4o",
                     messages=[{"role": "system", "content": "You are a professional astrologer. No jargon. Concise."},
                               {"role": "user", "content": season_prompt}],
                     temperature=0.2
@@ -384,7 +388,7 @@ class AIService:
                 No jargon. Simple English only.
                 """
                 pillar_res = await ai_client.chat.completions.create(
-                    model="gpt-3.5-turbo",
+                    model="gpt-4o",
                     messages=[{"role": "system", "content": "You are a warm, practical life coach. Use simple, easy-to-understand language. No technical terms."},
                               {"role": "user", "content": pillar_prompt}],
                     temperature=0.2
@@ -403,11 +407,12 @@ class AIService:
                 if c_line: cautions = [c.strip() for c in c_line.split('|')]
                 
                 a_line = next((l.split(': ')[1] for l in p_lines if 'Actions' in l), "")
+                if a_line: power_actions = [a.strip() for a in a_line.split('|')]
                 
                 # NEW: Citation LLM Integration
                 cite_prompt = f"Create a short, professional 1-sentence citation for a horoscope based on Moon in {moon_data['sign']} for {sign_name}. No jargon. Explain the source logic simply. Max 20 words."
                 cite_res = await ai_client.chat.completions.create(
-                    model="gpt-3.5-turbo",
+                    model="gpt-4o",
                     messages=[{"role": "system", "content": "You are a data scientist. No jargon."},
                               {"role": "user", "content": cite_prompt}],
                     temperature=0.2
@@ -415,17 +420,10 @@ class AIService:
                 citation = cite_res.choices[0].message.content
             except Exception as e:
                 print(f"LLM Sign Horoscope Error: {e}")
-                wealth = "Focus on conservation of resources today."
-                career = "Steady progress; focus on administrative excellence."
-                health = "Prioritize restorative practices and balanced diet."
-                remedy = "Recite 'Om Namah Shivaya' 11 times to harmonize your energy."
-                citation = f"Grounded in Gochara Logic & {moon_data['sign']} Lunar Alignment."
         else:
             wealth = "Moderate gains likely through digital channels." if moon_h in [2, 11] else "Focus on conservation of resources today."
             career = "Your influence is growing in your professional circle." if moon_h in [1, 10] else "Steady progress; focus on administrative excellence."
             health = "Vitality is high; excellent for rigorous activity." if moon_h in [1, 3, 6] else "Prioritize restorative practices and balanced diet."
-            remedy = "Recite 'Om Namah Shivaya' 11 times to harmonize your energy."
-            citation = f"Grounded in Gochara Logic & {moon_data['sign']} Lunar Alignment."
 
         return {
             "sign": sign_name,
@@ -446,7 +444,7 @@ class AIService:
             },
             "risk_level": {"label": risk_label, "score": risk_score},
             "cautions": cautions,
-            "power_actions": synthesized_actions if synthesized_actions else power_actions,
+            "power_actions": power_actions,
             "citation": citation
         }
 
@@ -483,7 +481,7 @@ class AIService:
             No jargon. Warm, mentoring tone. No hashtags.
             """
             response = await client.chat.completions.create(
-                model="gpt-3.5-turbo",
+                model="gpt-4o",
                 messages=[{"role": "system", "content": "You are a warm, friendly life coach. Use simple English. No jargon. No hashtags."},
                           {"role": "user", "content": prompt}],
                 temperature=0.2
@@ -524,7 +522,7 @@ class AIService:
             No jargon. No hashtags.
             """
             response = await client.chat.completions.create(
-                model="gpt-3.5-turbo",
+                model="gpt-4o",
                 messages=[{"role": "system", "content": "You are a financial advisor. Use simple English. No jargon."},
                           {"role": "user", "content": prompt}],
                 temperature=0.2
@@ -560,7 +558,7 @@ class AIService:
             - Action 3
             """
             response = await client.chat.completions.create(
-                model="gpt-3.5-turbo",
+                model="gpt-4o",
                 messages=[{"role": "system", "content": "You are a warm, practical life coach. No jargon. Very simple English."},
                           {"role": "user", "content": prompt}],
                 temperature=0.2
@@ -600,7 +598,7 @@ class AIService:
             Turning Point: [Date]
             """
             response = await client.chat.completions.create(
-                model="gpt-3.5-turbo",
+                model="gpt-4o",
                 messages=[{"role": "system", "content": "You are a professional life mentor. Simple English. No jargon."},
                           {"role": "user", "content": prompt}],
                 temperature=0.2
@@ -653,7 +651,7 @@ class AIService:
             Travel: [Value]
             """
             response = await client.chat.completions.create(
-                model="gpt-3.5-turbo",
+                model="gpt-4o",
                 messages=[{"role": "system", "content": "You are a helpful mentor. Easy English only."},
                           {"role": "user", "content": prompt}],
                 temperature=0.2
@@ -706,7 +704,7 @@ class AIService:
             No jargon. No signs/planets mentioned. Just the human essence.
             """
             response = await client.chat.completions.create(
-                model="gpt-3.5-turbo",
+                model="gpt-4o",
                 messages=[{"role": "system", "content": "You are a warm relationship mentor. Use simple, direct English. No jargon."},
                           {"role": "user", "content": prompt}],
                 temperature=0.2
@@ -728,9 +726,108 @@ class AIService:
             print(f"Matching AI Error: {e}")
             return None
     
-    async def get_consultation_response(self, messages, astro_name):
-        """Mock response for consultation chat."""
-        return f"I am {astro_name}, your Vedic guide. Based on your chart, I see great potential for growth."
+    async def get_chat_response(self, user_name, query):
+        """Generates a dynamic astrological response to a user query for the free chat feature."""
+        from openai import AsyncOpenAI
+        api_key = os.environ.get("OPENAI_API_KEY")
+        if not api_key: return f"I am your Vedic guide. Based on {user_name}'s chart, I see great potential."
+        
+        try:
+            client = AsyncOpenAI(api_key=api_key)
+            prompt = f"""
+            You are a wise, empathetic Vedic AI Astrologer. 
+            The user is asking a question about a person named {user_name}.
+            Question: "{query}"
+            
+            Provide a warm, intuitive, and reassuring astrological answer (max 60 words). 
+            Use simple English without overly technical jargon. Maintain the persona of a master Jyotishi.
+            """
+            response = await client.chat.completions.create(
+                model="gpt-4o",
+                messages=[{"role": "system", "content": "You are a master Jyotishi and life guide."},
+                          {"role": "user", "content": prompt}],
+                temperature=0.7
+            )
+            return response.choices[0].message.content
+        except Exception as e:
+            print(f"Chat AI Error: {e}")
+            return f"I sense strong, transformative energies for {user_name}. The planetary alignments suggest a very promising path forward."
+
+    async def get_consultation_response(self, messages, astro_name, user_profile=None):
+        """Generates a dynamic response for the Marketplace Astrologer consultation chat, using actual chart data."""
+        from openai import AsyncOpenAI
+        api_key = os.environ.get("OPENAI_API_KEY")
+        if not api_key: return f"I am {astro_name}, your Vedic guide. Based on your chart, I see great potential for growth."
+        
+        try:
+            client = AsyncOpenAI(api_key=api_key)
+            
+            today = datetime.now().strftime("%d %B %Y")
+            context_prompt = f"You are {astro_name}, an expert Vedic Astrologer. Write like a real human expert sharing wisdom, not a robot. Use a warm, conversational, and empathetic tone. Use natural phrases like 'I see here...', 'Looking at your charts...', or 'It's interesting to note...'. Today's date is {today}. IMPORTANT: Only predict events from today onwards. NEVER suggest past years as future opportunities. Keep responses under 60 words. Do not break character."
+            if user_profile:
+                name = user_profile.get("full_name", "the user")
+                dob = user_profile.get("birth_date", "")
+                birth_time = user_profile.get("birth_time", "")
+                place = user_profile.get("birth_place", "")
+                profession = user_profile.get("profession", "")
+                marital = user_profile.get("marital_status", "")
+                
+                chart_context = ""
+                if "chart" in user_profile and user_profile["chart"]:
+                    chart = user_profile["chart"]
+                    planets = chart.get("planets", [])
+                    asc = planets[0].get("sign", "") if planets else ""
+                    moon = next((p.get("sign", "") for p in planets if p.get("name") == "Moon"), "")
+                    sun = next((p.get("sign", "") for p in planets if p.get("name") == "Sun"), "")
+                    jupiter = next((p for p in planets if p.get("name") == "Jupiter"), None)
+                    saturn = next((p for p in planets if p.get("name") == "Saturn"), None)
+                    jupiter_info = f"Jupiter in House {jupiter['house']} ({jupiter['sign']})" if jupiter else ""
+                    saturn_info = f"Saturn in House {saturn['house']} ({saturn['sign']})" if saturn else ""
+                    dasha = chart.get("dasha", "")
+                    chart_context = f" Birth Chart: Ascendant={asc}, Moon={moon}, Sun={sun}. {jupiter_info}. {saturn_info}. Current Dasha: {dasha}."
+                
+                context_prompt += f" You are consulting {name} (born {dob} at {birth_time} in {place}, profession: {profession}, marital status: {marital}).{chart_context} YOU ALREADY HAVE THEIR COMPLETE CHART. DO NOT ASK FOR BIRTH DETAILS. Give specific, date-aware predictions based on this data."
+            
+            # ── Inject verified Vedic timing data ───────────────────────────────
+            timing = user_profile.get("vedic_timing") if user_profile else None
+            if timing and "error" not in timing:
+                maha = timing["current_mahadasha"]
+                antar = timing["current_antardasha"]
+                upcoming = timing.get("upcoming_mahadashas", [])
+                upcoming_str = ", ".join(
+                    [f"{u['planet']} Mahadasha ({u['starts']} to {u['ends']})" for u in upcoming]
+                )
+                jup_sign = timing.get("jupiter_current_sign", "")
+                nak_name = timing.get("moon_nakshatra_name", "")
+                timing_block = (
+                    f" VERIFIED VEDIC TIMING (computed from Swiss Ephemeris, NOT guessed):"
+                    f" Moon Nakshatra={nak_name}."
+                    f" Current Mahadasha: {maha['planet']} (ends {maha['ends']})."
+                    f" Current Antardasha: {antar['planet']} (ends {antar['ends']})."
+                    f" Upcoming Mahadashas: {upcoming_str}."
+                    f" Jupiter currently transiting {jup_sign}."
+                    f" Use ONLY these computed dates when predicting timing. Never invent or approximate years."
+                )
+                context_prompt += timing_block
+            # ──────────────────────────────────────────────────────────────────
+
+            # Format history for OpenAI
+            openai_messages = [{"role": "system", "content": context_prompt}]
+            
+            for msg in messages:
+                # msg usually has 'role' ('astro' or 'user') and 'text'
+                role = "assistant" if msg.get("role") == "astro" else "user"
+                openai_messages.append({"role": role, "content": msg.get("text", "")})
+                
+            response = await client.chat.completions.create(
+                model="gpt-4o",
+                messages=openai_messages,
+                temperature=0.7
+            )
+            return response.choices[0].message.content
+        except Exception as e:
+            print(f"Consultation AI Error: {e}")
+            return f"I am analyzing your energies right now. The cosmos are aligning favorably."
 
     async def get_sign_prediction(self, sign, chart_data):
         """Mock sign prediction."""

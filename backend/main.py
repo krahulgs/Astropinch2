@@ -33,6 +33,7 @@ class ChatLogModel(BaseModel):
 class ChatQueryModel(BaseModel):
     messages: List[ChatMessage]
     astro_name: str
+    profile_name: Optional[str] = None
 
 class PaymentOrderRequest(BaseModel):
     amount: float
@@ -100,12 +101,127 @@ async def log_chat(data: ChatLogModel):
         json.dump(data.dict(), f, indent=4)
     return {"status": "success", "file": filename}
 
+@app.get("/consultation/history")
+async def get_all_history():
+    log_dir = "logs/chat_sessions"
+    if not os.path.exists(log_dir):
+        return []
+    
+    history = []
+    for filename in os.listdir(log_dir):
+        if filename.endswith(".json"):
+            with open(os.path.join(log_dir, filename), "r") as f:
+                data = json.load(f)
+                # Just return metadata for the list
+                history.append({
+                    "session_id": data.get("session_id"),
+                    "astrologer_id": data.get("astrologer_id"),
+                    "message_count": len(data.get("messages", [])),
+                    "last_message": data.get("messages", [])[-1]["text"] if data.get("messages") else "",
+                    "time": data.get("messages", [])[0]["time"] if data.get("messages") else ""
+                })
+    return history
+
+@app.get("/consultation/history/{session_id}")
+async def get_session_history(session_id: str):
+    log_dir = "logs/chat_sessions"
+    for filename in os.listdir(log_dir):
+        if filename.startswith(f"{session_id}_"):
+            with open(os.path.join(log_dir, filename), "r") as f:
+                return json.load(f)
+    return {"error": "Session not found"}
+
+
 @app.post("/consultation/chat")
-async def chat_with_astro(data: ChatQueryModel):
+async def chat_with_astro(data: ChatQueryModel, db: Session = Depends(get_db)):
     from services.ai_service import AIService
-    ai = AIService()
+    from services.astrology import AstrologyEngine
+    import pytz
+    ai_svc = AIService()
     messages_dict = [m.dict() for m in data.messages]
-    response = await ai.get_consultation_response(messages_dict, data.astro_name)
+    
+    user_profile = None
+    if data.profile_name:
+        # Case-insensitive name search
+        search = data.profile_name.strip().lower()
+        user = db.query(models.User).filter(
+            models.User.full_name.ilike(f"%{search}%")
+        ).first()
+        
+        if user:
+            user_profile = {
+                "full_name": user.full_name,
+                "birth_date": user.birth_date,
+                "birth_time": user.birth_time,
+                "birth_place": user.birth_place,
+                "profession": user.profession,
+                "marital_status": user.marital_status,
+                "chart": None
+            }
+            # Compute the chart if we have all required info
+            if user.birth_date and user.birth_time and user.lat and user.lon:
+                try:
+                    astro_engine = AstrologyEngine()
+                    parts = user.birth_date.replace('/', '-').split('-')
+                    if len(parts[0]) == 4:
+                        year, month, day = int(parts[0]), int(parts[1]), int(parts[2])
+                    else:
+                        day, month, year = int(parts[0]), int(parts[1]), int(parts[2])
+                    
+                    time_parts = user.birth_time.split(':')
+                    hour, minute = int(time_parts[0]), int(time_parts[1])
+                    
+                    from datetime import datetime
+                    local_tz = pytz.timezone("Asia/Kolkata")
+                    local_dt = local_tz.localize(datetime(year, month, day, hour, minute))
+                    utc_dt = local_dt.astimezone(pytz.utc)
+                    import swisseph as swe
+                    jd_ut = swe.julday(utc_dt.year, utc_dt.month, utc_dt.day,
+                                       utc_dt.hour + utc_dt.minute / 60.0)
+                    
+                    # ── Build chart using correct AstrologyEngine API ──────────
+                    raw_planets = astro_engine.get_planets(jd_ut, float(user.lat), float(user.lon))
+                    asc = astro_engine.get_ascendant(jd_ut, float(user.lat), float(user.lon))
+                    
+                    formatted_planets = []
+                    for pname, p in raw_planets.items():
+                        house = astro_engine.get_house_number(p["longitude"], asc["longitude"])
+                        formatted_planets.append({
+                            "name": pname,
+                            "sign": astro_engine.SIGN_NAMES[p["sign_id"] - 1],
+                            "degree": p["position_in_sign"],
+                            "house": house,
+                            "nakshatra": astro_engine.NAKSHATRA_NAMES[p["nakshatra_id"] - 1],
+                            "nakshatra_id": p["nakshatra_id"],
+                            "longitude": p["longitude"],
+                            "is_retrograde": p.get("is_retrograde", False)
+                        })
+                    
+                    dasha_str = astro_engine.calculate_dasha(raw_planets, jd_ut)
+                    chart = {
+                        "planets": formatted_planets,
+                        "ascendant": {
+                            "sign": astro_engine.SIGN_NAMES[asc["sign_id"] - 1],
+                            "degree": asc["position_in_sign"],
+                        },
+                        "dasha": dasha_str
+                    }
+                    user_profile["chart"] = chart
+                    # ──────────────────────────────────────────────────────────
+
+                    # ── Compute verified Vedic timing ──────────────────────────
+                    from services.vedic_timing import build_timing_report
+                    birth_dt = datetime(year, month, day, hour, minute)
+                    today_dt = datetime.now()
+                    timing = build_timing_report(chart, birth_dt, today_dt)
+                    user_profile["vedic_timing"] = timing
+                    # ──────────────────────────────────────────────────────────
+
+                except Exception as e:
+                    import traceback
+                    print(f"Chart/Timing error for {user.full_name}: {e}\n{traceback.format_exc()}")
+    
+    response = await ai_svc.get_consultation_response(messages_dict, data.astro_name, user_profile)
     return {"text": response}
 
 app.add_middleware(
@@ -713,5 +829,19 @@ async def get_matching_raw(req: dict):
         groom["name"] = groom.get("name", "Groom")
         res = await engine.get_match_report(bride, groom)
         return res
+    except Exception as e:
+        return {"error": str(e)}
+
+@app.post("/chat")
+async def chat_consultation(req: dict):
+    try:
+        user_name = req.get("profile", "User")
+        query = req.get("query", "")
+        if not query:
+            return {"response": "Please ask a question."}
+        
+        ai_engine = AIService()
+        response = await ai_engine.get_chat_response(user_name, query)
+        return {"response": response}
     except Exception as e:
         return {"error": str(e)}

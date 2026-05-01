@@ -65,8 +65,16 @@ class AstrologyEngine:
         "Mriga (Deer)", "Vanar (Monkey)", "Nakul (Mongoose)", "Singha (Lion)"
     ]
     
-    # Mapping Nakshatra Index (1-27) to Yoni Index
-    NAK_YONI_MAP = [0, 1, 2, 3, 3, 4, 5, 2, 5, 6, 6, 7, 8, 9, 8, 9, 10, 10, 4, 11, 12, 11, 13, 0, 13, 7, 1]
+    # Mapping Nakshatra Index (0-26) to Yoni Index (0-13)
+    # Classical Brihat Parashara Hora Shastra mapping
+    # Ashwini=Ashwa(0), Bharani=Gaja(1), Krittika=Mesha(2), Rohini=Sarpa(3),
+    # Mrigashira=Mriga(10), Ardra=Shwan(4), Punarvasu=Marjar(5), Pushya=Mesha(2),
+    # Ashlesha=Marjar(5), Magha=Mushak(6), PurvaPhalguni=Mushak(6), UttaraPhalguni=Gau(7),
+    # Hasta=Mahish(8), Chitra=Vyaghra(9), Swati=Mahish(8), Vishakha=Vyaghra(9),
+    # Anuradha=Mriga(10), Jyeshtha=Mriga(10), Mula=Shwan(4), PurvaAshadha=Vanar(11),
+    # UttaraAshadha=Gau(7), Shravana=Vanar(11), Dhanishta=Singha(13), Shatabhisha=Ashwa(0),
+    # PurvaBhadra=Singha(13), UttaraBhadra=Gau(7), Revati=Gaja(1)
+    NAK_YONI_MAP = [0, 1, 2, 3, 10, 4, 5, 2, 5, 6, 6, 7, 8, 9, 8, 9, 10, 10, 4, 11, 7, 11, 13, 0, 13, 7, 1]
     
     GANA_NAMES = ["Deva (Divine)", "Manushya (Human)", "Rakshasa (Demon)"]
     # Mapping Nakshatra Index (1-27) to Gana Index (0:Dev, 1:Man, 2:Rak)
@@ -83,6 +91,11 @@ class AstrologyEngine:
     VASHYA_NAMES = ["Chatushpada (Quadruped)", "Manav (Human)", "Jalanchar (Water)", "Vanachar (Wild)", "Keeta (Insect)"]
     # Mapping Sign Index (1-12) to Vashya Index
     SIGN_VASHYA_MAP = [0, 0, 1, 2, 3, 1, 1, 4, 0, 0, 1, 2]
+
+    RASHI_LORDS = [
+        "Mars", "Venus", "Mercury", "Moon", "Sun", "Mercury",
+        "Venus", "Mars", "Jupiter", "Saturn", "Saturn", "Jupiter"
+    ]
 
     def __init__(self, ayanamsa_mode=swe.SIDM_LAHIRI):
         self.ayanamsa_mode = ayanamsa_mode
@@ -339,19 +352,39 @@ class AstrologyEngine:
         }
 
     def check_manglik(self, planets, ascendant):
-        """Checks for Mangal Dosha (Mars in 1, 4, 7, 8, 12 houses)."""
+        """Checks for Mangal Dosha (Mars in 1, 4, 7, 8, 12 houses) from Lagna and Moon with Parihara logic."""
         mars_lon = planets["Mars"]["longitude"]
         asc_lon = ascendant["longitude"]
-        house = self.get_house_number(mars_lon, asc_lon)
+        moon_lon = planets["Moon"]["longitude"]
         
-        is_manglik = house in [1, 4, 7, 8, 12]
-        severity = "High" if house in [7, 8] else "Low" if is_manglik else "None"
+        house_lagna = self.get_house_number(mars_lon, asc_lon)
+        house_moon = self.get_house_number(mars_lon, moon_lon)
+        
+        is_manglik_lagna = house_lagna in [1, 4, 7, 8, 12]
+        is_manglik_moon = house_moon in [1, 4, 7, 8, 12]
+        
+        # Parihara (Cancellation) Logic
+        mars_sign = int(mars_lon // 30) + 1 # 1-12
+        # Mars in its own signs (1, 8) or exaltation (10) cancels the dosha's severity
+        is_parihara = mars_sign in [1, 8, 10]
+        
+        # Overall status
+        is_manglik = (is_manglik_lagna or is_manglik_moon)
+        
+        if is_parihara:
+            severity = "Low (Neutralized)" if is_manglik else "None"
+        else:
+            severity = "High" if (house_lagna in [7, 8] or house_moon in [7, 8]) else "Moderate" if is_manglik else "None"
         
         return {
             "is_manglik": is_manglik,
-            "house": house,
+            "is_parihara": is_parihara,
+            "lagna_house": house_lagna,
+            "moon_house": house_moon,
+            "is_lagna_manglik": is_manglik_lagna,
+            "is_moon_manglik": is_manglik_moon,
             "severity": severity,
-            "description": f"Mars is in the {house} house from your Ascendant."
+            "description": f"Mars is in {house_lagna} from Lagna and {house_moon} from Moon." + (" (Dosha neutralized by sign position)" if is_parihara and is_manglik else "")
         }
 
     def check_kaal_sarp(self, planets):

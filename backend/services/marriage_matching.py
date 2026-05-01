@@ -54,11 +54,21 @@ class MarriageMatchingEngine:
 
 
     def _calculate_vedha_dosha(self, b_nak: int, g_nak: int) -> bool:
-        # Vedha pairs (0-indexed)
-        pairs = [(0,17), (1,16), (2,15), (3,14), (5,12), (6,11), (7,10), (8,18), (19,26), (20,25), (21,24), (22,23)]
+        # Standard Vedha pairs (0-indexed)
+        # Ashwini-Jyeshta, Bharani-Anuradha, etc.
+        pairs = [
+            (0, 17), (1, 16), (2, 15), (3, 14), (5, 21), (6, 20),
+            (7, 19), (8, 18), (9, 26), (10, 25), (11, 24), (12, 23)
+        ]
         for p1, p2 in pairs:
             if (b_nak == p1 and g_nak == p2) or (b_nak == p2 and g_nak == p1):
                 return True
+        
+        # Mutual Vedha: Mrigashira(4), Chitra(13), Dhanishta(22)
+        mutual = [4, 13, 22]
+        if b_nak in mutual and g_nak in mutual and b_nak != g_nak:
+            return True
+            
         return False
 
 
@@ -162,7 +172,7 @@ class MarriageMatchingEngine:
                 'marriage_timing': timing,
                 'charts': {
                     'bride': {'planets': self._format_planets(b_planets, b_asc['longitude']), 'ascendant': {'sign': self.engine.SIGN_NAMES[b_asc['sign_id'] - 1], 'degree': b_asc['position_in_sign'], 'longitude': b_asc['longitude']}},
-                    'groom': {'planets': self._format_planets(g_planets, g_asc['longitude']), 'ascendant': {'sign': self.engine.SIGN_NAMES[g_asc['sign_id'] - 1], 'degree': b_asc['position_in_sign'], 'longitude': b_asc['longitude']}}
+                    'groom': {'planets': self._format_planets(g_planets, g_asc['longitude']), 'ascendant': {'sign': self.engine.SIGN_NAMES[g_asc['sign_id'] - 1], 'degree': g_asc['position_in_sign'], 'longitude': g_asc['longitude']}}
                 },
                 'strengths': strengths, 'challenges': challenges,
                 'remedies': remedies,
@@ -204,7 +214,8 @@ class MarriageMatchingEngine:
                 "sign": self.engine.SIGN_NAMES[p["sign_id"] - 1],
                 "degree": p["position_in_sign"],
                 "longitude": p["longitude"],
-                "house": house
+                "house": house,
+                "nakshatra": self.engine.NAKSHATRA_NAMES[p["nakshatra_id"] - 1]
             })
         return formatted
 
@@ -222,46 +233,129 @@ class MarriageMatchingEngine:
         scores = {}
         
         # Varna (1)
+        # Groom should be same or superior varna (superior = lower index)
         b_varna = self.engine.SIGN_VARNA_MAP[b_sign]
         g_varna = self.engine.SIGN_VARNA_MAP[g_sign]
-        scores["Varna"] = 1 if g_varna >= b_varna else 0
+        scores["Varna"] = 1 if g_varna <= b_varna else 0
         
         # Vashya (2)
+        vashya_matrix = [
+            [2, 1, 1, 1, 1], # Chatushpada
+            [1, 2, 0.5, 1, 1], # Manav
+            [1, 0.5, 2, 1, 1], # Jalanchar
+            [1, 1, 1, 2, 0], # Vanachar
+            [1, 1, 1, 0, 2]  # Keeta
+        ]
         b_vashya = self.engine.SIGN_VASHYA_MAP[b_sign]
         g_vashya = self.engine.SIGN_VASHYA_MAP[g_sign]
-        scores["Vashya"] = 2 if b_vashya == g_vashya else 0
-        
+        scores["Vashya"] = vashya_matrix[g_vashya][b_vashya]
+
         # Tara (3)
-        dist = (g_nak - b_nak) % 9
-        scores["Tara"] = 3 if dist in [1, 2, 4, 6, 8, 0] else 1.5 if dist in [3, 5, 7] else 0
+        t_b_to_g = (g_nak - b_nak + 1) % 9
+        t_g_to_b = (b_nak - g_nak + 1) % 9
+        if t_b_to_g == 0: t_b_to_g = 9
+        if t_g_to_b == 0: t_g_to_b = 9
         
+        b_bad = t_b_to_g in [3, 5, 7]
+        g_bad = t_g_to_b in [3, 5, 7]
+        
+        if not b_bad and not g_bad: scores["Tara"] = 3
+        elif b_bad and g_bad: scores["Tara"] = 0
+        else: scores["Tara"] = 1.5
+
         # Yoni (4)
+        yoni_matrix = [
+            [4,2,2,3,2,2,2,2,2,1,2,1,2,0], # Ashwa
+            [2,4,3,3,2,2,2,2,3,2,2,2,0,3], # Gaja
+            [2,3,4,2,2,2,1,1,1,2,1,2,2,2], # Mesha
+            [3,3,2,4,2,1,1,1,1,2,2,2,0,2], # Sarpa
+            [2,2,2,2,4,2,1,2,2,1,0,2,1,1], # Shwan
+            [2,2,2,1,2,4,2,1,3,0,2,1,2,1], # Marjar
+            [2,2,1,1,1,2,4,2,1,2,2,1,2,2], # Mushak
+            [2,2,1,1,2,1,2,4,3,1,2,2,2,1], # Gau
+            [2,3,1,1,2,3,1,3,4,1,2,2,2,1], # Mahish
+            [1,2,2,2,1,0,2,1,1,4,2,2,2,2], # Vyaghra
+            [2,2,1,2,0,2,2,2,2,2,4,2,2,2], # Mriga
+            [1,2,2,2,2,1,1,2,2,2,2,4,2,2], # Vanar
+            [2,0,2,0,1,2,2,2,2,2,2,2,4,2], # Nakul
+            [0,3,2,2,1,1,2,1,1,2,2,2,2,4]  # Singha
+        ]
         b_yoni = self.engine.NAK_YONI_MAP[b_nak]
         g_yoni = self.engine.NAK_YONI_MAP[g_nak]
-        scores["Yoni"] = 4 if b_yoni == g_yoni else 2 # Friendly
+        scores["Yoni"] = yoni_matrix[g_yoni][b_yoni]
         
         # Maitri (5)
-        scores["Maitri"] = 5 if b_sign == g_sign else 4 if (b_sign + 6) % 12 == g_sign else 1
+        b_lord = self.engine.RASHI_LORDS[b_sign]
+        g_lord = self.engine.RASHI_LORDS[g_sign]
+        scores["Maitri"] = self._get_planetary_relationship(b_lord, g_lord)
+
         # Gana (6)
         b_gana = self.engine.NAK_GANA_MAP[b_nak]
         g_gana = self.engine.NAK_GANA_MAP[g_nak]
         if b_gana == g_gana:
             scores["Gana"] = 6
         elif (b_gana == 0 and g_gana == 1) or (b_gana == 1 and g_gana == 0):
-            scores["Gana"] = 1
+            scores["Gana"] = 5 # Deva-Manushya
+        elif (g_gana == 2 and b_gana == 0):
+            scores["Gana"] = 1 # Rakshasa Groom, Deva Bride
         else:
             scores["Gana"] = 0
-
         
         # Bhakoot (7)
-        rashi_dist = (g_sign - b_sign + 1)
-        if rashi_dist <= 0: rashi_dist += 12
-        scores["Bhakoot"] = 7 if rashi_dist not in [2, 12, 5, 9, 6, 8] else 0
+        # 1-indexed distance from bride's sign to groom's sign
+        # Adverse patterns: 2-12 (wealth/longevity), 6-8 (health/longevity), 9-5 (progeny)
+        # In 1-indexed: if groom is in 2nd → dist=2, 6th→dist=6, 8th→dist=8, 9th→dist=9, 12th→dist=12
+        rashi_dist = ((g_sign - b_sign) % 12) + 1
+        bhakoot_score = 7 if rashi_dist not in {2, 6, 8, 9, 12} else 0
+        scores["Bhakoot"] = bhakoot_score
         
         # Nadi (8)
         b_nadi = self.engine.NAK_NADI_MAP[b_nak]
         g_nadi = self.engine.NAK_NADI_MAP[g_nak]
-        scores["Nadi"] = 8 if b_nadi != g_nadi else 0
+        nadi_score = 8 if b_nadi != g_nadi else 0
+        scores["Nadi"] = nadi_score
+
+        # Dosha Cancellation Logic (Shuddhi)
+        # Reuse b_lord/g_lord already computed for Maitri score above
+        lords_are_friends = self._get_planetary_relationship(b_lord, g_lord) >= 4.0
+        lords_are_same = b_lord == g_lord
+
+        # 1. Nadi Dosha Cancellation
+        nadi_cancelled = False
+        if b_nadi == g_nadi:
+            # Same Nakshatra logic (Eka Nakshatra)
+            if b_nak == g_nak:
+                # Cancelled if Padas are different
+                b_pada = b_planets["Moon"]["pada"]
+                g_pada = g_planets["Moon"]["pada"]
+                if b_pada != g_pada:
+                    nadi_cancelled = True
+                else:
+                    # Same Nakshatra, Same Pada is a major Dosha
+                    nadi_cancelled = False
+            # Different Nakshatra logic
+            else:
+                # Cancelled if same rashi but different nakshatra
+                if b_sign == g_sign:
+                    nadi_cancelled = True
+                # Specific nakshatra exemptions (some traditions)
+                elif b_nak in [2, 6, 12, 15, 21, 23]: # Rohini, Ardra, etc.
+                    nadi_cancelled = True
+
+        # 2. Bhakoot Dosha Cancellation
+        bhakoot_cancelled = False
+        if bhakoot_score == 0:
+            if lords_are_friends or lords_are_same:
+                bhakoot_cancelled = True
+            # Navamsha Shuddhi (simplified here as Navamsha lord check)
+            # For brevity, we'll use the main lords friendship as a strong proxy
+
+        # 3. Gana Dosha Cancellation
+        gana_cancelled = False
+        if scores["Gana"] == 0:
+            if lords_are_friends or lords_are_same or bhakoot_score == 7:
+                gana_cancelled = True
+
         breakdown = {
             "Varna": {"received": scores["Varna"], "total": 1},
             "Vashya": {"received": scores["Vashya"], "total": 2},
@@ -272,13 +366,14 @@ class MarriageMatchingEngine:
             "Bhakoot": {"received": scores["Bhakoot"], "total": 7},
             "Nadi": {"received": scores["Nadi"], "total": 8}
         }
+
         return {
             "total": sum(scores.values()),
             "breakdown": breakdown,
             "doshas": {
-                "nadi": b_nadi == g_nadi,
-                "bhakoot": scores["Bhakoot"] == 0,
-                "gana": scores["Gana"] == 0
+                "nadi": {"present": b_nadi == g_nadi, "cancelled": nadi_cancelled},
+                "bhakoot": {"present": bhakoot_score == 0, "cancelled": bhakoot_cancelled},
+                "gana": {"present": scores["Gana"] == 0, "cancelled": gana_cancelled}
             }
         }
 
@@ -339,7 +434,10 @@ class MarriageMatchingEngine:
 
     def _extract_challenges(self, v, w) -> List[str]:
         c = []
-        if v["doshas"]["nadi"]: c.append("Physiological Sync Issues")
+        if v["doshas"]["nadi"]["present"] and not v["doshas"]["nadi"]["cancelled"]:
+            c.append("Physiological Sync Issues (Nadi Dosha)")
+        if v["doshas"]["bhakoot"]["present"] and not v["doshas"]["bhakoot"]["cancelled"]:
+            c.append("Prosperity & Family Welfare Concerns (Bhakoot Dosha)")
         if w["synastry_score"] < 60: c.append("Communication Hurdles")
         return c if c else ["Routine Management"]
 
@@ -357,13 +455,13 @@ class MarriageMatchingEngine:
         
         # 1. Nadi Dosha (+30)
         nadi_points = 0
-        if vedic["doshas"]["nadi"]:
+        if vedic["doshas"]["nadi"]["present"]:
             nadi_points = 30
-            # Cancellation: Same Rashi
-            if b_p["Moon"]["sign_id"] == g_p["Moon"]["sign_id"]:
+            # Cancellation check
+            if vedic["doshas"]["nadi"]["cancelled"]:
                 nadi_points -= 20
-                cancellations.append("Nadi Dosha partial cancellation (Same Rashi)")
-            doshas_found["nadi_dosha"] = {"present": True, "cancelled": nadi_points < 30, "points": nadi_points}
+                cancellations.append("Nadi Dosha partial cancellation (Vedic Exception)")
+            doshas_found["nadi_dosha"] = {"present": True, "cancelled": vedic["doshas"]["nadi"]["cancelled"], "points": nadi_points}
         score += nadi_points
 
         # 2. Bhakoot Dosha (6-8: +20, 9-5: +15, 12-2: +10)
@@ -383,14 +481,11 @@ class MarriageMatchingEngine:
             bhakoot_type = "12-2"
             
         if bhakoot_points > 0:
-            # Cancellation: Graha Maitri OK (Maitri score >= 4)
-            # Breakdown values may be dicts {received, total} or plain numbers
-            maitri_val = vedic["breakdown"].get("Maitri", 0)
-            maitri_score = maitri_val.get("received", 0) if isinstance(maitri_val, dict) else maitri_val
-            if maitri_score >= 4:
+            # Cancellation check from ashtakoot engine
+            if vedic["doshas"]["bhakoot"]["cancelled"]:
                 bhakoot_points -= 10
                 cancellations.append(f"Bhakoot {bhakoot_type} cancellation (Graha Maitri Exception)")
-            doshas_found["bhakoot_dosha"] = {"type": bhakoot_type, "present": True, "cancelled": bhakoot_points < 20, "points": bhakoot_points}
+            doshas_found["bhakoot_dosha"] = {"type": bhakoot_type, "present": True, "cancelled": vedic["doshas"]["bhakoot"]["cancelled"], "points": bhakoot_points}
         score += bhakoot_points
 
         # 3. Mangal Dosha
