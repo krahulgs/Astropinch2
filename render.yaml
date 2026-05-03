@@ -15,6 +15,17 @@ services:
         sync: false
       - key: OPENAI_BASE_URL
         value: https://api.deepseek.com
+      - key: CASHFREE_CLIENT_ID
+        sync: false
+      - key: CASHFREE_CLIENT_SECRET
+        sync: false
+      - key: CASHFREE_ENVIRONMENT
+        value: SANDBOX
+      - key: FRONTEND_URL
+        fromService:
+          name: astropinch-web
+          type: web
+          property: host
       - key: PYTHON_VERSION
         value: 3.13.0
       - key: PYTHONPATH
