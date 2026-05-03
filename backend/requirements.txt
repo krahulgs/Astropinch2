@@ -4,6 +4,7 @@ pydantic
 pyswisseph
 python-jose[cryptography]
 passlib[bcrypt]
+bcrypt
 python-multipart
 sqlalchemy
 psycopg2-binary
@@ -14,3 +15,4 @@ pandas
 astropy
 PyJHora
 jyotishganit
+cashfree-pg
