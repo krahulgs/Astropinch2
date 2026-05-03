@@ -5,11 +5,17 @@ services:
     env: python
     region: ohio
     plan: free
-    buildCommand: pip install -r backend/requirements.txt
+    buildCommand: pip install --upgrade pip && pip install -r backend/requirements.txt --prefer-binary
     startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
-      - key: GEMINI_API_KEY
+      - key: DATABASE_URL
+        fromDatabase:
+          name: astropinch-db
+          property: connectionString
+      - key: OPENAI_API_KEY
         sync: false
+      - key: OPENAI_BASE_URL
+        value: https://api.deepseek.com
       - key: PYTHON_VERSION
         value: 3.13.0
 
@@ -29,3 +35,7 @@ services:
           property: host
       - key: NODE_VERSION
         value: 20.x
+
+databases:
+  - name: astropinch-db
+    plan: free
