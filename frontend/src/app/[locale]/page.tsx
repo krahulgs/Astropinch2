@@ -400,18 +400,18 @@ export default function HomePage() {
       </main>
       {/* Promotional Popover */}
       {showPopover && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-background/80 backdrop-blur-md animate-in fade-in duration-500">
-          <div className="relative max-w-5xl w-full bg-gradient-to-br from-secondary via-primary to-highlight border border-white/20 rounded-[3rem] overflow-hidden shadow-[0_0_100px_-20px_rgba(var(--primary-rgb),0.5)] flex flex-col md:flex-row animate-in zoom-in slide-in-from-bottom-10 duration-700">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-background/80 backdrop-blur-md animate-in fade-in duration-500">
+          <div className="relative max-w-3xl w-full bg-gradient-to-br from-secondary via-primary to-highlight border border-white/20 rounded-[2rem] overflow-hidden shadow-[0_0_80px_-20px_rgba(var(--primary-rgb),0.5)] flex flex-col md:flex-row animate-in zoom-in slide-in-from-bottom-10 duration-700">
             {/* Close Button */}
             <button 
               onClick={() => setShowPopover(false)}
-              className="absolute top-6 right-6 z-20 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white hover:bg-white hover:text-primary transition-all shadow-lg"
+              className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white hover:bg-white hover:text-primary transition-all shadow-lg"
             >
               <X size={20} />
             </button>
 
             {/* Image Side */}
-            <div className="md:w-1/2 relative h-80 md:h-auto">
+            <div className="md:w-5/12 relative h-48 md:h-auto hidden sm:block">
               <Image 
                 src="/images/jyotish_guru.png" 
                 alt="Jyotish Guru" 
@@ -422,7 +422,7 @@ export default function HomePage() {
             </div>
 
             {/* Content Side */}
-            <div className="md:w-1/2 p-10 md:p-20 flex flex-col justify-center space-y-10 relative">
+            <div className="md:w-7/12 p-6 md:p-12 flex flex-col justify-center space-y-6 md:space-y-8 relative">
               {/* Decorative Glow */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none" />
               
@@ -430,10 +430,10 @@ export default function HomePage() {
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 text-white text-[10px] font-black uppercase tracking-widest border border-white/30 backdrop-blur-md">
                   <Sparkles size={12} className="animate-pulse" /> INDIA&apos;S MOST ADVANCED ASTRO PORTAL
                 </div>
-                <h2 className="text-5xl md:text-6xl font-serif italic text-white leading-tight">
+                <h2 className="text-3xl md:text-4xl font-serif italic text-white leading-tight">
                   Your Future, <span className="text-white/80 italic">Decoded.</span>
                 </h2>
-                <p className="text-lg text-white/90 font-light leading-relaxed">
+                <p className="text-sm md:text-base text-white/90 font-light leading-relaxed">
                   Connect with our grand-master AI Jyotish Guru for absolute clarity on your career, relationships, and health. No waiting, just wisdom.
                 </p>
               </div>
@@ -442,11 +442,11 @@ export default function HomePage() {
                 <Link 
                   href="/chat" 
                   onClick={() => setShowPopover(false)}
-                  className="w-full py-6 bg-white text-primary rounded-[2rem] font-bold uppercase tracking-[0.2em] text-xs hover:bg-white/90 hover:scale-[1.02] transition-all flex items-center justify-center gap-4 shadow-2xl"
+                  className="w-full py-4 bg-white text-primary rounded-full font-bold uppercase tracking-[0.2em] text-[10px] md:text-xs hover:bg-white/90 hover:scale-[1.02] transition-all flex items-center justify-center gap-3 shadow-xl"
                 >
-                  <MessageCircle size={20} /> Free Chat with Jyotish Guru
+                  <MessageCircle size={18} /> Free Chat with Jyotish Guru
                 </Link>
-                <div className="flex justify-center gap-6 text-[9px] font-bold uppercase tracking-[0.25em] text-white/60">
+                <div className="flex flex-wrap justify-center gap-4 text-[8px] md:text-[9px] font-bold uppercase tracking-[0.25em] text-white/60">
                   <span className="flex items-center gap-2">✦ 100% PRIVATE</span>
                   <span className="flex items-center gap-2">✦ NO SIGNUP</span>
                   <span className="flex items-center gap-2">✦ INSTANT</span>
