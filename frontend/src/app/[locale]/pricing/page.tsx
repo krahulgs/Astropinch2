@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useCashfree } from '@/hooks/useCashfree';
+
 import { Check, Sparkles, Crown, Moon, Star, ArrowRight } from 'lucide-react';
 import AnimatedZodiacBackground from '@/components/AnimatedZodiacBackground';
 
@@ -37,33 +37,13 @@ const plans = [
 ];
 
 export default function PricingPage() {
-  const { initializePayment } = useCashfree();
   const [loading, setLoading] = useState<string | null>(null);
-
   const handleSubscribe = async (plan: typeof plans[0]) => {
     setLoading(plan.name);
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/payments/create-order`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          amount: plan.price,
-          customer_id: 'user_123',
-          customer_phone: '9999999999',
-          customer_email: 'user@example.com'
-        })
-      });
-
-      const data = await response.json();
-
-      if (data.payment_session_id) {
-        const result = await initializePayment(data.payment_session_id);
-        if (result.success) {
-          console.log('Payment Successful');
-        }
-      } else {
-        alert('Failed to initiate secure checkout. Please check backend logs.');
-      }
+      // Simulate network request
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      alert(`Subscription to ${plan.name} selected! Payment integration is currently disabled.`);
     } catch (error) {
       console.error('Subscription error:', error);
       alert('Cosmic connection interrupted. Please try again.');

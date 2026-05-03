@@ -15,6 +15,6 @@ pandas
 astropy
 PyJHora
 jyotishganit
-cashfree-pg
+
 kerykeion
 flatlib

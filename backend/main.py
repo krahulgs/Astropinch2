@@ -12,7 +12,6 @@ from typing import List, Optional
 from services.astrology import AstrologyEngine
 from services.ai_service import AIService
 from services.muhurat import MuhuratService
-from services.payment_service import PaymentService
 from services.marriage_matching import MarriageMatchingEngine
 import models
 import auth
@@ -37,11 +36,7 @@ class ChatQueryModel(BaseModel):
     is_repeat: bool = False
     repeat_count: int = 0
 
-class PaymentOrderRequest(BaseModel):
-    amount: float
-    customer_id: str
-    customer_phone: str
-    customer_email: str
+
 
 class AstrologerApplicationSubmit(BaseModel):
     full_name: str
@@ -1100,40 +1095,7 @@ async def get_sign_horoscope(sign: str = Query(...)):
         print(f"ERROR in get_sign_horoscope: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.post("/payments/create-order")
-async def create_payment_order(req: PaymentOrderRequest):
-    import uuid
-    payment_service = PaymentService()
-    order_id = f"order_{uuid.uuid4().hex[:12]}"
-    try:
-        order_data = await payment_service.create_subscription_order(
-            order_id=order_id,
-            amount=req.amount,
-            customer_id=req.customer_id,
-            customer_phone=req.customer_phone,
-            customer_email=req.customer_email
-        )
-        return order_data
-    except Exception as e:
-        from fastapi import HTTPException
-        raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/payments/verify/{order_id}")
-async def verify_payment(order_id: str):
-    payment_service = PaymentService()
-    try:
-        order_status = await payment_service.verify_payment(order_id)
-        return order_status
-    except Exception as e:
-        from fastapi import HTTPException
-        raise HTTPException(status_code=500, detail=str(e))
-
-@app.post("/payments/webhook")
-async def cashfree_webhook(data: dict = Body(...)):
-    # In a real app, verify the signature here
-    print(f"Received Webhook: {data}")
-    # Update subscription status in DB
-    return {"status": "received"}
 
 # --- AUTH & USER MANAGEMENT ---
 
