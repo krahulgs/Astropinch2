@@ -109,7 +109,7 @@ export default function PricingPage() {
               
               <div className="mb-6">
                 <div className={`w-12 h-12 rounded-[1.25rem] bg-gradient-to-br ${plan.color} flex items-center justify-center border ${plan.borderColor} mb-4 transition-transform group-hover:scale-105 duration-500`}>
-                  {React.cloneElement(plan.icon as React.ReactElement, { className: 'w-5 h-5' })}
+                  {React.cloneElement(plan.icon as React.ReactElement<{ className?: string }>, { className: 'w-5 h-5' })}
                 </div>
                 <h2 className="text-2xl font-serif italic mb-1">{plan.name}</h2>
                 <p className="text-text-secondary text-[13px] font-light leading-snug h-8">
