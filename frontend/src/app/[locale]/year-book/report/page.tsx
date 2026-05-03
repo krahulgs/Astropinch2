@@ -147,7 +147,7 @@ export default function YearBookReportPage() {
   const targetYear = parseInt(searchParams.get('targetYear') || '2026');
 
   return (
-    <main className="relative pt-24 md:pt-32 pb-24 px-3 md:px-6 print:pt-8 print:pb-0 print:px-0 min-h-screen text-foreground">
+    <main className="relative pt-24 md:pt-32 pb-24 px-4 md:px-6 print:pt-8 print:pb-0 print:px-0 min-h-screen text-foreground overflow-x-hidden">
       <div className="max-w-7xl mx-auto space-y-8 md:space-y-16 print:space-y-8">
         {/* PDF BRANDING HEADER */}
         <div className="hidden print:flex items-center justify-between mb-8 border-b-2 border-secondary pb-4">
@@ -263,8 +263,8 @@ export default function YearBookReportPage() {
           {/* Month Selector — horizontal scroll on mobile, vertical list on lg */}
           <div className="space-y-3">
             <h3 className="text-sm font-bold uppercase tracking-widest text-text-secondary px-1 hidden lg:block">{t('report.months_label')}</h3>
-            {/* Mobile: horizontal scroll pill tabs */}
-            <div className="flex lg:hidden gap-2 overflow-x-auto no-scrollbar pb-1">
+            {/* Mobile: horizontal scroll pill tabs — isolated so it doesn't affect page width */}
+            <div className="flex lg:hidden -mx-4 px-4 overflow-x-auto no-scrollbar gap-2 pb-1">
               {aiLoading ? (
                 Array.from({ length: 12 }).map((_, i) => (
                   <div key={i} className="h-10 w-20 rounded-xl bg-surface border border-border animate-pulse flex-shrink-0" />
