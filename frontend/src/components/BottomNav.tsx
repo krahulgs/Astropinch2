@@ -62,6 +62,10 @@ function AuthBottomNav() {
   ];
 
   const getHref = (item: typeof menu[number]) => {
+    // Matching pages must always start fresh — never autofill birth data
+    const noCarry = ['marriage', 'lovebirds'];
+    if (noCarry.includes(item.id)) return item.href;
+
     let base = item.href;
     let query = '';
     if (item.href.includes('?')) [base, query] = item.href.split('?');
