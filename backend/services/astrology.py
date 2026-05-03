@@ -394,13 +394,24 @@ class AstrologyEngine:
         if house_lagna == 12 and mars_sign in [3, 6, 9, 12]: # Mercury/Jupiter signs in 12th
             parihara_reasons.append("Mars in a dual sign in the 12th house is neutralized.")
             
+        # Rule 3: Mars in Jupiter's signs (Sagittarius or Pisces) reduces aggression
+        if mars_sign in [9, 12] and not any("Sagittarius" in r or "Pisces" in r for r in parihara_reasons):
+            parihara_reasons.append("Mars is in a friendly and dharmic sign (ruled by Jupiter), which significantly reduces its aggression, resulting in a Mild/Cancelled Dosha.")
+
+        # Lagna Sandhi Check (Ascendant on the cusp)
+        asc_degree_in_sign = asc_lon % 30
+        is_lagna_sandhi = (asc_degree_in_sign < 2) or (asc_degree_in_sign > 28)
+        
+        if is_lagna_sandhi:
+            parihara_reasons.append("Lagna is on the boundary (Sandhi). Even a 2-5 minute difference in birth time can shift the Ascendant, making this a borderline, non-binary case.")
+            
         is_parihara = len(parihara_reasons) > 0
         
         # Overall status
         is_manglik = (is_manglik_lagna or is_manglik_moon)
         
         if is_parihara and is_manglik:
-            severity = "Low (Parihara Applied)"
+            severity = "Low / Mild (Cancelled)"
             status_desc = "Neutralized: " + " ".join(parihara_reasons)
         elif is_manglik:
             severity = "High" if (house_lagna in [7, 8] or house_moon in [7, 8]) else "Moderate"
