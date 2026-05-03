@@ -14,7 +14,7 @@ export default function Breadcrumbs() {
   const pathSegments = pathname.split('/').filter((segment) => segment !== '');
 
   return (
-    <div className="absolute top-24 left-0 right-0 z-40 w-full max-w-7xl mx-auto px-6 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-text-secondary pointer-events-none">
+    <div className="hidden md:flex print:hidden absolute top-24 left-0 right-0 z-40 w-full max-w-7xl mx-auto px-6 items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-text-secondary pointer-events-none">
       <div className="pointer-events-auto flex items-center gap-2">
         <Link href="/" className="hover:text-foreground transition-colors flex items-center gap-1">
           <Home size={14} />
