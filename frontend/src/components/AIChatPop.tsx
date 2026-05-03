@@ -63,7 +63,7 @@ export default function AIChatPop() {
   };
 
   return (
-    <div className="fixed bottom-8 right-8 z-[100] flex flex-col items-end gap-4">
+    <div className="hidden lg:flex fixed bottom-8 right-8 z-[100] flex-col items-end gap-4">
       {/* Chat Window */}
       {isOpen && (
         <div className="w-[90vw] md:w-[400px] h-[600px] max-h-[70vh] bg-surface border border-border rounded-[2.5rem] shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-8 duration-500 backdrop-blur-2xl">
