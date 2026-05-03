@@ -1,8 +1,10 @@
 import os
+import json
 import math
 from datetime import datetime
 from typing import Dict, List, Any
 import numpy as np
+
 
 class AIService:
     """
@@ -298,7 +300,10 @@ Return a STRICT JSON object with exactly 12 month keys:
         # Run both AI requests concurrently
         if ai_client:
             ai_outlook, monthly_preds = await asyncio.gather(
-                self.get_yearbook_outlook(natal_sign, target_year),
+                self.get_yearbook_outlook(
+                    natal_sign, target_year,
+                    chart_context=chart_data  # pass full chart for grounded predictions
+                ),
                 fetch_12_months()
             )
         else:
@@ -537,65 +542,128 @@ Return JSON only:
             return []
     
 
-    async def get_yearbook_outlook(self, sign_name, target_year):
-        """Generates a high-level annual theme and outlook."""
+    async def get_yearbook_outlook(self, sign_name: str, target_year: int,
+                                    chart_context: dict = None):
+        """
+        Generates a high-level annual theme and outlook.
+        Now accepts full chart_context (planets, dasha, transits) so DeepSeek
+        can produce grounded, data-driven predictions instead of generic text.
+        """
         from openai import AsyncOpenAI
         api_key = os.environ.get("OPENAI_API_KEY")
-        if not api_key: return None
-        
+        if not api_key:
+            return None
+
+        # ── Build a rich astro context string from real engine data ──────────
+        astro_lines = []
+        if chart_context:
+            planets = chart_context.get("planets", [])
+            dasha   = chart_context.get("dasha", {})
+            transits = chart_context.get("transits", [])
+
+            # Key natal placements
+            key_planets = ["Sun", "Moon", "Jupiter", "Saturn", "Mars", "Rahu", "Ketu"]
+            for p in planets:
+                if p["name"] in key_planets:
+                    retro = " (Retrograde)" if p.get("is_retrograde") else ""
+                    astro_lines.append(
+                        f"Natal {p['name']}: {p['sign']}, House {p['house']}, "
+                        f"Nakshatra {p.get('nakshatra', '?')}{retro}"
+                    )
+
+            # Dasha context
+            if dasha:
+                astro_lines.append(
+                    f"Current Mahadasha: {dasha.get('mahadasha','?')} "
+                    f"(ends {dasha.get('ends_year','?')}), "
+                    f"Antardasha: {dasha.get('antardasha','?')}"
+                )
+
+            # Upcoming transits (top 5)
+            if transits:
+                transit_lines = [
+                    f"{t['planet']} {t['event']} on {t['date']}"
+                    for t in transits[:5]
+                ]
+                astro_lines.append("Key {yr} transits: {tr}".format(
+                    yr=target_year, tr="; ".join(transit_lines)
+                ))
+
+        astro_context = "\n".join(astro_lines) if astro_lines else \
+            f"Moon sign: {sign_name}"
+
         try:
-            client = AsyncOpenAI(api_key=api_key, base_url=os.environ.get("OPENAI_BASE_URL", "https://api.deepseek.com"))
-            prompt = f"""
-            You are a master astrologer. Synthesize a 2026 Year Book outlook for {sign_name}.
-            
-            Synthesize:
-            - A 'Year Theme' (e.g., Year of Growth, Year of Discipline)
-            - A 'Summary' (Detailed, comprehensive overview of the year, around 80-100 words, Easy English, no jargon)
-            - 4 'Quarters' (Period: Q1/Q2/Q3/Q4, Focus: 2-3 detailed sentences each)
-            - A 'Key Turning Point' (Specific date in 2026)
-            
-            Format:
-            Theme: [Theme]
-            Summary: [Summary]
-            Q1: [Focus]
-            Q2: [Focus]
-            Q3: [Focus]
-            Q4: [Focus]
-            Turning Point: [Date]
-            """
+            client = AsyncOpenAI(
+                api_key=api_key,
+                base_url=os.environ.get("OPENAI_BASE_URL", "https://api.deepseek.com")
+            )
+
+            system_prompt = (
+                "You are a world-class Vedic astrologer and life strategist. "
+                "Your job is to synthesize real planetary data into a clear, human, "
+                "actionable annual outlook. Write in plain English — no jargon. "
+                "Output ONLY valid JSON, no markdown, no code fences."
+            )
+
+            user_prompt = f"""
+Synthesize a complete {target_year} Year Book outlook for a person with Moon in {sign_name}.
+
+BIRTH CHART DATA (computed by Swiss Ephemeris — use this to ground your predictions):
+{astro_context}
+
+Produce a JSON object with EXACTLY these fields:
+{{
+  "theme": "A 4-6 word annual theme title (e.g. 'Year of Grounded Expansion')",
+  "summary": "80-100 word overview of {target_year} in plain English. Reference their Mahadasha lord and key transits. No jargon. Warm, personal tone.",
+  "quarters": [
+    {{"period": "Q1 (Jan–Mar {target_year})", "focus": "2-3 sentences specific to this quarter's planetary energy. Reference actual transits happening in Jan-Mar {target_year}."}},
+    {{"period": "Q2 (Apr–Jun {target_year})", "focus": "2-3 sentences specific to Q2 energy."}},
+    {{"period": "Q3 (Jul–Sep {target_year})", "focus": "2-3 sentences specific to Q3 energy."}},
+    {{"period": "Q4 (Oct–Dec {target_year})", "focus": "2-3 sentences specific to Q4 energy."}}
+  ],
+  "key_date": "One specific calendar date in {target_year} that is a pivotal turning point, with a 1-sentence reason (e.g. 'July 14, {target_year} — Jupiter stations direct, opening a growth window')",
+  "citation": "One sentence citing the specific planetary factors used (e.g. 'Based on Jupiter transit in House 11, Saturn Mahadasha, and Rahu-Ketu axis shift')."
+}}
+"""
+
             response = await client.chat.completions.create(
                 model="deepseek-chat",
-                messages=[{"role": "system", "content": "You are a professional life mentor. Simple English. No jargon."},
-                          {"role": "user", "content": prompt}],
-                temperature=0.2, max_tokens=500
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user",   "content": user_prompt}
+                ],
+                response_format={"type": "json_object"},
+                temperature=0.35,
+                max_tokens=900
             )
-            text = response.choices[0].message.content.replace("#", "")
-            data = {}
-            lines = text.split('\n')
-            quarters = []
-            for line in lines:
-                if ':' in line:
-                    parts = line.split(':', 1)
-                    k = parts[0].strip().lower()
-                    v = parts[1].strip()
-                    if k == 'theme': data['theme'] = v
-                    elif k == 'summary': data['summary'] = v
-                    elif k in ['q1', 'q2', 'q3', 'q4']: 
-                        period_map = {
-                            "q1": "Q1 (Jan - Mar)",
-                            "q2": "Q2 (Apr - Jun)",
-                            "q3": "Q3 (Jul - Sep)",
-                            "q4": "Q4 (Oct - Dec)"
-                        }
-                        quarters.append({"period": period_map[k], "focus": v})
-                    elif k == 'turning point': data['key_date'] = v
-            
-            data['quarters'] = quarters
-            data['citation'] = f"Grounded in {sign_name} Gochara Logic & 2026 Transit Alignment."
+
+            raw = response.choices[0].message.content
+            print(f"[YearBook Outlook] DeepSeek response ({len(raw)} chars): {raw[:200]}")
+            data = json.loads(raw)
+
+            # Validate required fields; fall back gracefully
+            if not data.get("theme"):
+                data["theme"] = f"Year of {sign_name} Renewal"
+            if not data.get("key_date"):
+                data["key_date"] = f"September 2, {target_year}"
+            if not isinstance(data.get("quarters"), list) or len(data["quarters"]) != 4:
+                data["quarters"] = [
+                    {"period": f"Q1 (Jan–Mar {target_year})", "focus": data.get("summary", "A period of new beginnings.")},
+                    {"period": f"Q2 (Apr–Jun {target_year})", "focus": "Momentum builds through steady effort."},
+                    {"period": f"Q3 (Jul–Sep {target_year})", "focus": "Mid-year review and course correction."},
+                    {"period": f"Q4 (Oct–Dec {target_year})", "focus": "Harvest results and prepare for the next cycle."},
+                ]
+            if not data.get("citation"):
+                data["citation"] = f"Grounded in {sign_name} Gochara Logic & {target_year} Transit Alignment."
+
             return data
+
         except Exception as e:
-            print(f"Yearbook Outlook Error: {e}")
+            import traceback
+            print(f"[YearBook Outlook] Error: {e}")
+            traceback.print_exc()
             return None
+
 
     async def get_monthly_ai_prediction(self, sign_name, month, score, season_context=""):
         """Generates distinct, plain-English monthly predictions for all pillars with actionable tips."""

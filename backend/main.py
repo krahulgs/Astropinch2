@@ -980,38 +980,56 @@ async def get_year_book(req: ChartRequest):
 async def get_year_book_outlook(req: ChartRequest):
     """
     SLOW endpoint — calls DeepSeek for the AI narrative outlook.
-    Called after the main predictions are already displayed.
+    Now passes real chart + dasha + transit data for grounded predictions.
     """
     try:
         jd_ut = get_jd_ut_from_request(req, engine)
+        jd    = engine.get_julian_day(req.year, req.month, req.day, req.hour, req.minute)
         raw_planets = engine.get_planets(jd_ut, req.lat, req.lon)
         asc = engine.get_ascendant(jd_ut, req.lat, req.lon)
 
+        # Format planets with house numbers
         formatted_planets = []
         for name, p in raw_planets.items():
             house = engine.get_house_number(p["longitude"], asc["longitude"])
             formatted_planets.append({
-                "name": name,
-                "sign": engine.SIGN_NAMES[p["sign_id"] - 1],
-                "degree": p["position_in_sign"],
-                "house": house,
-                "nakshatra": engine.NAKSHATRA_NAMES[p["nakshatra_id"] - 1],
+                "name":         name,
+                "sign":         engine.SIGN_NAMES[p["sign_id"] - 1],
+                "degree":       p["position_in_sign"],
+                "house":        house,
+                "nakshatra":    engine.NAKSHATRA_NAMES[p["nakshatra_id"] - 1],
                 "is_retrograde": p.get("is_retrograde", False)
             })
 
+        # Dasha from astro engine
+        dasha_data = engine.calculate_dasha(raw_planets, jd)
+
+        # Real transits from yearbook engine
+        natal_positions = yb_engine.compute_natal_positions(
+            req.year, req.month, req.day, req.hour, req.minute
+        )
+        transits = yb_engine.get_planet_transit_summary(natal_positions, req.target_year)
+
         chart_data = {
-            "planets": formatted_planets,
-            "ascendant": {"sign": engine.SIGN_NAMES[asc["sign_id"] - 1], "degree": asc["position_in_sign"]}
+            "planets":   formatted_planets,
+            "ascendant": {"sign": engine.SIGN_NAMES[asc["sign_id"] - 1], "degree": asc["position_in_sign"]},
+            "dasha":     dasha_data,
+            "transits":  transits
         }
         user_profile = {
-            "name": "User",
-            "dob": f"{req.day}/{req.month}/{req.year}",
-            "time": f"{req.hour}:{req.minute}",
+            "name":  "User",
+            "dob":   f"{req.day}/{req.month}/{req.year}",
+            "time":  f"{req.hour}:{req.minute}",
             "place": f"Lat: {req.lat}, Lon: {req.lon}"
         }
 
-        ai_res = await ai.get_yearly_prediction(chart_data, user_profile, target_year=req.target_year, language=req.language)
+        ai_res = await ai.get_yearly_prediction(
+            chart_data, user_profile,
+            target_year=req.target_year,
+            language=req.language
+        )
         return {"ai_outlook": ai_res.get("ai_outlook", {})}
+
     except Exception as e:
         import traceback
         traceback.print_exc()
