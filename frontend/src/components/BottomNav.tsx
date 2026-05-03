@@ -51,13 +51,14 @@ function AuthBottomNav() {
   const searchParams = useSearchParams();
 
   const menu = [
-    { id: 'home',        href: '/',                                              icon: <Home size={20} />,        label: 'Home' },
-    { id: 'charts',      href: '/kundali/result?tab=charts',                    icon: <FileText size={20} />,    label: 'Kundali' },
-    { id: 'daily',       href: '/kundali/result?tab=daily',                     icon: <Sparkles size={20} />,    label: 'Daily' },
-    { id: 'marriage',    href: '/matching?context=marriage&mode=vedic',          icon: <Gem size={20} />,         label: 'Match' },
-    { id: 'year-book',   href: '/year-book',                                    icon: <BookOpen size={20} />,    label: n('year-book') },
-    { id: 'marketplace', href: '/marketplace',                                  icon: <ShoppingBag size={20} />, label: n('marketplace') },
-    { id: 'muhurat',     href: '/muhurat',                                      icon: <Clock size={20} />,       label: n('muhurat') },
+    { id: 'home',        href: '/',                                                icon: <Home size={20} />,        label: 'Home' },
+    { id: 'charts',      href: '/kundali/result?tab=charts',                      icon: <FileText size={20} />,    label: 'Kundali' },
+    { id: 'daily',       href: '/kundali/result?tab=daily',                       icon: <Sparkles size={20} />,    label: 'Daily' },
+    { id: 'marriage',    href: '/matching?context=marriage&mode=vedic',            icon: <Gem size={20} />,         label: 'Match' },
+    { id: 'lovebirds',   href: '/matching?context=relationship&mode=lovers',       icon: <Heart size={20} />,       label: 'Lovebirds' },
+    { id: 'year-book',   href: '/year-book',                                      icon: <BookOpen size={20} />,    label: n('year-book') },
+    { id: 'marketplace', href: '/marketplace',                                    icon: <ShoppingBag size={20} />, label: n('marketplace') },
+    { id: 'muhurat',     href: '/muhurat',                                        icon: <Clock size={20} />,       label: n('muhurat') },
   ];
 
   const getHref = (item: typeof menu[number]) => {
@@ -74,10 +75,11 @@ function AuthBottomNav() {
 
   const isActive = (item: typeof menu[number]) => {
     const tab = searchParams.get('tab');
-    if (item.id === 'charts')   return pathname.includes('/kundali/result') && (tab === 'charts' || !tab);
-    if (item.id === 'daily')    return pathname.includes('/kundali/result') && tab === 'daily';
-    if (item.id === 'marriage') return pathname.includes('/matching') && searchParams.get('context') === 'marriage';
-    if (item.id === 'home')     return pathname === '/' || pathname === '';
+    if (item.id === 'charts')    return pathname.includes('/kundali/result') && (tab === 'charts' || !tab);
+    if (item.id === 'daily')     return pathname.includes('/kundali/result') && tab === 'daily';
+    if (item.id === 'marriage')  return pathname.includes('/matching') && searchParams.get('context') === 'marriage';
+    if (item.id === 'lovebirds') return pathname.includes('/matching') && searchParams.get('mode') === 'lovers';
+    if (item.id === 'home')      return pathname === '/' || pathname === '';
     return pathname.includes(`/${item.id}`);
   };
 
