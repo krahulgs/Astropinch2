@@ -6,7 +6,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import NorthIndianChart from '@/components/NorthIndianChart';
 import SouthIndianChart from '@/components/SouthIndianChart';
 import Skeleton from '@/components/Skeleton';
-import { Download, Share2, Sparkles, Compass, Coins, Briefcase, Activity, Leaf, FileText, Lock } from 'lucide-react';
+import { Download, Share2, Sparkles, Compass, Coins, Briefcase, Activity, Leaf, FileText, Lock, Flame, Shield } from 'lucide-react';
 import AIChatPop from '@/components/AIChatPop';
 import SubscriptionModal from '@/components/SubscriptionModal';
 
@@ -319,8 +319,8 @@ export default function KundaliResultPage() {
                 ))}
               </div>
 
-              {/* Jatak + Dasha in one row */}
-              <div className="grid md:grid-cols-2 gap-4">
+              {/* Jatak + Dasha + Manglik Dosha in one row */}
+              <div className="grid md:grid-cols-3 gap-4">
                 <div className="p-5 rounded-2xl bg-surface border border-border space-y-3">
                   <p className="text-[8px] font-bold uppercase tracking-widest text-text-secondary">{t('result.analysis.title')} · Jatak</p>
                   <div className="flex flex-wrap gap-2">
@@ -349,6 +349,31 @@ export default function KundaliResultPage() {
                       </div>
                     </div>
                   ) : <p className="text-xs text-text-secondary">{t('result.dasha.unavailable')}</p>}
+                </div>
+                <div className="p-5 rounded-2xl bg-surface border border-border space-y-3">
+                  <div className="flex items-center justify-between">
+                    <p className="text-[8px] font-bold uppercase tracking-widest text-text-secondary">Mangal Dosha Status</p>
+                    <span className="text-[7px] font-bold uppercase tracking-widest text-primary bg-primary/10 px-2 py-0.5 rounded-full border border-primary/20 flex items-center gap-1"><Sparkles size={8}/> AI Verified</span>
+                  </div>
+                  {loadingCalculations ? <Skeleton className="h-10 w-full" /> : (
+                    <div>
+                        <div className="flex items-center gap-2 mb-2">
+                           {calculations?.manglik?.is_manglik && !calculations?.manglik?.is_parihara ? <span className="text-alert"><Flame size={16}/></span> : <span className="text-highlight"><Shield size={16}/></span>}
+                           <span className="text-lg font-serif italic text-foreground">
+                               {calculations?.manglik?.is_manglik ? (calculations?.manglik?.is_parihara ? 'Non-Manglik (Neutralized)' : `Manglik (${calculations.manglik.severity})`) : 'Non-Manglik'}
+                           </span>
+                        </div>
+                        <p className="text-[10px] text-text-secondary leading-relaxed">
+                            {calculations?.manglik?.description}
+                        </p>
+                        {calculations?.manglik?.cancellation_logic && calculations.manglik.cancellation_logic.length > 0 && (
+                            <div className="mt-3 p-2.5 bg-highlight/10 border border-highlight/20 rounded-xl">
+                                <p className="text-[8px] font-bold uppercase tracking-widest text-highlight mb-1">DeepSeek Validation</p>
+                                <p className="text-[9px] text-foreground font-medium">{calculations.manglik.cancellation_logic[0]}</p>
+                            </div>
+                        )}
+                    </div>
+                  )}
                 </div>
               </div>
             </section>
