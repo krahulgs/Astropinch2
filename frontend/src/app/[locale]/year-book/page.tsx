@@ -107,24 +107,24 @@ export default function YearBookPage() {
     return (
       <div className="min-h-screen text-foreground overflow-hidden relative selection:bg-primary/30">
         <AnimatedZodiacBackground />
-        <main className="relative z-10 pt-32 pb-20 px-6">
-          <div className="max-w-3xl mx-auto space-y-10">
+        <main className="relative z-10 pt-24 md:pt-32 pb-24 px-4 md:px-6">
+          <div className="max-w-3xl mx-auto space-y-8">
             {/* Header */}
-            <div className="text-center mb-16 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold uppercase tracking-widest mb-6">
+            <div className="text-center space-y-4 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold uppercase tracking-widest">
                 <Sparkles size={12} /> The Annual Dossier
               </div>
-              <h1 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1] italic font-serif text-foreground mb-6">
-                Your Future Is Written. <br className="hidden md:block" />
-                <span className="text-text-secondary font-light text-4xl md:text-5xl">Read The Script.</span>
+              <h1 className="text-3xl md:text-7xl font-medium tracking-tight leading-[1.1] italic font-serif text-foreground">
+                Your Future Is Written.{' '}
+                <span className="block text-xl md:text-5xl text-text-secondary font-light mt-1">Read The Script.</span>
               </h1>
-              <p className="text-lg md:text-xl text-text-secondary max-w-3xl mx-auto font-light leading-relaxed">
-                You've successfully secured your birth data. Now, generate your month-by-month cosmic roadmap to navigate the upcoming year with unfair foresight.
+              <p className="text-sm md:text-xl text-text-secondary max-w-3xl mx-auto font-light leading-relaxed hidden md:block">
+                Generate your month-by-month cosmic roadmap to navigate the upcoming year with unfair foresight.
               </p>
             </div>
 
             {/* Profile Selector Card */}
-            <form onSubmit={handleProfileSubmit} className="p-8 rounded-[2.5rem] bg-surface/50 backdrop-blur-xl border border-border shadow-2xl animate-in fade-in zoom-in duration-1000 space-y-6">
+            <form onSubmit={handleProfileSubmit} className="p-5 md:p-8 rounded-[2rem] md:rounded-[2.5rem] bg-surface/50 backdrop-blur-xl border border-border shadow-2xl animate-in fade-in zoom-in duration-1000 space-y-5">
               <div className="space-y-2">
                 <label className="text-[9px] font-black uppercase tracking-widest text-text-secondary ml-2 block">
                   {t('form.select_profile')}
@@ -152,7 +152,7 @@ export default function YearBookPage() {
 
               {/* Selected Profile Preview */}
               {parsedActive && (
-                <div className="grid grid-cols-3 gap-3 animate-in fade-in duration-500">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 animate-in fade-in duration-500">
                   {[
                     { label: t('form.birth_date'), value: `${parsedActive.day}/${parsedActive.month}/${parsedActive.year}` },
                     { label: t('form.birth_time'), value: `${parsedActive.hour}:${parsedActive.minute}` },
@@ -227,26 +227,26 @@ export default function YearBookPage() {
 
   // ── GUEST EXPERIENCE ──────────────────────────────────────────────────────
   return (
-    <main className="relative pt-32 pb-20 px-6 min-h-screen text-foreground">
+    <main className="relative pt-24 md:pt-32 pb-28 px-4 md:px-6 min-h-screen text-foreground">
       <AnimatedZodiacBackground />
-      <div className="max-w-7xl mx-auto space-y-12 relative z-10">
-        <div className="text-center mb-16 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+      <div className="max-w-7xl mx-auto space-y-8 md:space-y-12 relative z-10">
+        <div className="text-center space-y-4 animate-in fade-in slide-in-from-bottom-8 duration-1000">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold uppercase tracking-widest mb-6">
             <Sparkles size={12} /> The Annual Dossier
           </div>
-          <h1 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1] italic font-serif text-foreground mb-6">
-            Your Future Is Written. <br className="hidden md:block" />
-            <span className="text-text-secondary font-light text-4xl md:text-5xl">Read The Script.</span>
+          <h1 className="text-3xl md:text-7xl font-medium tracking-tight leading-[1.1] italic font-serif text-foreground">
+            Your Future Is Written.{' '}
+            <span className="block text-xl md:text-5xl text-text-secondary font-light mt-1">Read The Script.</span>
           </h1>
-          <p className="text-lg md:text-xl text-text-secondary max-w-3xl mx-auto font-light leading-relaxed mb-6">
-            Why be surprised by life when you can read the blueprint in advance? Our predictive Year Book combines Dasha timelines with major planetary transits to give you a month-by-month roadmap of your next 12 months. Navigate with unfair foresight.
+          <p className="text-sm md:text-xl text-text-secondary max-w-3xl mx-auto font-light leading-relaxed hidden md:block">
+            Our predictive Year Book combines Dasha timelines with major planetary transits to give you a month-by-month roadmap. Navigate with unfair foresight.
           </p>
           <p className="text-xs text-primary font-bold uppercase tracking-widest inline-flex items-center gap-2 bg-primary/5 px-4 py-2 rounded-full border border-primary/20">
             <Link href="/login" className="hover:underline">{t('form.signin_prefix')}</Link> {t('form.signin_suffix')}
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto p-8 rounded-[2rem] bg-surface/50 backdrop-blur-xl border border-border shadow-2xl animate-in fade-in zoom-in duration-1000 delay-200">
+        <div className="max-w-3xl mx-auto p-4 md:p-8 rounded-[1.5rem] md:rounded-[2rem] bg-surface/50 backdrop-blur-xl border border-border shadow-2xl animate-in fade-in zoom-in duration-1000 delay-200">
           <form onSubmit={handleGuestSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-1.5">

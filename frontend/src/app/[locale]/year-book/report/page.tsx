@@ -147,8 +147,8 @@ export default function YearBookReportPage() {
   const targetYear = parseInt(searchParams.get('targetYear') || '2026');
 
   return (
-    <main className="relative pt-32 pb-20 px-6 print:pt-8 print:pb-0 print:px-0 min-h-screen text-foreground">
-      <div className="max-w-7xl mx-auto space-y-16 print:space-y-8">
+    <main className="relative pt-24 md:pt-32 pb-24 px-3 md:px-6 print:pt-8 print:pb-0 print:px-0 min-h-screen text-foreground">
+      <div className="max-w-7xl mx-auto space-y-8 md:space-y-16 print:space-y-8">
         {/* PDF BRANDING HEADER */}
         <div className="hidden print:flex items-center justify-between mb-8 border-b-2 border-secondary pb-4">
           <div className="flex items-center gap-3">
@@ -168,7 +168,7 @@ export default function YearBookReportPage() {
 
         {/* Header */}
         <div className="text-center space-y-4 print:space-y-2">
-          <h1 className="text-4xl md:text-6xl font-medium italic font-serif text-foreground leading-tight">
+          <h1 className="text-2xl md:text-6xl font-medium italic font-serif text-foreground leading-tight">
             {searchParams.get('name')}&apos;s {targetYear} {t('report.year_book_suffix')}
             <span className="block mt-3 text-2xl md:text-4xl text-primary font-light opacity-90 print:mt-1 print:text-2xl">
               {t('report.chart_overview')}
@@ -258,23 +258,44 @@ export default function YearBookReportPage() {
         </div>
         )}
 
-        {/* Month selector + detail — skeleton while AI loading */}
-        <div className="grid lg:grid-cols-[1fr_3fr] gap-12 print:hidden">
-          {/* Month Selector */}
-          <div className="space-y-4">
-            <h3 className="text-sm font-bold uppercase tracking-widest text-text-secondary px-4">{t('report.months_label')}</h3>
-            <div className="grid grid-cols-2 lg:grid-cols-1 gap-2">
+        {/* Month selector + detail */}
+        <div className="grid lg:grid-cols-[1fr_3fr] gap-6 md:gap-12 print:hidden">
+          {/* Month Selector — horizontal scroll on mobile, vertical list on lg */}
+          <div className="space-y-3">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-text-secondary px-1 hidden lg:block">{t('report.months_label')}</h3>
+            {/* Mobile: horizontal scroll pill tabs */}
+            <div className="flex lg:hidden gap-2 overflow-x-auto no-scrollbar pb-1">
               {aiLoading ? (
                 Array.from({ length: 12 }).map((_, i) => (
-                  <div key={i} className="h-14 rounded-2xl bg-surface border border-border animate-pulse"></div>
+                  <div key={i} className="h-10 w-20 rounded-xl bg-surface border border-border animate-pulse flex-shrink-0" />
+                ))
+              ) : data?.predictions?.map((p, i) => (
+                <button
+                  key={p.month}
+                  onClick={() => setActiveMonth(i)}
+                  className={`h-10 px-4 rounded-xl text-xs font-bold flex-shrink-0 transition-all ${
+                    activeMonth === i
+                      ? 'bg-foreground text-background'
+                      : 'bg-surface text-text-secondary hover:bg-foreground/5'
+                  }`}
+                >
+                  {t(`months.${p.month}`).slice(0, 3)}
+                </button>
+              ))}
+            </div>
+            {/* Desktop: vertical list */}
+            <div className="hidden lg:grid grid-cols-1 gap-2">
+              {aiLoading ? (
+                Array.from({ length: 12 }).map((_, i) => (
+                  <div key={i} className="h-14 rounded-2xl bg-surface border border-border animate-pulse" />
                 ))
               ) : data?.predictions?.map((p, i) => (
                 <button
                   key={p.month}
                   onClick={() => setActiveMonth(i)}
                   className={`h-14 px-6 rounded-2xl text-left transition-all font-medium ${
-                    activeMonth === i 
-                      ? 'bg-foreground text-background' 
+                    activeMonth === i
+                      ? 'bg-foreground text-background'
                       : 'bg-surface text-text-secondary hover:bg-foreground/5'
                   }`}
                 >
@@ -301,19 +322,19 @@ export default function YearBookReportPage() {
           ) : currentPred ? (
           <div key={activeMonth} className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-              <h2 className="text-5xl font-serif italic text-foreground">{t(`months.${currentPred.month}`)} {targetYear}</h2>
-              <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-secondary/10 to-highlight/10 border border-secondary/30 shadow-xl shadow-secondary/5 backdrop-blur-md">
-                <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-highlight opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-highlight"></span>
+          <h2 className="text-3xl md:text-5xl font-serif italic text-foreground">{t(`months.${currentPred.month}`)} {targetYear}</h2>
+              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-secondary/10 to-highlight/10 border border-secondary/30 backdrop-blur-md self-start md:self-auto">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-highlight opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-highlight" />
                 </span>
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-foreground/80">
-                  {t('report.alignment_score')} <span className="text-secondary text-lg ml-2 font-black">{currentPred.score}</span><span className="text-text-secondary/50 font-medium">/100</span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-foreground/80">
+                  {t('report.alignment_score')} <span className="text-secondary text-base ml-1 font-black">{currentPred.score}</span><span className="text-text-secondary/50 font-medium">/100</span>
                 </span>
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-4 md:gap-6">
               {[
                 { label: 'Career & Work', content: currentPred.career },
                 { label: 'Finance & Wealth', content: currentPred.finance },
@@ -321,7 +342,7 @@ export default function YearBookReportPage() {
                 { label: 'Health & Vitality', content: currentPred.health },
                 { label: 'Travel & Growth', content: currentPred.travel }
               ].map((section) => (
-                <div key={section.label} className="p-8 rounded-[2rem] bg-surface border border-border backdrop-blur-sm space-y-4">
+                <div key={section.label} className="p-5 md:p-8 rounded-[1.5rem] md:rounded-[2rem] bg-surface border border-border backdrop-blur-sm space-y-3 md:space-y-4">
                   <div className="flex items-center gap-3">
                     <CustomYearBookIcon type={section.label} />
                     <h4 className="font-bold text-foreground/90 uppercase tracking-widest text-xs">{section.label}</h4>
