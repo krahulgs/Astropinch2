@@ -213,7 +213,7 @@ class AstrologyEngine:
         api_key = os.environ.get("OPENAI_API_KEY")
         if not api_key: return
 
-        client = AsyncOpenAI(api_key=api_key)
+        client = AsyncOpenAI(api_key=api_key, base_url=os.environ.get("OPENAI_BASE_URL", "https://api.deepseek.com"))
         
         # We send a sample of the data for an 'Astrological Logic Audit'
         audit_data = {
@@ -236,7 +236,7 @@ class AstrologyEngine:
         """
         try:
             response = await client.chat.completions.create(
-                model="gpt-4o-mini",
+                model="deepseek-chat",
                 messages=[{"role": "system", "content": "You are an expert computational astrologer auditing calculation logic."},
                           {"role": "user", "content": prompt}],
                 temperature=0
@@ -286,9 +286,10 @@ class AstrologyEngine:
             # but (lon * 9) % 360 is the most mathematically direct for many Vargas.
             # Vedic traditional D9 uses a specific sign mapping which we'll implement.
             
+            sign_idx = int(lon // 30)
+            pos_in_sign = lon % 30
+
             if v == 9:
-                sign_idx = int(lon // 30)
-                pos_in_sign = lon % 30
                 pada = int(pos_in_sign / (30/9))
                 
                 # Element-based starting signs for D9
@@ -301,6 +302,16 @@ class AstrologyEngine:
                 start_offsets = [0, 9, 6, 3] # Aries=0, Cap=9, Lib=6, Can=3
                 nav_sign_idx = (start_offsets[sign_idx % 4] + pada) % 12
                 return (nav_sign_idx * 30) + (pos_in_sign * 9) % 30
+            elif v == 10:
+                # D-10 Dasamsa: 10 parts of 3 degrees each
+                part = int(pos_in_sign / 3)
+                if sign_idx % 2 == 0:
+                    # Odd signs: start from sign itself
+                    dasamsa_sign_idx = (sign_idx + part) % 12
+                else:
+                    # Even signs: start from 9th sign from current sign
+                    dasamsa_sign_idx = (sign_idx + 8 + part) % 12
+                return (dasamsa_sign_idx * 30) + (pos_in_sign * 10) % 30
             else:
                 return (lon * v) % 360
 
@@ -316,6 +327,8 @@ class AstrologyEngine:
             "sign_id": int(v_asc_lon // 30) + 1,
             "position_in_sign": v_asc_lon % 30
         }
+        
+        return varga_data
         
     def get_jatak_aspects(self, planets):
         """Calculates birth (Jatak) aspects based on Moon's position."""
@@ -352,7 +365,7 @@ class AstrologyEngine:
         }
 
     def check_manglik(self, planets, ascendant):
-        """Checks for Mangal Dosha (Mars in 1, 4, 7, 8, 12 houses) from Lagna and Moon with Parihara logic."""
+        """Checks for Mangal Dosha (Mars in 1, 4, 7, 8, 12 houses) from Lagna and Moon with authentic Parihara (cancellation) logic."""
         mars_lon = planets["Mars"]["longitude"]
         asc_lon = ascendant["longitude"]
         moon_lon = planets["Moon"]["longitude"]
@@ -363,18 +376,38 @@ class AstrologyEngine:
         is_manglik_lagna = house_lagna in [1, 4, 7, 8, 12]
         is_manglik_moon = house_moon in [1, 4, 7, 8, 12]
         
-        # Parihara (Cancellation) Logic
+        # Parihara (Cancellation) Logic - Authentic Vedic Rules
         mars_sign = int(mars_lon // 30) + 1 # 1-12
-        # Mars in its own signs (1, 8) or exaltation (10) cancels the dosha's severity
-        is_parihara = mars_sign in [1, 8, 10]
+        parihara_reasons = []
+        
+        # Rule 1: Mars in own sign (Aries/Scorpio) or Exaltation (Capricorn)
+        if mars_sign in [1, 8, 10]:
+            parihara_reasons.append("Mars is in its own or exalted sign.")
+            
+        # Rule 2: Specific House-Sign Cancellations
+        if house_lagna == 4 and mars_sign == 8: # Scorpio in 4th
+            parihara_reasons.append("Mars in Scorpio in the 4th house cancels the Dosha.")
+        if house_lagna == 7 and mars_sign in [10, 12]: # Cap/Pisces in 7th
+            parihara_reasons.append("Mars in Capricorn or Pisces in the 7th house cancels the Dosha.")
+        if house_lagna == 8 and mars_sign in [4, 9]: # Cancer/Sag in 8th
+            parihara_reasons.append("Mars in Cancer or Sagittarius in the 8th house cancels the Dosha.")
+        if house_lagna == 12 and mars_sign in [3, 6, 9, 12]: # Mercury/Jupiter signs in 12th
+            parihara_reasons.append("Mars in a dual sign in the 12th house is neutralized.")
+            
+        is_parihara = len(parihara_reasons) > 0
         
         # Overall status
         is_manglik = (is_manglik_lagna or is_manglik_moon)
         
-        if is_parihara:
-            severity = "Low (Neutralized)" if is_manglik else "None"
+        if is_parihara and is_manglik:
+            severity = "Low (Parihara Applied)"
+            status_desc = "Neutralized: " + " ".join(parihara_reasons)
+        elif is_manglik:
+            severity = "High" if (house_lagna in [7, 8] or house_moon in [7, 8]) else "Moderate"
+            status_desc = f"Mars is in {house_lagna} from Lagna and {house_moon} from Moon. No direct cancellation found."
         else:
-            severity = "High" if (house_lagna in [7, 8] or house_moon in [7, 8]) else "Moderate" if is_manglik else "None"
+            severity = "None"
+            status_desc = "No Mangal Dosha detected in the birth chart."
         
         return {
             "is_manglik": is_manglik,
@@ -384,7 +417,8 @@ class AstrologyEngine:
             "is_lagna_manglik": is_manglik_lagna,
             "is_moon_manglik": is_manglik_moon,
             "severity": severity,
-            "description": f"Mars is in {house_lagna} from Lagna and {house_moon} from Moon." + (" (Dosha neutralized by sign position)" if is_parihara and is_manglik else "")
+            "description": status_desc,
+            "cancellation_logic": parihara_reasons
         }
 
     def check_kaal_sarp(self, planets):

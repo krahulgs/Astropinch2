@@ -145,94 +145,33 @@ class AIService:
         api_key = os.environ.get("OPENAI_API_KEY")
         if api_key:
             try:
-                client = AsyncOpenAI(api_key=api_key)
-                prompt = f"""
-                You are a world-class Vedic Astrologer. Analyze this birth chart summary for a {user_profile.get('profession', 'professional')}.
-                
-                Data:
-                - Rising Sign: {asc_sign}
-                - Moon Sign: {moon_sign}
-                - Element: {element}
-                - Ruling Planet: {ruler} (in house {ruler_house})
-                
-                Synthesize a professional, jargon-free report.
-                
-                SECTION: Soul Essence
-                [Concisely explain their core nature. Max 40 words.]
-                
-                SECTION: Life Chapter
-                [Explain their current energetic focus. Max 40 words.]
-                
-                SECTION: Wealth Strategy
-                [One concise tip for financial growth. Max 20 words.]
-                
-                SECTION: Career Path
-                [One professional growth tip based on their profession. Max 20 words.]
-                
-                SECTION: Wellness Guide
-                [One health or lifestyle tip. Max 20 words.]
-                
-                SECTION: Personal Remedy
-                [One simple, practical ritual. Max 15 words.]
-                """
+                client = AsyncOpenAI(api_key=api_key, base_url=os.environ.get("OPENAI_BASE_URL", "https://api.deepseek.com"))
+                import json as _kjson
+                prompt = f"""Profile:Rising={asc_sign}|Moon={moon_sign}|Element={element}|Ruler={ruler}(H{ruler_house})|Profession={user_profile.get('profession','professional')}
+
+JSON only:
+{{"soul_essence":"2 sentences core nature, no jargon","current_season":"2 sentences current life theme","wealth":"1 practical tip ≤15 words","career":"1 tip ≤15 words","health":"1 tip ≤15 words","remedy":"1 simple habit ≤12 words"}}"""
                 response = await client.chat.completions.create(
-                    model="gpt-4o",
-                    messages=[{"role": "system", "content": "You are a friendly, expert astrologer. Use 'Easy English' that is simple to understand. No jargon. Explain things as a life mentor would."},
+                    model="deepseek-chat",
+                    messages=[{"role": "system", "content": "Vedic life coach. JSON only. No astrological jargon."},
                               {"role": "user", "content": prompt}],
-                    temperature=0.2
+                    response_format={"type": "json_object"},
+                    temperature=0.2, max_tokens=350
                 )
                 llm_res = response.choices[0].message.content
-                
-                # We can split these into the fields or just use the full synthesized report
-                # For consistency with the existing 4-module UI, let's keep the return structure
-                soul_essence = llm_res # The frontend handles splitting if needed, or we split here
-                current_season = "Your unique birth chart analysis is being dynamically synthesized by our AI."
-                
+                kd = _kjson.loads(llm_res)
+                return {
+                    "soul_essence": kd.get("soul_essence", soul_essence),
+                    "current_season": kd.get("current_season", current_season),
+                    "actionable_pillars": {
+                        "wealth": kd.get("wealth", lang_map["pillars"]["wealth"]),
+                        "career": kd.get("career", lang_map["pillars"]["career"]),
+                        "health": kd.get("health", lang_map["pillars"]["health"])
+                    },
+                    "remedy": kd.get("remedy", lang_map["remedies"].get(element, lang_map["remedies"]["Ether"]))
+                }
             except Exception as e:
                 print(f"Kundali AI Error: {e}")
-
-        # Parse LLM response if available
-        if api_key and 'llm_res' in locals():
-            lines = llm_res.split('\n')
-            soul_essence = ""
-            current_season = ""
-            wealth_tip = ""
-            career_tip = ""
-            health_tip = ""
-            personal_remedy = ""
-            
-            current_section = ""
-            for line in lines:
-                if 'SECTION: Soul Essence' in line: current_section = 'soul'
-                elif 'SECTION: Life Chapter' in line: current_section = 'chapter'
-                elif 'SECTION: Wealth Strategy' in line: current_section = 'wealth'
-                elif 'SECTION: Career Path' in line: current_section = 'career'
-                elif 'SECTION: Wellness Guide' in line: current_section = 'health'
-                elif 'SECTION: Personal Remedy' in line: current_section = 'remedy'
-                elif line.strip() and current_section:
-                    if current_section == 'soul': soul_essence += line + " "
-                    elif current_section == 'chapter': current_season += line + " "
-                    elif current_section == 'wealth': wealth_tip += line + " "
-                    elif current_section == 'career': career_tip += line + " "
-                    elif current_section == 'health': health_tip += line + " "
-                    elif current_section == 'remedy': personal_remedy += line + " "
-            
-            # Re-map tips to pillars for the UI
-            wealth = wealth_tip.strip() if wealth_tip else lang_map["pillars"]["wealth"]
-            career = career_tip.strip() if career_tip else lang_map["pillars"]["career"]
-            health = health_tip.strip() if health_tip else lang_map["pillars"]["health"]
-            remedy = personal_remedy.strip() if personal_remedy else lang_map["remedies"].get(element, lang_map["remedies"]["Ether"])
-            
-            return {
-                "soul_essence": soul_essence.strip(),
-                "current_season": current_season.strip(),
-                "actionable_pillars": {
-                    "wealth": wealth,
-                    "career": career,
-                    "health": health
-                },
-                "remedy": remedy
-            }
 
         return {
             "soul_essence": soul_essence,
@@ -245,44 +184,109 @@ class AIService:
     async def get_yearly_prediction(self, chart_data, user_profile, target_year=2026, language="English"):
         """Generates a detailed 12-month roadmap for the Year Book module with AI synthesis."""
         months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-        monthly_preds = []
         
         natal_moon = next((p for p in chart_data["planets"] if p["name"] == "Moon"), None)
         natal_sign = natal_moon["sign"] if natal_moon else "Aries"
         
-        # 1. Get High-Level Annual Outlook
         from openai import AsyncOpenAI
+        import json
+        import math as _math
+        import asyncio
         api_key = os.environ.get("OPENAI_API_KEY")
-        ai_client = AsyncOpenAI(api_key=api_key) if api_key else None
-        
-        ai_outlook = await self.get_yearbook_outlook(natal_sign, target_year) if ai_client else None
-        
-        # 2. Generate Monthly Predictions (with AI fallback)
+        ai_client = AsyncOpenAI(api_key=api_key, base_url=os.environ.get("OPENAI_BASE_URL", "https://api.deepseek.com")) if api_key else None
+
+        sign_offset = self.engine.SIGN_NAMES.index(natal_sign) if natal_sign in self.engine.SIGN_NAMES else 0
+        seasons = [
+            "Winter – rest and reflection season",
+            "Late Winter – planning and new intentions season",
+            "Spring – new beginnings and action season",
+            "Spring – growth and momentum season",
+            "Late Spring – expansion and opportunity season",
+            "Summer – peak energy and social season",
+            "Monsoon – emotion and introspection season",
+            "Late Monsoon – transition and course-correction season",
+            "Autumn – harvest and results season",
+            "Mid-Autumn – consolidation and review season",
+            "Pre-Winter – preparation and saving season",
+            "Winter – completion and release season"
+        ]
+
+        # Precompute scores
+        month_scores = []
         for idx, m in enumerate(months):
-            score = 65 + (idx % 20) 
-            ai_month = await self.get_monthly_ai_prediction(natal_sign, m, score) if ai_client else None
-            
-            if ai_month:
-                monthly_preds.append({
-                    "month": m,
-                    "career": ai_month.get("career", "Steady progress continues."),
-                    "finance": ai_month.get("finance", "Maintain balance in your spending."),
-                    "love": ai_month.get("love", "Focus on emotional connections."),
-                    "health": ai_month.get("health", "Prioritize rest and nutrition."),
-                    "travel": ai_month.get("travel", "Short trips are favored."),
-                    "score": score
-                })
-            else:
-                monthly_preds.append({
-                    "month": m,
-                    "career": "Your professional path remains stable. Focus on current goals.",
-                    "finance": "A neutral month for finances. Avoid large risks.",
-                    "love": "Warmth in relationships is highlighted.",
-                    "health": "Vitality is good; keep up your routine.",
-                    "travel": "Travel plans are neutral.",
-                    "score": score
-                })
-        
+            score = int(60 + 20 * _math.sin((idx + sign_offset) * _math.pi / 6)) + (sign_offset % 5)
+            score = max(40, min(98, score))
+            month_scores.append({"month": m, "score": score, "season": seasons[idx]})
+
+        async def fetch_12_months():
+            monthly_preds = []
+            if ai_client:
+                try:
+                    prompt = f"""
+                    Provide a complete, highly detailed 12-month astrological roadmap for a {natal_sign} Moon native for the year {target_year}. 
+                    Keep advice profound, jargon-free, and highly actionable. No astrological terms.
+                    
+                    For EVERY month, provide 1 highly impactful, action-oriented sentence for each area of life. Do not ramble.
+                    
+                    Return a STRICT JSON object mapping each month name exactly to its predictions.
+                    Example structure:
+                    {{
+                      "January": {{"career": "1 impactful sentence...", "finance": "1 impactful sentence...", "love": "1 impactful sentence...", "health": "1 impactful sentence...", "travel": "1 impactful sentence..."}},
+                      "February": {{"career": "1 impactful sentence...", "finance": "1 impactful sentence...", "love": "1 impactful sentence...", "health": "1 impactful sentence...", "travel": "1 impactful sentence..."}},
+                      ...
+                    }}
+                    """
+                    
+                    response = await ai_client.chat.completions.create(
+                        model="deepseek-chat",
+                        messages=[{"role": "system", "content": "You are a master life coach and astrologer. Output pure valid JSON only."},
+                                  {"role": "user", "content": prompt}],
+                        response_format={"type": "json_object"},
+                        temperature=0.3, max_tokens=1800
+                    )
+                    llm_data = json.loads(response.choices[0].message.content)
+                    
+                    if 'January' not in llm_data and len(llm_data.keys()) == 1:
+                        llm_data = list(llm_data.values())[0]
+
+                    for ms in month_scores:
+                        m = ms["month"]
+                        ai_month = llm_data.get(m, {})
+                        monthly_preds.append({
+                            "month": m,
+                            "career": ai_month.get("career", "Steady progress continues."),
+                            "finance": ai_month.get("finance", "Maintain balance in your spending."),
+                            "love": ai_month.get("love", "Focus on emotional connections."),
+                            "health": ai_month.get("health", "Prioritize rest and nutrition."),
+                            "travel": ai_month.get("travel", "Short trips are favored."),
+                            "score": ms["score"]
+                        })
+                except Exception as e:
+                    print(f"Batch Monthly AI Error: {e}")
+
+            if not monthly_preds:
+                for ms in month_scores:
+                    monthly_preds.append({
+                        "month": ms["month"],
+                        "career": "Your professional path remains stable. Focus on current goals.",
+                        "finance": "A neutral month for finances. Avoid large risks.",
+                        "love": "Warmth in relationships is highlighted.",
+                        "health": "Vitality is good; keep up your routine.",
+                        "travel": "Travel plans are neutral.",
+                        "score": ms["score"]
+                    })
+            return monthly_preds
+
+        # Run both AI requests concurrently
+        if ai_client:
+            ai_outlook, monthly_preds = await asyncio.gather(
+                self.get_yearbook_outlook(natal_sign, target_year),
+                fetch_12_months()
+            )
+        else:
+            ai_outlook = None
+            monthly_preds = await fetch_12_months()
+
         return {
             "year": target_year,
             "predictions": monthly_preds,
@@ -290,14 +294,23 @@ class AIService:
         }
     
 
-    async def get_daily_horoscope(self, sign_name, chart_data, user_profile, language="English"):
+    async def get_daily_horoscope(self, sign_name, chart_data, user_profile=None, language="English"):
         """Generates real-time daily insights based on lunar transits and sign-specific metrics."""
+        if user_profile is None:
+            user_profile = {}
+            
         from openai import AsyncOpenAI
         api_key = os.environ.get("OPENAI_API_KEY")
-        ai_client = AsyncOpenAI(api_key=api_key) if api_key else None
+        ai_client = AsyncOpenAI(api_key=api_key, base_url=os.environ.get("OPENAI_BASE_URL", "https://api.deepseek.com")) if api_key else None
 
         # Find Moon's house relative to the Sign
-        moon_data = next((p for p in chart_data["planets"] if p["name"] == "Moon"), {"sign": "Aries"})
+        moon_data = next((p for p in chart_data["planets"] if p["name"] == "Moon"), {"sign": "Aries", "nakshatra": "Ashwini"})
+        
+        # Get Dasha info if available
+        dasha_info = user_profile.get("dasha", {})
+        mahadasha = dasha_info.get("mahadasha", "Unknown")
+        antardasha = dasha_info.get("antardasha", "Unknown")
+        
         try:
             moon_sign_id = self.engine.SIGN_NAMES.index(moon_data["sign"]) + 1
             target_sign_id = self.engine.SIGN_NAMES.index(sign_name) + 1
@@ -328,96 +341,31 @@ class AIService:
         citation = f"Grounded in Gochara Logic & {moon_data['sign']} Lunar Alignment."
         soul_essence = f"As a {sign_name}, you are experiencing the Moon's influence in your {moon_h} house today."
         current_season = "A period of steady growth and reflection."
-
-        # LLM Synthesis
+        # LLM Synthesis — single batched JSON call (merged 4 calls → 1)
         if ai_client:
             try:
-                prompt = f"""
-                You are a world-class Vedic Astrologer. Synthesize a professional daily horoscope for {sign_name}.
-                
-                Data:
-                - Moon is in the {moon_h} house from {sign_name}.
-                - Risk Level: {risk_label} (Score: {risk_score}/100)
-                - Transiting Sign: {moon_data['sign']}
-                
-                Format:
-                SECTION: Celestial Vibe
-                [Clear summary of how {sign_name} will feel. MAX 40 WORDS.]
+                import json as _json
+                prompt = f"""Sign:{sign_name}|Profession:{user_profile.get('profession','person')}|MoonHouse:{moon_h}|Risk:{risk_label}|Mahadasha:{mahadasha}|Antardasha:{antardasha}
 
-                SECTION: Planetary Logic
-                [Plain English explanation. NO JARGON. MAX 50 WORDS.]
-
-                SECTION: Power Move
-                [One actionable tip. MAX 30 WORDS.]
-                
-                CRITICAL: Use ONLY the SECTION: label format. Keep each section short and punchy.
-                """
-                response = await ai_client.chat.completions.create(
-                    model="gpt-4o",
-                    messages=[{"role": "system", "content": "You are a friendly mentor providing daily insights. Use very simple, 'Easy English.' Explain the vibe simply and avoid all technical terms."},
+Return JSON only:
+{{"vibe":"1 sentence daily energy (no jargon)","season":"1 sentence current life theme","wealth":"tip ≤12 words","career":"tip ≤12 words","health":"tip ≤12 words","remedy":"1 simple ritual ≤10 words","cautions":["warn1","warn2","warn3"],"actions":["action1","action2","action3"],"citation":"1 sentence source logic ≤15 words"}}"""
+                resp = await ai_client.chat.completions.create(
+                    model="deepseek-chat",
+                    messages=[{"role": "system", "content": "Life coach. JSON only. No jargon. Ultra concise."},
                               {"role": "user", "content": prompt}],
-                    temperature=0.2
+                    response_format={"type": "json_object"},
+                    temperature=0.2, max_tokens=300
                 )
-                llm_response = response.choices[0].message.content
-
-                # Split the response if it contains headers, or use as is
-                soul_essence = llm_response
-                # If LLM followed the format, current_season can be the 'Celestial Vibe' part
-                # But to ensure it's fully AI, let's ask for the season specifically
-                season_prompt = f"Explain the 'Current Season' for {sign_name} based on Moon in {moon_data['sign']} and risk {risk_label}. No jargon. Max 40 words."
-                season_res = await ai_client.chat.completions.create(
-                    model="gpt-4o",
-                    messages=[{"role": "system", "content": "You are a professional astrologer. No jargon. Concise."},
-                              {"role": "user", "content": season_prompt}],
-                    temperature=0.2
-                )
-                current_season = season_res.choices[0].message.content.replace("#", "")
-
-                # NEW: Pillar and Remedy LLM Integration
-                pillar_prompt = f"""
-                As a mentor, provide 3 short tips, 1 simple remedy, 3 concise cautions, and 3 power actions for {sign_name} today based on the Moon in house {moon_h}.
-                
-                Format:
-                Wealth: [Tip, max 15 words]
-                Career: [Tip, max 15 words]
-                Health: [Tip, max 15 words]
-                Remedy: [One simple ritual, max 12 words]
-                Cautions: [List 3 short warnings separated by |]
-                Actions: [List 3 short power actions separated by |]
-                
-                No jargon. Simple English only.
-                """
-                pillar_res = await ai_client.chat.completions.create(
-                    model="gpt-4o",
-                    messages=[{"role": "system", "content": "You are a warm, practical life coach. Use simple, easy-to-understand language. No technical terms."},
-                              {"role": "user", "content": pillar_prompt}],
-                    temperature=0.2
-                )
-                pillar_text = pillar_res.choices[0].message.content.replace("#", "")
-                
-                # Parse the pillar text
-                p_lines = pillar_text.split('\n')
-                wealth = next((l.split(': ')[1] for l in p_lines if 'Wealth' in l), wealth)
-                career = next((l.split(': ')[1] for l in p_lines if 'Career' in l), career)
-                health = next((l.split(': ')[1] for l in p_lines if 'Health' in l), health)
-                remedy = next((l.split(': ')[1] for l in p_lines if 'Remedy' in l), remedy)
-                
-                # NEW: Cautions and Power Actions AI Integration
-                c_line = next((l.split(': ')[1] for l in p_lines if 'Cautions' in l), "")
-                if c_line: cautions = [c.strip() for c in c_line.split('|')]
-                
-                a_line = next((l.split(': ')[1] for l in p_lines if 'Actions' in l), "")
-                if a_line: power_actions = [a.strip() for a in a_line.split('|')]
-                
-                # NEW: Citation LLM Integration
-                cite_prompt = f"Create a short, professional 1-sentence citation for a horoscope based on Moon in {moon_data['sign']} for {sign_name}. No jargon. Explain the source logic simply. Max 20 words."
-                cite_res = await ai_client.chat.completions.create(
-                    model="gpt-4o",
-                    messages=[{"role": "system", "content": "You are a data scientist. No jargon."},
-                              {"role": "user", "content": cite_prompt}],
-                    temperature=0.2
-                )
-                citation = cite_res.choices[0].message.content
+                d = _json.loads(resp.choices[0].message.content)
+                soul_essence   = d.get("vibe", soul_essence)
+                current_season = d.get("season", current_season)
+                wealth         = d.get("wealth", wealth)
+                career         = d.get("career", career)
+                health         = d.get("health", health)
+                remedy         = d.get("remedy", remedy)
+                citation       = d.get("citation", citation)
+                if d.get("cautions"):  cautions      = d["cautions"]
+                if d.get("actions"):   power_actions = d["actions"]
             except Exception as e:
                 print(f"LLM Sign Horoscope Error: {e}")
         else:
@@ -458,7 +406,7 @@ class AIService:
         if not api_key: return None
         
         try:
-            client = AsyncOpenAI(api_key=api_key)
+            client = AsyncOpenAI(api_key=api_key, base_url=os.environ.get("OPENAI_BASE_URL", "https://api.deepseek.com"))
             prompt = f"""
             You are a friendly, expert Vedic Astrologer. Analyze the risks for {user_name} (Sign: {sign_name}) based on their {element} element and Moon in house {moon_h}.
             
@@ -481,10 +429,10 @@ class AIService:
             No jargon. Warm, mentoring tone. No hashtags.
             """
             response = await client.chat.completions.create(
-                model="gpt-4o",
+                model="deepseek-chat",
                 messages=[{"role": "system", "content": "You are a warm, friendly life coach. Use simple English. No jargon. No hashtags."},
                           {"role": "user", "content": prompt}],
-                temperature=0.2
+                temperature=0.2, max_tokens=500
             )
             return response.choices[0].message.content.replace("#", "")
         except Exception as e:
@@ -501,7 +449,7 @@ class AIService:
         if not api_key: return None
         
         try:
-            client = AsyncOpenAI(api_key=api_key)
+            client = AsyncOpenAI(api_key=api_key, base_url=os.environ.get("OPENAI_BASE_URL", "https://api.deepseek.com"))
             prompt = f"""
             You are a Financial Astrologer. Analyze the markets for {sign_name} based on their {element} element and Moon in house {moon_h}.
             
@@ -522,10 +470,10 @@ class AIService:
             No jargon. No hashtags.
             """
             response = await client.chat.completions.create(
-                model="gpt-4o",
+                model="deepseek-chat",
                 messages=[{"role": "system", "content": "You are a financial advisor. Use simple English. No jargon."},
                           {"role": "user", "content": prompt}],
-                temperature=0.2
+                temperature=0.2, max_tokens=500
             )
             return response.choices[0].message.content.replace("#", "")
         except Exception as e:
@@ -542,7 +490,7 @@ class AIService:
         if not api_key: return []
         
         try:
-            client = AsyncOpenAI(api_key=api_key)
+            client = AsyncOpenAI(api_key=api_key, base_url=os.environ.get("OPENAI_BASE_URL", "https://api.deepseek.com"))
             prompt = f"""
             You are a friendly life mentor. Suggest 3 simple, actionable 'Strategic Actions' for {user_name} (Sign: {sign_name}) based on their {element} energy today.
             
@@ -558,10 +506,10 @@ class AIService:
             - Action 3
             """
             response = await client.chat.completions.create(
-                model="gpt-4o",
+                model="deepseek-chat",
                 messages=[{"role": "system", "content": "You are a warm, practical life coach. No jargon. Very simple English."},
                           {"role": "user", "content": prompt}],
-                temperature=0.2
+                temperature=0.2, max_tokens=500
             )
             text = response.choices[0].message.content.replace("#", "")
             actions = [l.strip('- ').strip() for l in text.split('\n') if l.strip()]
@@ -578,14 +526,14 @@ class AIService:
         if not api_key: return None
         
         try:
-            client = AsyncOpenAI(api_key=api_key)
+            client = AsyncOpenAI(api_key=api_key, base_url=os.environ.get("OPENAI_BASE_URL", "https://api.deepseek.com"))
             prompt = f"""
             You are a master astrologer. Synthesize a 2026 Year Book outlook for {sign_name}.
             
             Synthesize:
             - A 'Year Theme' (e.g., Year of Growth, Year of Discipline)
-            - A 'Summary' (max 40 words, Easy English, no jargon)
-            - 4 'Quarters' (Period: Q1/Q2/Q3/Q4, Focus: 1 sentence each)
+            - A 'Summary' (Detailed, comprehensive overview of the year, around 80-100 words, Easy English, no jargon)
+            - 4 'Quarters' (Period: Q1/Q2/Q3/Q4, Focus: 2-3 detailed sentences each)
             - A 'Key Turning Point' (Specific date in 2026)
             
             Format:
@@ -598,10 +546,10 @@ class AIService:
             Turning Point: [Date]
             """
             response = await client.chat.completions.create(
-                model="gpt-4o",
+                model="deepseek-chat",
                 messages=[{"role": "system", "content": "You are a professional life mentor. Simple English. No jargon."},
                           {"role": "user", "content": prompt}],
-                temperature=0.2
+                temperature=0.2, max_tokens=500
             )
             text = response.choices[0].message.content.replace("#", "")
             data = {}
@@ -614,7 +562,14 @@ class AIService:
                     v = parts[1].strip()
                     if k == 'theme': data['theme'] = v
                     elif k == 'summary': data['summary'] = v
-                    elif k in ['q1', 'q2', 'q3', 'q4']: quarters.append({"period": k.upper(), "focus": v})
+                    elif k in ['q1', 'q2', 'q3', 'q4']: 
+                        period_map = {
+                            "q1": "Q1 (Jan - Mar)",
+                            "q2": "Q2 (Apr - Jun)",
+                            "q3": "Q3 (Jul - Sep)",
+                            "q4": "Q4 (Oct - Dec)"
+                        }
+                        quarters.append({"period": period_map[k], "focus": v})
                     elif k == 'turning point': data['key_date'] = v
             
             data['quarters'] = quarters
@@ -624,47 +579,71 @@ class AIService:
             print(f"Yearbook Outlook Error: {e}")
             return None
 
-    async def get_monthly_ai_prediction(self, sign_name, month, score):
-        """Generates simplified, jargon-free monthly predictions for all pillars."""
+    async def get_monthly_ai_prediction(self, sign_name, month, score, season_context=""):
+        """Generates distinct, plain-English monthly predictions for all pillars with actionable tips."""
         from openai import AsyncOpenAI
         api_key = os.environ.get("OPENAI_API_KEY")
         if not api_key: return None
         
+        # Tone descriptor based on score band
+        if score >= 80:
+            tone = "very positive and energising"
+        elif score >= 65:
+            tone = "moderately positive with some growth opportunities"
+        elif score >= 50:
+            tone = "mixed — some good days, some careful days"
+        else:
+            tone = "challenging but manageable with the right focus"
+        
         try:
-            client = AsyncOpenAI(api_key=api_key)
+            client = AsyncOpenAI(api_key=api_key, base_url=os.environ.get("OPENAI_BASE_URL", "https://api.deepseek.com"))
             prompt = f"""
-            You are a friendly astrologer. Predict {month} for {sign_name} (Score: {score}/100).
-            
-            Synthesize 1 sentence each (max 15 words) for:
-            - Career
-            - Finance
-            - Love
-            - Health
-            - Travel
-            
-            No jargon. Simple English. No hashtags.
-            Format:
-            Career: [Value]
-            Finance: [Value]
-            Love: [Value]
-            Health: [Value]
-            Travel: [Value]
-            """
+You are writing a personalized monthly forecast for someone with their Moon in {sign_name}.
+
+Month: {month}
+Season: {season_context}
+Overall Energy Score: {score}/100 — this month feels {tone}.
+
+Write a UNIQUE and SPECIFIC forecast for {month} only. Do NOT write generic advice.
+Reflect the season ({season_context}) and the energy score in every prediction.
+
+For each of the 5 areas below, write:
+- A main insight: 2 clear, conversational sentences specific to {month}.
+- A Simple Tip: one short, practical action the person can take this month (max 12 words).
+
+Rules:
+- Use plain, everyday English. No astrology words (no 'transit', 'aspect', 'retrograde', 'nakshatra', 'lagna', 'dasha').
+- Be warm, human, and direct — like a trusted friend giving advice.
+- Each section MUST feel different from the others.
+
+Format exactly like this (no extra text, no markdown):
+Career: [main insight — 2 sentences] Simple Tip: [one tip]
+Finance: [main insight — 2 sentences] Simple Tip: [one tip]
+Love: [main insight — 2 sentences] Simple Tip: [one tip]
+Health: [main insight — 2 sentences] Simple Tip: [one tip]
+Travel: [main insight — 2 sentences] Simple Tip: [one tip]
+"""
             response = await client.chat.completions.create(
-                model="gpt-4o",
-                messages=[{"role": "system", "content": "You are a helpful mentor. Easy English only."},
-                          {"role": "user", "content": prompt}],
-                temperature=0.2
+                model="deepseek-chat",
+                messages=[
+                    {"role": "system", "content": "You are a warm, practical life guide. Write like you are texting a close friend. Use simple, clear everyday language. Never use astrological jargon."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.85, max_tokens=500  # Higher temp = more varied outputs per month
             )
-            text = response.choices[0].message.content.replace("#", "")
+            text = response.choices[0].message.content.replace("#", "").strip()
             preds = {}
             for line in text.split('\n'):
+                line = line.strip()
+                if not line:
+                    continue
                 if ':' in line:
                     parts = line.split(':', 1)
                     k = parts[0].strip().lower()
                     v = parts[1].strip()
-                    preds[k] = v
-            return preds
+                    if k in ['career', 'finance', 'love', 'health', 'travel']:
+                        preds[k] = v
+            return preds if len(preds) >= 4 else None
         except Exception as e:
             print(f"Monthly AI Error: {e}")
             return None
@@ -679,7 +658,7 @@ class AIService:
         if not api_key: return None
         
         try:
-            client = AsyncOpenAI(api_key=api_key)
+            client = AsyncOpenAI(api_key=api_key, base_url=os.environ.get("OPENAI_BASE_URL", "https://api.deepseek.com"))
             prompt = f"""
             You are a relationship counselor and master astrologer. Analyze the marriage compatibility between {bride_name} and {groom_name}.
             
@@ -704,10 +683,10 @@ class AIService:
             No jargon. No signs/planets mentioned. Just the human essence.
             """
             response = await client.chat.completions.create(
-                model="gpt-4o",
+                model="deepseek-chat",
                 messages=[{"role": "system", "content": "You are a warm relationship mentor. Use simple, direct English. No jargon."},
                           {"role": "user", "content": prompt}],
-                temperature=0.2
+                temperature=0.2, max_tokens=500
             )
             text = response.choices[0].message.content.replace("#", "")
             data = {}
@@ -733,7 +712,7 @@ class AIService:
         if not api_key: return f"I am your Vedic guide. Based on {user_name}'s chart, I see great potential."
         
         try:
-            client = AsyncOpenAI(api_key=api_key)
+            client = AsyncOpenAI(api_key=api_key, base_url=os.environ.get("OPENAI_BASE_URL", "https://api.deepseek.com"))
             prompt = f"""
             You are a wise, empathetic Vedic AI Astrologer. 
             The user is asking a question about a person named {user_name}.
@@ -743,91 +722,580 @@ class AIService:
             Use simple English without overly technical jargon. Maintain the persona of a master Jyotishi.
             """
             response = await client.chat.completions.create(
-                model="gpt-4o",
+                model="deepseek-chat",
                 messages=[{"role": "system", "content": "You are a master Jyotishi and life guide."},
                           {"role": "user", "content": prompt}],
-                temperature=0.7
+                temperature=0.7, max_tokens=500
             )
             return response.choices[0].message.content
         except Exception as e:
             print(f"Chat AI Error: {e}")
             return f"I sense strong, transformative energies for {user_name}. The planetary alignments suggest a very promising path forward."
 
-    async def get_consultation_response(self, messages, astro_name, user_profile=None):
-        """Generates a dynamic response for the Marketplace Astrologer consultation chat, using actual chart data."""
+    async def get_consultation_response(self, messages, astro_name, user_profile=None, is_repeat=False, repeat_count=0):
+        """
+        Generates a highly accurate, engaging consultation response.
+        Implements: full chart injection, topic detection, persona voices,
+        follow-up questions, session arc, date guardrails, and repeat handling.
+        """
         from openai import AsyncOpenAI
         api_key = os.environ.get("OPENAI_API_KEY")
-        if not api_key: return f"I am {astro_name}, your Vedic guide. Based on your chart, I see great potential for growth."
-        
+        if not api_key:
+            return f"I am {astro_name}, your Vedic guide. The stars hold much wisdom for you today."
+
         try:
-            client = AsyncOpenAI(api_key=api_key)
-            
+            client = AsyncOpenAI(api_key=api_key, base_url=os.environ.get("OPENAI_BASE_URL", "https://api.deepseek.com"))
             today = datetime.now().strftime("%d %B %Y")
-            context_prompt = f"You are {astro_name}, an expert Vedic Astrologer. Write like a real human expert sharing wisdom, not a robot. Use a warm, conversational, and empathetic tone. Use natural phrases like 'I see here...', 'Looking at your charts...', or 'It's interesting to note...'. Today's date is {today}. IMPORTANT: Only predict events from today onwards. NEVER suggest past years as future opportunities. Keep responses under 60 words. Do not break character."
+            msg_count = len([m for m in messages if m.get("role") == "user"])
+
+            # ── 1. ASTROLOGER PERSONA LIBRARY ──────────────────────────────────
+            PERSONAS = {
+                "Acharya Rahul": {
+                    "voice": "Warm, uses 'beta' affectionately, authoritative. Uses phrases like 'I see clearly in your chart...', 'Beta, let me tell you...'. Always ends with one practical tip and a short Sanskrit blessing like 'Jai Shri Ram' or 'Om Namah Shivaya'.",
+                    "specialty": "Vedic and KP Astrology, career and life purpose"
+                },
+                "Smt. Kavita": {
+                    "voice": "Motherly, deeply compassionate. Speaks about karma and soul lessons naturally. Uses phrases like 'My dear...', 'Your soul chose this path because...'. Always asks ONE gentle follow-up question at the end to understand deeper.",
+                    "specialty": "Nadi Astrology and Vastu, karmic patterns and past life influences"
+                },
+                "Dr. Sanjay": {
+                    "voice": "Precise, analytical, scientific tone. Cites specific astrological logic briefly. Uses phrases like 'Technically speaking...', 'The Prashna chart for this moment indicates...', 'With high confidence I can say...'. Gives a probability estimate like '70% likely'.",
+                    "specialty": "Prashna Astrology, precise event timing and decision analysis"
+                },
+                "Swami Ji": {
+                    "voice": "Deeply spiritual, poetic, uses metaphors from nature and ancient texts. Speaks slowly and profoundly. Uses phrases like 'The river of your destiny...', 'As the Gita says...'. Always closes with a 5-word mantra relevant to the question.",
+                    "specialty": "Vedic meditation, spiritual guidance, and life purpose"
+                },
+                "Astrologer Priya": {
+                    "voice": "Friendly, modern, upbeat and encouraging. Uses conversational language. Uses phrases like 'Okay so here's the thing...', 'Honestly?', 'The good news is...'. Always ends with a numbered list of 2-3 action steps.",
+                    "specialty": "Numerology, Tarot, and practical life coaching for modern challenges"
+                },
+                "Guru Dev": {
+                    "voice": "Supremely authoritative, minimal words, maximum impact. Rarely uses filler words. Speaks in short, powerful, memorable sentences. Never more than 3 sentences per response. Each sentence lands like a truth.",
+                    "specialty": "Grand synthesis of Vedic, KP, Nadi and Prashna — the complete picture"
+                },
+            }
+            persona = PERSONAS.get(astro_name, PERSONAS["Acharya Rahul"])
+
+            # ── 2. TOPIC DETECTION → CONTEXT INJECTION ─────────────────────────
+            last_user_msg = ""
+            for m in reversed(messages):
+                if m.get("role") == "user":
+                    last_user_msg = m.get("text", "").lower()
+                    break
+
+            topic_map = {
+                "career":       ["job", "career", "work", "business", "promotion", "boss", "office", "profession", "resign", "interview"],
+                "finance":      ["money", "invest", "finance", "loan", "debt", "savings", "wealth", "profit", "loss", "stock", "property"],
+                "marriage":     ["marriage", "marry", "wedding", "spouse", "husband", "wife", "partner", "relationship", "love", "divorce"],
+                "health":       ["health", "sick", "disease", "illness", "hospital", "surgery", "pain", "recovery", "anxiety", "depression"],
+                "children":     ["child", "baby", "pregnancy", "son", "daughter", "kids", "fertility", "conceive"],
+                "travel":       ["travel", "abroad", "visa", "migration", "move", "foreign", "country", "relocate"],
+                "education":    ["study", "exam", "degree", "education", "college", "university", "course", "scholarship"],
+            }
+            detected_topic = "general"
+            for topic, keywords in topic_map.items():
+                if any(kw in last_user_msg for kw in keywords):
+                    detected_topic = topic
+                    break
+
+            # House relevance per topic for targeted chart injection
+            TOPIC_HOUSES = {
+                "career":    [10, 6, 2],
+                "finance":   [2, 11, 8],
+                "marriage":  [7, 5, 2],
+                "health":    [6, 8, 1],
+                "children":  [5, 2, 9],
+                "travel":    [9, 12, 3],
+                "education": [4, 5, 9],
+                "general":   [1, 10, 7],
+            }
+            relevant_houses = TOPIC_HOUSES.get(detected_topic, [1, 10, 7])
+
+            # ── 3. FULL CHART INJECTION ─────────────────────────────────────────
+            chart_block = ""
+            if user_profile and user_profile.get("chart"):
+                chart = user_profile["chart"]
+                planets = chart.get("planets", [])
+
+                # All planetary positions
+                planet_lines = []
+                for p in planets:
+                    planet_lines.append(f"{p['name']}: {p['sign']} House {p['house']} ({p['degree']:.1f}°){' [R]' if p.get('is_retrograde') else ''}")
+                all_planets = " | ".join(planet_lines)
+
+                # Topic-relevant planets
+                topic_relevant = [p for p in planets if p.get("house") in relevant_houses]
+                topic_context = ", ".join([f"{p['name']} in {p['sign']} (H{p['house']})" for p in topic_relevant])
+
+                asc_sign = planets[0]["sign"] if planets else "Unknown"
+                moon_p = next((p for p in planets if p["name"] == "Moon"), None)
+                moon_sign = moon_p["sign"] if moon_p else "Unknown"
+
+                chart_block = (
+                    f"\n\n=== VERIFIED BIRTH CHART (Swiss Ephemeris) ==="
+                    f"\nAscendant: {asc_sign} | Moon: {moon_sign}"
+                    f"\nAll Planets: {all_planets}"
+                    f"\nKey planets for {detected_topic.upper()} question: {topic_context}"
+                    f"\nYOU HAVE THE COMPLETE CHART. DO NOT ASK FOR BIRTH DETAILS EVER."
+                )
+
+            # ── 4. TIMING DATA (EXACT DATES ONLY) ──────────────────────────────
+            timing_block = ""
+            timing = user_profile.get("vedic_timing") if user_profile else None
+            if timing and "error" not in timing:
+                maha = timing.get("current_mahadasha", {})
+                antar = timing.get("current_antardasha", {})
+                upcoming = timing.get("upcoming_mahadashas", [])
+                upcoming_str = " → ".join([f"{u['planet']} ({u['starts']} to {u['ends']})" for u in upcoming[:3]])
+                timing_block = (
+                    f"\n\n=== EXACT VEDIC TIMING (use ONLY these dates, never invent) ==="
+                    f"\nToday: {today}"
+                    f"\nCurrent Mahadasha: {maha.get('planet','?')} (ends {maha.get('ends','?')})"
+                    f"\nCurrent Antardasha: {antar.get('planet','?')} (ends {antar.get('ends','?')})"
+                    f"\nUpcoming: {upcoming_str}"
+                    f"\nJupiter transiting: {timing.get('jupiter_current_sign','?')}"
+                    f"\nMoon Nakshatra: {timing.get('moon_nakshatra_name','?')}"
+                    f"\nRULE: Every prediction must reference ONLY these computed dates."
+                )
+
+            # ── 5. USER PROFILE CONTEXT (with computed age) ──────────────────
+            profile_block = ""
             if user_profile:
-                name = user_profile.get("full_name", "the user")
+                name = user_profile.get("full_name", "the seeker")
                 dob = user_profile.get("birth_date", "")
                 birth_time = user_profile.get("birth_time", "")
                 place = user_profile.get("birth_place", "")
                 profession = user_profile.get("profession", "")
                 marital = user_profile.get("marital_status", "")
-                
-                chart_context = ""
-                if "chart" in user_profile and user_profile["chart"]:
-                    chart = user_profile["chart"]
-                    planets = chart.get("planets", [])
-                    asc = planets[0].get("sign", "") if planets else ""
-                    moon = next((p.get("sign", "") for p in planets if p.get("name") == "Moon"), "")
-                    sun = next((p.get("sign", "") for p in planets if p.get("name") == "Sun"), "")
-                    jupiter = next((p for p in planets if p.get("name") == "Jupiter"), None)
-                    saturn = next((p for p in planets if p.get("name") == "Saturn"), None)
-                    jupiter_info = f"Jupiter in House {jupiter['house']} ({jupiter['sign']})" if jupiter else ""
-                    saturn_info = f"Saturn in House {saturn['house']} ({saturn['sign']})" if saturn else ""
-                    dasha = chart.get("dasha", "")
-                    chart_context = f" Birth Chart: Ascendant={asc}, Moon={moon}, Sun={sun}. {jupiter_info}. {saturn_info}. Current Dasha: {dasha}."
-                
-                context_prompt += f" You are consulting {name} (born {dob} at {birth_time} in {place}, profession: {profession}, marital status: {marital}).{chart_context} YOU ALREADY HAVE THEIR COMPLETE CHART. DO NOT ASK FOR BIRTH DETAILS. Give specific, date-aware predictions based on this data."
-            
-            # ── Inject verified Vedic timing data ───────────────────────────────
-            timing = user_profile.get("vedic_timing") if user_profile else None
-            if timing and "error" not in timing:
-                maha = timing["current_mahadasha"]
-                antar = timing["current_antardasha"]
-                upcoming = timing.get("upcoming_mahadashas", [])
-                upcoming_str = ", ".join(
-                    [f"{u['planet']} Mahadasha ({u['starts']} to {u['ends']})" for u in upcoming]
-                )
-                jup_sign = timing.get("jupiter_current_sign", "")
-                nak_name = timing.get("moon_nakshatra_name", "")
-                timing_block = (
-                    f" VERIFIED VEDIC TIMING (computed from Swiss Ephemeris, NOT guessed):"
-                    f" Moon Nakshatra={nak_name}."
-                    f" Current Mahadasha: {maha['planet']} (ends {maha['ends']})."
-                    f" Current Antardasha: {antar['planet']} (ends {antar['ends']})."
-                    f" Upcoming Mahadashas: {upcoming_str}."
-                    f" Jupiter currently transiting {jup_sign}."
-                    f" Use ONLY these computed dates when predicting timing. Never invent or approximate years."
-                )
-                context_prompt += timing_block
-            # ──────────────────────────────────────────────────────────────────
 
-            # Format history for OpenAI
-            openai_messages = [{"role": "system", "content": context_prompt}]
-            
-            for msg in messages:
-                # msg usually has 'role' ('astro' or 'user') and 'text'
-                role = "assistant" if msg.get("role") == "astro" else "user"
-                openai_messages.append({"role": role, "content": msg.get("text", "")})
+                # Compute exact age from DOB
+                age_str = ""
+                age_rules = ""
+                try:
+                    from dateutil.parser import parse as parse_date
+                    dob_dt = parse_date(dob, dayfirst=True)
+                    age = (datetime.now() - dob_dt).days // 365
+                    age_str = f" | Current Age: {age} years"
+                    retirement_age = 60
+                    years_to_retirement = max(0, retirement_age - age)
+                    career_cutoff_year = datetime.now().year + years_to_retirement
+
+                    # Topic-aware Dasha window filter
+                    topic_age_rule = ""
+                    if detected_topic == "career":
+                        topic_age_rule = (
+                            f"\nCAREER TIMING RULE: Person is {age} years old."
+                            f"\n- Only Dasha periods starting BEFORE {career_cutoff_year} are actionable career windows."
+                            f"\n- Dasha periods starting after {career_cutoff_year} must be described as retirement, legacy, or spiritual phase — NEVER as a job change opportunity."
+                            f"\n- NEVER suggest a career change window when the person will be over 60 at that time."
+                        )
+                    elif detected_topic == "children":
+                        topic_age_rule = (
+                            f"\nCHILDREN TIMING RULE: Person is {age} years old."
+                            + ("\n- Biological childbirth is inappropriate at this age. Re-frame 5th house as creativity, legacy, or mentorship." if age > 45 else "\n- Childbirth is contextually relevant.")
+                        )
+
+                    # General age-tier rules
+                    if age > 55:
+                        age_rules = (
+                            f"\n\nAGE GUARDRAILS (person is {age} — approaching retirement):"
+                            f"\n- Focus on legacy, wealth preservation, spiritual growth, and family harmony."
+                            f"\n- Career advice: suggest consulting, mentoring, or part-time roles — never full career pivots."
+                            f"\n- Do NOT suggest starting a new career from scratch at this age."
+                            f"\n- Do NOT predict childbirth."
+                            f"{topic_age_rule}"
+                        )
+                    elif age > 45:
+                        age_rules = (
+                            f"\n\nAGE GUARDRAILS (person is {age} years old):"
+                            f"\n- Do NOT predict childbirth or pregnancy — biologically and contextually inappropriate."
+                            f"\n- If asked about children, re-frame 5th house: creativity, legacy, students, mentorship."
+                            f"\n- Career changes are still very relevant — anchor advice to next {years_to_retirement} years only."
+                            f"\n- Do NOT flag any Dasha period starting after age {retirement_age} as a career opportunity."
+                            f"\n- All timing must be cross-referenced with current age of {age}."
+                            f"{topic_age_rule}"
+                        )
+                    elif age > 35:
+                        age_rules = (
+                            f"\n\nAGE CONTEXT (person is {age} years old):"
+                            f"\n- Fertility/children questions are still contextually relevant."
+                            f"\n- Career peak years are ahead. Dasha periods within next 20 years are all actionable."
+                            f"{topic_age_rule}"
+                        )
+                    elif age < 25:
+                        age_rules = (
+                            f"\n\nAGE CONTEXT (person is {age} — early life stage):"
+                            f"\n- Focus on education, career foundation, self-discovery."
+                            f"\n- Marriage/children predictions should be exploratory, not fixed timelines."
+                            f"{topic_age_rule}"
+                        )
+                    else:
+                        age_rules = topic_age_rule
+                except Exception:
+                    pass
+
+                profile_block = (
+                    f"\n\n=== SEEKER PROFILE ==="
+                    f"\nName: {name}{age_str} | DOB: {dob} {birth_time} | Place: {place}"
+                    f"\nProfession: {profession} | Marital Status: {marital}"
+                    f"\nQuestion Topic: {detected_topic.upper()}"
+                    f"{age_rules}"
+                )
+
+            # ── 6. SESSION ARC (smart follow-up logic) ──────────────────────────
+            # Detect if user's last message is a short agreement / closure signal
+            CLOSURE_SIGNALS = {
+                "yes", "no", "ok", "okay", "sure", "alright", "i see", "understood",
+                "got it", "makes sense", "i will", "will do", "i'll try", "noted",
+                "good", "fine", "agree", "correct", "right", "exactly", "true",
+                "sounds good", "that helps", "thank you", "thanks", "great", "perfect"
+            }
+            user_msg_clean = last_user_msg.strip().lower().rstrip("!.?")
+            is_short_agreement = (
+                len(last_user_msg.split()) <= 4 and
+                any(sig in user_msg_clean for sig in CLOSURE_SIGNALS)
+            )
+
+            if msg_count <= 2:
+                arc_instruction = (
+                    "OPENING phase: Build rapport warmly. Acknowledge their concern and give your first powerful insight. "
+                    "End with ONE open question to understand their situation better."
+                )
+            elif is_short_agreement:
+                arc_instruction = (
+                    "AFFIRMATION phase: The user has just agreed, confirmed, or given a short positive reply. "
+                    "Do NOT ask another question right now. Instead: affirm their choice warmly, give one final encouragement or reminder, "
+                    "then INVITE them to share their NEXT concern with a soft opener like 'Is there another area of your life you'd like to explore?' "
+                    "Keep the response under 50 words. Let the conversation breathe."
+                )
+            elif msg_count <= 6:
+                arc_instruction = (
+                    "DEEP DIVE phase: Give your most specific, chart-grounded insight. "
+                    "Ask a follow-up question ONLY if you genuinely need more information to deepen the reading. "
+                    "If you have given a complete, actionable recommendation, do NOT force a question — end with a decisive statement instead. "
+                    "A question should feel natural, not mechanical."
+                )
+            else:
+                arc_instruction = (
+                    "CLOSING phase: Synthesize the key wisdom from this session. Offer a final remedy or practical action. "
+                    "Close with a warm, persona-appropriate blessing. Do NOT ask any more questions."
+                )
+
+            # ── 7. NO-CHART / ON-THE-FLY CHART COMPUTATION ──────────────────────
+            no_chart_guard = ""
+            if not (user_profile and user_profile.get("chart")):
+                import re
                 
+                # Scan all user messages for birth details
+                full_conversation = " ".join(
+                    m.get("text", "") for m in messages if m.get("role") == "user"
+                )
+                
+                date_pattern = re.compile(
+                    r'(\d{1,2}[\s/-](?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|'
+                    r'jul(?:y)?|aug(?:ust)?|sep(?:tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?|\d{1,2})[\s/-]\d{2,4})',
+                    re.IGNORECASE
+                )
+                time_pattern = re.compile(r'(\d{1,2}:\d{2}\s*(?:am|pm)?)', re.IGNORECASE)
+                place_pattern = re.compile(
+                    r'(?:born in|from|in|at|place[:\s]+)([A-Za-z][A-Za-z\s]{2,20})', re.IGNORECASE
+                )
+
+                date_matches = date_pattern.findall(full_conversation)
+                time_matches = time_pattern.findall(full_conversation)
+                place_matches = place_pattern.findall(full_conversation)
+
+                # Try to compute chart if details found
+                chart_computed = False
+                if date_matches and time_matches and place_matches:
+                    try:
+                        from dateutil.parser import parse as parse_date
+                        from services.astrology import AstrologyEngine
+                        import urllib.request
+                        import json
+                        import pytz, swisseph as swe
+
+                        dob_str = date_matches[-1]
+                        dob = parse_date(dob_str, dayfirst=True)
+                        place = place_matches[-1].strip()
+                        time_str = time_matches[-1]
+                        
+                        # Time parsing
+                        t_obj = parse_date(time_str).time()
+                        h, m = t_obj.hour, t_obj.minute
+
+                        # Geocode
+                        url = f"https://nominatim.openstreetmap.org/search?q={urllib.parse.quote(place)}&format=json&limit=1"
+                        req = urllib.request.Request(url, headers={'User-Agent': 'AstroPinch/2.0'})
+                        with urllib.request.urlopen(req, timeout=3) as response:
+                            geo_data = json.loads(response.read().decode())
+                            if geo_data:
+                                lat, lon = float(geo_data[0]['lat']), float(geo_data[0]['lon'])
+                                
+                                local_tz = pytz.timezone("Asia/Kolkata")
+                                local_dt = local_tz.localize(datetime(dob.year, dob.month, dob.day, h, m))
+                                utc_dt = local_dt.astimezone(pytz.utc)
+                                jd_ut = swe.julday(utc_dt.year, utc_dt.month, utc_dt.day, utc_dt.hour + utc_dt.minute / 60.0)
+
+                                ae = AstrologyEngine()
+                                planets = ae.get_planets(jd_ut, lat, lon)
+                                asc = ae.get_ascendant(jd_ut, lat, lon)
+
+                                plines = []
+                                for pname, p in planets.items():
+                                    house = ae.get_house_number(p["longitude"], asc["longitude"])
+                                    retro = " [R]" if p.get("is_retrograde") else ""
+                                    plines.append(f"{pname}: {ae.SIGN_NAMES[p['sign_id']-1]} H{house}{retro}")
+
+                                asc_sign = ae.SIGN_NAMES[asc["sign_id"] - 1]
+                                no_chart_guard = (
+                                    f"\n\n=== COMPUTED CHART (Details just provided) ==="
+                                    f"\nUser's Details Found: {dob_str} at {time_str} in {place}"
+                                    f"\nAscendant: {asc_sign}"
+                                    f"\nPlanets: {' | '.join(plines)}"
+                                    f"\nRULE: You now have their chart! Proceed with a full, verified prediction based on this data."
+                                )
+                                print(f"  ✅ On-the-fly chart computed | ASC={asc_sign}")
+                                chart_computed = True
+                    except Exception as e:
+                        print(f"  ⚠️ On-the-fly chart failed: {e}")
+                
+                # If no chart could be computed, strictly block and ask
+                if not chart_computed:
+                    missing = []
+                    if not date_matches: missing.append("Date of Birth")
+                    if not time_matches: missing.append("Time of Birth")
+                    if not place_matches: missing.append("Place of Birth")
+                    
+                    # If everything is missing (initial state), politely ask for the Name as well for UX
+                    if len(missing) == 3:
+                        missing.insert(0, "Name")
+                    
+                    missing_str = ", ".join(missing)
+                    no_chart_guard = (
+                        f"\n\n=== STRICT RULE: NO BIRTH CHART AVAILABLE ==="
+                        f"\nYou DO NOT have the user's birth chart. You CANNOT make any astrological predictions."
+                        f"\nYou must ONLY do one thing: politely ask for their {missing_str}."
+                        f"\nDO NOT guess, DO NOT use Prashna, DO NOT give any general advice."
+                        f"\nTell them: 'To give you a precise, chart-grounded reading, I need your exact birth details. Could you please share your {missing_str}?'"
+                    )
+
+
+            # ── 8. REPEAT QUESTION HANDLING ────────────────────────────────────
+            TOPIC_CLARIFIERS = {
+                "career":    "What's holding you back most — financial risk, your current manager, or fear of the unknown?",
+                "finance":   "Are you asking about a specific investment, or your overall financial direction?",
+                "marriage":  "Is your concern about timing, compatibility, or family expectations?",
+                "health":    "Is this about a current condition, or a general concern about your future health?",
+                "children":  "Are you asking about timing for having children, or about an existing child?",
+                "travel":    "Is this about a specific trip or a longer-term move abroad?",
+                "education": "Are you asking about a specific course, or your overall education path?",
+                "general":   "What is the deepest worry behind this question — can you share more?",
+            }
+            repeat_block = ""
+            if is_repeat:
+                clarifier = TOPIC_CLARIFIERS.get(detected_topic, TOPIC_CLARIFIERS["general"])
+                prev_answers = [m.get("text", "")[:100] for m in messages if m.get("role") in ("assistant", "astrologer")][-3:]
+                prev_summary = " | ".join(prev_answers) if prev_answers else "none"
+                repeat_block = (
+                    f"\n\n=== REPEATED QUESTION DETECTED (repeat #{repeat_count}) ==="
+                    f"\nYour previous answers summarized: {prev_summary}"
+                    f"\nDO NOT repeat any of the above advice."
+                    f"\nINSTEAD: Acknowledge you heard them, then ask this specific clarifying question to go deeper: '{clarifier}'"
+                    f"\nThen offer ONE new, different angle on their question that you have not mentioned before."
+                )
+
+            # ── 8b. THIRD-PARTY DETECTION ──────────────────────────────────────
+            # Scan all user messages for mentions of a spouse/third party
+            all_user_text = " ".join(
+                m.get("text", "").lower() for m in messages if m.get("role") == "user"
+            )
+            THIRD_PARTY_KEYWORDS = [
+                "wife", "husband", "partner", "expecting", "pregnant", "pregnancy",
+                "spouse", "she is", "he is", "her chart", "his chart", "my son", "my daughter",
+                "my mother", "my father", "my sister", "my brother", "my friend"
+            ]
+            third_party_mentioned = any(kw in all_user_text for kw in THIRD_PARTY_KEYWORDS)
+
+            # Try to extract and compute spouse's chart from conversation
+            spouse_chart_block = ""
+            spouse_chart_computed = False
+            if third_party_mentioned:
+                import re
+                # Look for birth date patterns in the conversation
+                date_pattern = re.compile(
+                    r'(\d{1,2}[\s/-](?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|'
+                    r'jul(?:y)?|aug(?:ust)?|sep(?:tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?|\d{1,2})[\s/-]\d{2,4})',
+                    re.IGNORECASE
+                )
+                time_pattern = re.compile(r'(\d{1,2}:\d{2}\s*(?:am|pm)?)', re.IGNORECASE)
+                place_pattern = re.compile(
+                    r'(?:born in|from|in|at|place[:\s]+)([A-Za-z][A-Za-z\s]{2,20})', re.IGNORECASE
+                )
+
+                full_conversation = " ".join(
+                    m.get("text", "") for m in messages if m.get("role") == "user"
+                )
+                date_matches = date_pattern.findall(full_conversation)
+                time_matches = time_pattern.findall(full_conversation)
+                place_matches = place_pattern.findall(full_conversation)
+
+                if date_matches and place_matches:
+                    try:
+                        from dateutil.parser import parse as parse_date
+                        from services.astrology import AstrologyEngine
+                        import pytz, swisseph as swe
+
+                        spouse_dob_str = date_matches[-1]  # use most recent date mentioned
+                        spouse_dob = parse_date(spouse_dob_str, dayfirst=True)
+                        spouse_place = place_matches[-1].strip()
+
+                        # Try geocoding the place
+                        import urllib.request, urllib.parse, json as json_lib
+                        geo_url = f"https://nominatim.openstreetmap.org/search?q={urllib.parse.quote(spouse_place)}&format=json&limit=1"
+                        req = urllib.request.Request(geo_url, headers={"User-Agent": "AstroPinch/2.0"})
+                        with urllib.request.urlopen(req, timeout=3) as r:
+                            geo_data = json_lib.loads(r.read())
+
+                        if geo_data:
+                            sp_lat = float(geo_data[0]["lat"])
+                            sp_lon = float(geo_data[0]["lon"])
+
+                            # Parse time
+                            sp_hour, sp_minute = 12, 0
+                            if time_matches:
+                                t = parse_date(time_matches[-1])
+                                sp_hour, sp_minute = t.hour, t.minute
+
+                            local_tz = pytz.timezone("Asia/Kolkata")
+                            sp_local = local_tz.localize(
+                                datetime(spouse_dob.year, spouse_dob.month, spouse_dob.day, sp_hour, sp_minute)
+                            )
+                            sp_utc = sp_local.astimezone(pytz.utc)
+                            jd = swe.julday(sp_utc.year, sp_utc.month, sp_utc.day,
+                                            sp_utc.hour + sp_utc.minute / 60.0)
+
+                            astro_engine = AstrologyEngine()
+                            sp_planets = astro_engine.get_planets(jd, sp_lat, sp_lon)
+                            sp_asc = astro_engine.get_ascendant(jd, sp_lat, sp_lon)
+
+                            sp_lines = []
+                            for pname, p in sp_planets.items():
+                                h = astro_engine.get_house_number(p["longitude"], sp_asc["longitude"])
+                                sp_lines.append(f"{pname}: {astro_engine.SIGN_NAMES[p['sign_id']-1]} H{h}")
+
+                            sp_age = (datetime.now() - spouse_dob).days // 365
+                            spouse_chart_block = (
+                                f"\n\n=== SPOUSE/THIRD-PARTY CHART (Swiss Ephemeris) ==="
+                                f"\nDOB: {spouse_dob.strftime('%d %b %Y')} | Place: {spouse_place} | Age: {sp_age}"
+                                f"\nAscendant: {astro_engine.SIGN_NAMES[sp_asc['sign_id']-1]}"
+                                f"\nPlanets: {' | '.join(sp_lines)}"
+                                f"\nUse THIS chart (not the seeker's) for questions about the spouse/third party."
+                            )
+                            spouse_chart_computed = True
+                            print(f"  ✅ Spouse chart computed: {spouse_place} | ASC={astro_engine.SIGN_NAMES[sp_asc['sign_id']-1]}")
+                    except Exception as sp_err:
+                        print(f"  ⚠️ Spouse chart computation failed: {sp_err}")
+
+                if not spouse_chart_computed:
+                    spouse_chart_block = (
+                        "\n\n=== THIRD PARTY MENTIONED (no chart available) ==="
+                        "\nThe user has mentioned a spouse or family member. You do NOT have their birth chart."
+                        "\nDO NOT make predictions about the third party based on the seeker's chart."
+                        "\nInstead say: 'For an accurate reading about [spouse/family member], I need their date, time, and place of birth.'"
+                        "\nYou may offer general context from the seeker's 7th house (spouse) or 5th house (children) as secondary context only."
+                    )
+
+            # ── 9. OFF-TOPIC / CASUAL INPUT DETECTION ─────────────────────────
+            CASUAL_PHRASES = [
+                "i love you", "love you", "thank you", "thanks", "ok", "okay",
+                "lol", "haha", "hehe", "bye", "goodbye", "good night", "good morning",
+                "hello", "hi", "hey", "nice", "great", "cool", "wow", "amazing",
+                "you're amazing", "you are great", "appreciate", "namaste", "🙏"
+            ]
+            msg_lower = last_user_msg.strip().lower()
+            is_casual = (
+                len(msg_lower.split()) <= 5 and
+                any(phrase in msg_lower for phrase in CASUAL_PHRASES)
+            )
+
+            casual_rule = ""
+            if is_casual:
+                casual_rule = (
+                    f"\n\nOFF-TOPIC / CASUAL MESSAGE DETECTED:"
+                    f"\nThe user sent a short casual or emotional message ('{last_user_msg.strip()}') that is not a real astrological question."
+                    f"\nRespond with warm, light humor in your persona — like a wise elder who smiles and deflects gently."
+                    f"\nFor 'I love you' type messages: laugh it off warmly, e.g. 'Haha! Save those words for your partner — the stars say they need to hear it more than I do!' then offer to continue the reading."
+                    f"\nFor 'thank you': acknowledge graciously in your persona voice, then invite the next question."
+                    f"\nFor greetings: respond warmly and invite them to share their concern."
+                    f"\nNEVER get clinical or stiff about casual messages. Stay warm, human, and in character."
+                    f"\nKeep response under 40 words for casual messages."
+                )
+
+            # ── 10. FINAL SYSTEM PROMPT ─────────────────────────────────────────
+            system_prompt = f"""You are {astro_name}, a world-renowned Vedic Astrologer.
+
+PERSONA & VOICE: {persona['voice']}
+SPECIALTY: {persona['specialty']}
+SESSION PHASE: {arc_instruction}
+
+ABSOLUTE RULES:
+- Use ONLY the verified chart data and timing below. NEVER hallucinate planetary positions or dates.
+- Keep response under 100 words. Be impactful, not verbose.
+- Never say "I cannot access your chart" — you have it below.
+- STRICT JARGON BAN: Speak in simple, everyday English. NEVER use heavy astrological terms like "5th lord", "debilitated", "transiting your 10th house", or "Mahadasha" in your final output. Explain the *meaning* and the *human experience* behind the stars instead of reciting the technical chart data to the user.
+- Always speak in first person as {astro_name}.
+- ALWAYS write a COMPLETE, self-contained response. Never end with phrases like 'Let me explain', 'I will elaborate', 'More on this...', or any cliffhanger. Every response must be a complete thought.
+- When the user sends a casual, playful, or emotional message: respond warmly in persona — never get robotic or clinical about it.
+
+ETHICAL PREDICTION LIMITS (NON-NEGOTIABLE):
+- NEVER predict a child's gender with a percentage or certainty. It is not possible from any single chart alone.
+- NEVER say "You are correct" or "I re-calculate" when the user states a future date or fact. Instead say: "Thank you for sharing this. Working with the {detected_topic} window you've mentioned..."
+- NEVER agree with user-stated future facts as if your chart analysis confirmed them — you are acknowledging, not validating.
+- NEVER predict medical outcomes (smooth delivery, complications, health of mother/child).
+- For gender questions: note the classical Vedic indicators briefly, then always add: "This is a traditional indicator, not a certainty."
+- If asked to predict something you cannot verify, say so honestly, then offer what you CAN say.
+- NEVER give fabricated probability percentages (like "70% likely" or "80% confident") unless you can name the SPECIFIC planet and its position from the verified chart data that supports that number. If you cannot name the basis, do not give a percentage.
+- PRASHNA vs NATAL: If you only have the Prashna (current sky) chart and NOT a birth chart, make it clear you are reading the current cosmic moment — not the user's personal natal chart. Never blend natal and Prashna language.
+{chart_block}{timing_block}{profile_block}{spouse_chart_block}{no_chart_guard}{repeat_block}{casual_rule}"""
+
+            # ── 8. BUILD MESSAGE HISTORY ────────────────────────────────────────
+            openai_messages = [{"role": "system", "content": system_prompt}]
+
+            # Memory compression: summarize if > 8 messages
+            user_messages = [m for m in messages if m.get("role") != "system"]
+            if len(user_messages) > 8:
+                old_msgs = user_messages[:-6]
+                summary_pairs = []
+                for m in old_msgs:
+                    r = "User" if m.get("role") == "user" else astro_name
+                    summary_pairs.append(f"{r}: {m.get('text','')[:80]}")
+                summary = "Earlier conversation summary: " + " | ".join(summary_pairs)
+                openai_messages.append({"role": "system", "content": summary})
+                user_messages = user_messages[-6:]
+
+            for msg in user_messages:
+                role = "assistant" if msg.get("role") in ("astrologer", "assistant", "astro") else "user"
+                text = msg.get("text", msg.get("content", ""))
+                if text:
+                    openai_messages.append({"role": role, "content": text})
+
+            # Temperature: lower for repeats to reduce variance
+            temperature = 0.3 if is_repeat else 0.72
+
             response = await client.chat.completions.create(
-                model="gpt-4o",
+                model="deepseek-chat",
                 messages=openai_messages,
-                temperature=0.7
+                temperature=temperature,
+                max_tokens=320
             )
             return response.choices[0].message.content
+
         except Exception as e:
             print(f"Consultation AI Error: {e}")
-            return f"I am analyzing your energies right now. The cosmos are aligning favorably."
+            import traceback; traceback.print_exc()
+            return "I am sensing deep energies around your question. Could you share a little more context so I can guide you with precision?"
 
     async def get_sign_prediction(self, sign, chart_data):
         """Mock sign prediction."""

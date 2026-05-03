@@ -14,8 +14,9 @@ class HoroscopeService:
         self.panchang = PanchangService()
         self.ai_client = None
         api_key = os.environ.get("OPENAI_API_KEY")
+        base_url = os.environ.get("OPENAI_BASE_URL", "https://api.deepseek.com")
         if api_key:
-            self.ai_client = AsyncOpenAI(api_key=api_key)
+            self.ai_client = AsyncOpenAI(api_key=api_key, base_url=base_url)
 
     async def get_daily_horoscope(self, user_data: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -216,50 +217,48 @@ class HoroscopeService:
         m_shift = asc_element * 7 # 0, 7, 14, 21 minutes
         
         # 4. LLM Rephrasing (If API Key is available)
-        llm_summary = None
+        llm_data = {}
         if self.ai_client:
             try:
                 prompt = f"""
-                You are a master Vedic Astrologer synthesizing complex celestial data into a clear, professional, and spiritually grounded daily guide.
-                Rephrase the following astrological data into a sophisticated yet accessible report. 
+                You are a world-class Astrologer providing a personalized daily guide for {user_name}, whose profession is {profession}.
+                Their astrological profile: Lagna is {lagna_name}, Moon is in {moon_name}.
+                Today's energetic score is {day_score}/10.
                 
-                For each section, use the provided data but explain the COSMIC LOGIC behind it (e.g., 'Because the Moon is transiting your 10th house of career...').
+                Please provide detailed daily guidance in plain, simple English without ANY astrological jargon. Do NOT use words like Lagna, Nakshatra, Houses, or planetary alignments in your explanation. Just translate the cosmic energy into highly practical, relatable advice.
                 
-                Input Data:
-                - Native Name: {user_name}
-                - Current Summary: {day_summary}
-                - Profession: {profession}
-                - Professional Advice: {prof_advice}
-                - Key Planetary Influence: {moon_name} Moon & {lagna_name} Ascendant
-                - Lucky Elements: Color {["Sea Green / White", "Red / Orange", "Brown / Emerald", "Sky Blue / Yellow"][asc_element]}, Direction {["North", "East"][planets['Moon']['sign_id'] > 6]}
-
-                Required Format (Strictly follow this):
-                
-                ### 🌌 The Celestial Synthesis
-                [A concise 1-2 sentence overview of the day's energy. Use clear, simple English. STICK TO UNDER 40 WORDS.]
-
-                ### 🔭 The 'Why' Behind the Stars
-                [Explain the cosmic logic in plain language without using any technical jargon like 'Nakshatra', 'Lagna', or house names. Explain it like a mentor to a student. STICK TO UNDER 50 WORDS.]
-
-                ### ⚡ Power Move for Today
-                [One short, actionable piece of advice. STICK TO UNDER 30 WORDS.]
-                
-                CRITICAL: Use ZERO astrological jargon. No mention of 'transits', 'aspects', or technical terms. Keep every section under 50 words.
+                Return the response STRICTLY as a JSON object with the following keys and string values (or list of strings for arrays):
+                {{
+                    "llm_rephrased_summary": "A 2-3 sentence overview of the day.",
+                    "morning_mantra": "A short, positive, modern morning affirmation (not a traditional chant).",
+                    "prof_key_guidance": "Detailed advice for their career today.",
+                    "prof_decision_reasoning": "Why today is good or bad for decisions based on the current energy.",
+                    "fin_risk_detail": "Plain English advice on financial risk today.",
+                    "health_risk_detail": "Plain English advice on health risk today.",
+                    "rel_risk_detail": "Plain English advice on relationships.",
+                    "travel_risk_detail": "Plain English advice on travel.",
+                    "do_today": ["Actionable tip 1", "Actionable tip 2", "Actionable tip 3"],
+                    "avoid_today": ["Thing to avoid 1", "Thing to avoid 2", "Thing to avoid 3"],
+                    "inv_rationale": "Why today is or isn't good for investing, in plain English.",
+                    "market_advice": "General advice for market or business moves today.",
+                    "closing_wisdom": "A beautiful, jargon-free closing wisdom quote."
+                }}
                 """
                 response = await self.ai_client.chat.completions.create(
-                    model="gpt-4o",
-                    messages=[{"role": "system", "content": "You are a world-class Vedic Astrologer known for deep insights and practical wisdom."},
+                    model="deepseek-chat",
+                    messages=[{"role": "system", "content": "You are a master life coach and astrologer. Always output valid JSON."},
                               {"role": "user", "content": prompt}],
-                    temperature=0.2
+                    response_format={"type": "json_object"},
+                    temperature=0.3, max_tokens=800
                 )
-                llm_summary = response.choices[0].message.content
+                import json
+                llm_data = json.loads(response.choices[0].message.content)
             except Exception as e:
                 print(f"LLM Rephrase Error: {e}")
-                llm_summary = "Cosmic insights are being synthesized. Stay tuned."
 
         return {
             "date": now.strftime("%d %B %Y"),
-            "llm_rephrased_summary": llm_summary,
+            "llm_rephrased_summary": llm_data.get("llm_rephrased_summary", day_summary),
             "user_name": user_name,
             "lagna": lagna_name,
             "moon_sign": moon_name,
@@ -271,46 +270,46 @@ class HoroscopeService:
             "day_energy": day_energy,
             "day_score": day_score,
 
-            "morning_mantra": [
+            "morning_mantra": llm_data.get("morning_mantra", [
                 "ॐ नमः शिवाय (Om Namah Shivaya)\nMeaning: Salutations to the auspicious one. May your emotional waters remain calm.", # Water
                 "ॐ सूर्याय नमः (Om Suryaya Namah)\nMeaning: Salutations to the Sun. May you radiate confidence and clarity.", # Fire
                 "ॐ गं गणपतये नमः (Om Gam Ganapataye Namah)\nMeaning: Salutations to the Remover of Obstacles. May your material path be clear.", # Earth
                 "ॐ बुं बुधाय नमः (Om Bum Budhaya Namah)\nMeaning: Salutations to Mercury. May your communication be precise and effective." # Air
-            ][asc_element],
+            ][asc_element]),
 
             "day_summary": day_summary,
             "profession_guidance": {
                 "profession": profession,
                 "todays_outlook": "Favorable" if day_score > 6 else "Neutral",
-                "key_guidance": prof_advice,
+                "key_guidance": llm_data.get("prof_key_guidance", prof_advice),
                 "best_time_to_work": best_times[tithi_num % 4],
                 "avoid_time": f"{avoid_times[tithi_num % 4]} — avoid critical professional decisions",
                 "decision_verdict": "Green Light — Take Decisions" if day_score > 6 else "Yellow — Wait for Clarity",
-                "decision_reasoning": decision_reasoning
+                "decision_reasoning": llm_data.get("prof_decision_reasoning", decision_reasoning)
             },
 
             "risk_assessment": {
                 "overall_risk_level": "Low" if day_score > 7 else "Moderate",
                 "risk_score": 10 - day_score,
                 "financial_risk": "Low" if asc_element in [0, 2] else "Moderate",
-                "financial_risk_detail": fin_details[asc_element],
+                "financial_risk_detail": llm_data.get("fin_risk_detail", fin_details[asc_element]),
                 "health_risk": "Moderate" if asc_element in [1, 3] else "Low",
-                "health_risk_detail": health_details[asc_element],
+                "health_risk_detail": llm_data.get("health_risk_detail", health_details[asc_element]),
                 "relationship_risk": "Low" if moon_element in [0, 2] else "Moderate",
-                "relationship_risk_detail": rel_details[moon_element],
+                "relationship_risk_detail": llm_data.get("rel_risk_detail", rel_details[moon_element]),
                 "travel_risk": "Low",
-                "travel_risk_detail": travel_details[asc_element]
+                "travel_risk_detail": llm_data.get("travel_risk_detail", travel_details[asc_element])
             },
 
-            "do_today": dynamic_do[asc_element],
+            "do_today": llm_data.get("do_today", dynamic_do[asc_element]),
 
-            "avoid_today": dynamic_avoid[asc_element],
+            "avoid_today": llm_data.get("avoid_today", dynamic_avoid[asc_element]),
 
             "investment_guidance": {
                 "suitable_for_investing": "Yes" if day_score > 6 else "With Caution",
                 "sectors_favored": inv_sectors_favored[asc_element],
                 "sectors_to_avoid": inv_sectors_avoid[asc_element],
-                "rationale": inv_rationale[asc_element]
+                "rationale": llm_data.get("inv_rationale", inv_rationale[asc_element])
             },
 
             "remedies": {
@@ -359,8 +358,8 @@ class HoroscopeService:
                 "confidence_level": "High" if day_score > 7 else "Medium",
                 "key_planet_driving_markets": market_planets[asc_element],
                 "sectors_to_watch": inv_sectors_favored[asc_element],
-                "advice": market_advices[asc_element]
+                "advice": llm_data.get("market_advice", market_advices[asc_element])
             },
 
-            "closing_wisdom": wisdoms[asc_element]
+            "closing_wisdom": llm_data.get("closing_wisdom", wisdoms[asc_element])
         }

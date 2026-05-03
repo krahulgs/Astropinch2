@@ -18,3 +18,21 @@ class User(Base):
     marital_status = Column(String, nullable=True)
     profile_image = Column(String, nullable=True) # URL or path to image
     is_active = Column(Boolean, default=True)
+
+class AstrologerApplication(Base):
+    __tablename__ = "astrologer_applications"
+
+    id = Column(Integer, primary_key=True, index=True)
+    full_name = Column(String, index=True)
+    email = Column(String, unique=True, index=True)
+    phone = Column(String)
+    experience_years = Column(Integer)
+    specialties = Column(String) # Stored as JSON string
+    languages = Column(String) # Stored as JSON string
+    bio = Column(String)
+    status = Column(String, default="PENDING") # PENDING, ACTIVE, REJECTED
+    documents = Column(String, nullable=True) # JSON string of paths
+    profile_image = Column(String, nullable=True)
+    rate_per_min = Column(Integer, nullable=True)
+    ai_persona_prompt = Column(String, nullable=True)
+    created_at = Column(String, nullable=True)

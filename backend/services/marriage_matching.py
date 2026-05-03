@@ -1,3 +1,4 @@
+import os
 import swisseph as swe
 import math
 import logging
@@ -140,13 +141,52 @@ class MarriageMatchingEngine:
             mahendra = self._calculate_mahendra(b_nak, g_nak)
 
             
-            # 8. AI Logic Audit (GPT-4o Verification)
+            # 8. AI Logic Audit (DeepSeek Verification)
             try:
-                b_moon = b_planets["Moon"]
-                g_moon = g_planets["Moon"]
-                audit_prompt = f"Audit Guna: B_Nak={b_moon['nakshatra_id']}, G_Nak={g_moon['nakshatra_id']}. Calc_Total={vedic_match['total']}. Verify Bhakoot and Nadi accuracy. Return 'OK' or corrected JSON."
-                # We trust our math but use AI for complex cancellation edge cases
-            except: pass
+                from openai import AsyncOpenAI
+                _api_key = os.environ.get("OPENAI_API_KEY")
+                _base_url = os.environ.get("OPENAI_BASE_URL", "https://api.deepseek.com")
+                if _api_key:
+                    _audit_client = AsyncOpenAI(api_key=_api_key, base_url=_base_url)
+                    b_moon_audit = b_planets["Moon"]
+                    g_moon_audit = g_planets["Moon"]
+                    b_nak_name = self.engine.NAKSHATRA_NAMES[b_moon_audit['nakshatra_id'] - 1]
+                    g_nak_name = self.engine.NAKSHATRA_NAMES[g_moon_audit['nakshatra_id'] - 1]
+                    b_sign_name = self.engine.SIGN_NAMES[b_moon_audit['sign_id'] - 1]
+                    g_sign_name = self.engine.SIGN_NAMES[g_moon_audit['sign_id'] - 1]
+                    audit_prompt = f"""
+                    You are a strict Vedic astrology logic auditor.
+
+                    Bride Moon: Nakshatra={b_nak_name}, Rashi={b_sign_name}
+                    Groom Moon: Nakshatra={g_nak_name}, Rashi={g_sign_name}
+
+                    Calculated Ashtakoot Breakdown: {vedic_match['breakdown']}
+                    Calculated Total: {vedic_match['total']}/36
+                    Dosha Status: {vedic_match['doshas']}
+
+                    Task:
+                    1. Verify each Koot score (Varna, Vashya, Tara, Yoni, Maitri, Gana, Bhakoot, Nadi) against classical scripture.
+                    2. Check if Bhakoot and Nadi Dosha cancellations are correctly identified.
+                    3. Flag any mathematical errors or missed cancellations.
+
+                    Reply with ONLY 'VERIFIED' if everything is correct.
+                    If there are errors, reply with 'CORRECTION: <brief description of the issue>'.
+                    """
+                    _audit_response = await _audit_client.chat.completions.create(
+                        model="deepseek-chat",
+                        messages=[
+                            {"role": "system", "content": "You are an expert Vedic astrology computational auditor. Be strict and precise."},
+                            {"role": "user", "content": audit_prompt}
+                        ],
+                        temperature=0
+                    )
+                    _audit_result = _audit_response.choices[0].message.content.strip()
+                    if "VERIFIED" in _audit_result:
+                        logger.info(f"AI Guna Audit: VERIFIED — Total={vedic_match['total']}/36")
+                    else:
+                        logger.warning(f"AI Guna Audit flagged an issue: {_audit_result}")
+            except Exception as _audit_err:
+                logger.warning(f"AI Guna Audit skipped: {_audit_err}")
 
             # AI Synthesis
             from .ai_service import AIService

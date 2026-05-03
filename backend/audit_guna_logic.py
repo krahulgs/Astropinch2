@@ -22,13 +22,13 @@ if os.path.exists(path):
     # 0 if same Nadi. 8 if different.
     
     # 2. Integrate AIService for a "Logic Final Pass"
-    # We will send the calculated Gunas to GPT-4o for a sanity check before returning.
+    # We will send the calculated Gunas to DeepSeek for a sanity check before returning.
     
     # 3. Add AI-Driven Guna Validation to MarriageMatchingEngine
     if 'async def _validate_gunas_with_ai' not in content:
         ai_validation_method = \"\"\"
     async def _validate_gunas_with_ai(self, b_data: Dict, g_data: Dict, calculated_gunas: Dict) -> Dict:
-        \"\"\"Logic audit for Guna Milan using GPT-4o.\"\"\"
+        \"\"\"Logic audit for Guna Milan using DeepSeek.\"\"\"
         from .ai_service import AIService
         ai = AIService()
         prompt = f\"\"\"
