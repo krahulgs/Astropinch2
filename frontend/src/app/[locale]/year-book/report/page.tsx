@@ -346,7 +346,7 @@ export default function YearBookReportPage() {
               <div className="p-8 rounded-[2rem] bg-primary/10 border border-primary/20 backdrop-blur-sm space-y-4">
                 <h4 className="font-bold text-primary uppercase tracking-widest text-xs">{t('report.key_transits')}</h4>
                 <div className="space-y-3">
-                  {data.transits.map((tr, i) => (
+                    {data?.transits?.map((tr, i) => (
                     <div key={i} className="flex justify-between items-center text-sm gap-4">
                       <span className="text-foreground/80 font-medium truncate">{tr.planet} {tr.event}</span>
                       <span className="text-text-secondary text-xs shrink-0">{tr.date}</span>
@@ -410,7 +410,7 @@ export default function YearBookReportPage() {
                 <div className="p-5 rounded-2xl border border-primary/20 bg-primary/5 space-y-3">
                   <h4 className="font-bold text-primary uppercase tracking-widest text-[10px]">{t('report.key_transits')}</h4>
                   <div className="space-y-2">
-                    {data.transits.map((tr, i) => (
+                      {data?.transits?.map((tr, i) => (
                       <div key={i} className="flex justify-between items-center text-[9px] border-b border-primary/10 pb-1">
                         <span className="text-foreground font-medium">{tr.planet} {tr.event}</span>
                         <span className="text-text-secondary">{tr.date}</span>
