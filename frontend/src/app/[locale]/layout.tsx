@@ -82,7 +82,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
  
   return (
-    <html lang={locale} className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${inter.variable} ${notoDevanagari.variable} ${notoBengali.variable} ${notoTelugu.variable} ${notoTamil.variable} ${notoGujarati.variable} antialiased`}>
+    <html lang={locale} className={`dark ${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${inter.variable} ${notoDevanagari.variable} ${notoBengali.variable} ${notoTelugu.variable} ${notoTamil.variable} ${notoGujarati.variable} antialiased`}>
       <body>
         <CosmicBackground />
         <NextIntlClientProvider messages={messages}>
