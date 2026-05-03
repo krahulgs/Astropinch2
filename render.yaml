@@ -3,7 +3,6 @@ services:
   - type: web
     name: astropinch-api
     env: python
-    region: ohio
     plan: free
     buildCommand: pip install --upgrade pip && pip install -r backend/requirements.txt --prefer-binary
     startCommand: cd backend && chmod +x pre-start.sh && ./pre-start.sh
@@ -25,7 +24,6 @@ services:
   - type: web
     name: astropinch-web
     env: node
-    region: ohio
     plan: free
     buildCommand: cd frontend && npm install && npm run build
     startCommand: cd frontend && npm run start
