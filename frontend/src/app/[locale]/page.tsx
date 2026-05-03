@@ -411,7 +411,7 @@ export default function HomePage() {
             </button>
 
             {/* Image Side */}
-            <div className="md:w-5/12 relative h-48 md:h-auto hidden sm:block">
+            <div className="w-full md:w-5/12 relative h-40 md:h-auto">
               <Image 
                 src="/images/jyotish_guru.png" 
                 alt="Jyotish Guru" 
