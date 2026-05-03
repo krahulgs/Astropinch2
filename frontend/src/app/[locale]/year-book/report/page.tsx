@@ -308,29 +308,29 @@ export default function YearBookReportPage() {
 
           {/* Month Detail */}
           {aiLoading ? (
-            <div className="space-y-8 animate-pulse">
-              <div className="h-12 bg-foreground/10 rounded-xl w-1/3"></div>
-              <div className="grid md:grid-cols-2 gap-6">
+          <div className="space-y-4 md:space-y-8 animate-pulse">
+              <div className="h-8 bg-foreground/10 rounded-xl w-1/2" />
+              <div className="grid md:grid-cols-2 gap-3 md:gap-6">
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <div key={i} className="p-8 rounded-[2rem] bg-surface border border-border space-y-4">
-                    <div className="h-4 bg-foreground/10 rounded w-1/3"></div>
-                    <div className="h-3 bg-foreground/10 rounded w-full"></div>
-                    <div className="h-3 bg-foreground/10 rounded w-5/6"></div>
+                  <div key={i} className="p-4 md:p-8 rounded-[1.5rem] md:rounded-[2rem] bg-surface border border-border space-y-3">
+                    <div className="h-3 bg-foreground/10 rounded w-1/3" />
+                    <div className="h-3 bg-foreground/10 rounded w-full" />
+                    <div className="h-3 bg-foreground/10 rounded w-5/6" />
                   </div>
                 ))}
               </div>
             </div>
           ) : currentPred ? (
-          <div key={activeMonth} className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <h2 className="text-3xl md:text-5xl font-serif italic text-foreground">{t(`months.${currentPred.month}`)} {targetYear}</h2>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-secondary/10 to-highlight/10 border border-secondary/30 backdrop-blur-md self-start md:self-auto">
-                <span className="relative flex h-2.5 w-2.5">
+          <div key={activeMonth} className="space-y-4 md:space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-2 md:gap-4">
+              <h2 className="text-2xl md:text-5xl font-serif italic text-foreground">{t(`months.${currentPred.month}`)} {targetYear}</h2>
+              <div className="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-gradient-to-r from-secondary/10 to-highlight/10 border border-secondary/30 backdrop-blur-md self-start">
+                <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-highlight opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-highlight" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-highlight" />
                 </span>
-                <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-foreground/80">
-                  {t('report.alignment_score')} <span className="text-secondary text-base ml-1 font-black">{currentPred.score}</span><span className="text-text-secondary/50 font-medium">/100</span>
+                <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.15em] text-foreground/80">
+                  {t('report.alignment_score')} <span className="text-secondary text-sm md:text-base ml-1 font-black">{currentPred.score}</span><span className="text-text-secondary/50 font-medium">/100</span>
                 </span>
               </div>
             </div>
@@ -343,20 +343,19 @@ export default function YearBookReportPage() {
                 { label: 'Health & Vitality', content: currentPred.health },
                 { label: 'Travel & Growth', content: currentPred.travel }
               ].map((section) => (
-                <div key={section.label} className="p-5 md:p-8 rounded-[1.5rem] md:rounded-[2rem] bg-surface border border-border backdrop-blur-sm space-y-3 md:space-y-4">
-                  <div className="flex items-center gap-3">
+                <div key={section.label} className="p-4 md:p-8 rounded-[1.5rem] md:rounded-[2rem] bg-surface border border-border backdrop-blur-sm space-y-2 md:space-y-4">
+                  <div className="flex items-center gap-2 md:gap-3">
                     <CustomYearBookIcon type={section.label} />
-                    <h4 className="font-bold text-foreground/90 uppercase tracking-widest text-xs">{section.label}</h4>
+                    <h4 className="font-bold text-foreground/90 uppercase tracking-widest text-[10px] md:text-xs">{section.label}</h4>
                   </div>
-                  <div className="space-y-4">
-                    <p className="text-text-secondary leading-relaxed font-light">{section.content.split('Simple Tip:')[0]}</p>
-                    
+                  <div className="space-y-2 md:space-y-4">
+                    <p className="text-sm text-text-secondary leading-relaxed font-light">{section.content.split('Simple Tip:')[0]}</p>
                     {section.content.includes('Simple Tip:') && (
-                      <div className="flex items-start gap-3 p-4 rounded-2xl bg-highlight/5 border border-highlight/20">
-                         <span className="w-2 h-2 rounded-full bg-highlight mt-1.5 shrink-0"></span>
-                         <p className="text-sm text-text-secondary italic leading-relaxed">
-                           <span className="text-highlight font-bold uppercase tracking-wider not-italic">{t('report.tip')}</span> {section.content.split('Simple Tip:')[1]}
-                         </p>
+                      <div className="flex items-start gap-2 p-3 md:p-4 rounded-xl md:rounded-2xl bg-highlight/5 border border-highlight/20">
+                        <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-highlight mt-1.5 shrink-0" />
+                        <p className="text-xs md:text-sm text-text-secondary italic leading-relaxed">
+                          <span className="text-highlight font-bold uppercase tracking-wider not-italic">{t('report.tip')}</span> {section.content.split('Simple Tip:')[1]}
+                        </p>
                       </div>
                     )}
                   </div>
