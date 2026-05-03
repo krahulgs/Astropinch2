@@ -18,6 +18,7 @@ interface UserProfile {
   lat?: string;
   lon?: string;
   profession?: string;
+  gender?: string;
   marital_status?: string;
   profile_image?: string;
 }

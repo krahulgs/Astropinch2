@@ -12,6 +12,7 @@ export interface UserProfile {
   lat: string;
   lon: string;
   profession: string;
+  gender?: string;
   marital_status?: string;
   profile_image?: string;
 }
@@ -28,6 +29,7 @@ export interface ParsedProfile {
   lat: number;
   lon: number;
   profession: string;
+  gender?: string;
   marital_status?: string;
   profile_image?: string;
   role: string;
@@ -49,6 +51,7 @@ export function parseProfile(u: UserProfile): ParsedProfile | null {
     lat: parseFloat(u.lat),
     lon: parseFloat(u.lon),
     profession: u.profession || 'General',
+    gender: u.gender,
     marital_status: u.marital_status,
     profile_image: u.profile_image,
     role: u.role,
