@@ -221,10 +221,10 @@ export default function HomePage() {
               </Link>
               </div>
             </div>
-            <div className="flex-1 w-full rounded-[3rem] bg-gradient-to-br from-pink-500/10 to-transparent border border-pink-500/30 group-hover:border-pink-500/50 transition-all overflow-hidden relative shadow-2xl z-10 p-2">
-              <div className="aspect-[4/3] md:aspect-video rounded-[2.5rem] overflow-hidden relative border border-pink-500/20">
+            <div className="flex-1 w-full rounded-[3rem] bg-gradient-to-br from-pink-500/10 to-transparent border border-pink-500/30 group-hover:border-pink-500/50 transition-all overflow-hidden relative shadow-2xl z-10">
+              <div className="aspect-[4/3] md:aspect-video relative h-full w-full">
                 <Image src="/images/love_match_feature.png" alt="Love Match" fill className="object-cover group-hover:scale-110 transition-transform duration-1000" />
-                <div className="absolute inset-0 bg-gradient-to-t from-pink-500/30 via-transparent to-transparent opacity-80" />
+                <div className="absolute inset-0 bg-gradient-to-t from-pink-500/30 via-transparent to-transparent opacity-80 pointer-events-none" />
               </div>
             </div>
           </div>
