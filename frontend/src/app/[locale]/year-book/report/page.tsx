@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 
 import CustomYearBookIcon from '@/components/CustomYearBookIcon';
 import NorthIndianChart from '@/components/NorthIndianChart';
+import { Download, Share2, Sparkles, Stars, Lock } from 'lucide-react';
 
 interface Prediction {
   month: string;
@@ -137,6 +138,23 @@ export default function YearBookReportPage() {
   return (
     <main className="relative pt-32 pb-20 px-6 print:pt-8 print:pb-0 print:px-0 min-h-screen text-foreground">
       <div className="max-w-7xl mx-auto space-y-16 print:space-y-8">
+        {/* PDF BRANDING HEADER */}
+        <div className="hidden print:flex items-center justify-between mb-8 border-b-2 border-secondary pb-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-secondary rounded-xl flex items-center justify-center text-white">
+               <Stars size={24} />
+            </div>
+            <div>
+              <h2 className="text-2xl font-serif italic text-foreground leading-none">AstroPinch</h2>
+              <p className="text-[8px] font-black uppercase tracking-[0.3em] text-secondary">Divine Intelligence · {targetYear} Year Book</p>
+            </div>
+          </div>
+          <div className="text-right">
+            <p className="text-[10px] font-bold text-foreground">Personalized Annual Forecast</p>
+            <p className="text-[8px] text-text-secondary">{new Date().toLocaleDateString()}</p>
+          </div>
+        </div>
+
         {/* Header */}
         <div className="text-center space-y-4 print:space-y-2">
           <h1 className="text-4xl md:text-6xl font-medium italic font-serif text-foreground leading-tight">
@@ -318,9 +336,9 @@ export default function YearBookReportPage() {
                 <h4 className="font-bold text-primary uppercase tracking-widest text-xs">{t('report.key_transits')}</h4>
                 <div className="space-y-3">
                   {data.transits.map((tr, i) => (
-                    <div key={i} className="flex justify-between items-center text-sm">
-                      <span className="text-foreground/80 font-medium">{tr.planet} {tr.event}</span>
-                      <span className="text-text-secondary text-xs">{tr.date}</span>
+                    <div key={i} className="flex justify-between items-center text-sm gap-4">
+                      <span className="text-foreground/80 font-medium truncate">{tr.planet} {tr.event}</span>
+                      <span className="text-text-secondary text-xs shrink-0">{tr.date}</span>
                     </div>
                   ))}
                 </div>
@@ -376,6 +394,19 @@ export default function YearBookReportPage() {
                     </div>
                   </div>
                 ))}
+                
+                {/* Monthly Transits (Print) */}
+                <div className="p-5 rounded-2xl border border-primary/20 bg-primary/5 space-y-3">
+                  <h4 className="font-bold text-primary uppercase tracking-widest text-[10px]">{t('report.key_transits')}</h4>
+                  <div className="space-y-2">
+                    {data.transits.map((tr, i) => (
+                      <div key={i} className="flex justify-between items-center text-[9px] border-b border-primary/10 pb-1">
+                        <span className="text-foreground font-medium">{tr.planet} {tr.event}</span>
+                        <span className="text-text-secondary">{tr.date}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           ))}
@@ -478,32 +509,19 @@ export default function YearBookReportPage() {
           {/* Print Disclaimer & Footer */}
           <div className="pt-12 mt-12 border-t border-border space-y-8 pb-8 break-inside-avoid">
             <div className="space-y-3">
-              <h4 className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">{t('report.disclaimer_title')}</h4>
-              <p className="text-[8px] text-text-secondary leading-relaxed text-justify">
-                At AstroPinch, we are committed to providing thoughtful and personalized astrological insights using
-                advanced analytical models, astrological methodologies, and the best available prediction engines and
-                technologies currently accessible to us. While we make every reasonable effort to ensure the quality,
-                relevance, and consistency of the predictions and recommendations generated on our platform, astrology is
-                inherently interpretative in nature. As a result, predictions, guidance, and astrological readings may not
-                always be fully accurate, complete, or aligned with individual expectations or real-life outcomes. The
-                information, forecasts, remedies, and suggestions provided through AstroPinch are intended solely for
-                informational, spiritual, and entertainment purposes and should not be considered as professional advice
-                related to finance, health, legal matters, career decisions, or personal relationships. Users are encouraged to
-                apply their own judgment and discretion before making any significant decisions based on the content
-                provided on the platform. AstroPinch, its affiliates, employees, partners, and technology providers shall not be
-                held liable for any direct or indirect consequences, losses, or decisions arising from the use of the platform or
-                reliance on its predictions. By using AstroPinch, users acknowledge and accept that astrological
-                interpretations may vary and that no prediction system can guarantee absolute accuracy or certainty.
+              <h4 className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">Official Disclaimer</h4>
+              <p className="text-[8px] text-text-secondary leading-relaxed text-justify opacity-70">
+                At AstroPinch, we are committed to providing thoughtful and personalized astrological insights using advanced analytical models and Vedic methodologies. While we make every reasonable effort to ensure the quality, relevance, and consistency of the predictions, astrology is inherently interpretative. Guidance and readings may not always be fully accurate or aligned with real-life outcomes. The information provided is intended solely for informational and spiritual purposes and should not be considered as professional financial, health, or legal advice. AstroPinch and its affiliates shall not be held liable for any decisions arising from the use of the platform. By using AstroPinch, you acknowledge that astrological interpretations may vary and no system can guarantee absolute certainty.
               </p>
             </div>
             
             <div className="text-center space-y-2 border-t border-border/50 pt-8">
               <h4 className="text-xl font-serif italic text-foreground">AstroPinch AI Astrologer</h4>
               <p className="text-[10px] uppercase tracking-[0.2em] text-text-secondary">
-                {t('report.generated_for', { name: searchParams.get('name') || 'User' })} • High-Precision Vedic Synthesis
+                {t('report.generated_for', { name: searchParams.get('name') || 'User' })} • Annual Divine Synthesis
               </p>
               <p className="text-[10px] text-text-secondary/60">
-                © {new Date().getFullYear()} AstroPinch Technologies. All rights reserved. Highly confidential astrological data.
+                © {new Date().getFullYear()} AstroPinch Divine Intelligence. All rights reserved.
               </p>
             </div>
           </div>
@@ -524,14 +542,19 @@ export default function YearBookReportPage() {
           .print\\:block { display: block !important; }
           main { padding-top: 0 !important; }
           .max-w-7xl { max-width: 100% !important; }
-          .grid { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 1rem !important; }
-          .rounded-[3rem], .rounded-[2.5rem] { border-radius: 1rem !important; }
+          .grid-cols-2 { grid-template-columns: 1fr 1fr !important; }
+          .rounded-[3rem], .rounded-[2.5rem], .rounded-3xl { border-radius: 1rem !important; }
           .p-10, .p-8 { padding: 1.5rem !important; }
           .break-inside-avoid { break-inside: avoid !important; page-break-inside: avoid !important; }
           body { background: white !important; color: black !important; }
-          h1 { font-size: 28pt !important; }
+          h1 { font-size: 28pt !important; line-height: 1.1 !important; }
+          h2 { font-size: 22pt !important; line-height: 1.2 !important; }
+          h3 { font-size: 18pt !important; }
           .text-4xl { font-size: 20pt !important; }
           .text-lg { font-size: 10pt !important; }
+          .shadow-2xl, .shadow-xl, .shadow-lg { shadow: none !important; box-shadow: none !important; }
+          .bg-surface { background: #fafafa !important; border: 1px solid #eee !important; }
+          * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
         }
       `}</style>
     </main>
