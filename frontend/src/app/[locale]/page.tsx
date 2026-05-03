@@ -36,19 +36,19 @@ export default function HomePage() {
             <span className="animate-pulse">✦</span>
           </div>
           
-          <h1 className="text-6xl md:text-8xl font-medium tracking-tight leading-[0.9] max-w-4xl mx-auto italic font-serif text-foreground">
+          <h1 className="text-4xl sm:text-5xl md:text-8xl font-medium tracking-tight leading-[0.9] max-w-4xl mx-auto italic font-serif text-foreground">
             {t('hero.title')}
           </h1>
           
-          <p className="text-lg md:text-xl text-text-secondary max-w-3xl mx-auto font-light leading-relaxed">
+          <p className="text-base md:text-xl text-text-secondary max-w-3xl mx-auto font-light leading-relaxed px-4 md:px-0">
             {t('hero.subtitle')}
           </p>
 
-          <div className="pt-8 flex flex-wrap justify-center gap-6">
-            <Link href="/horoscope/daily" className="px-10 py-5 bg-primary text-white rounded-full font-bold uppercase tracking-widest text-[10px] hover:scale-105 transition-all shadow-2xl shadow-primary/20 flex items-center gap-3">
+          <div className="pt-8 flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 w-full max-w-xs sm:max-w-none mx-auto">
+            <Link href="/horoscope/daily" className="w-full sm:w-auto justify-center px-10 py-5 bg-primary text-white rounded-full font-bold uppercase tracking-widest text-[10px] hover:scale-105 transition-all shadow-2xl shadow-primary/20 flex items-center gap-3">
               ✦ Consult Daily Guide <ArrowRight size={14} />
             </Link>
-            <Link href="/kundali" className="px-10 py-5 bg-foreground text-background rounded-full font-bold uppercase tracking-widest text-[10px] hover:scale-105 transition-all shadow-2xl shadow-foreground/10 flex items-center gap-3">
+            <Link href="/kundali" className="w-full sm:w-auto justify-center px-10 py-5 bg-foreground text-background rounded-full font-bold uppercase tracking-widest text-[10px] hover:scale-105 transition-all shadow-2xl shadow-foreground/10 flex items-center gap-3">
               Get Your Free Kundali <ArrowRight size={14} />
             </Link>
           </div>
@@ -89,7 +89,7 @@ export default function HomePage() {
               desc: 'Jyotish was born in Sanskrit. We deliver it in Hindi, Tamil, Telugu, Kannada, Malayalam, Bengali, and English — with cultural nuance intact. Because translation isn&apos;t just words, it&apos;s meaning.' 
             }
           ].map((feature, i) => (
-            <div key={i} className="p-10 rounded-[3rem] bg-surface border border-border backdrop-blur-sm hover:bg-foreground/5 transition-all group relative overflow-hidden">
+            <div key={i} className="p-6 md:p-10 rounded-3xl md:rounded-[3rem] bg-surface border border-border backdrop-blur-sm hover:bg-foreground/5 transition-all group relative overflow-hidden">
               <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:scale-110 transition-transform duration-700">
                 <Sparkles size={80} />
               </div>
@@ -108,9 +108,9 @@ export default function HomePage() {
         <div className="space-y-24 mt-32">
           
           {/* HOROSCOPE */}
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 group">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12 group">
             <div className="flex-1 space-y-6">
-              <h2 className="text-4xl md:text-5xl font-serif italic text-foreground leading-tight">Your Day. Your Planets. Your Edge.</h2>
+              <h2 className="text-3xl md:text-5xl font-serif italic text-foreground leading-tight">Your Day. Your Planets. Your Edge.</h2>
               <p className="text-lg text-text-secondary leading-relaxed font-light">
                 Forget sun-sign columns written for 1/12th of humanity. Your daily horoscope on AstroPinch is generated from your actual birth chart — your lagna, your current dasha, your transits — every single day. Start each morning knowing what the cosmos has written specifically for you.
               </p>
@@ -127,9 +127,9 @@ export default function HomePage() {
           </div>
 
           {/* KUNDALI */}
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-12 group">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-8 md:gap-12 group">
             <div className="flex-1 space-y-6">
-              <h2 className="text-4xl md:text-5xl font-serif italic text-foreground leading-tight">Your Life&apos;s Blueprint. Finally Decoded.</h2>
+              <h2 className="text-3xl md:text-5xl font-serif italic text-foreground leading-tight">Your Life&apos;s Blueprint. Finally Decoded.</h2>
               <p className="text-lg text-text-secondary leading-relaxed font-light">
                 Your Kundali is the most precise map of your life ever created — drawn at the exact second you were born. AstroPinch generates all 16 divisional charts (Shodasvarga), calculates your Vimshottari Dasha timeline, and explains every placement in plain language. No Pandit appointment needed. No waiting.
               </p>
@@ -151,9 +151,9 @@ export default function HomePage() {
           </div>
 
           {/* MATCHING (Kundali Milan) */}
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 group">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12 group">
             <div className="flex-1 space-y-6">
-              <h2 className="text-4xl md:text-5xl font-serif italic text-foreground leading-tight">Before You Say Yes — Let the Stars Speak.</h2>
+              <h2 className="text-3xl md:text-5xl font-serif italic text-foreground leading-tight">Before You Say Yes — Let the Stars Speak.</h2>
               <p className="text-lg text-text-secondary leading-relaxed font-light">
                 Marriage is the biggest decision of your life. Our Kundali Matching goes beyond the 36-gun score to analyze Mangal Dosha, Nadi compatibility, Bhakoot, and Rajju — with a full AI explanation of what each compatibility point means for your specific relationship. Used by 11,000+ couples before their wedding.
               </p>
@@ -175,11 +175,11 @@ export default function HomePage() {
           </div>
 
           {/* LOVE MATCH (HIGHLIGHTED) */}
-          <div className="relative rounded-[4rem] bg-gradient-to-br from-pink-500/10 via-surface to-pink-500/5 border border-pink-500/20 shadow-[0_0_100px_-20px] shadow-pink-500/20 max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-stretch group overflow-hidden">
+          <div className="relative rounded-3xl md:rounded-[4rem] bg-gradient-to-br from-pink-500/10 via-surface to-pink-500/5 border border-pink-500/20 shadow-[0_0_100px_-20px] shadow-pink-500/20 max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-stretch group overflow-hidden">
             {/* Background Glow inside highlight */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-pink-500/10 rounded-full blur-[100px] pointer-events-none"></div>
             
-            <div className="flex-1 relative z-10 p-10 md:p-16 flex flex-col justify-center">
+            <div className="flex-1 relative z-10 p-6 sm:p-8 md:p-16 flex flex-col justify-center">
               {/* Floating Decorative Icons */}
               <div className="absolute top-0 right-10 opacity-[0.08] animate-[bounce_8s_infinite] pointer-events-none z-0">
                 <Heart size={64} className="text-pink-500 fill-pink-500" />
@@ -230,9 +230,9 @@ export default function HomePage() {
           </div>
 
           {/* PANCHANG */}
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 group">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12 group">
             <div className="flex-1 space-y-6">
-              <h2 className="text-4xl md:text-5xl font-serif italic text-foreground leading-tight">Every Day Has Energy. Know How to Use It.</h2>
+              <h2 className="text-3xl md:text-5xl font-serif italic text-foreground leading-tight">Every Day Has Energy. Know How to Use It.</h2>
               <p className="text-lg text-text-secondary leading-relaxed font-light">
                 Tithi, Vara, Nakshatra, Yoga, Karana — the five elements of Vedic time-keeping that determine the energy of every moment. Whether you&apos;re launching a business, signing a contract, or starting a new chapter, AstroPinch Panchang tells you the right moment to act. Updated daily at midnight.
               </p>
@@ -249,9 +249,9 @@ export default function HomePage() {
           </div>
 
           {/* YEAR BOOK */}
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-12 group">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-8 md:gap-12 group">
             <div className="flex-1 space-y-6">
-              <h2 className="text-4xl md:text-5xl font-serif italic text-foreground leading-tight">12 Months. Laid Out. No Surprises.</h2>
+              <h2 className="text-3xl md:text-5xl font-serif italic text-foreground leading-tight">12 Months. Laid Out. No Surprises.</h2>
               <p className="text-lg text-text-secondary leading-relaxed font-light">
                 What if you could see the peaks and valleys of your year before they happened? Your AstroPinch Year Book maps your Dasha periods, major transits, and auspicious windows across all 12 months — career, love, health, finance. Plan smarter. Move at the right time.
               </p>
@@ -273,9 +273,9 @@ export default function HomePage() {
           </div>
 
           {/* AI CHAT */}
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 group">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12 group">
             <div className="flex-1 space-y-6">
-              <h2 className="text-4xl md:text-5xl font-serif italic text-foreground leading-tight">A Jyotishi Who Knows Your Chart. Always On.</h2>
+              <h2 className="text-3xl md:text-5xl font-serif italic text-foreground leading-tight">A Jyotishi Who Knows Your Chart. Always On.</h2>
               <p className="text-lg text-text-secondary leading-relaxed font-light">
                 Ask anything. &quot;When should I change jobs?&quot; &quot;Is 2025 good for my marriage?&quot; &quot;Why do I keep facing problems in relationships?&quot; Our AI has read your full Kundali, your current dasha, and your planetary transits — and answers based on YOUR chart, not generic astrology rules.
               </p>
@@ -297,9 +297,9 @@ export default function HomePage() {
           </div>
 
           {/* MUHURAT */}
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-12 group">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-8 md:gap-12 group">
             <div className="flex-1 space-y-6">
-              <h2 className="text-4xl md:text-5xl font-serif italic text-foreground leading-tight">The Right Moment Changes Everything.</h2>
+              <h2 className="text-3xl md:text-5xl font-serif italic text-foreground leading-tight">The Right Moment Changes Everything.</h2>
               <p className="text-lg text-text-secondary leading-relaxed font-light">
                 In Vedic tradition, timing isn&apos;t superstition — it&apos;s strategy. AstroPinch Muhurat calculates the most auspicious time for marriage, griha pravesh, business launch, travel, or any major event using your personal chart and classical Muhurat criteria. Get the window the stars open for you.
               </p>
@@ -324,7 +324,7 @@ export default function HomePage() {
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-[0.2em]">
                 <Star size={12} className="fill-primary" /> COMMUNITY VALIDATION
               </div>
-              <h2 className="text-5xl md:text-6xl font-serif text-foreground">
+              <h2 className="text-4xl md:text-6xl font-serif text-foreground">
                 Trust in the <span className="italic text-primary">Cosmos</span>
               </h2>
               <p className="text-lg text-text-secondary leading-relaxed font-light max-w-lg">
@@ -371,7 +371,7 @@ export default function HomePage() {
               { text: "My mother uses it in Tamil, I use it in English. Same report, same insight, completely different language. That's magic.", name: "Preethi S.", role: "Chennai", img: "/images/avatar_priya.png" },
               { text: "Got my Muhurat for business registration through AstroPinch. Business crossed ₹1 crore in the first year. Coincidence? Maybe. But I'm using it again for my next venture.", name: "Rajesh K.", role: "Ahmedabad", img: "/images/avatar_vikram.png" }
             ].map((review, i) => (
-              <div key={i} className="bg-surface border border-border rounded-[2rem] p-8 space-y-6 hover:-translate-y-1 transition-transform duration-300 shadow-lg relative group overflow-hidden">
+              <div key={i} className="bg-surface border border-border rounded-3xl md:rounded-[2rem] p-6 md:p-8 space-y-6 hover:-translate-y-1 transition-transform duration-300 shadow-lg relative group overflow-hidden">
                 <div className="absolute -right-4 -top-4 w-24 h-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-all"></div>
                 <div className="flex text-yellow-500 gap-1 relative z-10">
                   <Star size={12} className="fill-yellow-500" />
