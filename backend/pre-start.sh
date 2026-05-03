@@ -8,7 +8,7 @@ mkdir -p static/avatars
 
 # Run database migrations (or create tables) with retries
 echo "Initializing database..."
-for i in {1..10}; do
+for i in {1..20}; do
   if python -c "from main import app; import models; from database import engine; models.Base.metadata.create_all(bind=engine)"; then
     echo "Database initialized successfully."
     break
