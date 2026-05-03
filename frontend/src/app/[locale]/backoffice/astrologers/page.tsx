@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { Check, X, ShieldAlert, User, Briefcase, FileText, ChevronRight, Settings } from 'lucide-react';
+import { Check, X, ShieldAlert, User, Briefcase, FileText, ChevronRight, Settings, Mail, Phone } from 'lucide-react';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}`;
 
