@@ -71,7 +71,7 @@ export default function LoversResultPage() {
             person1: {
               name: searchParams.get('b_name') || 'Partner 1',
               dob: `${searchParams.get('b_year')}-${String(searchParams.get('b_month')).padStart(2, '0')}-${String(searchParams.get('b_day')).padStart(2, '0')}`,
-              time: `${String(searchParams.get('b_hour')).padStart(2, '0')}:${String(searchParams.get('b_min')).padStart(2, '0')}`,
+              time: `${String(searchParams.get('b_hour')).padStart(2, '0')}:${String(searchParams.get('b_minute') || searchParams.get('b_min')).padStart(2, '0')}`,
               lat: parseFloat(searchParams.get('b_lat') || '28.6139'),
               lon: parseFloat(searchParams.get('b_lon') || '77.2090'),
               mbti: searchParams.get('b_mbti') || 'INFJ',
@@ -80,7 +80,7 @@ export default function LoversResultPage() {
             person2: {
               name: searchParams.get('g_name') || 'Partner 2',
               dob: `${searchParams.get('g_year')}-${String(searchParams.get('g_month')).padStart(2, '0')}-${String(searchParams.get('g_day')).padStart(2, '0')}`,
-              time: `${String(searchParams.get('g_hour')).padStart(2, '0')}:${String(searchParams.get('g_min')).padStart(2, '0')}`,
+              time: `${String(searchParams.get('g_hour')).padStart(2, '0')}:${String(searchParams.get('g_minute') || searchParams.get('g_min')).padStart(2, '0')}`,
               lat: parseFloat(searchParams.get('g_lat') || '19.0760'),
               lon: parseFloat(searchParams.get('g_lon') || '72.8777'),
               mbti: searchParams.get('g_mbti') || 'ENTP',

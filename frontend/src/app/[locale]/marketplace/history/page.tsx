@@ -37,7 +37,8 @@ export default function HistoryPage() {
 
   const fetchSessionDetails = async (sessionId: string) => {
     try {
-      const res = await fetch(`http://localhost:8000/consultation/history/${sessionId}`);
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const res = await fetch(`${apiUrl}/consultation/history/${sessionId}`);
       const data = await res.json();
       setSelectedSession(data);
     } catch (e) {

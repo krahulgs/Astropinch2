@@ -50,19 +50,26 @@ export default function KundaliResultPage() {
     month: parseInt(searchParams.get('month') || '1'),
     day: parseInt(searchParams.get('day') || '1'),
     hour: parseInt(searchParams.get('hour') || '0'),
-    minute: parseInt(searchParams.get('minute') || '0'),
+    minute: parseInt(searchParams.get('minute') || searchParams.get('min') || '0'),
     lat: parseFloat(searchParams.get('lat') || '28.6139'),
     lon: parseFloat(searchParams.get('lon') || '77.2090'),
     profession: searchParams.get('profession') || 'General',
   };
 
   useEffect(() => {
-    const post = (url: string) => fetch(`http://localhost:8000${url}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(url === '/ai/predict' ? { ...body, language: locale } : body) });
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+    const post = (url: string) => {
+      return fetch(`${apiUrl}${url}`, { 
+        method: 'POST', 
+        headers: { 'Content-Type': 'application/json' }, 
+        body: JSON.stringify(url === '/ai/predict' ? { ...body, language: locale } : body) 
+      });
+    };
 
     setLoading(true); setLoadingPrediction(true); setLoadingCalculations(true); setLoadingMoonChart(true);
 
     // Data Moat: Automatically save this profile
-    fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/profiles`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: searchParams.get('name') || 'User', ...body }) }).catch(console.error);
+    fetch(`${apiUrl}/api/profiles`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: searchParams.get('name') || 'User', ...body }) }).catch(console.error);
 
     post('/chart').then(r => r.json()).then(setData).catch(console.error).finally(() => setLoading(false));
     post('/ai/predict').then(r => r.json()).then(d => setPrediction(d.prediction)).catch(console.error).finally(() => setLoadingPrediction(false));
@@ -589,7 +596,7 @@ export default function KundaliResultPage() {
               month: searchParams.get('month') || '',
               year: searchParams.get('year') || '',
               hour: searchParams.get('hour') || '0',
-              minute: searchParams.get('minute') || '0',
+              minute: searchParams.get('minute') || searchParams.get('min') || '0',
               place: '',
               profession: searchParams.get('profession') || '',
               lat: parseFloat(searchParams.get('lat') || '0'),

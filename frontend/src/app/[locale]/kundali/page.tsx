@@ -32,7 +32,7 @@ export default function KundaliPage() {
         month: parsedActive.month,
         year: parsedActive.year,
         hour: parsedActive.hour,
-        minute: parsedActive.minute,
+        min: parsedActive.minute,
         profession: activeProfile.profession || 'Business/Entrepreneur',
         lat: parsedActive.lat.toString(),
         lon: parsedActive.lon.toString()
@@ -93,7 +93,7 @@ export default function KundaliPage() {
       month: formData.month,
       year: formData.year,
       hour: formData.hour,
-      minute: formData.minute,
+      min: formData.minute,
       profession: formData.profession,
       lat: formData.lat.toString(),
       lon: formData.lon.toString()

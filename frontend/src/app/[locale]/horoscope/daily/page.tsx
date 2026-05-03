@@ -150,7 +150,8 @@ export default function DailyHoroscopePage() {
   const handleAutoSubmit = async (profile: any) => {
     setLoading(true);
     try {
-      const res = await fetch('http://127.0.0.1:8000/astropinch_daily', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+      const res = await fetch(`${apiUrl}/astropinch_daily`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -196,7 +197,8 @@ export default function DailyHoroscopePage() {
     }));
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/astropinch_daily', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+      const res = await fetch(`${apiUrl}/astropinch_daily`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

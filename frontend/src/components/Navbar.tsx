@@ -38,7 +38,8 @@ const Navbar = () => {
     setUserRole(role);
 
     if (token) {
-      fetch('http://127.0.0.1:8000/users', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+      fetch(`${apiUrl}/users`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
         .then(res => res.ok ? res.json() : null)

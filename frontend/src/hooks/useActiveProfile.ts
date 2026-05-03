@@ -71,7 +71,8 @@ export function useActiveProfile() {
     setIsLoggedIn(true);
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/users', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+      const res = await fetch(`${apiUrl}/users`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error('Failed to fetch profiles');

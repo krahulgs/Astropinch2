@@ -23,7 +23,8 @@ export default function LoginPage() {
       params.append('username', email);
       params.append('password', password);
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/token`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${apiUrl}/token`, {
         method: 'POST',
         body: params,
       });

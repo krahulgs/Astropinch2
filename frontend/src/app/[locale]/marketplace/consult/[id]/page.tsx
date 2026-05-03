@@ -113,7 +113,8 @@ export default function ConsultationPage({ params }: { params: Promise<{ id: str
           time: m.time
         }));
 
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/consultation/chat`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const res = await fetch(`${apiUrl}/consultation/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -144,7 +145,7 @@ export default function ConsultationPage({ params }: { params: Promise<{ id: str
       setMessages(prev => [...prev, astroMsg]);
 
       // Log the session in background
-      fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/consultation/log`, {
+      fetch(`${apiUrl}/consultation/log`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

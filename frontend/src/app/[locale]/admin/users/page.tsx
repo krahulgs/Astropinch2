@@ -75,7 +75,8 @@ export default function AdminUsersPage() {
     }
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/users`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${apiUrl}/users`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (response.ok) {
@@ -100,7 +101,8 @@ export default function AdminUsersPage() {
     formData.append('file', file);
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/upload-avatar`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${apiUrl}/upload-avatar`, {
         method: 'POST',
         body: formData,
       });
@@ -125,7 +127,8 @@ export default function AdminUsersPage() {
     searchTimeout.current = setTimeout(async () => {
       setIsSearching(true);
       try {
-        const res = await fetch(`http://localhost:8000/geo/search?q=${encodeURIComponent(query)}`);
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+        const res = await fetch(`${apiUrl}/geo/search?q=${encodeURIComponent(query)}`);
         const data = await res.json();
         setSuggestions(data);
       } catch (err) {
@@ -222,9 +225,10 @@ export default function AdminUsersPage() {
     };
 
     try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
       const url = editingUser 
-        ? `http://localhost:8000/users/${editingUser.id}` 
-        : `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/users`;
+        ? `${apiUrl}/users/${editingUser.id}` 
+        : `${apiUrl}/users`;
       
       const response = await fetch(url, {
         method: editingUser ? 'PUT' : 'POST',
@@ -250,7 +254,8 @@ export default function AdminUsersPage() {
     const token = localStorage.getItem('token');
     
     try {
-      const response = await fetch(`http://localhost:8000/users/${id}`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${apiUrl}/users/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });

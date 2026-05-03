@@ -67,22 +67,24 @@ export default function YearBookReportPage() {
       month: parseInt(getParam('month', '1')),
       day: parseInt(getParam('day', '1')),
       hour: parseInt(getParam('hour', '0')),
-      minute: parseInt(getParam('minute', '0')),
+      minute: parseInt(getParam('minute', getParam('min', '0'))),
       lat: parseFloat(getParam('lat', '28.6139')),
       lon: parseFloat(getParam('lon', '77.2090')),
       target_year: parseInt(getParam('targetYear', '2026'))
     };
 
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
     // Phase 1: Fast calls — show page immediately
     const fetchFast = async () => {
       try {
         const [chartRes, calcRes] = await Promise.all([
-          fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/chart`, {
+          fetch(`${apiUrl}/chart`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
           }),
-          fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/calculate`, {
+          fetch(`${apiUrl}/calculate`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
@@ -100,7 +102,7 @@ export default function YearBookReportPage() {
     // Phase 2: Slow AI call — load in background, show skeleton
     const fetchAI = async () => {
       try {
-        const yearBookRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/year-book`, {
+        const yearBookRes = await fetch(`${apiUrl}/year-book`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body)

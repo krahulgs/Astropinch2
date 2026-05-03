@@ -102,22 +102,12 @@ export default function MatchingResultPage() {
           }
         };
 
-        let res;
-        const fetchOpts = {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+        const res = await fetch(`${apiUrl}/matching_raw`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
-        };
-        try {
-          res = await fetch('http://127.0.0.1:8000/matching_raw', fetchOpts);
-        } catch (e) {
-          console.log('127.0.0.1 failed, trying localhost...');
-          try {
-            res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/matching_raw`, fetchOpts);
-          } catch (e2) {
-            throw new Error('Cannot reach backend on any host');
-          }
-        }
+        });
 
         if (!res.ok) {
           const errText = await res.text();
