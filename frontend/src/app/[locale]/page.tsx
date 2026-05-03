@@ -175,11 +175,11 @@ export default function HomePage() {
           </div>
 
           {/* LOVE MATCH (HIGHLIGHTED) */}
-          <div className="relative p-10 md:p-16 rounded-[4rem] bg-gradient-to-br from-pink-500/10 via-surface to-pink-500/5 border border-pink-500/20 shadow-[0_0_100px_-20px] shadow-pink-500/20 max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-16 group overflow-hidden">
+          <div className="relative rounded-[4rem] bg-gradient-to-br from-pink-500/10 via-surface to-pink-500/5 border border-pink-500/20 shadow-[0_0_100px_-20px] shadow-pink-500/20 max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-stretch group overflow-hidden">
             {/* Background Glow inside highlight */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-pink-500/10 rounded-full blur-[100px] pointer-events-none"></div>
             
-            <div className="flex-1 relative z-10">
+            <div className="flex-1 relative z-10 p-10 md:p-16 flex flex-col justify-center">
               {/* Floating Decorative Icons */}
               <div className="absolute top-0 right-10 opacity-[0.08] animate-[bounce_8s_infinite] pointer-events-none z-0">
                 <Heart size={64} className="text-pink-500 fill-pink-500" />
@@ -221,9 +221,9 @@ export default function HomePage() {
               </Link>
               </div>
             </div>
-            <div className="flex-1 w-full rounded-[3rem] bg-gradient-to-br from-pink-500/10 to-transparent border border-pink-500/30 group-hover:border-pink-500/50 transition-all overflow-hidden relative shadow-2xl z-10">
-              <div className="aspect-[4/3] md:aspect-video relative h-full w-full">
-                <Image src="/images/love_match_feature.png" alt="Love Match" fill className="object-cover group-hover:scale-110 transition-transform duration-1000" />
+            <div className="flex-1 w-full relative z-10 overflow-hidden">
+              <div className="relative h-full w-full min-h-[300px]">
+                <Image src="/images/love_match_feature.png" alt="Love Match" fill className="object-cover group-hover:scale-105 transition-transform duration-1000" />
                 <div className="absolute inset-0 bg-gradient-to-t from-pink-500/30 via-transparent to-transparent opacity-80 pointer-events-none" />
               </div>
             </div>
