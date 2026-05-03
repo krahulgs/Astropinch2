@@ -29,19 +29,18 @@ export default function UnifiedMatchingPage() {
   // p1 = logged-in user's profile (or manual); p2 = always manual (the match partner)
   const [p2, setP2] = useState({ ...EMPTY_PARTNER, love_language: 'Words of Affirmation' });
 
+  // NOTE: P2 is intentionally NOT persisted to localStorage — partner details must be entered fresh each time.
   useEffect(() => {
-    const savedP2 = localStorage.getItem('unified_match_p2');
-    if (savedP2) setP2(JSON.parse(savedP2));
+    // Clear any stale partner data from previous sessions
+    localStorage.removeItem('unified_match_p2');
   }, []);
 
   useEffect(() => {
     const qMode = searchParams.get('mode');
-    const qCtx = searchParams.get('context');
+    const qCtx  = searchParams.get('context');
     if (qMode) setMatchMode(qMode as any);
-    if (qCtx) setMatchContext(qCtx as any);
+    if (qCtx)  setMatchContext(qCtx as any);
   }, [searchParams]);
-
-  useEffect(() => { localStorage.setItem('unified_match_p2', JSON.stringify(p2)); }, [p2]);
 
   // Derive p1 from profile when logged in, or use manual form
   const [p1Manual, setP1Manual] = useState({ ...EMPTY_PARTNER });
