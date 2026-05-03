@@ -51,6 +51,7 @@ export default function KundaliPage() {
     minute: '',
     place: '',
     profession: '',
+    gender: '',
     lat: 28.6139,
     lon: 77.2090
   });
@@ -95,6 +96,7 @@ export default function KundaliPage() {
       hour: formData.hour,
       min: formData.minute,
       profession: formData.profession,
+      gender: formData.gender,
       lat: formData.lat.toString(),
       lon: formData.lon.toString()
     }).toString();
@@ -199,6 +201,26 @@ export default function KundaliPage() {
                     <div className="grid grid-cols-2 gap-2">
                       <input required type="number" placeholder="HH" className="w-full h-10 rounded-xl bg-foreground/5 border border-transparent text-center text-xs text-foreground focus:border-primary focus:bg-transparent outline-none transition-all" value={formData.hour} onChange={(e) => setFormData({...formData, hour: e.target.value})} />
                       <input required type="number" placeholder="MM" className="w-full h-10 rounded-xl bg-foreground/5 border border-transparent text-center text-xs text-foreground focus:border-primary focus:bg-transparent outline-none transition-all" value={formData.minute} onChange={(e) => setFormData({...formData, minute: e.target.value})} />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[8px] font-black uppercase tracking-widest text-text-secondary ml-3 block">GENDER</label>
+                    <div className="grid grid-cols-3 gap-2">
+                      {['Male', 'Female', 'Other'].map(g => (
+                        <button
+                          key={g}
+                          type="button"
+                          onClick={() => setFormData({...formData, gender: g})}
+                          className={`h-10 rounded-xl text-xs font-bold transition-all border ${
+                            formData.gender === g
+                              ? 'bg-primary text-white border-primary shadow-lg'
+                              : 'bg-foreground/5 border-transparent text-text-secondary hover:border-primary/30'
+                          }`}
+                        >
+                          {g}
+                        </button>
+                      ))}
                     </div>
                   </div>
 

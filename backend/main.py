@@ -73,6 +73,7 @@ class UserCreate(BaseModel):
     lat: Optional[str] = None
     lon: Optional[str] = None
     profession: Optional[str] = None
+    gender: Optional[str] = None
     marital_status: Optional[str] = None
     profile_image: Optional[str] = None
 
@@ -84,6 +85,7 @@ class UserUpdate(BaseModel):
     birth_date: Optional[str] = None
     birth_time: Optional[str] = None
     profession: Optional[str] = None
+    gender: Optional[str] = None
     marital_status: Optional[str] = None
     profile_image: Optional[str] = None
     lat: Optional[str] = None

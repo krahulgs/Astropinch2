@@ -15,6 +15,7 @@ class User(Base):
     lat = Column(String, nullable=True)
     lon = Column(String, nullable=True)
     profession = Column(String, nullable=True)
+    gender = Column(String, nullable=True)  # Male / Female / Other
     marital_status = Column(String, nullable=True)
     profile_image = Column(String, nullable=True) # URL or path to image
     is_active = Column(Boolean, default=True)

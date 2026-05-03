@@ -42,6 +42,7 @@ export default function AdminUsersPage() {
   const [role, setRole] = useState('user');
   const [birthPlace, setBirthPlace] = useState('');
   const [profession, setProfession] = useState('');
+  const [gender, setGender] = useState('');
   const [maritalStatus, setMaritalStatus] = useState('');
   const [profileImage, setProfileImage] = useState('');
   const [uploading, setUploading] = useState(false);
@@ -153,6 +154,7 @@ export default function AdminUsersPage() {
     setRole(user.role || 'user');
     setBirthPlace(user.birth_place || '');
     setProfession(user.profession || '');
+    setGender(user.gender || '');
     setMaritalStatus(user.marital_status || '');
     setLat(user.lat || '');
     setLon(user.lon || '');
@@ -197,7 +199,8 @@ export default function AdminUsersPage() {
       minute,
       lat: user.lat,
       lon: user.lon,
-      profession: user.profession || 'General'
+      profession: user.profession || 'General',
+      gender: user.gender || ''
     }).toString();
     
     router.push(`/kundali/result?${query}`);
@@ -220,6 +223,7 @@ export default function AdminUsersPage() {
       lat,
       lon,
       profession,
+      gender,
       marital_status: maritalStatus,
       profile_image: profileImage
     };
@@ -272,6 +276,7 @@ export default function AdminUsersPage() {
     setRole('user');
     setBirthPlace('');
     setProfession('');
+    setGender('');
     setMaritalStatus('');
     setProfileImage('');
     setDay(''); setMonth(''); setYear('');
@@ -548,18 +553,39 @@ export default function AdminUsersPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-[9px] font-bold uppercase tracking-[0.1em] text-text-secondary ml-3">Marital Status</label>
-                  <div className="relative group">
-                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary"><Heart size={14} /></div>
-                    <select value={maritalStatus} onChange={(e) => setMaritalStatus(e.target.value)} className="w-full bg-surface border border-border rounded-xl py-3 pl-10 pr-4 text-xs focus:outline-none focus:border-primary/50 appearance-none transition-all">
-                      <option value="">Select Status</option>
-                      <option value="Single">Single</option>
-                      <option value="Married">Married</option>
-                      <option value="Divorced">Divorced</option>
-                    </select>
+                  <label className="text-[9px] font-bold uppercase tracking-[0.1em] text-text-secondary ml-3">Gender</label>
+                  <div className="grid grid-cols-3 gap-2">
+                    {['Male', 'Female', 'Other'].map(g => (
+                      <button
+                        key={g}
+                        type="button"
+                        onClick={() => setGender(g)}
+                        className={`py-3 rounded-xl text-xs font-bold transition-all border ${
+                          gender === g
+                            ? 'bg-primary text-white border-primary shadow-lg'
+                            : 'bg-surface border-border text-text-secondary hover:border-primary/30'
+                        }`}
+                      >
+                        {g}
+                      </button>
+                    ))}
                   </div>
                 </div>
               </div>
+
+              <div className="space-y-1.5">
+                <label className="text-[9px] font-bold uppercase tracking-[0.1em] text-text-secondary ml-3">Marital Status</label>
+                <div className="relative group">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary"><Heart size={14} /></div>
+                  <select value={maritalStatus} onChange={(e) => setMaritalStatus(e.target.value)} className="w-full bg-surface border border-border rounded-xl py-3 pl-10 pr-4 text-xs focus:outline-none focus:border-primary/50 appearance-none transition-all">
+                    <option value="">Select Status</option>
+                    <option value="Single">Single</option>
+                    <option value="Married">Married</option>
+                    <option value="Divorced">Divorced</option>
+                  </select>
+                </div>
+              </div>
+
 
               <button type="submit" className="w-full py-4 bg-foreground text-background rounded-xl font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-primary transition-all duration-500 shadow-xl shadow-foreground/5 mt-2">
                 {editingUser ? 'Update Profile' : 'Manifest Celestial Profile'}

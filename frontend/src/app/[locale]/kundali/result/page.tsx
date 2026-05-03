@@ -54,6 +54,7 @@ export default function KundaliResultPage() {
     lat: parseFloat(searchParams.get('lat') || '28.6139'),
     lon: parseFloat(searchParams.get('lon') || '77.2090'),
     profession: searchParams.get('profession') || 'General',
+    gender: searchParams.get('gender') || '',
   };
 
   useEffect(() => {
@@ -69,7 +70,7 @@ export default function KundaliResultPage() {
     setLoading(true); setLoadingPrediction(true); setLoadingCalculations(true); setLoadingMoonChart(true);
 
     // Data Moat: Automatically save this profile
-    fetch(`${apiUrl}/api/profiles`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: searchParams.get('name') || 'User', ...body }) }).catch(console.error);
+    fetch(`${apiUrl}/api/profiles`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: searchParams.get('name') || 'User', gender: searchParams.get('gender') || '', ...body }) }).catch(console.error);
 
     post('/chart').then(r => r.json()).then(setData).catch(console.error).finally(() => setLoading(false));
     post('/ai/predict').then(r => r.json()).then(d => setPrediction(d.prediction)).catch(console.error).finally(() => setLoadingPrediction(false));
