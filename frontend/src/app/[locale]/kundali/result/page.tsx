@@ -302,12 +302,11 @@ export default function KundaliResultPage() {
                 <span className="w-1 h-6 rounded-full bg-highlight" />
                 <h2 className="text-lg font-bold text-foreground uppercase tracking-widest">{t('result.analysis.title')}</h2>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
                 {[
                   { label: t('result.analysis.lagna'),        value: calculations?.ascendant || lagnaSign,                          color: 'text-primary' },
                   { label: t('result.analysis.rashi'),         value: calculations?.moon_sign || moonSign,                           color: 'text-secondary' },
                   { label: t('result.analysis.nakshatra'),     value: moonNakshatra,                                                  color: 'text-foreground' },
-                  { label: t('result.analysis.mangal_dosha'),  value: calculations?.manglik?.is_manglik ? (calculations?.manglik?.is_parihara ? 'Non-Manglik (Neutralized)' : `${t('result.analysis.manglik')} (${calculations.manglik.severity})`) : t('result.analysis.non_manglik'), color: (calculations?.manglik?.is_parihara && calculations?.manglik?.is_manglik) ? 'text-highlight' : (calculations?.manglik?.is_manglik ? 'text-alert' : 'text-highlight') },
                   { label: t('result.analysis.sade_sati'),    value: calculations?.sade_sati?.is_under_sade_sati ? calculations.sade_sati.phase : t('result.analysis.none'), color: calculations?.sade_sati?.is_under_sade_sati ? 'text-alert' : 'text-highlight' },
                   { label: t('result.analysis.moolank'),      value: calculations?.numerology?.moolank,                              color: 'text-primary' },
                   { label: t('result.analysis.bhagyank'),     value: calculations?.numerology?.bhagyank,                             color: 'text-secondary' },
