@@ -18,3 +18,4 @@ jyotishganit
 
 kerykeion
 flatlib
+openai
