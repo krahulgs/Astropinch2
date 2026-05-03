@@ -251,15 +251,19 @@ Return a STRICT JSON object with exactly 12 month keys:
                     
                     response = await ai_client.chat.completions.create(
                         model="deepseek-chat",
-                        messages=[{"role": "system", "content": "You are a master life coach and astrologer. Output pure valid JSON only."},
+                        messages=[{"role": "system", "content": "You are a master Vedic astrologer and life coach. Output ONLY pure, valid JSON. No markdown, no code fences, no extra text."},
                                   {"role": "user", "content": prompt}],
                         response_format={"type": "json_object"},
-                        temperature=0.3, max_tokens=1800
+                        temperature=0.4, max_tokens=4096
                     )
-                    llm_data = json.loads(response.choices[0].message.content)
+                    raw_content = response.choices[0].message.content
+                    print(f"[YearBook] DeepSeek raw response length: {len(raw_content)} chars")
+                    llm_data = json.loads(raw_content)
                     
                     if 'January' not in llm_data and len(llm_data.keys()) == 1:
                         llm_data = list(llm_data.values())[0]
+                    
+                    print(f"[YearBook] Months parsed from AI: {list(llm_data.keys())}")
 
                     for ms in month_scores:
                         m = ms["month"]
@@ -274,7 +278,9 @@ Return a STRICT JSON object with exactly 12 month keys:
                             "score": ms["score"]
                         })
                 except Exception as e:
-                    print(f"Batch Monthly AI Error: {e}")
+                    import traceback
+                    print(f"[YearBook] Batch Monthly AI Error: {e}")
+                    traceback.print_exc()
 
             if not monthly_preds:
                 for ms in month_scores:
