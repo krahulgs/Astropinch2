@@ -1,0 +1,140 @@
+/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:90: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+INFO:     Will watch for changes in these directories: ['/Users/pranjay/Public/AstroPinchV2.0/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [9873] using WatchFiles
+hora /Users/pranjay/Public added to system path ['/Users/pranjay/Public/AstroPinchV2.0/backend', '/opt/anaconda3/lib/python313.zip', '/opt/anaconda3/lib/python3.13', '/opt/anaconda3/lib/python3.13/lib-dynload', '/opt/anaconda3/lib/python3.13/site-packages', '/opt/anaconda3/lib/python3.13/site-packages/aeosa', '/Users/pranjay/Public']
+INFO:     Started server process [9875]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:53891 - "GET /users HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [9875]
+INFO:     Started server process [9895]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:54210 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54265 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54290 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54840 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55776 - "POST /token HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55778 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55779 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55778 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55778 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55783 - "GET /static/avatars/IMG_0152.jpeg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55776 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55788 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55776 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55776 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55793 - "GET /static/avatars/IMG_2249.jpeg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55783 - "GET /static/avatars/IMG_1394.jpeg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55794 - "GET /static/avatars/IMG_3814.jpeg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55778 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55790 - "OPTIONS /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55823 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55825 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55790 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55827 - "OPTIONS /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55823 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55829 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55790 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55827 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55825 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55830 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55823 - "OPTIONS /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55829 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55830 - "POST /moon-chart HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='Developer' language='en'
+INFO:     127.0.0.1:55790 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55827 - "POST /chart HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='Developer' language='en'
+INFO:     127.0.0.1:55825 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55823 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55829 - "POST /moon-chart HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [9895]
+INFO:     Started server process [10121]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:55853 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55853 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55853 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55853 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55893 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55896 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55898 - "OPTIONS /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55900 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55902 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55903 - "OPTIONS /year-book HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:55896 - "POST /year-book HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:55902 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55973 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55997 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55998 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:55999 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55973 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55999 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55998 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:55997 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56002 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56004 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:56005 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55973 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56005 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56004 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:56002 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55997 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55998 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:55999 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56005 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55998 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:55997 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55997 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55998 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:56005 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56005 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55997 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:55998 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56002 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55999 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:56004 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55973 - "GET /users HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [10121]
+INFO:     Started server process [10212]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [10212]
+INFO:     Started server process [10397]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.

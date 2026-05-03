@@ -151,7 +151,7 @@ const Navbar = () => {
           {/* <LanguageSwitcher /> - Hidden per user request */}
 
           {isLoggedIn ? (
-            /* ── LOGGED IN: Profile avatar + dropdown / bottom-sheet ── */
+            /* ── LOGGED IN: Profile avatar + dropdown ── */
             <div className="relative" ref={menuRef}>
               <button
                 onClick={() => setShowProfileMenu(!showProfileMenu)}
@@ -177,87 +177,69 @@ const Navbar = () => {
               </button>
 
               {showProfileMenu && (
-                <>
-                  {/* ── Mobile: full-screen backdrop + bottom sheet ── */}
-                  <div
-                    className="fixed inset-0 z-[80] bg-black/50 backdrop-blur-sm sm:hidden animate-in fade-in duration-200"
-                    onClick={() => setShowProfileMenu(false)}
-                  />
-                  <div className={`
-                    z-[90] bg-surface border-border shadow-2xl backdrop-blur-xl
-                    animate-in fade-in duration-200
-                    fixed bottom-0 left-0 right-0 rounded-t-[2rem] p-4 border-t
-                    sm:absolute sm:bottom-auto sm:left-auto sm:right-0 sm:top-full sm:mt-3
-                    sm:w-72 sm:rounded-2xl sm:border sm:p-2 sm:origin-top-right sm:zoom-in-95
-                  `}>
-                    {/* Mobile drag handle */}
-                    <div className="w-10 h-1 rounded-full bg-border mx-auto mb-3 sm:hidden" />
+                <div className="absolute right-0 mt-3 w-72 p-2 rounded-2xl bg-surface border border-border shadow-2xl backdrop-blur-xl animate-in fade-in zoom-in-95 duration-200 origin-top-right">
 
-                    {/* ── Account header ── */}
-                    <div className="flex items-center gap-3 p-4 border-b border-border/50">
-                      <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white overflow-hidden flex-shrink-0">
-                        {userImage ? (
-                          <img src={userImage} alt="Profile" className="w-full h-full object-cover" />
-                        ) : (
-                          <User size={18} />
-                        )}
-                      </div>
-                      <div className="min-w-0">
-                        <p className="text-xs font-bold text-foreground truncate">{userName || 'Master Admin'}</p>
-                        <p className="text-[9px] text-text-secondary uppercase tracking-widest">
-                          {userRole === 'master' ? '✦ Master Account' : 'Standard Account'}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* ── Menu Links ── */}
-                    <div className="mt-2 space-y-0.5">
-                      {userRole === 'master' && (
-                        <button
-                          onClick={() => { handleNav('/admin/users'); setShowProfileMenu(false); }}
-                          className="w-full flex items-center gap-3 px-4 py-3.5 sm:py-3 rounded-xl hover:bg-foreground/5 text-text-secondary hover:text-foreground transition-all group"
-                        >
-                          <Users size={15} className="group-hover:text-primary transition-colors flex-shrink-0" />
-                          <span className="text-xs font-bold uppercase tracking-widest">Manage Profile</span>
-                        </button>
+                  {/* ── Account header ── */}
+                  <div className="flex items-center gap-3 p-4 border-b border-border/50">
+                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white overflow-hidden flex-shrink-0">
+                      {userImage ? (
+                        <img src={userImage} alt="Profile" className="w-full h-full object-cover" />
+                      ) : (
+                        <User size={18} />
                       )}
-
-                      <button
-                        onClick={() => { handleNav('/marketplace/history'); setShowProfileMenu(false); }}
-                        className="w-full flex items-center gap-3 px-4 py-3.5 sm:py-3 rounded-xl hover:bg-foreground/5 text-text-secondary hover:text-foreground transition-all group"
-                      >
-                        <MessageSquare size={15} className="group-hover:text-primary transition-colors flex-shrink-0" />
-                        <span className="text-xs font-bold uppercase tracking-widest">Past Consultations</span>
-                      </button>
                     </div>
-
-                    <div className="h-px bg-border/50 my-2" />
-
-                    {/* ── Settings ── */}
-                    <button
-                      onClick={() => { handleNav('/settings'); setShowProfileMenu(false); }}
-                      className="w-full flex items-center gap-3 px-4 py-3.5 sm:py-3 rounded-xl hover:bg-foreground/5 text-text-secondary hover:text-foreground transition-all group"
-                    >
-                      <Settings size={15} className="group-hover:text-primary transition-colors flex-shrink-0" />
-                      <span className="text-xs font-bold uppercase tracking-widest">Settings</span>
-                    </button>
-
-                    {/* ── Logout ── */}
-                    <button
-                      onClick={handleLogout}
-                      className="w-full flex items-center gap-3 px-4 py-3.5 sm:py-3 rounded-xl hover:bg-red-500/10 text-text-secondary hover:text-red-400 transition-all group"
-                    >
-                      <LogOut size={15} className="flex-shrink-0" />
-                      <span className="text-xs font-bold uppercase tracking-widest">Logout</span>
-                    </button>
-
-                    {/* Extra safe-area padding for iOS home bar */}
-                    <div className="h-4 sm:hidden" />
+                    <div className="min-w-0">
+                      <p className="text-xs font-bold text-foreground truncate">{userName || 'Master Admin'}</p>
+                      <p className="text-[9px] text-text-secondary uppercase tracking-widest">
+                        {userRole === 'master' ? '✦ Master Account' : 'Standard Account'}
+                      </p>
+                    </div>
                   </div>
-                </>
+
+                  {/* ── Menu Links ── */}
+                  <div className="mt-2 space-y-0.5">
+                    {userRole === 'master' && (
+                      <button
+                        onClick={() => { handleNav('/admin/users'); setShowProfileMenu(false); }}
+                        className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-foreground/5 text-text-secondary hover:text-foreground transition-all group"
+                      >
+                        <Users size={15} className="group-hover:text-primary transition-colors flex-shrink-0" />
+                        <span className="text-xs font-bold uppercase tracking-widest">Manage Profile</span>
+                      </button>
+                    )}
+                    
+                    {/* View Past Consultations Link */}
+                    <button
+                      onClick={() => { handleNav('/marketplace/history'); setShowProfileMenu(false); }}
+                      className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-foreground/5 text-text-secondary hover:text-foreground transition-all group"
+                    >
+                      <MessageSquare size={15} className="group-hover:text-primary transition-colors flex-shrink-0" />
+                      <span className="text-xs font-bold uppercase tracking-widest">Past Consultations</span>
+                    </button>
+                  </div>
+
+                  <div className="h-px bg-border/50 my-2" />
+
+                  {/* ── Settings ── */}
+                  <button
+                    onClick={() => { handleNav('/settings'); setShowProfileMenu(false); }}
+                    className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-foreground/5 text-text-secondary hover:text-foreground transition-all group"
+                  >
+                    <Settings size={15} className="group-hover:text-primary transition-colors flex-shrink-0" />
+                    <span className="text-xs font-bold uppercase tracking-widest">Settings</span>
+                  </button>
+
+                  {/* ── Logout ── */}
+                  <button
+                    onClick={handleLogout}
+                    className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-red-500/10 text-text-secondary hover:text-red-400 transition-all group"
+                  >
+                    <LogOut size={15} className="flex-shrink-0" />
+                    <span className="text-xs font-bold uppercase tracking-widest">Logout</span>
+                  </button>
+                </div>
               )}
             </div>
-
           ) : (
             /* ── LOGGED OUT: Login button ── */
             <button

@@ -1,500 +1,782 @@
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:75: DeprecationWarning: 
-        on_event is deprecated, use lifespan event handlers instead.
-
-        Read more about it in the
-        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
-        
-  @app.on_event("startup")
-INFO:     Started server process [5666]
+INFO:     Started server process [10935]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-hora /Users/pranjay/Public added to system path ['/Users/pranjay/Public/AstroPinchV2.0/backend', '/opt/anaconda3/lib/python313.zip', '/opt/anaconda3/lib/python3.13', '/opt/anaconda3/lib/python3.13/lib-dynload', '/opt/anaconda3/lib/python3.13/site-packages', '/opt/anaconda3/lib/python3.13/site-packages/aeosa', '/Users/pranjay/Public']
-INFO:     127.0.0.1:54715 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54717 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54728 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54740 - "OPTIONS /panchang HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54741 - "OPTIONS /panchang HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54740 - "POST /panchang HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54741 - "POST /panchang HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54745 - "GET /muhurat/vivah?year=2026&month=4&type=Vivah HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54745 - "GET /muhurat/vivah?year=2026&month=4&type=Vivah HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54745 - "GET /muhurat/vivah?year=2026&month=4&type=Griha%20Pravesh HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54745 - "GET /muhurat/vivah?year=2026&month=4&type=Vehicle HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54745 - "POST /panchang HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54747 - "POST /panchang HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54753 - "OPTIONS /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54754 - "OPTIONS /astropinch_daily HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:54753 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:54754 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54760 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54760 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54760 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54762 - "POST /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54766 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54769 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54771 - "POST /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54772 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54786 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54797 - "GET /users HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:54798 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:54799 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54888 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54888 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54888 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54888 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54888 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54888 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54888 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54888 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54888 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54898 - "POST /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54902 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54904 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54906 - "POST /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54907 - "POST /calculate HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:54908 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:54909 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:54910 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:54911 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:54911 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:54910 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54921 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54924 - "GET /users HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:54925 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:54926 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:54927 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:54928 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:54928 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:54927 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54930 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54948 - "GET /users HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:54949 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:54950 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:54950 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:54949 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54952 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54963 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54964 - "POST /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54965 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54952 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55002 - "OPTIONS /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55004 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55006 - "POST /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55007 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55004 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55004 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55004 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55007 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55007 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55007 - "GET /users HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55012 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55013 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55013 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55012 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55018 - "GET /users HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55019 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55020 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55036 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55048 - "OPTIONS /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55049 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55050 - "OPTIONS /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55048 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55049 - "POST /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55050 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55036 - "GET /users HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55051 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55052 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55036 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55056 - "GET /users HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55059 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55060 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55073 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55076 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55076 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55092 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55092 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55106 - "OPTIONS /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55107 - "OPTIONS /astropinch_daily HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55106 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55107 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55107 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55106 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55112 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55113 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55116 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55127 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55128 - "POST /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55129 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55116 - "GET /users HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55130 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55131 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55136 - "GET /users HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55137 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55138 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55149 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55150 - "POST /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55151 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55136 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55136 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55136 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55163 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55164 - "POST /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55165 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55136 - "GET /users HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55166 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55167 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55173 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55185 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55186 - "POST /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55187 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55173 - "GET /users HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55194 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55195 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55198 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55202 - "GET /users HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55203 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55204 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55207 - "GET /users HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55208 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55209 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55209 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55208 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55222 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55230 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55235 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55279 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55282 - "POST /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55283 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55277 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55277 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55283 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55283 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55283 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55283 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55283 - "GET /users HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55291 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55292 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55292 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55291 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55301 - "GET /users HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55307 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55308 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55321 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55321 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55331 - "GET /users HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55334 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55335 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55340 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55346 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55351 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55367 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55369 - "POST /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55370 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55351 - "GET /users HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55371 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55372 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55372 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55371 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55378 - "OPTIONS /panchang HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55379 - "OPTIONS /panchang HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55378 - "POST /panchang HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55379 - "POST /panchang HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55379 - "GET /muhurat/vivah?year=2026&month=4&type=Vivah HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55378 - "GET /muhurat/vivah?year=2026&month=4&type=Vivah HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55378 - "POST /panchang HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55379 - "POST /panchang HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55386 - "GET /muhurat/vivah?year=2026&month=4&type=Vivah HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55386 - "GET /muhurat/vivah?year=2026&month=4&type=Vivah HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55388 - "OPTIONS /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55388 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55398 - "POST /panchang HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55400 - "POST /panchang HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55402 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55412 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55412 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55412 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55412 - "OPTIONS /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55417 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55419 - "OPTIONS /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55412 - "OPTIONS /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55417 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55421 - "OPTIONS /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55419 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55417 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55412 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55421 - "POST /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55424 - "POST /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55425 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55432 - "GET /users HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55433 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55434 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55449 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55452 - "POST /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55453 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55447 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55461 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55498 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55501 - "POST /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55502 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55496 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55496 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55496 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55502 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55496 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55529 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55534 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55534 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55534 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55536 - "POST /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55540 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55541 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55543 - "POST /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55544 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55547 - "OPTIONS /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55548 - "OPTIONS /astropinch_daily HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Isha Kumari
-INFO:     127.0.0.1:55547 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Isha Kumari
-INFO:     127.0.0.1:55548 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55563 - "POST /panchang HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55564 - "POST /panchang HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55569 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55572 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55582 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55582 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55582 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55582 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55587 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55592 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55592 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55592 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55592 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55592 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55599 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55614 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55614 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55616 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55614 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55620 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55625 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55629 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55629 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55631 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55629 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55638 - "POST /horoscope/sign?sign=scorpio HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55640 - "POST /horoscope/sign?sign=scorpio HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55652 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55655 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55655 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55655 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55655 - "POST /horoscope/sign?sign=taurus HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55657 - "POST /horoscope/sign?sign=taurus HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55657 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55668 - "POST /horoscope/sign?sign=taurus HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55657 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55683 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55692 - "POST /horoscope/sign?sign=taurus HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55683 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55692 - "POST /horoscope/sign?sign=taurus HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55683 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55697 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55707 - "POST /horoscope/sign?sign=gemini HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55709 - "POST /horoscope/sign?sign=gemini HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55713 - "POST /horoscope/sign?sign=leo HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55714 - "POST /horoscope/sign?sign=leo HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55722 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55731 - "POST /horoscope/sign?sign=leo HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55722 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55731 - "POST /horoscope/sign?sign=leo HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55722 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55738 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55747 - "POST /horoscope/sign?sign=leo HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55738 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55749 - "GET /static/avatars/IMG_0152.jpeg HTTP/1.1" 304 Not Modified
-INFO:     127.0.0.1:55749 - "GET /static/avatars/IMG_1394.jpeg HTTP/1.1" 304 Not Modified
-INFO:     127.0.0.1:55738 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55747 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55747 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55738 - "POST /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55753 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55755 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55758 - "POST /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55759 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55759 - "OPTIONS /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55758 - "OPTIONS /astropinch_daily HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55759 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55758 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55761 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55775 - "OPTIONS /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55775 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55783 - "POST /horoscope/sign?sign=gemini HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55784 - "POST /horoscope/sign?sign=gemini HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55794 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55803 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55803 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55805 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55803 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55803 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55878 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55878 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55878 - "POST /horoscope/sign?sign=taurus HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55883 - "POST /horoscope/sign?sign=taurus HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55900 - "POST /horoscope/sign?sign=taurus HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55898 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55898 - "GET /users HTTP/1.1" 200 OK
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:187: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
-  res = await service.get_daily_horoscope(req.dict())
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55906 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55908 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55908 - "POST /astropinch_daily HTTP/1.1" 200 OK
-DEBUG: Received Daily Horoscope request for Rahul Kumar
-INFO:     127.0.0.1:55906 - "POST /astropinch_daily HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55910 - "POST /horoscope/sign?sign=gemini HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55912 - "POST /horoscope/sign?sign=gemini HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55916 - "POST /horoscope/sign?sign=gemini HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55918 - "POST /horoscope/sign?sign=gemini HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55930 - "POST /horoscope/sign?sign=scorpio HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55932 - "POST /horoscope/sign?sign=scorpio HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56038 - "GET /horoscope/sign?sign=scorpio HTTP/1.1" 405 Method Not Allowed
-INFO:     127.0.0.1:56038 - "GET /users HTTP/1.1" 401 Unauthorized
-INFO:     127.0.0.1:56091 - "GET /horoscope/sign?sign=scorpio HTTP/1.1" 405 Method Not Allowed
-INFO:     127.0.0.1:56091 - "GET /horoscope/sign?sign=scorpio HTTP/1.1" 405 Method Not Allowed
-INFO:     127.0.0.1:56091 - "GET /horoscope/sign?sign=scorpio HTTP/1.1" 405 Method Not Allowed
-INFO:     127.0.0.1:56091 - "GET /horoscope/sign?sign=scorpio HTTP/1.1" 405 Method Not Allowed
-INFO:     127.0.0.1:56091 - "GET /horoscope/sign?sign=scorpio HTTP/1.1" 405 Method Not Allowed
-INFO:     127.0.0.1:56104 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
-INFO:     127.0.0.1:56104 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
-INFO:     127.0.0.1:56139 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
-INFO:     127.0.0.1:56139 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
-INFO:     127.0.0.1:56156 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
-INFO:     127.0.0.1:56156 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
-INFO:     127.0.0.1:56167 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
-INFO:     127.0.0.1:56167 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
-INFO:     127.0.0.1:56167 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
-INFO:     127.0.0.1:56167 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
-INFO:     127.0.0.1:56181 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
-INFO:     127.0.0.1:56181 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
-INFO:     127.0.0.1:56187 - "GET /horoscope/sign?sign=gemini HTTP/1.1" 405 Method Not Allowed
-INFO:     127.0.0.1:56190 - "GET /horoscope/sign?sign=sagittarius HTTP/1.1" 405 Method Not Allowed
-INFO:     127.0.0.1:56191 - "GET /horoscope/sign?sign=sagittarius HTTP/1.1" 405 Method Not Allowed
-INFO:     127.0.0.1:56191 - "GET /horoscope/sign?sign=sagittarius HTTP/1.1" 405 Method Not Allowed
-INFO:     127.0.0.1:56198 - "OPTIONS /panchang HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56198 - "OPTIONS /panchang HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56200 - "POST /panchang HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56198 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+[Startup] .env loaded. OPENAI_API_KEY present: True
+hora /Users/pranjay/Public added to system path ['', '/Users/pranjay/Public/AstroPinchV2.0/backend', '/opt/anaconda3/lib/python313.zip', '/opt/anaconda3/lib/python3.13', '/opt/anaconda3/lib/python3.13/lib-dynload', '/opt/anaconda3/lib/python3.13/site-packages', '/opt/anaconda3/lib/python3.13/site-packages/aeosa', '/Users/pranjay/Public']
+INFO:     127.0.0.1:60146 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60146 - "GET /users HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:60194 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60223 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60319 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60345 - "OPTIONS /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60345 - "OPTIONS /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60348 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60350 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60348 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60345 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60352 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60350 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60353 - "OPTIONS /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60348 - "OPTIONS /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60352 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60355 - "OPTIONS /chart HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='en'
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='en'
+INFO:     127.0.0.1:60348 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60352 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60345 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60367 - "OPTIONS /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Lovisha Gumber
+INFO:     127.0.0.1:60352 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60353 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60350 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60368 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60368 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60348 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60355 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60348 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60350 - "OPTIONS /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60399 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:60348 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60400 - "OPTIONS /year-book HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:60399 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60348 - "OPTIONS /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60399 - "OPTIONS /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60353 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60367 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60355 - "POST /chart HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 9557 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+[YearBook] DeepSeek raw response length: 9768 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:60400 - "POST /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60348 - "POST /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60554 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60792 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60901 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61010 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59914 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59914 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60247 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60254 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60255 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60256 - "OPTIONS /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60258 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:60255 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60258 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:60256 - "POST /year-book HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:60258 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60256 - "OPTIONS /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60262 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60262 - "OPTIONS /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60265 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60265 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:60247 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60254 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60255 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60261 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60342 - "GET /users HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 6347 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:60258 - "POST /year-book/outlook HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 6038 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:60262 - "POST /year-book/outlook HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 8578 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:60256 - "POST /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60748 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60755 - "OPTIONS /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60755 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60759 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60761 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60759 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60763 - "OPTIONS /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60761 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60765 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60763 - "OPTIONS /moon-chart HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='en'
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='en'
+INFO:     127.0.0.1:60757 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60755 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60748 - "OPTIONS /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Lovisha Gumber
+INFO:     127.0.0.1:60759 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60761 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60763 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60765 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60748 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60748 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60786 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61000 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='en'
+INFO:     127.0.0.1:61007 - "POST /calculate HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='en'
+INFO:     127.0.0.1:61010 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61010 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61011 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:61011 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:61000 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61000 - "POST /api/profiles HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Lovisha Gumber
+INFO:     127.0.0.1:61003 - "POST /chart HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='en'
+INFO:     127.0.0.1:61005 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61005 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61007 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61000 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61003 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61009 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61010 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61061 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61005 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60786 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61005 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61084 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60786 - "GET /users HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='en'
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='en'
+INFO:     127.0.0.1:61090 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61090 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61005 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61010 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61005 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='en'
+DEBUG: Received Daily Horoscope request for Lovisha Gumber
+INFO:     127.0.0.1:61084 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61088 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61010 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61084 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61005 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61133 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61090 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61086 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61088 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60786 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61230 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61269 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61272 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='en'
+INFO:     127.0.0.1:61277 - "POST /calculate HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='en'
+INFO:     127.0.0.1:61281 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61281 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61272 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61273 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61272 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='en'
+DEBUG: Received Daily Horoscope request for Lovisha Gumber
+INFO:     127.0.0.1:61276 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61276 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61277 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61273 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61272 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61281 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61279 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61276 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61269 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61269 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61269 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61513 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61513 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61572 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61572 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61572 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61572 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61687 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61687 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61836 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61836 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61836 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61836 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61836 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61836 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61836 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61836 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61836 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61836 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61927 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61927 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61927 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62006 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62006 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62006 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62006 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62191 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62191 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62284 - "GET /consultation/history HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62284 - "GET /consultation/history HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62316 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62316 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62363 - "GET /muhurat/vivah?year=2026&month=5&type=Vivah HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62365 - "OPTIONS /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62363 - "GET /muhurat/vivah?year=2026&month=5&type=Vivah HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62367 - "OPTIONS /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62369 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62365 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62488 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62488 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62488 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62570 - "GET /muhurat/vivah?year=2026&month=5&type=Vivah HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62571 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62570 - "GET /muhurat/vivah?year=2026&month=5&type=Vivah HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62573 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62769 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62834 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62834 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62834 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62834 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63142 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63143 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63142 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63142 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63142 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63142 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63142 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63142 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63142 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63142 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63209 - "OPTIONS /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63210 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63209 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63214 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63210 - "OPTIONS /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63215 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63214 - "OPTIONS /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63216 - "OPTIONS /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63209 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63215 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63210 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63218 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63216 - "OPTIONS /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63214 - "OPTIONS /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63218 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63210 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63215 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63209 - "OPTIONS /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63216 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63214 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63215 - "OPTIONS /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63218 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63210 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63214 - "OPTIONS /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63216 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=2001 month=8 day=31 hour=11 minute=5 lat=23.7957 lon=86.4304 timezone='Asia/Kolkata' target_year=2026 profession='Engineer' language='en'
+INFO:     127.0.0.1:63215 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63218 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:63216 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63215 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63216 - "POST /calculate HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=2001 month=8 day=31 hour=11 minute=5 lat=23.7957 lon=86.4304 timezone='Asia/Kolkata' target_year=2026 profession='Engineer' language='en'
+INFO:     127.0.0.1:63216 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63209 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63209 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63209 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63144 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63144 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63246 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='Developer' language='en'
+INFO:     127.0.0.1:63246 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63218 - "POST /chart HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='Developer' language='en'
+INFO:     127.0.0.1:63254 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63209 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63254 - "POST /calculate HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=2001 month=8 day=31 hour=11 minute=5 lat=23.7957 lon=86.4304 timezone='Asia/Kolkata' target_year=2026 profession='Engineer' language='en'
+INFO:     127.0.0.1:63209 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63210 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63215 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63215 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:63215 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63249 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63209 - "POST /chart HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:63209 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63209 - "OPTIONS /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63209 - "OPTIONS /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63256 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63215 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63246 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63218 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63251 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63214 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63216 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63252 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63210 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63254 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63381 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63381 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63381 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63381 - "GET /users HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 8067 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:63218 - "POST /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63381 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63381 - "GET /users HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 9282 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:63209 - "POST /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63423 - "GET /muhurat/vivah?year=2026&month=5&type=Vivah HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63424 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63423 - "GET /muhurat/vivah?year=2026&month=5&type=Vivah HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63426 - "POST /panchang HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 10856 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:63215 - "POST /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63523 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63428 - "GET /muhurat/vivah?year=2026&month=5&type=Vivah HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63428 - "GET /muhurat/vivah?year=2026&month=5&type=Vivah HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63525 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63527 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63525 - "GET /muhurat/vivah?year=2026&month=5&type=Vivah HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63529 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63689 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63689 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63760 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63760 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63790 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63790 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63790 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63790 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63975 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63975 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64066 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64066 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64095 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64097 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64099 - "OPTIONS /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64097 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:64099 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64104 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64099 - "OPTIONS /year-book/outlook HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:64105 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64101 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64095 - "POST /chart HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 6647 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:64105 - "POST /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64195 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64230 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64195 - "GET /users HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:64232 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64232 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64236 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:64238 - "POST /year-book HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:64236 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64230 - "POST /chart HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 9368 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:64234 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64228 - "POST /chart HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 7378 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:64232 - "POST /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64344 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64353 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64344 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64353 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:64353 - "GET /users HTTP/1.1" 401 Unauthorized
+[YearBook] DeepSeek raw response length: 9991 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:64236 - "POST /year-book/outlook HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 10522 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:64238 - "POST /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64528 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64528 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64550 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:64551 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64551 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64555 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:64557 - "POST /year-book HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:64555 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64550 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64553 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64548 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64354 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:64624 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64625 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:64624 - "GET /users HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 6202 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:64557 - "POST /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64624 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64657 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:64658 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64658 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64663 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:64664 - "POST /year-book HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:64658 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64657 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64557 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64661 - "POST /chart HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 7294 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+[YearBook] DeepSeek raw response length: 10639 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+[YearBook] DeepSeek raw response length: 9867 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:64658 - "POST /year-book/outlook HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 10418 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:64664 - "POST /year-book/outlook HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 10018 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:64663 - "POST /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65032 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65177 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65177 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65202 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:65204 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65204 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65208 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:65210 - "POST /year-book HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:65208 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65201 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65206 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65202 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65284 - "GET /users HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 9163 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:65210 - "POST /year-book/outlook HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 9568 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:65204 - "POST /year-book/outlook HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 10285 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:65208 - "POST /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49171 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49171 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49198 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:49200 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49200 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49208 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:49210 - "POST /year-book HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:49200 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49196 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49207 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49198 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49323 - "GET /users HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 8884 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+[YearBook] DeepSeek raw response length: 9598 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:49208 - "POST /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49210 - "POST /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49323 - "GET /users HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 10571 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:49200 - "POST /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49426 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49480 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49485 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:49486 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49486 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49491 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:49492 - "POST /year-book HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:49486 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49483 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49485 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49490 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49596 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49596 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49619 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:49621 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49621 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49625 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:49627 - "POST /year-book HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:49621 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49623 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49619 - "POST /chart HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 9995 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+[YearBook] DeepSeek raw response length: 9447 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:49618 - "POST /chart HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 10985 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+[YearBook] DeepSeek raw response length: 5571 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:49621 - "POST /year-book/outlook HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 10225 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:49625 - "POST /year-book/outlook HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 10904 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:49627 - "POST /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49874 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49907 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49907 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49908 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50207 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50241 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50358 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50400 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50573 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50573 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50573 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50600 - "OPTIONS /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50602 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50600 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50604 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50602 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50600 - "OPTIONS /moon-chart HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='en'
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='en'
+INFO:     127.0.0.1:50600 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50610 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50600 - "OPTIONS /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50610 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50610 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50607 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50604 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50625 - "OPTIONS /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Lovisha Gumber
+INFO:     127.0.0.1:50602 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50609 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50600 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50610 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50625 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50626 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50626 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50626 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50626 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50756 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50756 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50776 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50778 - "OPTIONS /year-book HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:50776 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50782 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50784 - "OPTIONS /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50776 - "OPTIONS /year-book/outlook HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:50782 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50781 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50775 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50884 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='en'
+INFO:     127.0.0.1:50889 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50889 - "POST /api/profiles HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 8420 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:50885 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50889 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50887 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50782 - "POST /year-book/outlook HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='en'
+INFO:     127.0.0.1:50887 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50889 - "POST /ai/predict HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 10038 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:50784 - "POST /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50884 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50885 - "POST /moon-chart HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Lovisha Gumber
+INFO:     127.0.0.1:50885 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='en'
+INFO:     127.0.0.1:50956 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50884 - "POST /chart HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Lovisha Gumber
+INFO:     127.0.0.1:50954 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50958 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50952 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50974 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51219 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51219 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51219 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51390 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51390 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51390 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51390 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51390 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51390 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51390 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51390 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51419 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='Developer' language='en'
+INFO:     127.0.0.1:51425 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51427 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='Developer' language='en'
+INFO:     127.0.0.1:51427 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51429 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51421 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51425 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51423 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51427 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51419 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51527 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52177 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52204 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52205 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52204 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52204 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52207 - "GET /static/avatars/IMG_3814.jpeg HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:52353 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52353 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52353 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52379 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:52380 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52384 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:52386 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52382 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52377 - "POST /chart HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 6689 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:52380 - "POST /year-book/outlook HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 8569 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:52386 - "POST /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52577 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52577 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52908 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52908 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53176 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53176 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53204 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:53205 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53205 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53209 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:53211 - "POST /year-book HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:53209 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53207 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53203 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53204 - "POST /chart HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 7615 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:53205 - "POST /year-book/outlook HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 9625 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:53211 - "POST /year-book/outlook HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 9909 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:53209 - "POST /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53467 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53467 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53492 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53494 - "OPTIONS /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:53496 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53498 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53500 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53498 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:53502 - "POST /year-book HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:53500 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53492 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53494 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53496 - "POST /chart HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 8411 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:53502 - "POST /year-book/outlook HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 10088 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:53500 - "POST /year-book/outlook HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 8712 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:53498 - "POST /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53928 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53952 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53954 - "OPTIONS /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53954 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53959 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53928 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53960 - "OPTIONS /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53954 - "OPTIONS /year-book HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:53959 - "POST /year-book HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:53960 - "POST /year-book HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:53954 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53959 - "OPTIONS /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53960 - "OPTIONS /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53952 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53957 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53950 - "POST /chart HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 9096 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:53954 - "POST /year-book/outlook HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 9953 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:53960 - "POST /year-book/outlook HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 7991 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:53959 - "POST /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54181 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55814 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55814 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58129 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58861 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58861 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58861 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58886 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58887 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58886 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58889 - "OPTIONS /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58887 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58893 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58886 - "OPTIONS /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58894 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58893 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58895 - "OPTIONS /year-book HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:58886 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58895 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:58893 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58886 - "POST /calculate HTTP/1.1" 200 OK
+YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
+INFO:     127.0.0.1:58895 - "POST /year-book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58893 - "OPTIONS /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58886 - "OPTIONS /year-book/outlook HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58887 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58894 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58889 - "POST /chart HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 4810 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:58893 - "POST /year-book/outlook HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 5302 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:58895 - "POST /year-book/outlook HTTP/1.1" 200 OK
+[YearBook] DeepSeek raw response length: 9451 chars
+[YearBook] Months parsed from AI: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+INFO:     127.0.0.1:58886 - "POST /year-book/outlook HTTP/1.1" 200 OK
