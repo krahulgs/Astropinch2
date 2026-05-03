@@ -223,19 +223,31 @@ JSON only:
             if ai_client:
                 try:
                     prompt = f"""
-                    Provide a complete, highly detailed 12-month astrological roadmap for a {natal_sign} Moon native for the year {target_year}. 
-                    Keep advice profound, jargon-free, and highly actionable. No astrological terms.
-                    
-                    For EVERY month, provide 1 highly impactful, action-oriented sentence for each area of life. Do not ramble.
-                    
-                    Return a STRICT JSON object mapping each month name exactly to its predictions.
-                    Example structure:
-                    {{
-                      "January": {{"career": "1 impactful sentence...", "finance": "1 impactful sentence...", "love": "1 impactful sentence...", "health": "1 impactful sentence...", "travel": "1 impactful sentence..."}},
-                      "February": {{"career": "1 impactful sentence...", "finance": "1 impactful sentence...", "love": "1 impactful sentence...", "health": "1 impactful sentence...", "travel": "1 impactful sentence..."}},
-                      ...
-                    }}
-                    """
+You are an expert Vedic astrologer and life strategist. Generate a deeply personalized 12-month forecast for a {natal_sign} Moon native for the year {target_year}.
+
+Rules:
+- Each month must reflect its real-world season and energy (e.g., January = winter planning, July = peak energy).
+- Every prediction must be 1-2 powerful, jargon-free, actionable sentences.
+- After each prediction, add a "Simple Tip:" followed by 1 practical action the user can take.
+- Ground predictions in real Vedic transits for {target_year} (e.g., Jupiter in Taurus, Saturn in Aquarius).
+- NO astrological jargon. Write for a modern, educated audience.
+
+Return a STRICT JSON object with exactly 12 month keys:
+{{
+  "January": {{"career": "...", "finance": "...", "love": "...", "health": "...", "travel": "..."}},
+  "February": {{"career": "...", "finance": "...", "love": "...", "health": "...", "travel": "..."}},
+  "March": {{"career": "...", "finance": "...", "love": "...", "health": "...", "travel": "..."}},
+  "April": {{"career": "...", "finance": "...", "love": "...", "health": "...", "travel": "..."}},
+  "May": {{"career": "...", "finance": "...", "love": "...", "health": "...", "travel": "..."}},
+  "June": {{"career": "...", "finance": "...", "love": "...", "health": "...", "travel": "..."}},
+  "July": {{"career": "...", "finance": "...", "love": "...", "health": "...", "travel": "..."}},
+  "August": {{"career": "...", "finance": "...", "love": "...", "health": "...", "travel": "..."}},
+  "September": {{"career": "...", "finance": "...", "love": "...", "health": "...", "travel": "..."}},
+  "October": {{"career": "...", "finance": "...", "love": "...", "health": "...", "travel": "..."}},
+  "November": {{"career": "...", "finance": "...", "love": "...", "health": "...", "travel": "..."}},
+  "December": {{"career": "...", "finance": "...", "love": "...", "health": "...", "travel": "..."}}
+}}
+"""
                     
                     response = await ai_client.chat.completions.create(
                         model="deepseek-chat",

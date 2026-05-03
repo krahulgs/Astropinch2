@@ -288,7 +288,7 @@ export default function YearBookReportPage() {
               </div>
             </div>
           ) : currentPred ? (
-          <div className="space-y-8 animate-in fade-in slide-in-from-right-8 duration-700">
+          <div key={activeMonth} className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <h2 className="text-5xl font-serif italic text-foreground">{t(`months.${currentPred.month}`)} {targetYear}</h2>
               <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-secondary/10 to-highlight/10 border border-secondary/30 shadow-xl shadow-secondary/5 backdrop-blur-md">
