@@ -104,7 +104,7 @@ export default function UnifiedMatchingPage() {
 
     if (isLoggedIn && completeProfiles.length > 0) {
       return (
-        <div className="p-6 rounded-[2rem] bg-surface/50 backdrop-blur-xl border border-primary/30 space-y-4 shadow-2xl animate-in fade-in zoom-in duration-700 relative overflow-hidden">
+        <div className="p-4 md:p-6 rounded-[1.5rem] md:rounded-[2rem] bg-surface/50 backdrop-blur-xl border border-primary/30 space-y-4 shadow-2xl animate-in fade-in zoom-in duration-700 relative overflow-hidden">
           {/* "You" badge */}
           <div className="absolute top-4 right-4">
             <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary text-white text-[8px] font-black uppercase tracking-widest">
@@ -173,7 +173,7 @@ export default function UnifiedMatchingPage() {
 
   // ── Partner 2 form: always manual ─────────────────────────────────────────
   const renderPartnerForm = (data: any, setData: any, label: string) => (
-    <div className="p-6 rounded-[2rem] bg-surface/50 backdrop-blur-xl border border-border space-y-4 shadow-2xl animate-in fade-in zoom-in duration-700">
+    <div className="p-4 md:p-6 rounded-[1.5rem] md:rounded-[2rem] bg-surface/50 backdrop-blur-xl border border-border space-y-4 shadow-2xl animate-in fade-in zoom-in duration-700">
       <div className="flex items-center gap-4 border-b border-border pb-4">
         <div className="w-12 h-12 rounded-2xl bg-foreground/5 flex items-center justify-center text-primary">
           <User size={20} />
@@ -297,15 +297,15 @@ export default function UnifiedMatchingPage() {
       <AnimatedZodiacBackground />
       <div className="fixed inset-0 pointer-events-none bg-gradient-to-b from-primary/5 via-transparent to-secondary/5 z-0" />
 
-      <main className="relative z-10 pt-32 pb-20 px-6">
-        <div className="max-w-7xl mx-auto space-y-12">
+      <main className="relative z-10 pt-24 md:pt-32 pb-24 md:pb-20 px-4 md:px-6">
+        <div className="max-w-7xl mx-auto space-y-8 md:space-y-12">
           <div className="text-center space-y-4 animate-in fade-in slide-in-from-top-8 duration-1000">
-            <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-primary text-white border border-primary/20 text-[10px] font-black uppercase tracking-[0.2em] mb-4 shadow-[0_0_25px_rgba(var(--primary-rgb),0.4)] animate-in fade-in slide-in-from-bottom-4 duration-1000">
-              <Sparkles size={14} className="fill-current animate-pulse" /> {t('badge')}
+            <div className="inline-flex items-center gap-2 px-4 md:px-6 py-2 rounded-full bg-primary text-white border border-primary/20 text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] mb-3 md:mb-4 shadow-[0_0_25px_rgba(var(--primary-rgb),0.4)] animate-in fade-in slide-in-from-bottom-4 duration-1000">
+              <Sparkles size={12} className="fill-current animate-pulse" /> {t('badge')}
             </div>
-            <h1 className="text-5xl md:text-7xl font-serif italic tracking-tight leading-[0.9]">
+            <h1 className="text-3xl md:text-7xl font-serif italic tracking-tight leading-[0.9]">
               {matchMode === 'soulbound' ? t('modes.soulbound') : matchMode === 'lovers' ? t('modes.lovers') : t('modes.vedic')}
-              <span className="block text-3xl md:text-5xl mt-2 not-italic font-sans font-black uppercase tracking-tighter opacity-20">{t('portal')}</span>
+              <span className="block text-xl md:text-5xl mt-2 not-italic font-sans font-black uppercase tracking-tighter opacity-20">{t('portal')}</span>
             </h1>
 
             {isLoggedIn && parsedActive && (
@@ -314,30 +314,30 @@ export default function UnifiedMatchingPage() {
               </p>
             )}
 
-            <div className="flex flex-col items-center gap-6 pt-8">
+            <div className="flex flex-col items-center gap-4 md:gap-6 pt-4 md:pt-8 w-full">
               {!isLoggedIn && (
                 <>
                   {/* Context Selector */}
-                  <div className="flex bg-foreground/5 p-1 rounded-2xl border border-border backdrop-blur-xl">
+                  <div className="flex bg-foreground/5 p-1 rounded-2xl border border-border backdrop-blur-xl w-full max-w-xs">
                     <button
                       onClick={() => setMatchContext('relationship')}
-                      className={`px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2 ${matchContext === 'relationship' ? 'bg-surface shadow-xl text-primary' : 'text-text-secondary hover:text-foreground'}`}
+                      className={`flex-1 px-3 md:px-8 py-2.5 md:py-3 rounded-xl text-[9px] md:text-[10px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-1.5 ${matchContext === 'relationship' ? 'bg-surface shadow-xl text-primary' : 'text-text-secondary hover:text-foreground'}`}
                     >
-                      <Heart size={14} /> {t('contexts.relationship')}
+                      <Heart size={12} /> {t('contexts.relationship')}
                     </button>
                     <button
                       onClick={() => { setMatchContext('marriage'); setMatchMode('vedic'); }}
-                      className={`px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2 ${matchContext === 'marriage' ? 'bg-surface shadow-xl text-secondary' : 'text-text-secondary hover:text-foreground'}`}
+                      className={`flex-1 px-3 md:px-8 py-2.5 md:py-3 rounded-xl text-[9px] md:text-[10px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-1.5 ${matchContext === 'marriage' ? 'bg-surface shadow-xl text-secondary' : 'text-text-secondary hover:text-foreground'}`}
                     >
-                      <Gem size={14} /> {t('contexts.marriage')}
+                      <Gem size={12} /> {t('contexts.marriage')}
                     </button>
                   </div>
 
                   {/* Mode Selector */}
-                  <div className="flex justify-center gap-3">
+                  <div className="flex flex-wrap justify-center gap-2">
                     <button
                       type="button" onClick={() => setMatchMode('vedic')}
-                      className={`px-6 py-2 rounded-full text-[9px] font-black uppercase tracking-widest transition-all border ${matchMode === 'vedic' ? 'bg-secondary/10 border-secondary text-secondary' : 'bg-surface border-border text-text-secondary'}`}
+                      className={`px-4 md:px-6 py-2 rounded-full text-[9px] font-black uppercase tracking-widest transition-all border ${matchMode === 'vedic' ? 'bg-secondary/10 border-secondary text-secondary' : 'bg-surface border-border text-text-secondary'}`}
                     >
                       {t('modes.vedic')}
                     </button>
@@ -345,13 +345,13 @@ export default function UnifiedMatchingPage() {
                       <>
                         <button
                           type="button" onClick={() => setMatchMode('soulbound')}
-                          className={`px-6 py-2 rounded-full text-[9px] font-black uppercase tracking-widest transition-all border ${matchMode === 'soulbound' ? 'bg-primary/10 border-primary text-primary' : 'bg-surface border-border text-text-secondary'}`}
+                          className={`px-4 md:px-6 py-2 rounded-full text-[9px] font-black uppercase tracking-widest transition-all border ${matchMode === 'soulbound' ? 'bg-primary/10 border-primary text-primary' : 'bg-surface border-border text-text-secondary'}`}
                         >
                           {t('modes.soulbound')}
                         </button>
                         <button
                           type="button" onClick={() => setMatchMode('lovers')}
-                          className={`px-6 py-2 rounded-full text-[9px] font-black uppercase tracking-widest transition-all border ${matchMode === 'lovers' ? 'bg-pink-500/10 border-pink-500 text-pink-500' : 'bg-surface border-border text-text-secondary'}`}
+                          className={`px-4 md:px-6 py-2 rounded-full text-[9px] font-black uppercase tracking-widest transition-all border ${matchMode === 'lovers' ? 'bg-pink-500/10 border-pink-500 text-pink-500' : 'bg-surface border-border text-text-secondary'}`}
                         >
                           {t('modes.lovers')}
                         </button>
@@ -363,8 +363,8 @@ export default function UnifiedMatchingPage() {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-8">
-            <div className="grid md:grid-cols-2 gap-8 relative">
+          <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8">
+            <div className="grid md:grid-cols-2 gap-5 md:gap-8 relative">
               <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-surface border border-border items-center justify-center z-20 shadow-2xl animate-pulse">
                 {matchContext === 'marriage' ? <Gem size={24} className="text-secondary" /> : <Heart size={24} className="text-primary fill-primary/20" />}
               </div>
@@ -381,7 +381,7 @@ export default function UnifiedMatchingPage() {
 
             <button
               disabled={loading} type="submit"
-              className={`w-full h-16 rounded-3xl font-black uppercase tracking-[0.3em] text-[11px] hover:scale-[0.98] active:scale-95 transition-all shadow-2xl flex items-center justify-center gap-4 disabled:opacity-50 ${matchMode === 'lovers' ? 'bg-pink-500 text-white shadow-pink-500/30' : matchMode === 'soulbound' ? 'bg-primary text-white shadow-primary/30' : 'bg-secondary text-white shadow-secondary/30'}`}
+              className={`w-full h-12 md:h-16 rounded-3xl font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-[11px] hover:scale-[0.98] active:scale-95 transition-all shadow-2xl flex items-center justify-center gap-3 md:gap-4 disabled:opacity-50 ${matchMode === 'lovers' ? 'bg-pink-500 text-white shadow-pink-500/30' : matchMode === 'soulbound' ? 'bg-primary text-white shadow-primary/30' : 'bg-secondary text-white shadow-secondary/30'}`}
             >
               {loading ? (
                 <><Loader2 size={20} className="animate-spin" /> {t('buttons.loading')}</>
@@ -391,16 +391,16 @@ export default function UnifiedMatchingPage() {
             </button>
           </form>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 pt-6 md:pt-12">
             {[
               { icon: <Sparkles />, title: t('features.psychological'), desc: t('features.psychological_desc') },
               { icon: <Stars />, title: t('features.vedic'), desc: t('features.vedic_desc') },
               { icon: <Heart />, title: t('features.karmic'), desc: t('features.karmic_desc') }
             ].map((f, i) => (
-              <div key={i} className="p-8 rounded-[2rem] bg-surface/50 border border-border text-center space-y-3 hover:bg-surface transition-all shadow-sm">
+              <div key={i} className="p-5 md:p-8 rounded-[1.5rem] md:rounded-[2rem] bg-surface/50 border border-border text-center space-y-2 md:space-y-3 hover:bg-surface transition-all shadow-sm">
                 <div className="text-primary flex justify-center">{f.icon}</div>
-                <h4 className="text-[10px] font-black uppercase tracking-widest">{f.title}</h4>
-                <p className="text-[11px] text-text-secondary font-light">{f.desc}</p>
+                <h4 className="text-[9px] md:text-[10px] font-black uppercase tracking-widest">{f.title}</h4>
+                <p className="text-[10px] md:text-[11px] text-text-secondary font-light">{f.desc}</p>
               </div>
             ))}
           </div>
