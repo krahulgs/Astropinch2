@@ -168,9 +168,9 @@ export default function YearBookReportPage() {
 
         {/* Header */}
         <div className="text-center space-y-4 print:space-y-2">
-          <h1 className="text-2xl md:text-6xl font-medium italic font-serif text-foreground leading-tight">
+          <h1 className="text-xl md:text-6xl font-medium italic font-serif text-foreground leading-tight">
             {searchParams.get('name')}&apos;s {targetYear} {t('report.year_book_suffix')}
-            <span className="block mt-3 text-2xl md:text-4xl text-primary font-light opacity-90 print:mt-1 print:text-2xl">
+            <span className="block mt-2 text-base md:text-4xl text-primary font-light opacity-90 print:mt-1 print:text-2xl">
               {t('report.chart_overview')}
             </span>
           </h1>
@@ -190,41 +190,42 @@ export default function YearBookReportPage() {
 
         {/* AI Outlook Section — skeleton while loading */}
         {aiLoading ? (
-          <div className="grid lg:grid-cols-2 gap-8 animate-pulse">
-            <div className="p-10 rounded-[3rem] bg-surface border border-border space-y-4">
-              <div className="h-8 bg-foreground/10 rounded-xl w-3/4"></div>
-              <div className="h-4 bg-foreground/10 rounded w-full"></div>
-              <div className="h-4 bg-foreground/10 rounded w-5/6"></div>
-              <div className="h-4 bg-foreground/10 rounded w-4/5"></div>
+          <div className="grid lg:grid-cols-2 gap-4 md:gap-8 animate-pulse">
+            <div className="p-5 md:p-10 rounded-[2rem] md:rounded-[3rem] bg-surface border border-border space-y-4">
+              <div className="h-6 bg-foreground/10 rounded-xl w-3/4" />
+              <div className="h-4 bg-foreground/10 rounded w-full" />
+              <div className="h-4 bg-foreground/10 rounded w-5/6" />
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              {[1,2,3,4].map(i => <div key={i} className="p-6 rounded-[2.5rem] bg-surface border border-border h-32"></div>)}
+            <div className="grid grid-cols-2 gap-3">
+              {[1,2,3,4].map(i => <div key={i} className="p-4 md:p-6 rounded-[1.5rem] md:rounded-[2.5rem] bg-surface border border-border h-24 md:h-32" />)}
             </div>
           </div>
         ) : data?.ai_outlook ? (
-          <div className="grid lg:grid-cols-2 gap-8 print:grid-cols-1 print:gap-6">
-            <div className="p-10 print:p-6 rounded-[3rem] print:rounded-2xl bg-gradient-to-br from-secondary/20 to-transparent border border-secondary/20 space-y-6 print:space-y-4">
-              <h2 className="text-4xl print:text-3xl font-serif italic text-secondary">{t('report.strategy_prefix')} {data.ai_outlook.theme}</h2>
-              <p className="text-lg print:text-base text-foreground/80 font-light leading-relaxed">{data.ai_outlook.summary}</p>
-              <div className="p-6 print:p-4 rounded-3xl/40 print:rounded-xl border border-border space-y-2">
+          <div className="grid lg:grid-cols-2 gap-4 md:gap-8 print:grid-cols-1 print:gap-6">
+            {/* AI Summary */}
+            <div className="p-5 md:p-10 print:p-6 rounded-[1.5rem] md:rounded-[3rem] print:rounded-2xl bg-gradient-to-br from-secondary/20 to-transparent border border-secondary/20 space-y-4 md:space-y-6 print:space-y-4">
+              <h2 className="text-2xl md:text-4xl print:text-3xl font-serif italic text-secondary leading-tight">{t('report.strategy_prefix')} {data.ai_outlook.theme}</h2>
+              <p className="text-sm md:text-lg print:text-base text-foreground/80 font-light leading-relaxed">{data.ai_outlook.summary}</p>
+              <div className="p-4 md:p-6 print:p-4 rounded-2xl print:rounded-xl border border-border space-y-2">
                 <h4 className="text-[10px] font-bold uppercase tracking-widest text-secondary">{t('report.vedic_citation')}</h4>
-                <p className="text-sm print:text-xs text-text-secondary italic">{data.ai_outlook.citation}</p>
+                <p className="text-xs md:text-sm print:text-xs text-text-secondary italic">{data.ai_outlook.citation}</p>
               </div>
             </div>
-            
-            <div className="grid grid-cols-2 gap-4 print:gap-4">
+
+            {/* Quarters grid */}
+            <div className="grid grid-cols-2 gap-3 md:gap-4 print:gap-4">
               {data.ai_outlook.quarters.map((q: any, i: number) => (
-                <div key={i} className="p-6 print:p-4 rounded-[2.5rem] print:rounded-xl bg-surface border border-border space-y-3 hover:bg-foreground/5 transition-all">
-                  <h4 className="text-xs font-bold uppercase tracking-widest text-text-secondary">{q.period}</h4>
-                  <p className="text-sm print:text-xs font-light text-foreground/80 leading-relaxed">
-                    <span className="font-bold text-foreground block mb-1">{q.focus.split('. ')[0]}.</span>
+                <div key={i} className="p-4 md:p-6 print:p-4 rounded-[1.5rem] md:rounded-[2.5rem] print:rounded-xl bg-surface border border-border space-y-2 md:space-y-3 hover:bg-foreground/5 transition-all">
+                  <h4 className="text-[9px] md:text-xs font-bold uppercase tracking-widest text-text-secondary">{q.period}</h4>
+                  <p className="text-xs md:text-sm print:text-xs font-light text-foreground/80 leading-relaxed">
+                    <span className="font-bold text-foreground block mb-0.5">{q.focus.split('. ')[0]}.</span>
                     {q.focus.split('. ').slice(1).join('. ')}
                   </p>
                 </div>
               ))}
-              <div className="col-span-full p-6 print:p-4 rounded-[2rem] print:rounded-xl bg-primary/10 border border-primary/20 flex justify-between items-center">
-                 <span className="text-xs font-bold uppercase tracking-widest text-primary">{t('report.key_turning_point')}</span>
-                 <span className="text-xl print:text-lg font-serif italic text-foreground">{data.ai_outlook.key_date}</span>
+              <div className="col-span-full p-4 md:p-6 print:p-4 rounded-[1.5rem] md:rounded-[2rem] print:rounded-xl bg-primary/10 border border-primary/20 flex justify-between items-center gap-3">
+                <span className="text-[9px] md:text-xs font-bold uppercase tracking-widest text-primary shrink-0">{t('report.key_turning_point')}</span>
+                <span className="text-base md:text-xl print:text-lg font-serif italic text-foreground text-right">{data.ai_outlook.key_date}</span>
               </div>
             </div>
           </div>
@@ -232,24 +233,24 @@ export default function YearBookReportPage() {
         
         {/* Dasha section — only show when data is available */}
         {data?.dasha && (
-        <div className="p-8 print:p-6 rounded-[2.5rem] print:rounded-2xl bg-surface border border-border backdrop-blur-sm space-y-6 print:break-after-page">
+        <div className="p-4 md:p-8 print:p-6 rounded-[1.5rem] md:rounded-[2.5rem] print:rounded-2xl bg-surface border border-border backdrop-blur-sm space-y-4 md:space-y-6 print:break-after-page">
           <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-text-secondary">{t('report.active_dasha')}</h3>
-          <div className="flex flex-wrap gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {data.dasha.map((d, i) => (
-              <div key={i} className="flex-1 min-w-[280px] print:min-w-[45%] p-6 print:p-4 rounded-3xl print:rounded-xl bg-surface border border-border space-y-4 break-inside-avoid">
+              <div key={i} className="p-4 md:p-6 print:p-4 rounded-2xl print:rounded-xl bg-surface border border-border space-y-3 break-inside-avoid">
                 <div className="flex justify-between items-center">
                   <span className="text-xs font-bold text-secondary uppercase tracking-widest">{d.type}</span>
-                  <span className="text-[10px] text-text-secondary">{d.start} — {d.end}</span>
+                  <span className="text-[9px] text-text-secondary">{d.start} — {d.end}</span>
                 </div>
-                <p className="text-2xl print:text-xl font-serif italic text-foreground">{d.planet}</p>
-                <div className="space-y-3 pt-4 border-t border-border/50">
-                  <div className="flex items-start gap-3">
-                    <span className="w-2 h-2 rounded-full bg-highlight mt-1.5 shrink-0"></span>
-                    <p className="text-sm print:text-xs text-text-secondary leading-relaxed"><span className="text-highlight font-bold uppercase tracking-wider">{t('report.good')}</span> {d.good}</p>
+                <p className="text-xl md:text-2xl print:text-xl font-serif italic text-foreground">{d.planet}</p>
+                <div className="space-y-2 md:space-y-3 pt-3 border-t border-border/50">
+                  <div className="flex items-start gap-2 md:gap-3">
+                    <span className="w-2 h-2 rounded-full bg-highlight mt-1.5 shrink-0" />
+                    <p className="text-xs md:text-sm print:text-xs text-text-secondary leading-relaxed"><span className="text-highlight font-bold uppercase tracking-wider">{t('report.good')}</span> {d.good}</p>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <span className="w-2 h-2 rounded-full bg-alert mt-1.5 shrink-0"></span>
-                    <p className="text-sm print:text-xs text-text-secondary leading-relaxed"><span className="text-alert font-bold uppercase tracking-wider">{t('report.caution')}</span> {d.bad}</p>
+                  <div className="flex items-start gap-2 md:gap-3">
+                    <span className="w-2 h-2 rounded-full bg-alert mt-1.5 shrink-0" />
+                    <p className="text-xs md:text-sm print:text-xs text-text-secondary leading-relaxed"><span className="text-alert font-bold uppercase tracking-wider">{t('report.caution')}</span> {d.bad}</p>
                   </div>
                 </div>
               </div>
@@ -362,15 +363,14 @@ export default function YearBookReportPage() {
                 </div>
               ))}
               
-              {/* Key Transits for the Month */}
               {data?.transits && (
-              <div className="p-8 rounded-[2rem] bg-primary/10 border border-primary/20 backdrop-blur-sm space-y-4">
+              <div className="p-4 md:p-8 rounded-[1.5rem] md:rounded-[2rem] bg-primary/10 border border-primary/20 backdrop-blur-sm space-y-3">
                 <h4 className="font-bold text-primary uppercase tracking-widest text-xs">{t('report.key_transits')}</h4>
-                <div className="space-y-3">
-                    {data?.transits?.map((tr, i) => (
-                    <div key={i} className="flex justify-between items-center text-sm gap-4">
+                <div className="space-y-2">
+                  {data?.transits?.map((tr, i) => (
+                    <div key={i} className="flex justify-between items-center text-xs gap-3">
                       <span className="text-foreground/80 font-medium truncate">{tr.planet} {tr.event}</span>
-                      <span className="text-text-secondary text-xs shrink-0">{tr.date}</span>
+                      <span className="text-text-secondary text-[10px] shrink-0">{tr.date}</span>
                     </div>
                   ))}
                 </div>
@@ -561,7 +561,7 @@ export default function YearBookReportPage() {
 
         {/* CTA */}
         <div className="text-center pt-8 print:hidden">
-          <button className="px-12 py-5 bg-foreground text-background rounded-full font-bold uppercase tracking-[0.2em] text-xs hover:bg-secondary transition-all shadow-2xl shadow-foreground/10">
+          <button className="px-8 md:px-12 py-4 md:py-5 bg-foreground text-background rounded-full font-bold uppercase tracking-[0.2em] text-xs hover:bg-secondary transition-all shadow-2xl shadow-foreground/10">
             {t('report.buy_pdf')}
           </button>
         </div>
