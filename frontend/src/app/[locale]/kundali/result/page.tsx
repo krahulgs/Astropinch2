@@ -178,7 +178,7 @@ export default function KundaliResultPage() {
                 <h1 className="text-3xl md:text-5xl font-medium italic font-serif text-foreground">
                   {t('result.header.chart_title', { name: searchParams.get('name') || t('result.header.your') })}
                 </h1>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 print:hidden">
                   {[
                     `${searchParams.get('day')}/${searchParams.get('month')}/${searchParams.get('year')}`,
                     `${searchParams.get('hour')}:${searchParams.get('minute')}`,
