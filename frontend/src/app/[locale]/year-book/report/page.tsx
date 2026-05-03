@@ -100,8 +100,8 @@ export default function YearBookReportPage() {
       }
     };
 
-    // Phase 2: Slow AI call — load in background, show skeleton
-    const fetchAI = async () => {
+    // Phase 2a: Fast YearBook predictions — instant via Swiss Ephemeris
+    const fetchYearBook = async () => {
       try {
         const yearBookRes = await fetch(`${apiUrl}/year-book`, {
           method: 'POST',
@@ -110,20 +110,31 @@ export default function YearBookReportPage() {
         });
         if (!yearBookRes.ok) {
           const errData = await yearBookRes.json().catch(() => ({}));
-          console.error(`Backend Error ${yearBookRes.status}:`, errData.detail);
+          console.error(`YearBook Error ${yearBookRes.status}:`, errData.detail);
           return;
         }
-        setData(await yearBookRes.json());
+        const ybData = await yearBookRes.json();
+        setData(ybData);
+        setAiLoading(false);  // Predictions ready — hide skeleton immediately
+
+        // Phase 2b: Background AI Outlook (slow) — fills in after predictions show
+        fetch(`${apiUrl}/year-book/outlook`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        }).then(r => r.json()).then(outlookData => {
+          setData(prev => prev ? { ...prev, ai_outlook: outlookData.ai_outlook } : prev);
+        }).catch(err => console.warn('AI Outlook fetch failed (non-critical):', err));
+
       } catch (err: any) {
-        console.error('YearBook AI Fetch Error:', err.message);
-      } finally {
+        console.error('YearBook Fetch Error:', err.message);
         setAiLoading(false);
       }
     };
 
     // Fire both in parallel — page shows fast, AI fills in
     fetchFast();
-    fetchAI();
+    fetchYearBook();
   }, [searchParams]);
 
   if (loading) return (

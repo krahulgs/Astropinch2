@@ -914,13 +914,76 @@ Home & Comfort: [detailed analysis]
         "moon_prediction": moon_prediction,
         "validation_note": validation_note
     }
-
 @app.post("/year-book")
 async def get_year_book(req: ChartRequest):
+    """
+    FAST endpoint — returns in ~200ms using pure Swiss Ephemeris.
+    Predictions and transits computed via Gochara rules. No AI wait.
+    """
     print(f"YearBook Request: {req}")
     try:
         jd_ut = get_jd_ut_from_request(req, engine)
         jd = engine.get_julian_day(req.year, req.month, req.day, req.hour, req.minute)
+        raw_planets = engine.get_planets(jd_ut, req.lat, req.lon)
+        asc = engine.get_ascendant(jd_ut, req.lat, req.lon)
+
+        # ── Swiss Ephemeris Gochara Engine (instant) ──
+        natal_positions = yb_engine.compute_natal_positions(
+            req.year, req.month, req.day, req.hour, req.minute
+        )
+        dasha_data = engine.calculate_dasha(raw_planets, jd)
+        mahadasha_lord = dasha_data.get('mahadasha', 'Jupiter')
+
+        predictions = yb_engine.compute_monthly_transit_scores(
+            natal=natal_positions,
+            target_year=req.target_year,
+            mahadasha_lord=mahadasha_lord
+        )
+
+        transits = yb_engine.get_planet_transit_summary(natal_positions, req.target_year)
+
+        planet_meanings = {
+            "Sun":     {"good": "A period of increased confidence, career growth, and stepping into leadership roles.", "bad": "Watch out for ego clashes or taking on too much responsibility."},
+            "Moon":    {"good": "A time of emotional growth, focus on family, and nurturing your inner peace.", "bad": "You may feel overly sensitive or emotionally drained at times."},
+            "Mars":    {"good": "High energy, courage, and motivation to tackle difficult projects.", "bad": "Be careful of impatience, arguments, or impulsive decisions."},
+            "Mercury": {"good": "Great for learning new skills, communication, and business networking.", "bad": "Avoid overthinking and stay away from unnecessary gossip."},
+            "Jupiter": {"good": "A highly positive time for financial expansion, learning, and overall good luck.", "bad": "Be mindful of overspending or becoming too overly optimistic."},
+            "Venus":   {"good": "Focuses on love, creativity, luxury, and building harmonious relationships.", "bad": "Avoid laziness or spending too much on unnecessary luxuries."},
+            "Saturn":  {"good": "A time for discipline, hard work, and building long-lasting foundations.", "bad": "Can bring delays, feelings of restriction, or require extra patience."},
+            "Rahu":    {"good": "Brings intense ambition, worldly success, and out-of-the-box thinking.", "bad": "Can cause confusion, anxiety, or chasing unrealistic desires."},
+            "Ketu":    {"good": "Excellent for spiritual growth, intuition, and letting go of what you don't need.", "bad": "May bring feelings of detachment, isolation, or sudden changes."}
+        }
+        maha_planet = dasha_data['mahadasha']
+        antar_planet = dasha_data['antardasha']
+        maha_meaning = planet_meanings.get(maha_planet, {"good": f"Primary themes of {maha_planet} are highly active.", "bad": f"Avoid {maha_planet}-related excess."})
+        antar_meaning = planet_meanings.get(antar_planet, {"good": f"Sub-period focus shifts toward {antar_planet} energy.", "bad": f"Minor fluctuations related to {antar_planet}."})
+
+        dasha_timeline = [
+            {"planet": maha_planet, "start": "Current", "end": f"{dasha_data['ends_year']}", "type": "Mahadasha", "good": maha_meaning["good"], "bad": maha_meaning["bad"]},
+            {"planet": antar_planet, "start": "Current", "end": "Ongoing", "type": "Antardasha", "good": antar_meaning["good"], "bad": antar_meaning["bad"]}
+        ]
+
+        return {
+            "year": req.target_year,
+            "predictions": predictions,
+            "dasha": dasha_timeline,
+            "transits": transits,
+            "ai_outlook": None  # Loaded separately via /year-book/outlook
+        }
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/year-book/outlook")
+async def get_year_book_outlook(req: ChartRequest):
+    """
+    SLOW endpoint — calls DeepSeek for the AI narrative outlook.
+    Called after the main predictions are already displayed.
+    """
+    try:
+        jd_ut = get_jd_ut_from_request(req, engine)
         raw_planets = engine.get_planets(jd_ut, req.lat, req.lon)
         asc = engine.get_ascendant(jd_ut, req.lat, req.lon)
 
@@ -940,67 +1003,18 @@ async def get_year_book(req: ChartRequest):
             "planets": formatted_planets,
             "ascendant": {"sign": engine.SIGN_NAMES[asc["sign_id"] - 1], "degree": asc["position_in_sign"]}
         }
-
-        # ── Phase 1: Swiss Ephemeris Gochara Engine (accurate, no AI) ──
-        natal_positions = yb_engine.compute_natal_positions(
-            req.year, req.month, req.day, req.hour, req.minute
-        )
-        dasha_data = engine.calculate_dasha(raw_planets, jd)
-        mahadasha_lord = dasha_data.get('mahadasha', 'Jupiter')
-
-        predictions = yb_engine.compute_monthly_transit_scores(
-            natal=natal_positions,
-            target_year=req.target_year,
-            mahadasha_lord=mahadasha_lord
-        )
-        print(f"[YearBook] Ephemeris engine generated {len(predictions)} months. Sample Jan career: {predictions[0]['career'][:60]}")
-
-        # ── Phase 2: Precise transit ingress detection ──
-        transits = yb_engine.get_planet_transit_summary(natal_positions, req.target_year)
-
-        # ── Phase 3: AI Outlook (narrative only — scores already computed) ──
         user_profile = {
             "name": "User",
             "dob": f"{req.day}/{req.month}/{req.year}",
             "time": f"{req.hour}:{req.minute}",
             "place": f"Lat: {req.lat}, Lon: {req.lon}"
         }
+
         ai_res = await ai.get_yearly_prediction(chart_data, user_profile, target_year=req.target_year, language=req.language)
-        ai_outlook_data = ai_res.get("ai_outlook", {})
-
-        # ── Dasha timeline with plain-English explanations ──
-        planet_meanings = {
-            "Sun": {"good": "A period of increased confidence, career growth, and stepping into leadership roles.", "bad": "Watch out for ego clashes or taking on too much responsibility."},
-            "Moon": {"good": "A time of emotional growth, focus on family, and nurturing your inner peace.", "bad": "You may feel overly sensitive or emotionally drained at times."},
-            "Mars": {"good": "High energy, courage, and motivation to tackle difficult projects.", "bad": "Be careful of impatience, arguments, or impulsive decisions."},
-            "Mercury": {"good": "Great for learning new skills, communication, and business networking.", "bad": "Avoid overthinking and stay away from unnecessary gossip."},
-            "Jupiter": {"good": "A highly positive time for financial expansion, learning, and overall good luck.", "bad": "Be mindful of overspending or becoming too overly optimistic."},
-            "Venus": {"good": "Focuses on love, creativity, luxury, and building harmonious relationships.", "bad": "Avoid laziness or spending too much on unnecessary luxuries."},
-            "Saturn": {"good": "A time for discipline, hard work, and building long-lasting foundations.", "bad": "Can bring delays, feelings of restriction, or require extra patience."},
-            "Rahu": {"good": "Brings intense ambition, worldly success, and out-of-the-box thinking.", "bad": "Can cause confusion, anxiety, or chasing unrealistic desires."},
-            "Ketu": {"good": "Excellent for spiritual growth, intuition, and letting go of what you don't need.", "bad": "May bring feelings of detachment, isolation, or sudden changes."}
-        }
-        maha_planet = dasha_data['mahadasha']
-        antar_planet = dasha_data['antardasha']
-        maha_meaning = planet_meanings.get(maha_planet, {"good": f"Primary themes of {maha_planet} are highly active.", "bad": f"Avoid {maha_planet}-related excess."})
-        antar_meaning = planet_meanings.get(antar_planet, {"good": f"Sub-period focus shifts toward {antar_planet} energy.", "bad": f"Minor fluctuations related to {antar_planet}."})
-
-        dasha_timeline = [
-            {"planet": maha_planet, "start": "Current", "end": f"{dasha_data['ends_year']}", "type": "Mahadasha", "good": maha_meaning["good"], "bad": maha_meaning["bad"]},
-            {"planet": antar_planet, "start": "Current", "end": "Ongoing", "type": "Antardasha", "good": antar_meaning["good"], "bad": antar_meaning["bad"]}
-        ]
-
-        return {
-            "year": req.target_year,
-            "predictions": predictions,
-            "dasha": dasha_timeline,
-            "transits": transits,
-            "ai_outlook": ai_outlook_data
-        }
+        return {"ai_outlook": ai_res.get("ai_outlook", {})}
     except Exception as e:
         import traceback
         traceback.print_exc()
-        print(f"YearBook Error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 class SoulboundProfile(BaseModel):
