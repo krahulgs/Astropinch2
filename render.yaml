@@ -1,0 +1,31 @@
+services:
+  # Backend API Service
+  - type: web
+    name: astropinch-api
+    env: python
+    region: ohio
+    plan: free
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: PYTHON_VERSION
+        value: 3.13.0
+
+  # Frontend Next.js Service
+  - type: web
+    name: astropinch-web
+    env: node
+    region: ohio
+    plan: free
+    buildCommand: cd frontend && npm install && npm run build
+    startCommand: cd frontend && npm run start
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          name: astropinch-api
+          type: web
+          property: host
+      - key: NODE_VERSION
+        value: 20.x
