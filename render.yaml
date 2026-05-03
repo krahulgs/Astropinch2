@@ -6,7 +6,7 @@ services:
     region: ohio
     plan: free
     buildCommand: pip install --upgrade pip && pip install -r backend/requirements.txt --prefer-binary
-    startCommand: cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT
+    startCommand: cd backend && chmod +x pre-start.sh && ./pre-start.sh
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -18,6 +18,8 @@ services:
         value: https://api.deepseek.com
       - key: PYTHON_VERSION
         value: 3.13.0
+      - key: PYTHONPATH
+        value: .
 
   # Frontend Next.js Service
   - type: web
