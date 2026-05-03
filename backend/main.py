@@ -7,12 +7,21 @@ import datetime
 import httpx
 import os
 import json
+
+# ── Load .env FIRST so OPENAI_API_KEY / DEEPSEEK keys are available to all services ──
+try:
+    from dotenv import load_dotenv
+    load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '.env'))
+    print(f"[Startup] .env loaded. OPENAI_API_KEY present: {bool(os.environ.get('OPENAI_API_KEY'))}")
+except ImportError:
+    print("[Startup] python-dotenv not installed, relying on system env vars.")
 from pydantic import BaseModel
 from typing import List, Optional
 from services.astrology import AstrologyEngine
 from services.ai_service import AIService
 from services.muhurat import MuhuratService
 from services.marriage_matching import MarriageMatchingEngine
+from services import yearbook_engine as yb_engine
 import models
 import auth
 from database import engine, SessionLocal, get_db
@@ -914,7 +923,7 @@ async def get_year_book(req: ChartRequest):
         jd = engine.get_julian_day(req.year, req.month, req.day, req.hour, req.minute)
         raw_planets = engine.get_planets(jd_ut, req.lat, req.lon)
         asc = engine.get_ascendant(jd_ut, req.lat, req.lon)
-        
+
         formatted_planets = []
         for name, p in raw_planets.items():
             house = engine.get_house_number(p["longitude"], asc["longitude"])
@@ -926,32 +935,40 @@ async def get_year_book(req: ChartRequest):
                 "nakshatra": engine.NAKSHATRA_NAMES[p["nakshatra_id"] - 1],
                 "is_retrograde": p.get("is_retrograde", False)
             })
-        
+
         chart_data = {
             "planets": formatted_planets,
-            "ascendant": {
-                "sign": engine.SIGN_NAMES[asc["sign_id"] - 1],
-                "degree": asc["position_in_sign"]
-            }
+            "ascendant": {"sign": engine.SIGN_NAMES[asc["sign_id"] - 1], "degree": asc["position_in_sign"]}
         }
-        
+
+        # ── Phase 1: Swiss Ephemeris Gochara Engine (accurate, no AI) ──
+        natal_positions = yb_engine.compute_natal_positions(
+            req.year, req.month, req.day, req.hour, req.minute
+        )
+        dasha_data = engine.calculate_dasha(raw_planets, jd)
+        mahadasha_lord = dasha_data.get('mahadasha', 'Jupiter')
+
+        predictions = yb_engine.compute_monthly_transit_scores(
+            natal=natal_positions,
+            target_year=req.target_year,
+            mahadasha_lord=mahadasha_lord
+        )
+        print(f"[YearBook] Ephemeris engine generated {len(predictions)} months. Sample Jan career: {predictions[0]['career'][:60]}")
+
+        # ── Phase 2: Precise transit ingress detection ──
+        transits = yb_engine.get_planet_transit_summary(natal_positions, req.target_year)
+
+        # ── Phase 3: AI Outlook (narrative only — scores already computed) ──
         user_profile = {
             "name": "User",
             "dob": f"{req.day}/{req.month}/{req.year}",
             "time": f"{req.hour}:{req.minute}",
             "place": f"Lat: {req.lat}, Lon: {req.lon}"
         }
-        
         ai_res = await ai.get_yearly_prediction(chart_data, user_profile, target_year=req.target_year, language=req.language)
-        
-        # Calculate dynamic dasha for the user
-        dasha_data = engine.calculate_dasha(raw_planets, jd)
-        
-        # Use AI generated predictions
-        predictions = ai_res.get("predictions", [])
         ai_outlook_data = ai_res.get("ai_outlook", {})
-        
-        # Define plain English explanations for Dasha periods
+
+        # ── Dasha timeline with plain-English explanations ──
         planet_meanings = {
             "Sun": {"good": "A period of increased confidence, career growth, and stepping into leadership roles.", "bad": "Watch out for ego clashes or taking on too much responsibility."},
             "Moon": {"good": "A time of emotional growth, focus on family, and nurturing your inner peace.", "bad": "You may feel overly sensitive or emotionally drained at times."},
@@ -963,49 +980,16 @@ async def get_year_book(req: ChartRequest):
             "Rahu": {"good": "Brings intense ambition, worldly success, and out-of-the-box thinking.", "bad": "Can cause confusion, anxiety, or chasing unrealistic desires."},
             "Ketu": {"good": "Excellent for spiritual growth, intuition, and letting go of what you don't need.", "bad": "May bring feelings of detachment, isolation, or sudden changes."}
         }
-        
         maha_planet = dasha_data['mahadasha']
         antar_planet = dasha_data['antardasha']
-        
         maha_meaning = planet_meanings.get(maha_planet, {"good": f"Primary themes of {maha_planet} are highly active.", "bad": f"Avoid {maha_planet}-related excess."})
         antar_meaning = planet_meanings.get(antar_planet, {"good": f"Sub-period focus shifts toward {antar_planet} energy.", "bad": f"Minor fluctuations related to {antar_planet}."})
-        
+
         dasha_timeline = [
-            {
-                "planet": maha_planet, 
-                "start": "Current", 
-                "end": f"{dasha_data['ends_year']}", 
-                "type": "Mahadasha", 
-                "good": maha_meaning["good"], 
-                "bad": maha_meaning["bad"]
-            },
-            {
-                "planet": antar_planet, 
-                "start": "Current", 
-                "end": "Ongoing", 
-                "type": "Antardasha", 
-                "good": antar_meaning["good"], 
-                "bad": antar_meaning["bad"]
-            }
+            {"planet": maha_planet, "start": "Current", "end": f"{dasha_data['ends_year']}", "type": "Mahadasha", "good": maha_meaning["good"], "bad": maha_meaning["bad"]},
+            {"planet": antar_planet, "start": "Current", "end": "Ongoing", "type": "Antardasha", "good": antar_meaning["good"], "bad": antar_meaning["bad"]}
         ]
-        
-        # Determine some dynamic transits for the target year
-        jd_start = engine.get_julian_day(req.target_year, 1, 1, 12, 0)
-        jd_end = engine.get_julian_day(req.target_year, 12, 31, 12, 0)
-        p_start = engine.get_planets(jd_start, req.lat, req.lon)
-        p_end = engine.get_planets(jd_end, req.lat, req.lon)
-        
-        transits = []
-        if p_start["Jupiter"]["sign_id"] != p_end["Jupiter"]["sign_id"]:
-            transits.append({"planet": "Jupiter", "event": f"Enters {engine.SIGN_NAMES[p_end['Jupiter']['sign_id']-1]}", "date": f"Mid-{req.target_year}"})
-        else:
-            transits.append({"planet": "Jupiter", "event": f"Remains in {engine.SIGN_NAMES[p_start['Jupiter']['sign_id']-1]}", "date": f"Throughout {req.target_year}"})
-            
-        if p_start["Saturn"]["sign_id"] != p_end["Saturn"]["sign_id"]:
-            transits.append({"planet": "Saturn", "event": f"Enters {engine.SIGN_NAMES[p_end['Saturn']['sign_id']-1]}", "date": f"Late {req.target_year}"})
-        else:
-            transits.append({"planet": "Saturn", "event": f"Solidifies in {engine.SIGN_NAMES[p_start['Saturn']['sign_id']-1]}", "date": f"Throughout {req.target_year}"})
-        
+
         return {
             "year": req.target_year,
             "predictions": predictions,
@@ -1014,8 +998,9 @@ async def get_year_book(req: ChartRequest):
             "ai_outlook": ai_outlook_data
         }
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         print(f"YearBook Error: {e}")
-        from fastapi import HTTPException
         raise HTTPException(status_code=500, detail=str(e))
 
 class SoulboundProfile(BaseModel):
