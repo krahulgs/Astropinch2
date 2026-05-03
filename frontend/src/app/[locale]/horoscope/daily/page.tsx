@@ -1,0 +1,726 @@
+"use client";
+
+import React, { useState, useEffect } from 'react';
+import { useRouter } from '@/i18n/routing';
+import { useTranslations } from 'next-intl';
+import { 
+  Sparkles, Shield, TrendingUp, Heart, Briefcase, 
+  MapPin, Clock, Moon, Sun, AlertTriangle, 
+  CheckCircle, Zap, Star, Coffee, Utensils, 
+  HandHeart, Compass, Gem, Activity, Lock, Calendar
+} from 'lucide-react';
+import { Link } from '@/i18n/routing';
+import CityInput from '@/components/CityInput';
+import { PROFESSION_CATEGORIES } from '@/constants/professions';
+import AnimatedZodiacBackground from '@/components/AnimatedZodiacBackground';
+
+interface HoroscopeData {
+  date: string;
+  user_name: string;
+  lagna: string;
+  moon_sign: string;
+  current_dasha: string;
+  todays_nakshatra: string;
+  todays_tithi: string;
+  day_energy: string;
+  day_score: number;
+  morning_mantra: string;
+  day_summary: string;
+  profession_guidance: {
+    profession: string;
+    todays_outlook: string;
+    key_guidance: string;
+    best_time_to_work: string;
+    avoid_time: string;
+    decision_verdict: string;
+    decision_reasoning: string;
+  };
+  risk_assessment: {
+    overall_risk_level: string;
+    risk_score: number;
+    financial_risk: string;
+    financial_risk_detail: string;
+    health_risk: string;
+    health_risk_detail: string;
+    relationship_risk: string;
+    relationship_risk_detail: string;
+    travel_risk: string;
+    travel_risk_detail: string;
+  };
+  do_today: string[];
+  avoid_today: string[];
+  investment_guidance: {
+    suitable_for_investing: string;
+    sectors_favored: string[];
+    sectors_to_avoid: string[];
+    rationale: string;
+  };
+  remedies: {
+    morning_remedy: string;
+    gemstone_activation: string;
+    mantra_for_today: string;
+    color_to_wear: string;
+    food_to_eat: string;
+    food_to_avoid: string;
+    charity_remedy: string;
+    evening_remedy: string;
+  };
+  lucky_elements: {
+    lucky_number: number;
+    lucky_color: string;
+    lucky_direction: string;
+    lucky_time: string;
+    lucky_gemstone: string;
+  };
+  planetary_highlights: {
+    planet: string;
+    position: string;
+    effect_today: string;
+  }[];
+  important_muhurtas: {
+    auspicious_windows: string[];
+    rahu_kaal: string;
+    gulika_kaal: string;
+    yamaganda: string;
+    abhijit_muhurta: string;
+  };
+  stock_market_pulse: {
+    market_sentiment: string;
+    confidence_level: string;
+    key_planet_driving_markets: string;
+    sectors_to_watch: string[];
+    advice: string;
+  };
+  closing_wisdom: string;
+}
+
+export default function DailyHoroscopePage() {
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    name: '',
+    day: '',
+    month: '',
+    year: '',
+    hour: '',
+    minute: '',
+    place: '',
+    profession: '',
+    lat: 0,
+    lon: 0
+  });
+  const [data, setData] = useState<HoroscopeData | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token);
+  }, []);
+
+  // Load from local storage if exists
+  useEffect(() => {
+    const loadProfile = () => {
+      const saved = localStorage.getItem('astropinch_profile');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        const [year, month, day] = parsed.birth_date.split('-');
+        const [hour, minute] = parsed.birth_time.split(':');
+        setFormData({
+          name: parsed.full_name,
+          day, month, year, hour, minute,
+          place: parsed.birth_place,
+          profession: parsed.profession,
+          lat: parseFloat(parsed.lat),
+          lon: parseFloat(parsed.lon)
+        });
+        // Auto submit if all data is present
+        if (parsed.full_name && parsed.birth_date && parsed.profession) {
+          handleAutoSubmit(parsed);
+        }
+      }
+    };
+
+    loadProfile();
+    window.addEventListener('profileChanged', loadProfile);
+    return () => window.removeEventListener('profileChanged', loadProfile);
+  }, []);
+
+  const handleAutoSubmit = async (profile: any) => {
+    setLoading(true);
+    try {
+      const res = await fetch('http://127.0.0.1:8000/astropinch_daily', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: profile.full_name,
+          dob: profile.birth_date,
+          time: profile.birth_time,
+          lat: parseFloat(profile.lat),
+          lon: parseFloat(profile.lon),
+          profession: profile.profession
+        })
+      });
+      if (!res.ok) throw new Error('Failed to fetch personalized guide');
+      const result = await res.json();
+      setData(result);
+      setSubmitted(true);
+    } catch (err: any) {
+      console.error('AutoSubmit Error:', err);
+      setError(err.message || 'Connection failed. Please try manual entry.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.lat || !formData.profession) {
+      setError('Please provide all details including birth place and profession.');
+      return;
+    }
+    setLoading(true);
+    const dob = `${formData.year}-${formData.month.padStart(2, '0')}-${formData.day.padStart(2, '0')}`;
+    const time = `${formData.hour.padStart(2, '0')}:${formData.minute.padStart(2, '0')}`;
+    
+    // Save to local storage
+    localStorage.setItem('astropinch_profile', JSON.stringify({
+      full_name: formData.name,
+      birth_date: dob,
+      birth_time: time,
+      birth_place: formData.place,
+      profession: formData.profession,
+      lat: formData.lat,
+      lon: formData.lon
+    }));
+
+    try {
+      const res = await fetch('http://127.0.0.1:8000/astropinch_daily', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          dob,
+          time,
+          lat: formData.lat,
+          lon: formData.lon,
+          profession: formData.profession
+        })
+      });
+
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.detail || 'Failed to fetch horoscope');
+      }
+
+      const result = await res.json();
+      setData(result);
+      setSubmitted(true);
+    } catch (err: any) {
+      setError(err.message || 'Connection failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!isLoggedIn) {
+    return (
+      <div className="relative pt-40 pb-20 px-6 text-center min-h-screen">
+        <AnimatedZodiacBackground />
+        <div className="max-w-md mx-auto space-y-8 relative z-10">
+          <div className="w-20 h-20 rounded-[2rem] bg-foreground/5 border border-border flex items-center justify-center mx-auto shadow-xl">
+            <Lock size={32} className="text-text-secondary" />
+          </div>
+          <div className="space-y-3">
+            <h2 className="text-3xl font-serif italic text-foreground">Personal Guidance Locked</h2>
+            <p className="text-xs text-text-secondary leading-relaxed uppercase tracking-widest font-bold">
+              Please sign in to access your detailed daily horoscope, professional guidance, and AI insights.
+            </p>
+          </div>
+          <Link 
+            href="/login"
+            className="inline-flex h-14 px-10 rounded-full bg-primary text-white items-center justify-center font-black uppercase tracking-[0.3em] text-[10px] hover:scale-105 transition-all shadow-2xl shadow-primary/20"
+          >
+            Sign In to Unlock
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  if (!submitted) {
+    return (
+      <main className="relative pt-32 pb-20 px-6 min-h-screen">
+        <AnimatedZodiacBackground />
+        <div className="max-w-7xl mx-auto space-y-12 relative z-10">
+          <div className="text-center space-y-4 animate-in fade-in slide-in-from-top-8 duration-1000">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-4">
+              <Sparkles size={14} className="animate-pulse" /> Personal Daily Guidance
+            </div>
+            <div className="flex items-center justify-center flex-wrap gap-4 animate-in fade-in slide-in-from-top-8 duration-1000">
+              <h1 className="text-5xl md:text-7xl font-serif italic tracking-tight leading-[0.9] text-foreground">
+                Your Daily <br/> Astrology Guide
+              </h1>
+              <div className="w-full">
+                <Link href="/" className="text-[10px] font-bold uppercase tracking-widest text-text-secondary hover:text-primary transition-colors">
+                  ← Back to Home
+                </Link>
+              </div>
+            </div>
+            <p className="text-sm text-text-secondary max-w-xl mx-auto font-light leading-relaxed">
+              Precision Jyotish analysis mapped against your birth chart and profession. NASA-grade accuracy. Mentor-styled wisdom.
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto p-8 rounded-[3rem] bg-surface/50 backdrop-blur-3xl border border-border shadow-2xl animate-in fade-in zoom-in duration-1000">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-[8px] font-black uppercase tracking-widest text-text-secondary ml-3 block">Full Name</label>
+                  <input required type="text" placeholder="Full Name" className="w-full h-12 px-6 rounded-2xl bg-foreground/5 border border-transparent text-xs text-foreground focus:border-primary focus:bg-transparent outline-none transition-all" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
+                </div>
+                <div className="space-y-1">
+                  <CityInput 
+                    label="Birth Place (India)"
+                    value={formData.place}
+                    onChange={(place, lat, lon) => setFormData({...formData, place, lat, lon})}
+                  />
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-[8px] font-black uppercase tracking-widest text-text-secondary ml-3 block">Birth Date</label>
+                  <div className="grid grid-cols-3 gap-2">
+                    <input required type="number" placeholder="DD" className="w-full h-12 rounded-2xl bg-foreground/5 border border-transparent text-center text-xs text-foreground focus:border-primary focus:bg-transparent outline-none" value={formData.day} onChange={e => setFormData({...formData, day: e.target.value})} />
+                    <input required type="number" placeholder="MM" className="w-full h-12 rounded-2xl bg-foreground/5 border border-transparent text-center text-xs text-foreground focus:border-primary focus:bg-transparent outline-none" value={formData.month} onChange={e => setFormData({...formData, month: e.target.value})} />
+                    <input required type="number" placeholder="YYYY" className="w-full h-12 rounded-2xl bg-foreground/5 border border-transparent text-center text-xs text-foreground focus:border-primary focus:bg-transparent outline-none" value={formData.year} onChange={e => setFormData({...formData, year: e.target.value})} />
+                  </div>
+                </div>
+                <div className="space-y-1">
+                  <label className="text-[8px] font-black uppercase tracking-widest text-text-secondary ml-3 block">Birth Time</label>
+                  <div className="grid grid-cols-2 gap-2">
+                    <input required type="number" placeholder="HH" className="w-full h-12 rounded-2xl bg-foreground/5 border border-transparent text-center text-xs text-foreground focus:border-primary focus:bg-transparent outline-none" value={formData.hour} onChange={e => setFormData({...formData, hour: e.target.value})} />
+                    <input required type="number" placeholder="MM" className="w-full h-12 rounded-2xl bg-foreground/5 border border-transparent text-center text-xs text-foreground focus:border-primary focus:bg-transparent outline-none" value={formData.minute} onChange={e => setFormData({...formData, minute: e.target.value})} />
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-[8px] font-black uppercase tracking-widest text-text-secondary ml-3 block">Your Profession</label>
+                <select
+                  required
+                  className="w-full h-12 px-6 rounded-2xl bg-foreground/5 border border-transparent text-[11px] text-foreground focus:border-primary focus:bg-transparent outline-none transition-all appearance-none cursor-pointer"
+                  value={formData.profession}
+                  onChange={e => setFormData({...formData, profession: e.target.value})}
+                >
+                  <option value="" className="bg-background">Select Profession</option>
+                  {Object.entries(PROFESSION_CATEGORIES).map(([category, professions]) => (
+                    <optgroup key={category} label={category} className="bg-background text-primary font-bold">
+                      {professions.map(p => (
+                        <option key={p} value={p} className="bg-background text-foreground">{p}</option>
+                      ))}
+                    </optgroup>
+                  ))}
+                </select>
+              </div>
+
+              {error && (
+                <div className="p-3 rounded-xl bg-alert/5 border border-alert/20 text-alert text-[8px] font-bold uppercase tracking-widest text-center">
+                  {error}
+                </div>
+              )}
+
+              <button
+                disabled={loading}
+                type="submit"
+                className="w-full h-14 bg-primary text-white rounded-2xl font-black uppercase tracking-[0.3em] text-[10px] hover:scale-[0.98] active:scale-95 transition-all shadow-xl shadow-primary/20 flex items-center justify-center gap-4 disabled:opacity-50"
+              >
+                {loading ? (
+                  <div className="w-5 h-5 border-2 border-background/20 border-t-background rounded-full animate-spin"></div>
+                ) : 'Consult ASTROPINCH Engine'}
+              </button>
+            </form>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  if (loading || !data) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col items-center justify-center space-y-6">
+        <div className="w-24 h-24 rounded-[2rem] bg-foreground/5 border border-border flex items-center justify-center animate-pulse">
+           <Sparkles size={32} className="text-primary animate-spin duration-1000" />
+        </div>
+        <p className="text-[10px] font-black uppercase tracking-[0.4em] text-text-secondary animate-pulse">Consulting the Pandit who never sleeps...</p>
+      </div>
+    );
+  }
+
+  return (
+    <main className="relative pt-32 pb-20 px-6 min-h-screen selection:bg-primary/30">
+      <AnimatedZodiacBackground />
+      <div className="max-w-7xl mx-auto space-y-12 relative z-10">
+        
+        {/* --- HEADER --- */}
+        <div className="space-y-6 animate-in fade-in slide-in-from-top-8 duration-1000">
+           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border pb-8">
+             <div className="space-y-1">
+               <h1 className="text-4xl md:text-6xl font-serif italic tracking-tight text-foreground">Good Morning, {data?.user_name}</h1>
+               <p className="text-xs font-bold uppercase tracking-[0.3em] text-primary flex items-center gap-2">
+                 <Calendar className="w-3 h-3" /> {data?.date}
+               </p>
+             </div>
+             <div className="flex items-center gap-4">
+                <div className="text-right">
+                  <p className="text-[8px] font-black uppercase tracking-widest text-text-secondary">Day Energy</p>
+                  <p className={`text-xl font-serif italic ${data?.day_score && data?.day_score > 6 ? 'text-highlight' : data?.day_score && data?.day_score > 4 ? 'text-secondary' : 'text-alert'}`}>{data?.day_energy}</p>
+                </div>
+                <div className="w-14 h-14 rounded-2xl bg-foreground/5 border border-border flex items-center justify-center text-2xl font-serif italic text-foreground">
+                  {data?.day_score}
+                </div>
+             </div>
+           </div>
+
+           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+             {[
+               { label: 'Lagna', value: data?.lagna, icon: <Activity size={14} /> },
+               { label: 'Moon Sign', value: data?.moon_sign, icon: <Moon size={14} /> },
+               { label: 'Nakshatra', value: data?.todays_nakshatra, icon: <Star size={14} /> },
+               { label: 'Current Dasha', value: data?.current_dasha, icon: <TrendingUp size={14} /> },
+             ].map((item, i) => (
+               <div key={i} className="p-4 rounded-2xl bg-surface/50 border border-border space-y-1">
+                 <p className="text-[8px] font-black uppercase tracking-widest text-text-secondary flex items-center gap-1">
+                   {item.icon} {item.label}
+                 </p>
+                 <p className="text-sm font-medium text-foreground">{item.value}</p>
+               </div>
+             ))}
+           </div>
+        </div>
+
+        {/* --- MORNING MANTRA & SUMMARY --- */}
+        <div className="grid md:grid-cols-12 gap-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-100">
+           <div className="md:col-span-8 p-10 rounded-[3rem] bg-surface/50 backdrop-blur-xl border border-border shadow-xl space-y-6">
+              <div className="flex items-center gap-4">
+                 <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+                    <Coffee size={24} />
+                 </div>
+                 <h2 className="text-2xl font-bold text-foreground">The Morning Dispatch</h2>
+              </div>
+              <p className="text-xl font-light text-foreground/90 leading-relaxed italic border-l-2 border-primary pl-6 py-2">
+                 "{data?.day_summary}"
+              </p>
+           </div>
+           <div className="md:col-span-4 p-8 rounded-[3rem] bg-primary text-white shadow-2xl shadow-primary/30 flex flex-col justify-center items-center text-center space-y-4">
+              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-white/60">Morning Mantra</p>
+              <p className="text-lg font-medium leading-relaxed">{data?.morning_mantra}</p>
+           </div>
+        </div>
+
+        {/* --- PROFESSION GUIDANCE --- */}
+        <div className="p-10 rounded-[3.5rem] bg-surface border border-border shadow-2xl space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
+           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-border pb-8">
+              <div className="flex items-center gap-4">
+                 <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+                    <Briefcase size={24} />
+                 </div>
+                  <div>
+                    <h2 className="text-2xl font-bold uppercase tracking-tight text-foreground">Professional Guidance</h2>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-text-secondary">{data?.profession_guidance?.profession}</p>
+                 </div>
+              </div>
+              <div className="flex items-center gap-3">
+                 <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border ${data?.profession_guidance?.todays_outlook === 'Excellent' || data?.profession_guidance?.todays_outlook === 'Favorable' ? 'bg-highlight/20 border-highlight text-highlight' : 'bg-secondary/20 border-secondary text-secondary'}`}>
+                    {data?.profession_guidance?.todays_outlook}
+                 </span>
+                 <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border ${data?.profession_guidance?.decision_verdict?.includes('Green') ? 'bg-highlight/20 border-highlight text-highlight' : 'bg-alert/20 border-alert text-alert'}`}>
+                    {data?.profession_guidance?.decision_verdict?.split(' — ')[0]}
+                 </span>
+              </div>
+           </div>
+
+           <div className="grid md:grid-cols-2 gap-12">
+              <div className="space-y-4">
+                 <p className="text-lg font-light leading-relaxed text-foreground/90 italic">
+                    {data?.profession_guidance?.key_guidance}
+                 </p>
+                 <div className="p-6 rounded-2xl bg-foreground/5 border border-border space-y-2">
+                    <p className="text-[9px] font-black uppercase tracking-widest text-text-secondary">Verdict Reasoning</p>
+                    <p className="text-sm font-medium text-foreground">{data?.profession_guidance?.decision_reasoning}</p>
+                 </div>
+              </div>
+              <div className="space-y-6">
+                 <div className="flex items-center gap-6 p-6 rounded-3xl bg-highlight/10 border border-highlight/20">
+                    <Clock className="text-highlight" size={32} />
+                    <div>
+                       <p className="text-[10px] font-black uppercase tracking-widest text-highlight/60">Best Execution Window</p>
+                       <p className="text-2xl font-serif italic text-foreground">{data?.profession_guidance?.best_time_to_work}</p>
+                    </div>
+                 </div>
+                 <div className="flex items-center gap-6 p-6 rounded-3xl bg-alert/10 border border-alert/20">
+                    <AlertTriangle className="text-alert" size={32} />
+                    <div>
+                       <p className="text-[10px] font-black uppercase tracking-widest text-alert/60">Critical Avoidance Window</p>
+                       <p className="text-2xl font-serif italic text-foreground">{data?.profession_guidance?.avoid_time}</p>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+
+        {/* --- RISK ASSESSMENT --- */}
+        <div className="grid md:grid-cols-2 gap-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
+           <div className="p-10 rounded-[3rem] bg-surface/50 backdrop-blur-xl border border-border shadow-xl space-y-8">
+              <div className="flex items-center justify-between">
+                 <div className="flex items-center gap-4">
+                    <Shield className="text-alert" size={24} />
+                    <h2 className="text-2xl font-bold">Risk Map</h2>
+                 </div>
+                 <div className="text-right">
+                    <p className="text-[8px] font-black uppercase tracking-widest text-text-secondary">Overall Risk</p>
+                    <p className={`text-xl font-serif italic ${data?.risk_assessment?.overall_risk_level === 'Low' ? 'text-highlight' : 'text-alert'}`}>{data?.risk_assessment?.overall_risk_level}</p>
+                 </div>
+              </div>
+              
+              <div className="space-y-6">
+                 {[
+                   { label: 'Financial', risk: data?.risk_assessment?.financial_risk, detail: data?.risk_assessment?.financial_risk_detail, icon: <TrendingUp size={16} /> },
+                   { label: 'Health', risk: data?.risk_assessment?.health_risk, detail: data?.risk_assessment?.health_risk_detail, icon: <Activity size={16} /> },
+                   { label: 'Relationships', risk: data?.risk_assessment?.relationship_risk, detail: data?.risk_assessment?.relationship_risk_detail, icon: <Heart size={16} /> },
+                   { label: 'Travel', risk: data?.risk_assessment?.travel_risk, detail: data?.risk_assessment?.travel_risk_detail, icon: <Compass size={16} /> },
+                 ].map((r, i) => (
+                   <div key={i} className="flex gap-4 group">
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${r.risk === 'Low' ? 'bg-highlight/10 text-highlight' : 'bg-alert/10 text-alert'}`}>
+                         {r.icon}
+                      </div>
+                      <div>
+                         <p className="text-xs font-bold text-foreground flex items-center gap-2">
+                            {r.label} <span className="text-[8px] uppercase tracking-widest text-text-secondary">| {r.risk} Risk</span>
+                         </p>
+                         <p className="text-xs text-text-secondary font-light mt-1">{r.detail}</p>
+                      </div>
+                   </div>
+                 ))}
+              </div>
+           </div>
+
+           <div className="space-y-8">
+              {/* DO & AVOID */}
+              <div className="p-8 rounded-[3rem] bg-highlight/5 border border-highlight/20 space-y-4">
+                 <h3 className="text-xs font-black uppercase tracking-widest text-highlight flex items-center gap-2">
+                    <CheckCircle size={14} /> Strategic Actions (Do)
+                 </h3>
+                 <ul className="space-y-3">
+                    {data?.do_today?.map((item, i) => (
+                      <li key={i} className="text-sm font-medium text-foreground flex gap-3">
+                         <span className="text-highlight">•</span> {item}
+                      </li>
+                    ))}
+                 </ul>
+              </div>
+              <div className="p-8 rounded-[3rem] bg-alert/5 border border-alert/20 space-y-4">
+                 <h3 className="text-xs font-black uppercase tracking-widest text-alert flex items-center gap-2">
+                    <AlertTriangle size={14} /> Protective Stance (Avoid)
+                 </h3>
+                 <ul className="space-y-3">
+                    {data?.avoid_today?.map((item, i) => (
+                      <li key={i} className="text-sm font-medium text-foreground flex gap-3">
+                         <span className="text-alert">•</span> {item}
+                      </li>
+                    ))}
+                 </ul>
+              </div>
+           </div>
+        </div>
+
+        {/* --- INVESTMENT & STOCK MARKET --- */}
+        <div className="p-10 rounded-[3rem] bg-surface/50 backdrop-blur-xl border border-border shadow-xl space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-400">
+           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-border pb-8">
+              <div className="flex items-center gap-4">
+                 <div className="w-12 h-12 rounded-2xl bg-highlight/10 flex items-center justify-center text-highlight">
+                    <TrendingUp size={24} />
+                 </div>
+                 <div>
+                    <h2 className="text-2xl font-bold">Wealth & Markets</h2>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-text-secondary">Financial Intelligence</p>
+                 </div>
+              </div>
+              <div className="flex items-center gap-3">
+                 <div className="px-4 py-2 rounded-xl bg-foreground/5 border border-border">
+                    <p className="text-[8px] font-black uppercase tracking-widest text-text-secondary">Sentiment</p>
+                    <p className="text-sm font-bold text-highlight">{data?.stock_market_pulse?.market_sentiment}</p>
+                 </div>
+                 <div className="px-4 py-2 rounded-xl bg-foreground/5 border border-border">
+                    <p className="text-[8px] font-black uppercase tracking-widest text-text-secondary">Suitable for Investing</p>
+                    <p className="text-sm font-bold text-foreground">{data?.investment_guidance?.suitable_for_investing}</p>
+                 </div>
+              </div>
+           </div>
+
+           <div className="grid md:grid-cols-2 gap-12">
+              <div className="space-y-6">
+                 <div className="space-y-2">
+                    <p className="text-[9px] font-black uppercase tracking-widest text-text-secondary">Investment Rationale</p>
+                    <p className="text-lg font-light italic leading-relaxed text-foreground/90">{data?.investment_guidance?.rationale}</p>
+                 </div>
+                 <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-3">
+                       <p className="text-[9px] font-black uppercase tracking-widest text-highlight">Favored Sectors</p>
+                       <div className="flex flex-wrap gap-2">
+                          {data?.investment_guidance?.sectors_favored?.map(s => (
+                            <span key={s} className="px-3 py-1 rounded-lg bg-highlight/10 text-highlight text-[10px] font-bold">{s}</span>
+                          ))}
+                       </div>
+                    </div>
+                    <div className="space-y-3">
+                       <p className="text-[9px] font-black uppercase tracking-widest text-alert">Avoid Sectors</p>
+                       <div className="flex flex-wrap gap-2">
+                          {data?.investment_guidance?.sectors_to_avoid?.map(s => (
+                            <span key={s} className="px-3 py-1 rounded-lg bg-alert/10 text-alert text-[10px] font-bold">{s}</span>
+                          ))}
+                       </div>
+                    </div>
+                 </div>
+              </div>
+              <div className="p-8 rounded-[2.5rem] bg-surface border border-border space-y-6">
+                 <p className="text-[10px] font-black uppercase tracking-widest text-foreground/40">Market Pulse</p>
+                 <div className="space-y-4">
+                    <p className="text-sm font-medium leading-relaxed">{data?.stock_market_pulse?.advice}</p>
+                    <div className="pt-4 border-t border-border">
+                       <p className="text-[8px] font-black uppercase tracking-widest text-foreground/40">Driving Planet</p>
+                       <p className="text-lg font-serif italic text-foreground">{data?.stock_market_pulse?.key_planet_driving_markets}</p>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+
+        {/* --- REMEDIES & LUCK --- */}
+        <div className="grid md:grid-cols-3 gap-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500">
+           <div className="md:col-span-2 p-10 rounded-[3rem] bg-secondary/10 border border-secondary/20 shadow-xl space-y-8">
+              <div className="flex items-center gap-4">
+                 <div className="w-12 h-12 rounded-2xl bg-secondary/20 flex items-center justify-center text-secondary">
+                    <Zap size={24} />
+                 </div>
+                 <h2 className="text-2xl font-bold">Planetary Alignment Remedies</h2>
+              </div>
+              <div className="grid md:grid-cols-2 gap-8">
+                 <div className="space-y-6">
+                    {[
+                      { label: 'Morning Ritual', val: data?.remedies?.morning_remedy, icon: <Sun size={14} /> },
+                      { label: 'Gemstone Sync', val: data?.remedies?.gemstone_activation, icon: <Gem size={14} /> },
+                      { label: 'Power Mantra', val: data?.remedies?.mantra_for_today, icon: <Sparkles size={14} /> },
+                    ].map((rem, i) => (
+                      <div key={i} className="space-y-1">
+                         <p className="text-[8px] font-black uppercase tracking-widest text-secondary flex items-center gap-1">
+                            {rem.icon} {rem.label}
+                         </p>
+                         <p className="text-xs font-medium text-foreground">{rem.val}</p>
+                      </div>
+                    ))}
+                 </div>
+                 <div className="space-y-6">
+                    {[
+                      { label: 'Vibrational Color', val: data?.remedies?.color_to_wear, icon: <Activity size={14} /> },
+                      { label: 'Energy Food', val: data?.remedies?.food_to_eat, icon: <Utensils size={14} /> },
+                      { label: 'Evening Calm', val: data?.remedies?.evening_remedy, icon: <Moon size={14} /> },
+                    ].map((rem, i) => (
+                      <div key={i} className="space-y-1">
+                         <p className="text-[8px] font-black uppercase tracking-widest text-secondary flex items-center gap-1">
+                            {rem.icon} {rem.label}
+                         </p>
+                         <p className="text-xs font-medium text-foreground">{rem.val}</p>
+                      </div>
+                    ))}
+                 </div>
+              </div>
+           </div>
+
+           <div className="p-10 rounded-[3rem] bg-surface border border-border shadow-2xl flex flex-col justify-between items-center text-center py-12">
+              <p className="text-[9px] font-black uppercase tracking-[0.3em] text-foreground/40">Lucky Matrix</p>
+              <div className="space-y-2">
+                 <p className="text-6xl font-serif italic text-foreground">{data?.lucky_elements?.lucky_number}</p>
+                 <p className="text-xs font-bold uppercase tracking-widest text-highlight">{data?.lucky_elements?.lucky_color}</p>
+              </div>
+              <div className="space-y-1 border-t border-border pt-6 w-full">
+                 <p className="text-[8px] font-black uppercase tracking-widest text-foreground/40">Auspicious Window</p>
+                 <p className="text-lg font-serif italic text-foreground">{data?.lucky_elements?.lucky_time}</p>
+                 <p className="text-[10px] font-bold text-highlight">{data?.lucky_elements?.lucky_direction} Direction</p>
+              </div>
+           </div>
+        </div>
+
+        {/* --- MUHURTAS & PLANETARY HIGHLIGHTS --- */}
+        <div className="grid md:grid-cols-2 gap-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-600">
+           <div className="p-10 rounded-[3rem] bg-surface/50 backdrop-blur-xl border border-border space-y-6">
+              <h3 className="text-xs font-black uppercase tracking-widest text-text-secondary flex items-center gap-2">
+                 <Clock size={14} /> Critical Muhurtas
+              </h3>
+              <div className="space-y-4">
+                 {data?.important_muhurtas?.auspicious_windows?.map((w, i) => (
+                    <div key={i} className="flex items-center justify-between p-4 rounded-2xl bg-highlight/5 border border-highlight/10">
+                       <p className="text-xs font-bold text-foreground">{w?.split(' (')[0]}</p>
+                       <p className="text-[10px] font-black uppercase tracking-widest text-highlight">{w?.split(' (')[1]?.replace(')', '')}</p>
+                    </div>
+                 ))}
+                 <div className="grid grid-cols-2 gap-4 pt-4 border-t border-border">
+                    <div>
+                       <p className="text-[8px] font-black uppercase tracking-widest text-alert/60">Rahu Kaal</p>
+                       <p className="text-sm font-bold text-alert">{data?.important_muhurtas?.rahu_kaal}</p>
+                    </div>
+                    <div>
+                       <p className="text-[8px] font-black uppercase tracking-widest text-secondary/60">Gulika Kaal</p>
+                       <p className="text-sm font-bold text-secondary">{data?.important_muhurtas?.gulika_kaal}</p>
+                    </div>
+                 </div>
+              </div>
+           </div>
+
+           <div className="p-10 rounded-[3rem] bg-surface/50 backdrop-blur-xl border border-border space-y-6">
+              <h3 className="text-xs font-black uppercase tracking-widest text-text-secondary flex items-center gap-2">
+                 <Zap size={14} /> Planetary Highlights
+              </h3>
+              <div className="space-y-6">
+                 {data?.planetary_highlights?.map((p, i) => (
+                    <div key={i} className="space-y-1">
+                       <p className="text-xs font-bold text-foreground">{p?.planet} <span className="text-[10px] font-normal text-text-secondary ml-2">in {p?.position}</span></p>
+                       <p className="text-xs text-text-secondary font-light leading-relaxed">{p?.effect_today}</p>
+                    </div>
+                 ))}
+              </div>
+           </div>
+        </div>
+
+        {/* --- CLOSING WISDOM --- */}
+        <div className="p-12 rounded-[4rem] bg-gradient-to-br from-primary/20 via-surface to-highlight/10 border border-primary/20 text-center space-y-6 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-700">
+           <div className="w-16 h-16 rounded-[1.5rem] bg-primary text-white flex items-center justify-center mx-auto shadow-xl shadow-primary/20">
+              <Sparkles size={28} />
+           </div>
+           <div className="max-w-2xl mx-auto space-y-4">
+              <p className="text-3xl font-serif italic tracking-tight text-foreground leading-snug">
+                "{data?.closing_wisdom}"
+              </p>
+              <div className="pt-6">
+                 <p className="text-[10px] font-black uppercase tracking-[0.4em] text-primary">— ASTROPINCH ENGINE —</p>
+                 <p className="text-[8px] font-bold text-text-secondary mt-1">NASA Ephemeris v4.2 · Sidereal Jyotish Logic</p>
+              </div>
+           </div>
+        </div>
+
+        <div className="flex justify-center pt-8">
+           <button 
+             onClick={() => setSubmitted(false)}
+             className="text-[10px] font-black uppercase tracking-widest text-text-secondary hover:text-primary transition-colors flex items-center gap-2"
+           >
+             <Activity size={14} /> Recalculate with New Profile
+           </button>
+        </div>
+
+      </div>
+    </main>
+  );
+}
+

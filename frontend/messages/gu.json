@@ -1,0 +1,212 @@
+{
+  "Home": {
+    "title": "AstroPinch",
+    "hero": {
+      "title": "Your Cosmic Journey Starts Here",
+      "subtitle": "Discover the wisdom of Vedic Astrology with AI-powered precision.",
+      "cta": "Get Started"
+    }
+  },
+  "Navigation": {
+    "home": "Home",
+    "horoscope": "Horoscope",
+    "kundali": "Kundali",
+    "matching": "Matching",
+    "panchang": "Panchang",
+    "calculators": "Calculators",
+    "year-book": "વર્ષફળ",
+    "marketplace": "માર્કેટપ્લેસ",
+    "muhurat": "મુહૂર્ત"
+  },
+  "Horoscope": {
+    "title": "Daily Horoscope",
+    "subtitle": "Choose your zodiac sign to reveal your cosmic insights for today.",
+    "aries": "મેષ",
+    "taurus": "વૃષભ",
+    "gemini": "મિથુન",
+    "cancer": "કર્ક",
+    "leo": "સિંહ",
+    "virgo": "કન્યા",
+    "libra": "તુલા",
+    "scorpio": "વૃશ્ચિક",
+    "sagittarius": "ધન",
+    "capricorn": "મકર",
+    "aquarius": "કુંભ",
+    "pisces": "મીન"
+  },
+  "Kundali": {
+    "title": "Vedic Birth Chart",
+    "subtitle": "Discover your destiny with arcsecond precision using NASA-grade planetary data.",
+    "form": {
+      "name": "Full Name",
+      "birthDate": "Birth Date",
+      "birthTime": "Birth Time",
+      "birthPlace": "Birth Place",
+      "submit": "Generate Birth Chart"
+    },
+    "result": {
+      "header": {
+        "your": "તમારી"
+      }
+    }
+  },
+  "Panchang": {
+    "title": "Daily Panchang"
+  },
+  "Calculators": {
+    "title": "Astro Calculators",
+    "subtitle": "A suite of precision Vedic tools to decode every aspect of your life."
+  },
+  "YearBook": {
+    "title": "વાર્ષિક રાશિફળ",
+    "subtitle": "આગામી વર્ષના અવકાશી ગોચર માટે તમારી વ્યાપક માર્ગદર્શિકા.",
+    "cta": "વાર્ષિક રોડમેપ બનાવો",
+    "no_profile": {
+      "title": "કોઈ પૂર્ણ પ્રોફાઇલ મળી નથી",
+      "desc": "વર્ષફળ (Year Book) નો ઉપયોગ કરવા માટે કૃપા કરીને તમારી પ્રોફાઇલમાં જન્મની વિગતો પૂર્ણ કરો.",
+      "button": "પ્રોફાઇલ પૂર્ણ કરો"
+    },
+    "form": {
+      "select_profile": "પ્રોફાઇલ પસંદ કરો",
+      "auto_filled": "પ્રોફાઇલમાંથી સ્વતઃ ભરેલ",
+      "birth_date": "જન્મ તારીખ",
+      "birth_time": "જન્મ સમય",
+      "birth_place": "જન્મ સ્થળ",
+      "prediction_year": "આગાહી વર્ષ",
+      "roadmap_suffix": "રોડમેપ",
+      "standard": "સ્ટાન્ડર્ડ",
+      "standard_desc": "12-મહિનાનો રિપોર્ટ",
+      "expert": "એક્સપર્ટ",
+      "expert_desc": "AI સંશ્લેષણ",
+      "loading": "તમારો કોસ્મિક રોડમેપ તૈયાર થઈ રહ્યો છે...",
+      "signin_prefix": "સાઇન ઇન કરો",
+      "signin_suffix": "આ ફોર્મ છોડવા અને તમારી સાચવેલી પ્રોફાઇલમાંથી સ્વતઃ ભરવા માટે",
+      "error_place": "કૃપા કરીને ડ્રોપડાઉનમાંથી જન્મ સ્થળ પસંદ કરો."
+    },
+    "report": {
+      "year_book_suffix": "વર્ષફળ (Year Book)",
+      "chart_overview": "મફત જન્મ કુંડળી વિશ્લેષણ સાથે",
+      "roadmap_subtitle": "વાર્ષિક કોસ્મિક રોડમેપ • ઉચ્ચ-ચોકસાઇ વૈદિક સંશ્લેષણ",
+      "download_pdf": "PDF રિપોર્ટ ડાઉનલોડ કરો",
+      "strategy_prefix": "વ્યૂહરચના:",
+      "vedic_citation": "વૈદિક સંદર્ભ",
+      "key_turning_point": "મુખ્ય વળાંક",
+      "active_dasha": "સક્રિય દશા સમયગાળો",
+      "good": "શુભ:",
+      "caution": "સાવધાની:",
+      "months_label": "મહિનાઓ",
+      "alignment_score": "સંરેખણ સ્કોર",
+      "key_transits": "મુખ્ય ગોચર",
+      "complete_analysis": "પૂર્ણ માસિક વિશ્લેષણ",
+      "detailed_breakdown": "તમારી કોસ્મિક મુસાફરીની વિગતવાર વિગતો",
+      "alignment": "સંરેખણ",
+      "tip": "ટીપ:",
+      "birth_chart_overview": "જન્મ કુંડળી વિશ્લેષણ",
+      "astrological_foundations": "જ્યોતિષીય પાયા",
+      "lagna_chart": "લગ્ન ચાર્ટ",
+      "vedic_analysis": "વૈદિક વિશ્લેષણ",
+      "jatak_details": "જાતક વિગતો",
+      "current_dasha_vimshottari": "વર્તમાન દશા (વિંશોત્તરી)",
+      "mahadasha": "મહાદશા",
+      "antardasha": "અંતરદશા",
+      "ends": "સમાપ્તિ",
+      "active": "સક્રિય",
+      "disclaimer_title": "ડિસ્ક્લેમર",
+      "generated_for": "ખાસ કરીને {name} માટે તૈયાર",
+      "buy_pdf": "PDF રિપોર્ટ ડાઉનલોડ કરો (₹199)",
+      "no_data": "કોઈ આગાહી ડેટા મળ્યો નથી.",
+      "retry": "ફરી પ્રયાસ કરો",
+      "invalid_month": "અમાન્ય મહિનો પસંદગી"
+    },
+    "months": {
+      "January": "જાન્યુઆરી",
+      "February": "ફેબ્રુઆરી",
+      "March": "માર્ચ",
+      "April": "એપ્રિલ",
+      "May": "મે",
+      "June": "જૂન",
+      "July": "જુલાઈ",
+      "August": "ઓગસ્ટ",
+      "September": "સપ્ટેમ્બર",
+      "October": "ઓક્ટોબર",
+      "November": "નવેમ્બર",
+      "December": "ડિસેમ્બર"
+    }
+  },
+  "Marketplace": {
+    "title": "એસ્ટ્રો માર્કેટપ્લેસ",
+    "subtitle": "ભારતના સૌથી સચોટ અને ચકાસાયેલ જ્યોતિષ નિષ્ણાતોની સલાહ લો",
+    "filters": {
+      "All": "બધા",
+      "Vedic": "વૈદિક",
+      "KP": "કેપી",
+      "Nadi": "નાડી",
+      "Numerology": "અંકશાસ્ત્ર",
+      "Vastu": "વાસ્તુ",
+      "Prashna": "પ્રશ્ન",
+      "Tarot": "ટેરોટ",
+      "Meditation": "ધ્યાન",
+      "Palmistry": "હસ્તરેખા",
+      "Yoga": "યોગ",
+      "Psychic": "સાઇકિક"
+    },
+    "card": {
+      "exp": "અનુભવ",
+      "starting": "શરૂઆત",
+      "consult": "સલાહ લો"
+    }
+  },
+  "Footer": {
+    "description": "AstroPinch is a trusted online astrology website offering accurate Vedic astrology, Kundali analysis, horoscope predictions, numerology, and dosha remedies using advanced AI and traditional astrological principles.",
+    "popular_services": {
+      "title": "Popular Services",
+      "free_kundali": "Free Kundali Online",
+      "birth_chart": "Birth Chart & Positions",
+      "horoscope": "Daily/Weekly Horoscope",
+      "career": "Career & Business",
+      "matching": "Marriage Matching",
+      "mangal_dosha": "Mangal Dasha Analysis",
+      "numerology": "Numerology Analysis",
+      "muhurat": "Muhurat & Panchang",
+      "premium": "Premium Reports"
+    },
+    "systems": {
+      "title": "Astrology Systems",
+      "vedic": "Vedic Astrology",
+      "kp": "KP Astrology",
+      "numerology": "Numerology",
+      "panchang": "Panchang & Muhurat"
+    },
+    "learn": {
+      "title": "Learn & Explore",
+      "basics": "Astrology Basics",
+      "planetary": "Planetary Effects",
+      "rashis": "Houses, Rashis & Nakshatras",
+      "yogas": "Yogas & Doshas",
+      "blog": "Blog & Research"
+    },
+    "why_choose": {
+      "title": "Why Choose AstroPinch®",
+      "accurate": "Accurate AI-Based Predictions",
+      "easy": "Easy-to-Understand Language",
+      "verified": "Verified Astrological Logic",
+      "secure": "Secure Online Payments",
+      "trusted": "Trusted by Users Worldwide"
+    },
+    "company": {
+      "title": "Company",
+      "about": "About Us",
+      "how_it_works": "How It Works",
+      "contact": "Contact Us",
+      "help": "Help Center",
+      "partnership": "Partnership"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Privacy Policy",
+      "terms": "Terms",
+      "disclaimer": "Disclaimer",
+      "refund": "Refund Policy"
+    }
+  }
+}

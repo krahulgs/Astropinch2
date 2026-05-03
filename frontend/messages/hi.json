@@ -1,0 +1,459 @@
+{
+  "Home": {
+    "title": "एस्ट्रोपिंच",
+    "hero": {
+      "title": "आपकी ब्रह्मांडीय यात्रा यहाँ शुरू होती है",
+      "subtitle": "एआई-संचालित सटीकता के साथ वैदिक ज्योतिष के ज्ञान की खोज करें।",
+      "cta": "लॉगिन करें"
+    }
+  },
+  "Navigation": {
+    "home": "होम",
+    "horoscope": "राशिफल",
+    "kundali": "कुंडली",
+    "matching": "मिलान",
+    "panchang": "पंचांग",
+    "calculators": "कैलकुलेटर",
+    "year-book": "वर्षफल",
+    "chat": "एआई चैट",
+    "marketplace": "मार्केटप्लेस",
+    "muhurat": "मुहूर्त",
+    "love-match": "लव मैच",
+    "daily-horoscope": "दैनिक राशिफल"
+  },
+  "Horoscope": {
+    "title": "दैनिक राशिफल",
+    "subtitle": "आज के लिए अपनी ब्रह्मांडीय अंतर्दृष्टि प्रकट करने के लिए अपनी राशि चुनें।",
+    "aries": "मेष",
+    "taurus": "वृषभ",
+    "gemini": "मिथुन",
+    "cancer": "कर्क",
+    "leo": "सिंह",
+    "virgo": "कन्या",
+    "libra": "तुला",
+    "scorpio": "वृश्चिक",
+    "sagittarius": "धनु",
+    "capricorn": "मकर",
+    "aquarius": "कुंभ",
+    "pisces": "मीन"
+  },
+  "Kundali": {
+    "title": "वैदिक जन्म कुंडली",
+    "subtitle": "नासा-ग्रेड ग्रहीय डेटा का उपयोग करके आर्कसेकंड सटीकता के साथ अपने भाग्य की खोज करें।",
+    "form": {
+      "name": "पूरा नाम",
+      "birthDate": "जन्म तिथि",
+      "birthTime": "जन्म समय",
+      "birthPlace": "जन्म स्थान",
+      "submit": "जन्म कुंडली बनाएं"
+    },
+    "result": {
+      "tabs": {
+        "chart": "जन्म कुंडली",
+        "daily": "दैनिक मार्गदर्शिका"
+      },
+      "header": {
+        "chart_title": "{name} की कुंडली",
+        "your": "आपकी",
+        "download": "डाउनलोड",
+        "share": "शेयर"
+      },
+      "charts": {
+        "lagna": "लग्न कुंडली",
+        "north": "उत्तर",
+        "south": "दक्षिण"
+      },
+      "analysis": {
+        "title": "वैदिक विश्लेषण",
+        "precision": "उच्च सटीकता",
+        "mangal_dosha": "मंगल दोष",
+        "sade_sati": "साढ़े साती",
+        "moolank": "मूलांक",
+        "bhagyank": "भाग्यांक",
+        "manglik": "मांगलिक",
+        "non_manglik": "गैर-मांगलिक",
+        "none": "कोई नहीं",
+        "lagna": "लग्न",
+        "rashi": "राशि",
+        "nakshatra": "नक्षत्र",
+        "yoni": "योनि",
+        "gana": "गण",
+        "nadi": "नाडी",
+        "varna": "वर्ण"
+      },
+      "planets": {
+        "title": "ग्रहों की स्थिति",
+        "headers": {
+          "planet": "ग्रह",
+          "sign": "राशि",
+          "degree": "अंश",
+          "house": "भाव",
+          "status": "स्थिति"
+        },
+        "names": {
+          "Sun": "सूर्य",
+          "Moon": "चंद्रमा",
+          "Mars": "मंगल",
+          "Mercury": "बुध",
+          "Jupiter": "बृहस्पति",
+          "Venus": "शुक्र",
+          "Saturn": "शनि",
+          "Rahu": "राहु",
+          "Ketu": "केतु",
+          "Ascendant": "लग्न"
+        },
+        "status": {
+          "Retro": "वक्री",
+          "Direct": "मार्गी"
+        }
+      },
+      "dasha": {
+        "title": "वर्तमान दशा",
+        "subtitle": "विंशोत्तरी अवधि",
+        "mahadasha": "महादशा",
+        "antardasha": "अन्तर्दशा",
+        "ends": "समाप्त",
+        "active": "सक्रिय",
+        "unavailable": "दशा की जानकारी उपलब्ध नहीं है"
+      },
+      "synthesis": {
+        "title": "ज्योतिष संश्लेषण",
+        "soul_essence": "आत्मा का सार",
+        "current_season": "वर्तमान सीजन",
+        "remedy": "वैदिक उपाय",
+        "pillars": {
+          "wealth": "धन",
+          "career": "करियर",
+          "health": "स्वास्थ्य"
+        },
+        "loading_daily": "दैनिक मार्गदर्शिका लोड हो रही है...",
+        "error_loading": "चार्ट लोड करने में त्रुटि"
+      },
+      "cta": {
+        "clarity": "गहरी स्पष्टता चाहिए?",
+        "consult": "ज्योतिषी से परामर्श करें"
+      }
+    }
+  },
+  "Panchang": {
+    "title": "दैनिक पंचांग"
+  },
+  "Calculators": {
+    "title": "ज्योतिष कैलकुलेटर",
+    "subtitle": "आपके जीवन के हर पहलू को समझने के लिए सटीक वैदिक उपकरणों का एक सेट।"
+  },
+  "Footer": {
+    "description": "एस्ट्रोपिंच एक भरोसेमंद ऑनलाइन ज्योतिष वेबसाइट है जो उन्नत एआई और पारंपरिक ज्योतिषीय सिद्धांतों का उपयोग करके सटीक वैदिक ज्योतिष, कुंडली विश्लेषण, राशिफल भविष्यवाणियां, अंक ज्योतिष और दोष उपचार प्रदान करती है। करियर, विवाह, वित्त, स्वास्थ्य और जीवन मार्गदर्शन के लिए व्यक्तिगत ज्योतिष रिपोर्ट प्राप्त करें—सरल, स्पष्ट और विश्वसनीय।",
+    "popular_services": {
+      "title": "लोकप्रिय सेवाएँ",
+      "free_kundali": "निःशुल्क कुंडली ऑनलाइन",
+      "birth_chart": "जन्म कुंडली और स्थितियाँ",
+      "horoscope": "दैनिक/साप्ताहिक राशिफल",
+      "career": "करियर और व्यवसाय",
+      "matching": "विवाह मिलान",
+      "mangal_dosha": "मंगल दोष विश्लेषण",
+      "numerology": "अंक ज्योतिष विश्लेषण",
+      "muhurat": "मुहूर्त और पंचांग",
+      "premium": "प्रीमियम रिपोर्ट"
+    },
+    "systems": {
+      "title": "ज्योतिष प्रणालियाँ",
+      "vedic": "वैदिक ज्योतिष",
+      "kp": "केपी ज्योतिष",
+      "numerology": "अंक ज्योतिष",
+      "panchang": "पंचांग और मुहूर्त"
+    },
+    "learn": {
+      "title": "सीखें और अन्वेषण करें",
+      "basics": "ज्योतिष की मूल बातें",
+      "planetary": "ग्रहों के प्रभाव",
+      "rashis": "भाव, राशियाँ और नक्षत्र",
+      "yogas": "योग और दोष",
+      "blog": "ब्लॉग और शोध"
+    },
+    "why_choose": {
+      "title": "एस्ट्रोपिंच® क्यों चुनें",
+      "accurate": "सटीक एआई-आधारित भविष्यवाणियां",
+      "easy": "समझने में आसान भाषा",
+      "verified": "सत्यापित ज्योतिषीय तर्क",
+      "secure": "सुरक्षित ऑनलाइन भुगतान",
+      "trusted": "दुनिया भर के उपयोगकर्ताओं द्वारा भरोसेमंद"
+    },
+    "company": {
+      "title": "कंपनी",
+      "about": "हमारे बारे में",
+      "how_it_works": "यह कैसे काम करता है",
+      "contact": "संपर्क करें",
+      "help": "सहायता केंद्र",
+      "partnership": "साझेदारी"
+    },
+    "legal": {
+      "title": "कानूनी",
+      "privacy": "गोपनीयता नीति",
+      "terms": "नियम और शर्तें",
+      "disclaimer": "अस्वीकरण",
+      "refund": "धनवापसी नीति"
+    }
+  },
+  "DailyGuide": {
+    "title": "आपकी दैनिक ज्योतिष मार्गदर्शिका",
+    "subtitle": "आपकी जन्म कुंडली और पेशे के आधार पर सटीक वैदिक विश्लेषण।",
+    "form": {
+      "full_name": "पूरा नाम",
+      "birth_place": "जन्म स्थान (भारत)",
+      "birth_date": "जन्म तिथि",
+      "birth_time": "जन्म समय",
+      "profession": "आपका पेशा",
+      "select_profession": "पेशा चुनें",
+      "submit": "एस्ट्रोपिंच इंजन से परामर्श करें"
+    },
+    "loading": "उस पंडित से परामर्श कर रहे हैं जो कभी नहीं सोता...",
+    "header": {
+      "personalized": "व्यक्तिगत ज्योतिष",
+      "energy_status": "दिन की ऊर्जा स्थिति",
+      "score": "स्कोर",
+      "guide_title": "{name} की दैनिक मार्गदर्शिका"
+    },
+    "footer": {
+      "engine": "एस्ट्रोपिंच इंजन",
+      "logic": "नासा एफिमेरिस v4.2 · साइडरियल ज्योतिष तर्क"
+    },
+    "sections": {
+      "morning_dispatch": "सुबह का संदेश",
+      "morning_mantra": "सुबह का मंत्र",
+      "professional_guidance": "पेशेवर मार्गदर्शन",
+      "risk_map": "जोखिम मानचित्र",
+      "overall_risk": "कुल जोखिम",
+      "strategic_actions": "रणनीतिक क्रियाएं (करें)",
+      "protective_stance": "सुरक्षात्मक रुख (बचें)",
+      "wealth_markets": "धन और बाजार",
+      "financial_intelligence": "वित्तीय बुद्धिमत्ता",
+      "planetary_remedies": "ग्रह संरेखण उपचार",
+      "lucky_matrix": "लकी मैट्रिक्स",
+      "muhurtas": "महत्वपूर्ण मुहूर्त",
+      "planetary_highlights": "ग्रहों की मुख्य विशेषताएं"
+    },
+    "metrics": {
+      "lagna": "लग्न",
+      "moon_sign": "चंद्र राशि",
+      "birth_nakshatra": "जन्म नक्षत्र",
+      "current_dasha": "वर्तमान दशा"
+    },
+    "profession_detail": {
+      "verdict_reasoning": "निर्णय का तर्क",
+      "best_execution": "कार्य के लिए सर्वोत्तम समय",
+      "critical_avoidance": "महत्वपूर्ण बचाव समय",
+      "outlook": "दृष्टिकोण",
+      "verdict": "निर्णय"
+    },
+    "risk_detail": {
+      "financial": "वित्तीय",
+      "health": "स्वास्थ्य",
+      "relationships": "संबंध",
+      "travel": "यात्रा"
+    },
+    "wealth_detail": {
+      "sentiment": "बाजार की भावना",
+      "suitable": "निवेश के लिए उपयुक्त",
+      "rationale": "निवेश का तर्क",
+      "favored": "पसंदीदा क्षेत्र",
+      "avoid": "बचने योग्य क्षेत्र",
+      "pulse": "मार्केट पल्स",
+      "driving_planet": "मुख्य ग्रह"
+    },
+    "remedy_detail": {
+      "morning_ritual": "सुबह की रस्म",
+      "gemstone": "रत्न समन्वय",
+      "power_mantra": "पावर मंत्र",
+      "color": "कंपन रंग",
+      "food": "ऊर्जा भोजन",
+      "evening": "शाम की शांति"
+    },
+    "luck_detail": {
+      "auspicious_window": "शुभ समय",
+      "direction": "दिशा",
+      "lucky_matrix": "भाग्यशाली मैट्रिक्स"
+    },
+    "muhurta_detail": {
+      "rahu_kaal": "राहु काल",
+      "gulika_kaal": "गुलीका काल"
+    },
+    "actions": {
+      "recalculate": "नए प्रोफाइल के साथ पुनर्गणना करें",
+      "in": "में"
+    }
+  },
+  "Marketplace": {
+    "title": "एस्ट्रो मार्केटप्लेस",
+    "subtitle": "भारत के सबसे सटीक और सत्यापित ज्योतिष विशेषज्ञों से परामर्श करें",
+    "filters": {
+      "All": "सभी",
+      "Vedic": "वैदिक",
+      "KP": "केपी",
+      "Nadi": "नाडी",
+      "Numerology": "अंकज्योतिष",
+      "Vastu": "वास्तु",
+      "Prashna": "प्रश्न",
+      "Tarot": "टैरो",
+      "Meditation": "ध्यान",
+      "Palmistry": "हस्तरेखा",
+      "Yoga": "योग",
+      "Psychic": "साइकिक"
+    },
+    "card": {
+      "exp": "अनुभव",
+      "starting": "शुरुआत",
+      "consult": "परामर्श करें",
+      "consult_history": "पिछले परामर्श देखें"
+    },
+    "status": {
+      "Online": "ऑनलाइन",
+      "Busy": "व्यस्त",
+      "Offline": "ऑफलाइन"
+    }
+  },
+  "Matching": {
+    "badge": "एकीकृत ब्रह्मांडीय विश्लेषण",
+    "portal": "मैचिंग पोर्टल",
+    "signed_in": "{name} के रूप में साइन इन किया गया — आपका विवरण पहले से भरा हुआ है",
+    "contexts": {
+      "relationship": "लवबर्ड्स",
+      "marriage": "शादी"
+    },
+    "modes": {
+      "vedic": "पारंपरिक वैदिक",
+      "soulbound": "✨ एआई सोलबउंड",
+      "lovers": "🔥 एआई लवर्स"
+    },
+    "labels": {
+      "groom": "दूल्हा",
+      "bride": "दुल्हन",
+      "p1": "साथी एक",
+      "p2": "साथी दो",
+      "your_profile": "आपका प्रोफाइल",
+      "auto_filled": "प्रोफाइल से स्वतः भरा गया",
+      "switch_profile": "प्रोफाइल बदलें",
+      "signature": "आकाशीय हस्ताक्षर",
+      "full_name": "पूरा नाम",
+      "birth_date": "जन्म तिथि",
+      "birth_time": "जन्म समय",
+      "birth_place": "जन्म स्थान (भारत)",
+      "profession": "व्यवसाय",
+      "select_profession": "व्यवसाय चुनें",
+      "mbti": "एमबीटीआई प्रकार",
+      "love_lang": "प्रेम की भाषा",
+      "not_sure": "निश्चित नहीं / छोड़ें",
+      "mbti_types": {
+        "INFJ": "अधिवक्ता (Advocate)",
+        "INFP": "मध्यस्थ (Mediator)",
+        "INTJ": "वास्तुकार (Architect)",
+        "INTP": "तर्कशास्त्री (Logician)",
+        "ISFJ": "रक्षक (Defender)",
+        "ISFP": "साहसी (Adventurer)",
+        "ISTJ": "निरीक्षक (Inspector)",
+        "ISTP": "गुणी (Virtuoso)",
+        "ENFJ": "नायक (Protagonist)",
+        "ENFP": "अभियानकर्ता (Campaigner)",
+        "ENTJ": "कमांडर (Commander)",
+        "ENTP": "बहस करने वाला (Debater)",
+        "ESFJ": "वाणिज्यदूत (Consul)",
+        "ESFP": "मनोरंजक (Entertainer)",
+        "ESTJ": "कार्यकारी (Executive)",
+        "ESTP": "उद्यमी (Entrepreneur)"
+      }
+    },
+    "buttons": {
+      "loading": "सितारों को संरेखित करना...",
+      "lovers": "LOVERS.EXE विश्लेषण निष्पादित करें",
+      "soulbound": "गहन एआई विश्लेषण लॉन्च करें",
+      "vedic": "वैदिक मिलान करें"
+    },
+    "features": {
+      "psychological": "मनोवैज्ञानिक फिट",
+      "psychological_desc": "व्यक्तित्व तालमेल का एआई विश्लेषण",
+      "vedic": "वैदिक ज्ञान",
+      "vedic_desc": "शास्त्रीय गुण मिलान और दोष जांच",
+      "karmic": "कर्मिक बंधन",
+      "karmic_desc": "आत्मा-स्तर के कनेक्शन की तीव्रता"
+    },
+    "errors": {
+      "places": "कृपया दोनों भागीदारों के लिए जन्म स्थान चुनें।"
+    }
+  },
+  "YearBook": {
+    "title": "वार्षिक ज्योतिष",
+    "subtitle": "आने वाले वर्ष के आकाशीय पारगमन के लिए आपका व्यापक मार्गदर्शक।",
+    "cta": "वार्षिक रोडमैप जनरेट करें",
+    "no_profile": {
+      "title": "कोई पूर्ण प्रोफाइल नहीं मिला",
+      "desc": "ईयर बुक का उपयोग करने के लिए कृपया अपने प्रोफाइल में जन्म विवरण पूरा करें।",
+      "button": "प्रोफाइल पूरा करें"
+    },
+    "form": {
+      "select_profile": "प्रोफाइल चुनें",
+      "auto_filled": "प्रोफाइल से स्वतः भरा गया",
+      "birth_date": "जन्म तिथि",
+      "birth_time": "जन्म समय",
+      "birth_place": "जन्म स्थान",
+      "prediction_year": "भविष्यवाणी का वर्ष",
+      "roadmap_suffix": "रोडमैप",
+      "standard": "मानक",
+      "standard_desc": "12-महीने की रिपोर्ट",
+      "expert": "विशेषज्ञ",
+      "expert_desc": "एआई संश्लेषण",
+      "loading": "आपका ब्रह्मांडीय रोडमैप तैयार किया जा रहा है...",
+      "signin_prefix": "साइन इन करें",
+      "signin_suffix": "इस फॉर्म को छोड़ने और अपने सहेजे गए प्रोफाइल से स्वतः भरने के लिए",
+      "error_place": "कृपया ड्रॉपडाउन से जन्म स्थान चुनें।"
+    },
+    "report": {
+      "year_book_suffix": "ईयर बुक (Year Book)",
+      "chart_overview": "मुफ्त जन्म कुंडली अवलोकन के साथ",
+      "roadmap_subtitle": "वार्षिक ब्रह्मांडीय रोडमैप • उच्च-सटीक वैदिक संश्लेषण",
+      "download_pdf": "PDF रिपोर्ट डाउनलोड करें",
+      "strategy_prefix": "रणनीति:",
+      "vedic_citation": "वैदिक संदर्भ",
+      "key_turning_point": "मुख्य मोड़",
+      "active_dasha": "सक्रिय दशा अवधि",
+      "good": "शुभ:",
+      "caution": "सावधानी:",
+      "months_label": "महीने",
+      "alignment_score": "संरेखण स्कोर",
+      "key_transits": "मुख्य गोचर",
+      "complete_analysis": "पूर्ण मासिक विश्लेषण",
+      "detailed_breakdown": "आपकी ब्रह्मांडीय यात्रा का विस्तृत विवरण",
+      "alignment": "संरेखण",
+      "tip": "सुझाव:",
+      "birth_chart_overview": "जन्म कुंडली अवलोकन",
+      "astrological_foundations": "ज्योतिषीय आधार",
+      "lagna_chart": "लग्न चार्ट",
+      "vedic_analysis": "वैदिक विश्लेषण",
+      "jatak_details": "जातक विवरण",
+      "current_dasha_vimshottari": "वर्तमान दशा (विंशोत्तरी)",
+      "mahadasha": "महादशा",
+      "antardasha": "अन्तर्दशा",
+      "ends": "समाप्ति",
+      "active": "सक्रिय",
+      "disclaimer_title": "अस्वीकरण",
+      "generated_for": "विशेष रूप से {name} के लिए तैयार",
+      "buy_pdf": "PDF रिपोर्ट डाउनलोड करें (₹199)",
+      "no_data": "कोई भविष्यवाणी डेटा नहीं मिला।",
+      "retry": "पुनः प्रयास करें",
+      "invalid_month": "अमान्य महीना चयन"
+    },
+    "months": {
+      "January": "जनवरी",
+      "February": "फरवरी",
+      "March": "मार्च",
+      "April": "अप्रैल",
+      "May": "मई",
+      "June": "जून",
+      "July": "जुलाई",
+      "August": "अगस्त",
+      "September": "सितंबर",
+      "October": "अक्टूबर",
+      "November": "नवंबर",
+      "December": "दिसंबर"
+    }
+  }
+}

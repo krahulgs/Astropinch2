@@ -1,0 +1,108 @@
+{
+  "Home": {
+    "title": "AstroPinch",
+    "hero": {
+      "title": "Your Cosmic Journey Starts Here",
+      "subtitle": "Discover the wisdom of Vedic Astrology with AI-powered precision.",
+      "cta": "Get Started"
+    }
+  },
+  "Navigation": {
+    "home": "Home",
+    "horoscope": "Horoscope",
+    "kundali": "Kundali",
+    "matching": "Matching",
+    "panchang": "Panchang",
+    "calculators": "Calculators",
+    "year-book": "வருடாந்திர பலன்கள்",
+    "marketplace": "மார்க்கெட்பிளேஸ்",
+    "muhurat": "முஹூர்த்தம்"
+  },
+  "Horoscope": {
+    "title": "Daily Horoscope",
+    "subtitle": "Choose your zodiac sign to reveal your cosmic insights for today.",
+    "aries": "Aries",
+    "taurus": "Taurus",
+    "gemini": "Gemini",
+    "cancer": "Cancer",
+    "leo": "Leo",
+    "virgo": "Virgo",
+    "libra": "Libra",
+    "scorpio": "Scorpio",
+    "sagittarius": "Sagittarius",
+    "capricorn": "Capricorn",
+    "aquarius": "Aquarius",
+    "pisces": "Pisces"
+  },
+  "Kundali": {
+    "title": "Vedic Birth Chart",
+    "subtitle": "Discover your destiny with arcsecond precision using NASA-grade planetary data.",
+    "form": {
+      "name": "Full Name",
+      "birthDate": "Birth Date",
+      "birthTime": "Birth Time",
+      "birthPlace": "Birth Place",
+      "submit": "Generate Birth Chart"
+    }
+  },
+  "Panchang": {
+    "title": "Daily Panchang"
+  },
+  "Calculators": {
+    "title": "Astro Calculators",
+    "subtitle": "A suite of precision Vedic tools to decode every aspect of your life."
+  },
+  "Footer": {
+    "description": "AstroPinch is a trusted online astrology website offering accurate Vedic astrology, Kundali analysis, horoscope predictions, numerology, and dosha remedies using advanced AI and traditional astrological principles.",
+    "popular_services": {
+      "title": "Popular Services",
+      "free_kundali": "Free Kundali Online",
+      "birth_chart": "Birth Chart & Positions",
+      "horoscope": "Daily/Weekly Horoscope",
+      "career": "Career & Business",
+      "matching": "Marriage Matching",
+      "mangal_dosha": "Mangal Dasha Analysis",
+      "numerology": "Numerology Analysis",
+      "muhurat": "Muhurat & Panchang",
+      "premium": "Premium Reports"
+    },
+    "systems": {
+      "title": "Astrology Systems",
+      "vedic": "Vedic Astrology",
+      "kp": "KP Astrology",
+      "numerology": "Numerology",
+      "panchang": "Panchang & Muhurat"
+    },
+    "learn": {
+      "title": "Learn & Explore",
+      "basics": "Astrology Basics",
+      "planetary": "Planetary Effects",
+      "rashis": "Houses, Rashis & Nakshatras",
+      "yogas": "Yogas & Doshas",
+      "blog": "Blog & Research"
+    },
+    "why_choose": {
+      "title": "Why Choose AstroPinch®",
+      "accurate": "Accurate AI-Based Predictions",
+      "easy": "Easy-to-Understand Language",
+      "verified": "Verified Astrological Logic",
+      "secure": "Secure Online Payments",
+      "trusted": "Trusted by Users Worldwide"
+    },
+    "company": {
+      "title": "Company",
+      "about": "About Us",
+      "how_it_works": "How It Works",
+      "contact": "Contact Us",
+      "help": "Help Center",
+      "partnership": "Partnership"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Privacy Policy",
+      "terms": "Terms",
+      "disclaimer": "Disclaimer",
+      "refund": "Refund Policy"
+    }
+  }
+}

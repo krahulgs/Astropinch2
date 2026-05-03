@@ -1,0 +1,463 @@
+{
+  "Home": {
+    "title": "AstroPinch",
+    "hero": {
+      "title": "The Stars Knew. Now You Will Too.",
+      "subtitle": "Ancient Jyotish wisdom. NASA-grade planetary data. AI that reads your Kundali like a Pandit who never sleeps.",
+      "cta": "Get Your Free Kundali"
+    }
+  },
+  "Navigation": {
+    "home": "Home",
+    "horoscope": "Horoscope",
+    "kundali": "Kundali",
+    "matching": "Matching",
+    "panchang": "Panchang",
+    "calculators": "Calculators",
+    "year-book": "Year Book",
+    "chat": "AI Chat",
+    "marketplace": "Marketplace",
+    "muhurat": "Muhurat",
+    "love-match": "Love Match",
+    "daily-horoscope": "Daily Horoscope"
+  },
+  "Horoscope": {
+    "title": "General Horoscope",
+    "subtitle": "Choose your zodiac sign to reveal your cosmic insights for today.",
+    "aries": "Aries",
+    "taurus": "Taurus",
+    "gemini": "Gemini",
+    "cancer": "Cancer",
+    "leo": "Leo",
+    "virgo": "Virgo",
+    "libra": "Libra",
+    "scorpio": "Scorpio",
+    "sagittarius": "Sagittarius",
+    "capricorn": "Capricorn",
+    "aquarius": "Aquarius",
+    "pisces": "Pisces"
+  },
+  "DailyHoroscope": {
+    "title": "Daily Horoscope",
+    "subtitle": "Personalized cosmic insights based on your unique birth chart."
+  },
+  "Kundali": {
+    "title": "Vedic Birth Chart",
+    "subtitle": "Discover your destiny with arcsecond precision using NASA-grade planetary data.",
+    "form": {
+      "name": "Full Name",
+      "birthDate": "Birth Date",
+      "birthTime": "Birth Time",
+      "birthPlace": "Birth Place",
+      "submit": "Generate Birth Chart"
+    },
+    "result": {
+      "tabs": {
+        "chart": "Birth Chart",
+        "daily": "Daily Guide"
+      },
+      "header": {
+        "chart_title": "{name}'s Chart",
+        "your": "Your",
+        "download": "Download",
+        "share": "Share"
+      },
+      "charts": {
+        "lagna": "Lagna Chart",
+        "north": "North",
+        "south": "South"
+      },
+      "analysis": {
+        "title": "Vedic Analysis",
+        "precision": "High Precision",
+        "mangal_dosha": "Mangal Dosha",
+        "sade_sati": "Sade Sati",
+        "moolank": "Moolank",
+        "bhagyank": "Bhagyank",
+        "manglik": "Manglik",
+        "non_manglik": "Non-Manglik",
+        "none": "None",
+        "lagna": "Lagna",
+        "rashi": "Rashi",
+        "nakshatra": "Nakshatra",
+        "yoni": "Yoni",
+        "gana": "Gana",
+        "nadi": "Nadi",
+        "varna": "Varna"
+      },
+      "planets": {
+        "title": "Planetary Status",
+        "headers": {
+          "planet": "Planet",
+          "sign": "Sign",
+          "degree": "Degree",
+          "house": "House",
+          "status": "Status"
+        },
+        "names": {
+          "Sun": "Sun",
+          "Moon": "Moon",
+          "Mars": "Mars",
+          "Mercury": "Mercury",
+          "Jupiter": "Jupiter",
+          "Venus": "Venus",
+          "Saturn": "Saturn",
+          "Rahu": "Rahu",
+          "Ketu": "Ketu",
+          "Ascendant": "Ascendant"
+        },
+        "status": {
+          "Retro": "Retro",
+          "Direct": "Direct"
+        }
+      },
+      "dasha": {
+        "title": "Current Dasha",
+        "subtitle": "Vimshottari Period",
+        "mahadasha": "Mahadasha",
+        "antardasha": "Antardasha",
+        "ends": "Ends",
+        "active": "Active",
+        "unavailable": "Dasha information unavailable"
+      },
+      "synthesis": {
+        "title": "Jyotish Synthesis",
+        "soul_essence": "The Soul Essence",
+        "current_season": "Current Season",
+        "remedy": "Vedic Remedy",
+        "pillars": {
+          "wealth": "Wealth",
+          "career": "Career",
+          "health": "Health"
+        },
+        "loading_daily": "Loading Daily Guide…",
+        "error_loading": "Error loading chart"
+      },
+      "cta": {
+        "clarity": "Need deeper clarity?",
+        "consult": "Consult Astrologer"
+      }
+    }
+  },
+  "Panchang": {
+    "title": "Daily Panchang"
+  },
+  "Calculators": {
+    "title": "Astro Calculators",
+    "subtitle": "A suite of precision Vedic tools to decode every aspect of your life."
+  },
+  "Footer": {
+    "description": "AstroPinch is a trusted online astrology website offering accurate Vedic astrology, Kundali analysis, horoscope predictions, numerology, and dosha remedies using advanced AI and traditional astrological principles.",
+    "popular_services": {
+      "title": "Popular Services",
+      "free_kundali": "Free Kundali Online",
+      "birth_chart": "Birth Chart & Positions",
+      "horoscope": "Daily/Weekly Horoscope",
+      "career": "Career & Business",
+      "matching": "Marriage Matching",
+      "mangal_dosha": "Mangal Dasha Analysis",
+      "numerology": "Numerology Analysis",
+      "muhurat": "Muhurat & Panchang",
+      "premium": "Premium Reports"
+    },
+    "systems": {
+      "title": "Astrology Systems",
+      "vedic": "Vedic Astrology",
+      "kp": "KP Astrology",
+      "numerology": "Numerology",
+      "panchang": "Panchang & Muhurat"
+    },
+    "learn": {
+      "title": "Learn & Explore",
+      "basics": "Astrology Basics",
+      "planetary": "Planetary Effects",
+      "rashis": "Houses, Rashis & Nakshatras",
+      "yogas": "Yogas & Doshas",
+      "blog": "Blog & Research"
+    },
+    "why_choose": {
+      "title": "Why Choose AstroPinch®",
+      "accurate": "Accurate AI-Based Predictions",
+      "easy": "Easy-to-Understand Language",
+      "verified": "Verified Astrological Logic",
+      "secure": "Secure Online Payments",
+      "trusted": "Trusted by Users Worldwide"
+    },
+    "company": {
+      "title": "Company",
+      "about": "About Us",
+      "how_it_works": "How It Works",
+      "contact": "Contact Us",
+      "help": "Help Center",
+      "partnership": "Partnership"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Privacy Policy",
+      "terms": "Terms",
+      "disclaimer": "Disclaimer",
+      "refund": "Refund Policy"
+    }
+  },
+  "DailyGuide": {
+    "title": "Your Daily Astrology Guide",
+    "subtitle": "Precision Jyotish analysis mapped against your birth chart and profession.",
+    "form": {
+      "full_name": "Full Name",
+      "birth_place": "Birth Place (India)",
+      "birth_date": "Birth Date",
+      "birth_time": "Birth Time",
+      "profession": "Your Profession",
+      "select_profession": "Select Profession",
+      "submit": "Consult ASTROPINCH Engine"
+    },
+    "loading": "Consulting the Pandit who never sleeps...",
+      "sections": {
+      "morning_dispatch": "The Morning Dispatch",
+      "morning_mantra": "Morning Mantra",
+      "professional_guidance": "Professional Guidance",
+      "risk_map": "Risk Map",
+      "overall_risk": "Overall Risk",
+      "strategic_actions": "Strategic Actions (Do)",
+      "protective_stance": "Protective Stance (Avoid)",
+      "wealth_markets": "Wealth & Markets",
+      "financial_intelligence": "Financial Intelligence",
+      "planetary_remedies": "Planetary Alignment Remedies",
+      "lucky_matrix": "Lucky Matrix",
+      "muhurtas": "Critical Muhurtas",
+      "planetary_highlights": "Planetary Highlights"
+    },
+    "header": {
+      "personalized": "Personalized Vedic Blueprint",
+      "energy_status": "Current Energy Status",
+      "score": "Precision Score",
+      "guide_title": "{name}'s Daily Guide"
+    },
+    "footer": {
+      "engine": "ASTROPINCH ENGINE",
+      "logic": "NASA Ephemeris v4.2 · Sidereal Jyotish Logic"
+    },
+    "metrics": {
+      "lagna": "Lagna",
+      "moon_sign": "Moon Sign",
+      "birth_nakshatra": "Birth Nakshatra",
+      "current_dasha": "Current Dasha"
+    },
+    "profession_detail": {
+      "verdict_reasoning": "Verdict Reasoning",
+      "best_execution": "Best Execution Window",
+      "critical_avoidance": "Critical Avoidance Window",
+      "outlook": "Outlook",
+      "verdict": "Verdict"
+    },
+    "risk_detail": {
+      "financial": "Financial",
+      "health": "Health",
+      "relationships": "Relationships",
+      "travel": "Travel"
+    },
+    "wealth_detail": {
+      "sentiment": "Market Sentiment",
+      "suitable": "Suitable for Investing",
+      "rationale": "Investment Rationale",
+      "favored": "Favored Sectors",
+      "avoid": "Avoid Sectors",
+      "pulse": "Market Pulse",
+      "driving_planet": "Driving Planet"
+    },
+    "remedy_detail": {
+      "morning_ritual": "Morning Ritual",
+      "gemstone": "Gemstone Sync",
+      "power_mantra": "Power Mantra",
+      "color": "Vibrational Color",
+      "food": "Energy Food",
+      "evening": "Evening Calm"
+    },
+    "luck_detail": {
+      "auspicious_window": "Auspicious Window",
+      "direction": "Direction",
+      "lucky_matrix": "Lucky Matrix"
+    },
+    "muhurta_detail": {
+      "rahu_kaal": "Rahu Kaal",
+      "gulika_kaal": "Gulika Kaal"
+    },
+    "actions": {
+      "recalculate": "Recalculate with New Profile",
+      "in": "in"
+    }
+  },
+  "Marketplace": {
+    "title": "Astro Marketplace",
+    "subtitle": "Consult with India's most accurate and verified Jyotish experts",
+    "filters": {
+      "All": "All",
+      "Vedic": "Vedic",
+      "KP": "KP",
+      "Nadi": "Nadi",
+      "Numerology": "Numerology",
+      "Vastu": "Vastu",
+      "Prashna": "Prashna",
+      "Tarot": "Tarot",
+      "Meditation": "Meditation",
+      "Palmistry": "Palmistry",
+      "Yoga": "Yoga",
+      "Psychic": "Psychic"
+    },
+    "card": {
+      "exp": "EXP",
+      "starting": "Starting",
+      "consult": "Consult",
+      "consult_history": "View Past Consultations"
+    },
+    "status": {
+      "Online": "Online",
+      "Busy": "Busy",
+      "Offline": "Offline"
+    }
+  },
+  "Matching": {
+    "badge": "Unified Cosmic Analysis",
+    "portal": "Matching Portal",
+    "signed_in": "Signed in as {name} — your details are pre-filled",
+    "contexts": {
+      "relationship": "LoveBirds",
+      "marriage": "Marriage"
+    },
+    "modes": {
+      "vedic": "Traditional Vedic",
+      "soulbound": "✨ AI Soulbound",
+      "lovers": "🔥 AI LOVERS.EXE"
+    },
+    "labels": {
+      "groom": "Groom",
+      "bride": "Bride",
+      "p1": "Partner One",
+      "p2": "Partner Two",
+      "your_profile": "Your Profile",
+      "auto_filled": "Auto-filled from profile",
+      "switch_profile": "Switch Profile",
+      "signature": "Celestial Signature",
+      "full_name": "Full Name",
+      "birth_date": "Birth Date",
+      "birth_time": "Birth Time",
+      "birth_place": "Birth Place (India)",
+      "profession": "Profession",
+      "select_profession": "Select Profession",
+      "mbti": "MBTI Type",
+      "love_lang": "Love Language",
+      "not_sure": "Not Sure / Skip",
+      "mbti_types": {
+        "INFJ": "Advocate",
+        "INFP": "Mediator",
+        "INTJ": "Architect",
+        "INTP": "Logician",
+        "ISFJ": "Defender",
+        "ISFP": "Adventurer",
+        "ISTJ": "Inspector",
+        "ISTP": "Virtuoso",
+        "ENFJ": "Protagonist",
+        "ENFP": "Campaigner",
+        "ENTJ": "Commander",
+        "ENTP": "Debater",
+        "ESFJ": "Consul",
+        "ESFP": "Entertainer",
+        "ESTJ": "Executive",
+        "ESTP": "Entrepreneur"
+      }
+    },
+    "buttons": {
+      "loading": "Aligning Stars...",
+      "lovers": "Execute LOVERS.EXE Analysis",
+      "soulbound": "Launch Deep AI Analysis",
+      "vedic": "Perform Vedic Match"
+    },
+    "features": {
+      "psychological": "Psychological Fit",
+      "psychological_desc": "AI analysis of personality synergy",
+      "vedic": "Vedic Wisdom",
+      "vedic_desc": "Classical Guna Milan & Dosha check",
+      "karmic": "Karmic Bond",
+      "karmic_desc": "Soul-level connection intensity"
+    },
+    "errors": {
+      "places": "Please select birth places for both partners."
+    }
+  },
+  "YearBook": {
+    "title": "Yearly Astrology",
+    "subtitle": "Your comprehensive guide to the celestial transits of the coming year.",
+    "cta": "Generate Yearly Roadmap",
+    "no_profile": {
+      "title": "No Complete Profile Found",
+      "desc": "Please complete birth details in your profile to use the Year Book.",
+      "button": "Complete Profile"
+    },
+    "form": {
+      "select_profile": "Select Profile",
+      "auto_filled": "Auto-filled from profile",
+      "birth_date": "Birth Date",
+      "birth_time": "Birth Time",
+      "birth_place": "Birth Place",
+      "prediction_year": "Prediction Year",
+      "roadmap_suffix": "Roadmap",
+      "standard": "Standard",
+      "standard_desc": "12-Month Report",
+      "expert": "Expert",
+      "expert_desc": "AI Synthesis",
+      "loading": "Preparing Your Cosmic Roadmap...",
+      "signin_prefix": "Sign in",
+      "signin_suffix": "to skip this form and auto-fill from your saved profile",
+      "error_place": "Please select a birth place from the dropdown."
+    },
+    "report": {
+      "year_book_suffix": "Year Book",
+      "chart_overview": "with Free Birth Chart Overview",
+      "roadmap_subtitle": "Annual Cosmic Roadmap • High-Precision Vedic Synthesis",
+      "download_pdf": "Download PDF Report",
+      "strategy_prefix": "Strategy:",
+      "vedic_citation": "Vedic Citation",
+      "key_turning_point": "Key Turning Point",
+      "active_dasha": "Active Dasha Periods",
+      "good": "Good:",
+      "caution": "Caution:",
+      "months_label": "Months",
+      "alignment_score": "Alignment Score",
+      "key_transits": "Key Transits",
+      "complete_analysis": "Complete Month-by-Month Analysis",
+      "detailed_breakdown": "A detailed breakdown of your cosmic journey",
+      "alignment": "Alignment",
+      "tip": "Tip:",
+      "birth_chart_overview": "Birth Chart Overview",
+      "astrological_foundations": "Astrological Foundations",
+      "lagna_chart": "Lagna Chart",
+      "vedic_analysis": "Vedic Analysis",
+      "jatak_details": "Jatak Details",
+      "current_dasha_vimshottari": "Current Dasha (Vimshottari)",
+      "mahadasha": "Mahadasha",
+      "antardasha": "Antardasha",
+      "ends": "Ends",
+      "active": "Active",
+      "disclaimer_title": "Disclaimer",
+      "generated_for": "Generated exclusively for {name}",
+      "buy_pdf": "Download PDF Report (₹199)",
+      "no_data": "No prediction data found.",
+      "retry": "Retry",
+      "invalid_month": "Invalid month selection"
+    },
+    "months": {
+      "January": "January",
+      "February": "February",
+      "March": "March",
+      "April": "April",
+      "May": "May",
+      "June": "June",
+      "July": "July",
+      "August": "August",
+      "September": "September",
+      "October": "October",
+      "November": "November",
+      "December": "December"
+    }
+  }
+}

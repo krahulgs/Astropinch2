@@ -1,0 +1,126 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+
+:root {
+  /* Premium Saffron & Amethyst (Light Mode) */
+  --background: #FDFBFA; /* Slightly warmer, cleaner white */
+  --foreground: #18181B; /* Zinc 900 for extremely crisp text */
+  --surface: #FFFFFF;
+  --border: #E4E4E7; /* Zinc 200 */
+  --primary: #5B21B6; /* Deep Violet (Premium) */
+  --secondary: #D97706; /* Rich Amber */
+  --text-secondary: #52525B; /* Zinc 600 for highly readable secondary text */
+  --highlight: #059669; /* Emerald 600 */
+  --alert: #E11D48; /* Rose 600 */
+}
+
+.dark {
+  /* Deep Nebula (Dark Mode) */
+  --background: #09090B; /* Zinc 950 for deep OLED black */
+  --foreground: #FAFAFA; /* Zinc 50 for bright text */
+  --surface: #18181B; /* Zinc 900 */
+  --border: #27272A; /* Zinc 800 */
+  --primary: #A78BFA; /* Vibrant Violet 400 */
+  --secondary: #FBBF24; /* Luminous Amber 400 */
+  --text-secondary: #A1A1AA; /* Zinc 400 for perfect contrast */
+  --highlight: #34D399; /* Emerald 400 */
+  --alert: #F43F5E; /* Rose 500 */
+}
+
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-text-secondary: var(--text-secondary);
+  --color-highlight: var(--highlight);
+  --color-alert: var(--alert);
+
+  --font-sans: var(--font-inter), var(--font-poppins), var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-hindi: var(--font-noto-devanagari);
+  --font-bengali: var(--font-noto-bengali);
+  --font-telugu: var(--font-noto-telugu);
+  --font-tamil: var(--font-noto-tamil);
+  --font-gujarati: var(--font-noto-gujarati);
+
+  --animate-pulse-slow: pulse-slow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-float-slow: float-slow 12s ease-in-out infinite;
+  --animate-reverse-float: reverse-float 15s ease-in-out infinite;
+
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+  }
+
+  @keyframes float-slow {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(2%, 2%) scale(1.05); }
+  }
+
+  @keyframes reverse-float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-2%, -2%) scale(1.1); }
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Accessibility & Interaction Defaults */
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Base interactive motion */
+button, a, input[type="button"], input[type="submit"] {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Tap feedback (subtle scale) */
+button:active, a:active {
+  transform: scale(0.97);
+}
+
+/* Prevent transitions from exceeding 400ms */
+* {
+  transition-duration: min(300ms, inherit);
+}
+
+@media print {
+  .no-print,
+  button,
+  nav,
+  footer {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Force background colors and images to print */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
