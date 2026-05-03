@@ -952,3 +952,44 @@ INFO:     127.0.0.1:49880 - "POST /ai/predict HTTP/1.1" 200 OK
 INFO:     127.0.0.1:49877 - "POST /moon-chart HTTP/1.1" 200 OK
 INFO:     127.0.0.1:49875 - "POST /moon-chart HTTP/1.1" 200 OK
 INFO:     127.0.0.1:50179 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51007 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:51032 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='Developer' language='en'
+INFO:     127.0.0.1:51039 - "POST /calculate HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='Developer' language='en'
+INFO:     127.0.0.1:51042 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51007 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:51042 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51035 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51035 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51032 - "POST /chart HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='Developer' language='en'
+INFO:     127.0.0.1:51036 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51039 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51036 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51032 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51035 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51042 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51040 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51039 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51113 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:51113 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:51114 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:51151 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:51217 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:51218 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:51326 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:51327 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:51446 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:51447 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:51729 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:51952 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:51953 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:51953 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:51953 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:51952 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:51953 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52358 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52359 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52358 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:52359 - "GET /users HTTP/1.1" 401 Unauthorized
