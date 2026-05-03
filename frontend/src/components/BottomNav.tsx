@@ -15,7 +15,6 @@ function PublicBottomNav() {
   const items = [
     { label: 'Home',    icon: <Home size={20} />,         href: '/' },
     { label: 'Kundali', icon: <FileText size={20} />,     href: '/kundali' },
-    { label: 'AI Chat', icon: <MessageCircle size={20} />, href: '/chat' },
     { label: 'Market',  icon: <ShoppingBag size={20} />,  href: '/marketplace' },
     { label: 'Login',   icon: <User size={20} />,          href: '/login' },
   ];
