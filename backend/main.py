@@ -372,11 +372,12 @@ async def chat_with_astro(data: ChatQueryModel, db: Session = Depends(get_db)):
         if user:
             print(f"  ✅ User found: {user.full_name} | DOB={user.birth_date} T={user.birth_time} lat={user.lat} lon={user.lon}")
             user_profile = {
-                "full_name": user.full_name,
-                "birth_date": user.birth_date,
-                "birth_time": user.birth_time,
-                "birth_place": user.birth_place,
-                "profession": user.profession,
+                "full_name":     user.full_name,
+                "birth_date":    user.birth_date,
+                "birth_time":    user.birth_time,
+                "birth_place":   user.birth_place,
+                "profession":    user.profession,
+                "gender":        getattr(user, "gender", "") or "",
                 "marital_status": user.marital_status,
                 "chart": None
             }
@@ -575,6 +576,7 @@ class ChartRequest(BaseModel):
     timezone: str = "Asia/Kolkata"
     target_year: int = 2026
     profession: str = "General"
+    gender: Optional[str] = ""      # Male / Female / Other
     language: Optional[str] = "English"
 
 # Initialize Global Services
@@ -756,11 +758,12 @@ async def get_ai_prediction(req: ChartRequest):
     }
     
     user_profile = {
-        "name": req.profession if req.profession != "General" else "User", # Placeholder
+        "name": req.name or "User",
         "dob": f"{req.day}/{req.month}/{req.year}",
         "time": f"{req.hour}:{req.minute}",
         "place": f"Lat: {req.lat}, Lon: {req.lon}",
-        "profession": req.profession
+        "profession": req.profession,
+        "gender": req.gender or ""
     }
     
     # Calculate dynamic dasha for synthesis context
@@ -1013,16 +1016,20 @@ async def get_year_book_outlook(req: ChartRequest):
         transits = yb_engine.get_planet_transit_summary(natal_positions, req.target_year)
 
         chart_data = {
-            "planets":   formatted_planets,
-            "ascendant": {"sign": engine.SIGN_NAMES[asc["sign_id"] - 1], "degree": asc["position_in_sign"]},
-            "dasha":     dasha_data,
-            "transits":  transits
+            "planets":    formatted_planets,
+            "ascendant":  {"sign": engine.SIGN_NAMES[asc["sign_id"] - 1], "degree": asc["position_in_sign"]},
+            "dasha":      dasha_data,
+            "transits":   transits,
+            "gender":     req.gender or "",
+            "profession": req.profession or ""
         }
         user_profile = {
-            "name":  "User",
-            "dob":   f"{req.day}/{req.month}/{req.year}",
-            "time":  f"{req.hour}:{req.minute}",
-            "place": f"Lat: {req.lat}, Lon: {req.lon}"
+            "name":       req.name or "User",
+            "dob":        f"{req.day}/{req.month}/{req.year}",
+            "time":       f"{req.hour}:{req.minute}",
+            "place":      f"Lat: {req.lat}, Lon: {req.lon}",
+            "profession": req.profession,
+            "gender":     req.gender or ""
         }
 
         ai_res = await ai.get_yearly_prediction(
@@ -1045,6 +1052,7 @@ class SoulboundProfile(BaseModel):
     lon: float
     mbti: Optional[str] = "INFJ"
     love_language: Optional[str] = "Quality Time"
+    gender: Optional[str] = ""
 
 class SoulboundMatchingRequest(BaseModel):
     person1: SoulboundProfile

@@ -149,8 +149,10 @@ class AIService:
             try:
                 client = AsyncOpenAI(api_key=api_key, base_url=os.environ.get("OPENAI_BASE_URL", "https://api.deepseek.com"))
                 import json as _kjson
-                prompt = f"""Profile:Rising={asc_sign}|Moon={moon_sign}|Element={element}|Ruler={ruler}(H{ruler_house})|Profession={user_profile.get('profession','professional')}
+                gender = user_profile.get('gender', '') or 'Not specified'
+                prompt = f"""Profile:Rising={asc_sign}|Moon={moon_sign}|Element={element}|Ruler={ruler}(H{ruler_house})|Profession={user_profile.get('profession','professional')}|Gender={gender}
 
+Gender MUST shape the tone and advice (e.g. for Female use feminine pronouns and address typical female life themes; for Male use masculine framing).
 JSON only:
 {{"soul_essence":"2 sentences core nature, no jargon","current_season":"2 sentences current life theme","wealth":"1 practical tip ≤15 words","career":"1 tip ≤15 words","health":"1 tip ≤15 words","remedy":"1 simple habit ≤12 words"}}"""
                 response = await client.chat.completions.create(
@@ -224,14 +226,16 @@ JSON only:
             monthly_preds = []
             if ai_client:
                 try:
+                    natal_gender = user_profile.get('gender', '') or 'Not specified'
                     prompt = f"""
 You are an expert Vedic astrologer and life strategist. Generate a deeply personalized 12-month forecast for a {natal_sign} Moon native for the year {target_year}.
 
+Gender: {natal_gender} — CRITICAL: adapt ALL predictions to this gender. Use correct pronouns, address gender-specific health, career, and relationship themes.
+
 Rules:
-- Each month must reflect its real-world season and energy (e.g., January = winter planning, July = peak energy).
+- Each month must reflect its real-world season and energy.
 - Every prediction must be 1-2 powerful, jargon-free, actionable sentences.
-- After each prediction, add a "Simple Tip:" followed by 1 practical action the user can take.
-- Ground predictions in real Vedic transits for {target_year} (e.g., Jupiter in Taurus, Saturn in Aquarius).
+- Ground predictions in real Vedic transits for {target_year}.
 - NO astrological jargon. Write for a modern, educated audience.
 
 Return a STRICT JSON object with exactly 12 month keys:
@@ -368,8 +372,10 @@ Return a STRICT JSON object with exactly 12 month keys:
         if ai_client:
             try:
                 import json as _json
-                prompt = f"""Sign:{sign_name}|Profession:{user_profile.get('profession','person')}|MoonHouse:{moon_h}|Risk:{risk_label}|Mahadasha:{mahadasha}|Antardasha:{antardasha}
+                gender = user_profile.get('gender', '') if user_profile else ''
+                prompt = f"""Sign:{sign_name}|Gender:{gender or 'Not specified'}|Profession:{user_profile.get('profession','person')}|MoonHouse:{moon_h}|Risk:{risk_label}|Mahadasha:{mahadasha}|Antardasha:{antardasha}
 
+Gender MUST shape advice — use correct pronouns and gender-relevant health/career tips.
 Return JSON only:
 {{"vibe":"1 sentence daily energy (no jargon)","season":"1 sentence current life theme","wealth":"tip ≤12 words","career":"tip ≤12 words","health":"tip ≤12 words","remedy":"1 simple ritual ≤10 words","cautions":["warn1","warn2","warn3"],"actions":["action1","action2","action3"],"citation":"1 sentence source logic ≤15 words"}}"""
                 resp = await ai_client.chat.completions.create(
@@ -589,6 +595,11 @@ Return JSON only:
                     yr=target_year, tr="; ".join(transit_lines)
                 ))
 
+        # Also extract gender and profession from chart_context
+        gender = chart_context.get("gender", "") if chart_context else ""
+        gender_label = gender or "Not specified"
+        profession = chart_context.get("profession", "") if chart_context else ""
+
         astro_context = "\n".join(astro_lines) if astro_lines else \
             f"Moon sign: {sign_name}"
 
@@ -607,6 +618,7 @@ Return JSON only:
 
             user_prompt = f"""
 Synthesize a complete {target_year} Year Book outlook for a person with Moon in {sign_name}.
+Gender: {gender_label} — CRITICAL: use correct pronouns and tailor advice to gender-specific life themes (e.g. fertility/career-break for Female, provider/leadership for Male).
 
 BIRTH CHART DATA (computed by Swiss Ephemeris — use this to ground your predictions):
 {astro_context}
@@ -622,7 +634,8 @@ Produce a JSON object with EXACTLY these fields:
     {{"period": "Q4 (Oct–Dec {target_year})", "focus": "2-3 sentences specific to Q4 energy."}}
   ],
   "key_date": "One specific calendar date in {target_year} that is a pivotal turning point, with a 1-sentence reason (e.g. 'July 14, {target_year} — Jupiter stations direct, opening a growth window')",
-  "citation": "One sentence citing the specific planetary factors used (e.g. 'Based on Jupiter transit in House 11, Saturn Mahadasha, and Rahu-Ketu axis shift')."
+  "strategy": "3-4 sentences on the overarching life strategy for {target_year} tailored to gender: {gender_label}. Cover career, relationships, and personal growth.",
+  "citation": "One sentence citing the specific planetary factors used."
 }}
 """
 
@@ -743,10 +756,25 @@ Travel: [main insight — 2 sentences] Simple Tip: [one tip]
         api_key = os.environ.get("OPENAI_API_KEY")
         if not api_key: return None
         
+    async def get_matching_synthesis(self, bride_name, groom_name, overall_score, grade,
+                                     vedic_score, western_score,
+                                     bride_gender="Female", groom_gender="Male"):
+        """
+        Generates a 3-part compatibility synthesis: Narrative, Strengths, and Challenges.
+        bride_gender / groom_gender allow same-sex and non-binary compatibility framing.
+        """
+        from openai import AsyncOpenAI
+        api_key = os.environ.get("OPENAI_API_KEY")
+        if not api_key: return None
+        
         try:
             client = AsyncOpenAI(api_key=api_key, base_url=os.environ.get("OPENAI_BASE_URL", "https://api.deepseek.com"))
             prompt = f"""
-            You are a relationship counselor and master astrologer. Analyze the marriage compatibility between {bride_name} and {groom_name}.
+            You are a relationship counselor and master astrologer.
+            Analyze the marriage/relationship compatibility between {bride_name} ({bride_gender}) and {groom_name} ({groom_gender}).
+            
+            Gender context: {bride_name} is {bride_gender}, {groom_name} is {groom_gender}.
+            Use correct pronouns throughout. Tailor advice to the specific dynamics of this gender pairing.
             
             Inputs:
             - Overall Score: {overall_score}/100
@@ -954,6 +982,7 @@ Travel: [main insight — 2 sentences] Simple Tip: [one tip]
                 place = user_profile.get("birth_place", "")
                 profession = user_profile.get("profession", "")
                 marital = user_profile.get("marital_status", "")
+                gender = user_profile.get("gender", "") or "Not specified"
 
                 # Compute exact age from DOB
                 age_str = ""
@@ -1024,7 +1053,8 @@ Travel: [main insight — 2 sentences] Simple Tip: [one tip]
                 profile_block = (
                     f"\n\n=== SEEKER PROFILE ==="
                     f"\nName: {name}{age_str} | DOB: {dob} {birth_time} | Place: {place}"
-                    f"\nProfession: {profession} | Marital Status: {marital}"
+                    f"\nGender: {gender} | Profession: {profession} | Marital Status: {marital}"
+                    f"\nGender RULE: Use correct pronouns and gender-appropriate framing throughout the entire response."
                     f"\nQuestion Topic: {detected_topic.upper()}"
                     f"{age_rules}"
                 )

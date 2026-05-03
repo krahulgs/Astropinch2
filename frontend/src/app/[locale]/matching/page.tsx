@@ -12,7 +12,7 @@ import { useActiveProfile, parseProfile } from '@/hooks/useActiveProfile';
 
 const EMPTY_PARTNER = {
   name: '', day: '', month: '', year: '', hour: '', minute: '',
-  place: '', lat: 0, lon: 0, profession: '', mbti: 'NOT_SURE', love_language: 'Quality Time'
+  place: '', lat: 0, lon: 0, profession: '', gender: '', mbti: 'NOT_SURE', love_language: 'Quality Time'
 };
 
 export default function UnifiedMatchingPage() {
@@ -62,6 +62,7 @@ export default function UnifiedMatchingPage() {
         lat: parsedActive.lat,
         lon: parsedActive.lon,
         profession: parsedActive.profession,
+        gender: parsedActive.gender || '',
         mbti: 'NOT_SURE',
         love_language: 'Quality Time',
       }
@@ -81,11 +82,11 @@ export default function UnifiedMatchingPage() {
       // p1 is Groom in marriage context, p2 is Bride
       g_name: p1.name, g_day: p1.day, g_month: p1.month, g_year: p1.year,
       g_hour: p1.hour, g_minute: p1.minute, g_lat: p1.lat.toString(), g_lon: p1.lon.toString(),
-      g_prof: p1.profession, g_mbti: (p1 as any).mbti || 'NOT_SURE', g_love: (p1 as any).love_language || 'Quality Time',
+      g_prof: p1.profession, g_gender: (p1 as any).gender, g_mbti: (p1 as any).mbti || 'NOT_SURE', g_love: (p1 as any).love_language || 'Quality Time',
       
       b_name: p2.name, b_day: p2.day, b_month: p2.month, b_year: p2.year,
       b_hour: p2.hour, b_minute: p2.minute, b_lat: p2.lat.toString(), b_lon: p2.lon.toString(),
-      b_prof: p2.profession, b_mbti: p2.mbti, b_love: p2.love_language,
+      b_prof: p2.profession, b_gender: p2.gender, b_mbti: p2.mbti, b_love: p2.love_language,
       
       context: matchContext
     }).toString();
@@ -212,6 +213,26 @@ export default function UnifiedMatchingPage() {
             value={data.place}
             onChange={(place, lat, lon) => setData({ ...data, place, lat, lon })}
           />
+        </div>
+
+        <div className="space-y-1">
+          <label className="text-[8px] font-black uppercase tracking-widest text-text-secondary ml-3 block">GENDER</label>
+          <div className="grid grid-cols-3 gap-2">
+            {['Male', 'Female', 'Other'].map(g => (
+              <button
+                key={g}
+                type="button"
+                onClick={() => setData({ ...data, gender: g })}
+                className={`h-10 rounded-xl text-xs font-bold transition-all border ${
+                  data.gender === g
+                    ? 'bg-primary text-white border-primary shadow-lg'
+                    : 'bg-foreground/5 border-transparent text-text-secondary hover:border-primary/30'
+                }`}
+              >
+                {g}
+              </button>
+            ))}
+          </div>
         </div>
 
         {matchMode !== 'vedic' && (

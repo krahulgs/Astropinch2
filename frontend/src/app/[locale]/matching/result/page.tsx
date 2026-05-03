@@ -88,7 +88,8 @@ export default function MatchingResultPage() {
             minute: parseInt(searchParams.get('b_minute') || searchParams.get('b_min') || '0'),
             lat: parseFloat(searchParams.get('b_lat') || '28.6139'),
             lon: parseFloat(searchParams.get('b_lon') || '77.2090'),
-            name: searchParams.get('b_name') || 'Bride'
+            name: searchParams.get('b_name') || 'Bride',
+            gender: searchParams.get('b_gender') || 'Female'
           },
           groom: {
             year: parseInt(searchParams.get('g_year') || '1990'),
@@ -98,7 +99,8 @@ export default function MatchingResultPage() {
             minute: parseInt(searchParams.get('g_minute') || searchParams.get('g_min') || '0'),
             lat: parseFloat(searchParams.get('g_lat') || '19.0760'),
             lon: parseFloat(searchParams.get('g_lon') || '72.8777'),
-            name: searchParams.get('g_name') || 'Groom'
+            name: searchParams.get('g_name') || 'Groom',
+            gender: searchParams.get('g_gender') || 'Male'
           }
         };
 

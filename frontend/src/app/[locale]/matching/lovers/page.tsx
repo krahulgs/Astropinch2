@@ -75,7 +75,8 @@ export default function LoversResultPage() {
               lat: parseFloat(searchParams.get('b_lat') || '28.6139'),
               lon: parseFloat(searchParams.get('b_lon') || '77.2090'),
               mbti: searchParams.get('b_mbti') || 'INFJ',
-              love_language: searchParams.get('b_love') || 'Quality Time'
+              love_language: searchParams.get('b_love') || 'Quality Time',
+              gender: searchParams.get('b_gender') || 'Female'
             },
             person2: {
               name: searchParams.get('g_name') || 'Partner 2',
@@ -84,7 +85,8 @@ export default function LoversResultPage() {
               lat: parseFloat(searchParams.get('g_lat') || '19.0760'),
               lon: parseFloat(searchParams.get('g_lon') || '72.8777'),
               mbti: searchParams.get('g_mbti') || 'ENTP',
-              love_language: searchParams.get('g_love') || 'Words of Affirmation'
+              love_language: searchParams.get('g_love') || 'Words of Affirmation',
+              gender: searchParams.get('g_gender') || 'Male'
             }
           })
         });
