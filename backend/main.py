@@ -1167,8 +1167,12 @@ async def list_users(db: Session = Depends(get_db), current_user_email: str = De
     if current_user.role == "master":
         users = db.query(models.User).all()
     else:
-        users = [current_user]
-    return users # FastAPI will serialize the model objects to JSON automatically
+        # User sees themselves plus anyone they created
+        users = db.query(models.User).filter(
+            (models.User.id == current_user.id) | 
+            (models.User.created_by_id == current_user.id)
+        ).all()
+    return users
 
 @app.post("/users")
 async def create_user(user_data: UserCreate, db: Session = Depends(get_db), current_user: models.User = Depends(auth.get_current_user_obj)):
@@ -1193,8 +1197,10 @@ async def create_user(user_data: UserCreate, db: Session = Depends(get_db), curr
         lat=user_data.lat,
         lon=user_data.lon,
         profession=user_data.profession,
+        gender=user_data.gender,
         marital_status=user_data.marital_status,
-        profile_image=user_data.profile_image
+        profile_image=user_data.profile_image,
+        created_by_id=current_user.id
     )
     db.add(new_user)
     db.commit()

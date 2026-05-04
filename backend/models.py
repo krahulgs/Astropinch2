@@ -21,6 +21,7 @@ class User(Base):
     is_active = Column(Boolean, default=True)
     mobile_number = Column(String, nullable=True)
     otp = Column(String, nullable=True)
+    created_by_id = Column(Integer, nullable=True)
 
 class AstrologerApplication(Base):
     __tablename__ = "astrologer_applications"

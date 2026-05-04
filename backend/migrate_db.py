@@ -20,7 +20,8 @@ def migrate():
         'profile_image': 'VARCHAR',
         'mobile_number': 'VARCHAR',
         'otp': 'VARCHAR',
-        'is_active': 'BOOLEAN DEFAULT TRUE'
+        'is_active': 'BOOLEAN DEFAULT TRUE',
+        'created_by_id': 'INTEGER'
     }
     
     with engine.connect() as conn:
