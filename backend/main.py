@@ -1171,7 +1171,10 @@ async def list_users(db: Session = Depends(get_db), current_user_email: str = De
     return users # FastAPI will serialize the model objects to JSON automatically
 
 @app.post("/users")
-async def create_user(user_data: UserCreate, db: Session = Depends(get_db), current_user: models.User = Depends(auth.get_master_user)):
+async def create_user(user_data: UserCreate, db: Session = Depends(get_db), current_user: models.User = Depends(auth.get_current_user_obj)):
+    # Only master users can create non-regular user roles
+    if current_user.role != 'master' and user_data.role != 'user':
+        raise HTTPException(status_code=403, detail="Only master admins can create non-user roles")
     # Check if email exists (only if provided)
     if user_data.email:
         existing = db.query(models.User).filter(models.User.email == user_data.email).first()

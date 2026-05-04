@@ -1141,3 +1141,28 @@ INFO:     Finished server process [3832]
 INFO:     Started server process [5395]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
+[Startup] .env loaded. OPENAI_API_KEY present: True
+hora /Users/pranjay/Public added to system path ['/Users/pranjay/Public/AstroPinchV2.0/backend', '/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/bin', '/opt/anaconda3/lib/python313.zip', '/opt/anaconda3/lib/python3.13', '/opt/anaconda3/lib/python3.13/lib-dynload', '/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages', '/Users/pranjay/Public']
+INFO:     127.0.0.1:56205 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56216 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56220 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56231 - "GET /geo/search?q=jala HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56231 - "GET /geo/search?q=jalam HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56231 - "GET /geo/search?q=jala HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56236 - "GET /geo/search?q=jalan HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56238 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56240 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56245 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56245 - "POST /users HTTP/1.1" 403 Forbidden
+INFO:     127.0.0.1:56246 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56245 - "POST /users HTTP/1.1" 403 Forbidden
+INFO:     127.0.0.1:56256 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56256 - "GET /users HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5395]
+INFO:     Started server process [5473]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
