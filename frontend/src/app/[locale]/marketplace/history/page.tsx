@@ -6,7 +6,7 @@ import { Clock, MessageSquare, ChevronRight, ArrowLeft, Calendar, User, ChevronD
 import { useActiveProfile } from '@/hooks/useActiveProfile';
 
 export default function HistoryPage() {
-  const { profiles, activeProfileId, setActiveProfileId, parsedActive, isLoggedIn, loading: profileLoading } = useActiveProfile();
+  const { profiles, activeProfileId, selectProfile, parsedActive, isLoggedIn, loading: profileLoading } = useActiveProfile();
   const [history, setHistory] = useState<any[]>([]);
   const [selectedSession, setSelectedSession] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
@@ -86,7 +86,7 @@ export default function HistoryPage() {
                   <div className="relative">
                     <select
                       value={activeProfileId || ''}
-                      onChange={(e) => setActiveProfileId(parseInt(e.target.value))}
+                      onChange={(e) => selectProfile(parseInt(e.target.value))}
                       className="h-10 pl-4 pr-10 rounded-full bg-surface border border-border text-xs font-bold text-foreground focus:border-primary outline-none transition-all appearance-none cursor-pointer"
                     >
                       <option value="">All Consultations</option>
