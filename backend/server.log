@@ -1675,3 +1675,39 @@ WHERE users.email = ?
 ERROR:    Application startup failed. Exiting.
 [Startup] .env loaded. OPENAI_API_KEY present: True
 hora /Users/pranjay/Public added to system path ['/Users/pranjay/Public/AstroPinchV2.0/backend', '/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/bin', '/opt/anaconda3/lib/python313.zip', '/opt/anaconda3/lib/python3.13', '/opt/anaconda3/lib/python3.13/lib-dynload', '/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages', '/Users/pranjay/Public']
+WARNING:  StatReload detected changes in 'migrate_db.py'. Reloading...
+INFO:     Started server process [5881]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+[Startup] .env loaded. OPENAI_API_KEY present: True
+hora /Users/pranjay/Public added to system path ['/Users/pranjay/Public/AstroPinchV2.0/backend', '/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/bin', '/opt/anaconda3/lib/python313.zip', '/opt/anaconda3/lib/python3.13', '/opt/anaconda3/lib/python3.13/lib-dynload', '/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages', '/Users/pranjay/Public']
+INFO:      - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56580 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56581 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56582 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56428 - "POST /token HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56585 - "POST /token HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56643 - "POST /token HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:56739 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56740 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56741 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56743 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56748 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56749 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56580 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:56751 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56752 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56582 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:56581 - "GET /users HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:56743 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56749 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56748 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56741 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56585 - "GET /static/avatars/IMG_2247.jpeg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56743 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56756 - "GET /static/avatars/IMG_2247.jpeg HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56741 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56585 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56759 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56585 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56759 - "GET /users HTTP/1.1" 200 OK

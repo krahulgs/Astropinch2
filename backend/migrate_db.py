@@ -29,8 +29,8 @@ def migrate():
             if col_name not in columns:
                 print(f"Adding missing column: {col_name} to table 'users'...")
                 try:
-                    conn.execute(text(f"ALTER TABLE users ADD COLUMN {col_name} {col_type}"))
-                    conn.commit()
+                    with conn.begin():
+                        conn.execute(text(f"ALTER TABLE users ADD COLUMN {col_name} {col_type}"))
                     print(f"Column {col_name} added successfully.")
                 except Exception as e:
                     print(f"Error adding column {col_name}: {e}")
