@@ -90,10 +90,9 @@ export default function HistoryPage() {
                       className="h-10 pl-4 pr-10 rounded-full bg-surface border border-border text-xs font-bold text-foreground focus:border-primary outline-none transition-all appearance-none cursor-pointer"
                     >
                       <option value="">All Consultations</option>
-                      {profiles.map(p => {
-                        const pp = JSON.parse(p.profile_data || '{}');
-                        return <option key={p.id} value={p.id} className="bg-background">{pp.name || 'Unknown'}</option>;
-                      })}
+                      {profiles.map(p => (
+                        <option key={p.id} value={p.id} className="bg-background">{p.full_name || 'Unknown'}</option>
+                      ))}
                     </select>
                     <ChevronDown size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none" />
                   </div>
