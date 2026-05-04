@@ -84,7 +84,7 @@ export default function UnifiedMatchingPage() {
 
   // ── Partner forms ─────────────────────────────────────────  // ── Partner 2 form: always manual ─────────────────────────────────────────
   const renderPartnerForm = (data: any, setData: any, label: string, allowedGender?: string) => {
-    const allowedProfiles = completeProfiles.filter(p => !allowedGender || (p?.gender ?? '') === allowedGender);
+    const allowedProfiles = (completeProfiles || []).filter(p => p && (!allowedGender || p.gender === allowedGender));
 
     return (
     <div className="p-4 md:p-6 rounded-[1.5rem] md:rounded-[2rem] bg-surface/50 backdrop-blur-xl border border-border space-y-4 shadow-2xl animate-in fade-in zoom-in duration-700">
@@ -107,7 +107,7 @@ export default function UnifiedMatchingPage() {
               onChange={(e) => {
                 if (!e.target.value) return;
                 const id = parseInt(e.target.value);
-                const prof = allowedProfiles.find(p => p.id === id);
+                const prof = allowedProfiles.find(p => p && p.id === id);
                 if (prof) {
                   setData({
                     ...data,
