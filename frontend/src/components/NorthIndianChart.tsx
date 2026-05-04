@@ -70,8 +70,12 @@ const NorthIndianChart: React.FC<NorthIndianChartProps> = ({ planets, ascendant 
 
           return (
             <React.Fragment key={house}>
+              {/* House Number */}
+              <text x={tx} y={ty - 10} textAnchor="middle" dominantBaseline="middle" className="fill-foreground/40 text-[10px] font-medium tracking-wider">
+                H{house}
+              </text>
               {/* Sign Number */}
-              <text x={tx} y={ty} textAnchor="middle" dominantBaseline="middle" className="fill-secondary/80 text-[14px] font-bold">
+              <text x={tx} y={ty + 6} textAnchor="middle" dominantBaseline="middle" className="fill-secondary/80 text-[14px] font-bold">
                 {getHouseSign(house)}
               </text>
               {/* Planets */}
