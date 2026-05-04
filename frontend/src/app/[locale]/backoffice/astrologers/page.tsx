@@ -157,7 +157,7 @@ export default function BackofficeAstrologers() {
                     
                     <div>
                       <h4 className="text-xs font-bold uppercase tracking-widest text-text-secondary mb-2 flex items-center gap-2"><FileText size={14} /> Biography</h4>
-                      <p className="text-sm font-light leading-relaxed p-4 bg-background border border-border rounded-xl">
+                      <p className="text-sm font-normal leading-relaxed p-4 bg-background border border-border rounded-xl">
                         {selectedApp.bio}
                       </p>
                     </div>

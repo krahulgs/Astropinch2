@@ -13,7 +13,7 @@ export default function KPSystemPage() {
           <h1 className="text-6xl font-serif italic text-foreground tracking-tight leading-[0.9]">
             The KP <br/> <span className="text-highlight">System.</span>
           </h1>
-          <p className="text-xl text-text-secondary max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-xl text-text-secondary max-w-2xl mx-auto font-normal leading-relaxed">
             The Krishnamurti Padhdhati (KP) System — where mathematical precision meets the science of Sub-Lords.
           </p>
         </div>

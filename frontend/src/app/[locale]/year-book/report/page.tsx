@@ -170,7 +170,7 @@ export default function YearBookReportPage() {
         <div className="text-center space-y-4 print:space-y-2">
           <h1 className="text-xl md:text-6xl font-medium italic font-serif text-foreground leading-tight">
             {searchParams.get('name')}&apos;s {targetYear} {t('report.year_book_suffix')}
-            <span className="block mt-2 text-base md:text-4xl text-primary font-light opacity-90 print:mt-1 print:text-2xl">
+            <span className="block mt-2 text-base md:text-4xl text-primary font-normal opacity-90 print:mt-1 print:text-2xl">
               {t('report.chart_overview')}
             </span>
           </h1>
@@ -205,7 +205,7 @@ export default function YearBookReportPage() {
             {/* AI Summary */}
             <div className="p-5 md:p-10 print:p-6 rounded-[1.5rem] md:rounded-[3rem] print:rounded-2xl bg-gradient-to-br from-secondary/20 to-transparent border border-secondary/20 space-y-4 md:space-y-6 print:space-y-4">
               <h2 className="text-2xl md:text-4xl print:text-3xl font-serif italic text-secondary leading-tight">{t('report.strategy_prefix')} {data.ai_outlook.theme}</h2>
-              <p className="text-sm md:text-lg print:text-base text-foreground/80 font-light leading-relaxed">{data.ai_outlook.summary}</p>
+              <p className="text-sm md:text-lg print:text-base text-foreground/80 font-normal leading-relaxed">{data.ai_outlook.summary}</p>
               <div className="p-4 md:p-6 print:p-4 rounded-2xl print:rounded-xl border border-border space-y-2">
                 <h4 className="text-[10px] font-bold uppercase tracking-widest text-secondary">{t('report.vedic_citation')}</h4>
                 <p className="text-xs md:text-sm print:text-xs text-text-secondary italic">{data.ai_outlook.citation}</p>
@@ -217,7 +217,7 @@ export default function YearBookReportPage() {
               {data.ai_outlook.quarters.map((q: any, i: number) => (
                 <div key={i} className="p-4 md:p-6 print:p-4 rounded-[1.5rem] md:rounded-[2.5rem] print:rounded-xl bg-surface border border-border space-y-2 md:space-y-3 hover:bg-foreground/5 transition-all">
                   <h4 className="text-[9px] md:text-xs font-bold uppercase tracking-widest text-text-secondary">{q.period}</h4>
-                  <p className="text-xs md:text-sm print:text-xs font-light text-foreground/80 leading-relaxed">
+                  <p className="text-xs md:text-sm print:text-xs font-normal text-foreground/80 leading-relaxed">
                     <span className="font-bold text-foreground block mb-0.5">{q.focus.split('. ')[0]}.</span>
                     {q.focus.split('. ').slice(1).join('. ')}
                   </p>
@@ -355,7 +355,7 @@ export default function YearBookReportPage() {
                         <h4 className="font-bold text-foreground/90 uppercase tracking-widest text-[10px] md:text-xs">{section.label}</h4>
                       </div>
                       <div className="space-y-2 md:space-y-4">
-                        <p className="text-sm text-text-secondary leading-relaxed font-light">{section.content.split('Simple Tip:')[0]}</p>
+                        <p className="text-sm text-text-secondary leading-relaxed font-normal">{section.content.split('Simple Tip:')[0]}</p>
                         {section.content.includes('Simple Tip:') && (
                           <div className="flex items-start gap-2 p-3 md:p-4 rounded-xl md:rounded-2xl bg-highlight/5 border border-highlight/20">
                             <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-highlight mt-1.5 shrink-0" />
@@ -421,7 +421,7 @@ export default function YearBookReportPage() {
                   <div key={section.label} className="p-5 rounded-2xl border border-border/50 space-y-3">
                     <h4 className="font-bold text-foreground uppercase tracking-widest text-[10px]">{section.label}</h4>
                     <div className="space-y-3">
-                      <p className="text-text-secondary leading-relaxed font-light text-sm">{section.content.split('Simple Tip:')[0]}</p>
+                      <p className="text-text-secondary leading-relaxed font-normal text-sm">{section.content.split('Simple Tip:')[0]}</p>
                       {section.content.includes('Simple Tip:') && (
                         <div className="flex items-start gap-2 bg-highlight/5 p-3 rounded-xl">
                           <span className="w-1.5 h-1.5 rounded-full bg-highlight mt-1.5 shrink-0"></span>

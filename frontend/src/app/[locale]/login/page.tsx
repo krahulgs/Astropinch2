@@ -41,11 +41,8 @@ export default function LoginPage() {
       window.dispatchEvent(new Event('focus'));
       window.dispatchEvent(new Event('storage'));
 
-      if (data.role === 'master') {
-        router.push('/admin/users');
-      } else {
-        router.push('/');
-      }
+      // Redirect all users to the users dashboard
+      router.push('/admin/users');
     } catch (err: any) {
       setError(err.message || 'Login failed. Please try again.');
     } finally {
@@ -63,7 +60,7 @@ export default function LoginPage() {
             <Sparkles size={12} /> Secure Access
           </div>
           <h1 className="text-4xl font-serif italic">Cosmic Login</h1>
-          <p className="text-text-secondary font-light">Access your celestial dashboard</p>
+          <p className="text-text-secondary font-normal">Access your celestial dashboard</p>
         </div>
 
         <div className="bg-surface/80 border border-border backdrop-blur-xl rounded-[2.5rem] p-8 md:p-10 shadow-2xl">
@@ -117,6 +114,15 @@ export default function LoginPage() {
               <ArrowRight size={14} />
             </button>
           </form>
+
+          <div className="mt-8 text-center border-t border-border pt-6">
+            <p className="text-sm text-text-secondary">
+              Don't have an account?{' '}
+              <Link href="/register" className="text-primary font-bold hover:underline transition-all">
+                Create Account
+              </Link>
+            </p>
+          </div>
 
           {/* Credentials section removed for security */}
         </div>

@@ -180,34 +180,28 @@ const Navbar = () => {
                 <div className="absolute right-0 mt-3 w-72 p-2 rounded-2xl bg-surface border border-border shadow-2xl backdrop-blur-xl animate-in fade-in zoom-in-95 duration-200 origin-top-right">
 
                   {/* ── Account header ── */}
-                  <div className="flex items-center gap-3 p-4 border-b border-border/50">
-                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white overflow-hidden flex-shrink-0">
+                  <button 
+                    onClick={() => { handleNav('/admin/users'); setShowProfileMenu(false); }}
+                    className="w-full flex items-center gap-3 p-4 border-b border-border/50 hover:bg-foreground/5 transition-all text-left group"
+                  >
+                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white overflow-hidden flex-shrink-0 group-hover:scale-105 transition-transform shadow-md">
                       {userImage ? (
                         <img src={userImage} alt="Profile" className="w-full h-full object-cover" />
                       ) : (
                         <User size={18} />
                       )}
                     </div>
-                    <div className="min-w-0">
-                      <p className="text-xs font-bold text-foreground truncate">{userName || 'Master Admin'}</p>
-                      <p className="text-[9px] text-text-secondary uppercase tracking-widest">
-                        {userRole === 'master' ? '✦ Master Account' : 'Standard Account'}
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs font-bold text-foreground truncate group-hover:text-primary transition-colors">My Profiles</p>
+                      <p className="text-[9px] text-text-secondary uppercase tracking-widest mt-0.5">
+                        {userName || 'Manage Your Data'}
                       </p>
                     </div>
-                  </div>
+                    <ChevronDown size={14} className="text-text-secondary -rotate-90 group-hover:translate-x-1 transition-transform" />
+                  </button>
 
                   {/* ── Menu Links ── */}
                   <div className="mt-2 space-y-0.5">
-                    {userRole === 'master' && (
-                      <button
-                        onClick={() => { handleNav('/admin/users'); setShowProfileMenu(false); }}
-                        className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-foreground/5 text-text-secondary hover:text-foreground transition-all group"
-                      >
-                        <Users size={15} className="group-hover:text-primary transition-colors flex-shrink-0" />
-                        <span className="text-xs font-bold uppercase tracking-widest">Manage Profile</span>
-                      </button>
-                    )}
-                    
                     {/* View Past Consultations Link */}
                     <button
                       onClick={() => { handleNav('/marketplace/history'); setShowProfileMenu(false); }}

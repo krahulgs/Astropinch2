@@ -270,7 +270,7 @@ export default function DailyHoroscopePage() {
                 </Link>
               </div>
             </div>
-            <p className="text-sm text-text-secondary max-w-xl mx-auto font-light leading-relaxed">
+            <p className="text-sm text-text-secondary max-w-xl mx-auto font-normal leading-relaxed">
               Precision Jyotish analysis mapped against your birth chart and profession. NASA-grade accuracy. Mentor-styled wisdom.
             </p>
           </div>
@@ -412,7 +412,7 @@ export default function DailyHoroscopePage() {
                  </div>
                  <h2 className="text-2xl font-bold text-foreground">The Morning Dispatch</h2>
               </div>
-              <p className="text-xl font-light text-foreground/90 leading-relaxed italic border-l-2 border-primary pl-6 py-2">
+              <p className="text-xl font-normal text-foreground/90 leading-relaxed italic border-l-2 border-primary pl-6 py-2">
                  "{data?.day_summary}"
               </p>
            </div>
@@ -446,7 +446,7 @@ export default function DailyHoroscopePage() {
 
            <div className="grid md:grid-cols-2 gap-12">
               <div className="space-y-4">
-                 <p className="text-lg font-light leading-relaxed text-foreground/90 italic">
+                 <p className="text-lg font-normal leading-relaxed text-foreground/90 italic">
                     {data?.profession_guidance?.key_guidance}
                  </p>
                  <div className="p-6 rounded-2xl bg-foreground/5 border border-border space-y-2">
@@ -502,7 +502,7 @@ export default function DailyHoroscopePage() {
                          <p className="text-xs font-bold text-foreground flex items-center gap-2">
                             {r.label} <span className="text-[8px] uppercase tracking-widest text-text-secondary">| {r.risk} Risk</span>
                          </p>
-                         <p className="text-xs text-text-secondary font-light mt-1">{r.detail}</p>
+                         <p className="text-xs text-text-secondary font-normal mt-1">{r.detail}</p>
                       </div>
                    </div>
                  ))}
@@ -566,7 +566,7 @@ export default function DailyHoroscopePage() {
               <div className="space-y-6">
                  <div className="space-y-2">
                     <p className="text-[9px] font-black uppercase tracking-widest text-text-secondary">Investment Rationale</p>
-                    <p className="text-lg font-light italic leading-relaxed text-foreground/90">{data?.investment_guidance?.rationale}</p>
+                    <p className="text-lg font-normal italic leading-relaxed text-foreground/90">{data?.investment_guidance?.rationale}</p>
                  </div>
                  <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-3">
@@ -689,7 +689,7 @@ export default function DailyHoroscopePage() {
                  {data?.planetary_highlights?.map((p, i) => (
                     <div key={i} className="space-y-1">
                        <p className="text-xs font-bold text-foreground">{p?.planet} <span className="text-[10px] font-normal text-text-secondary ml-2">in {p?.position}</span></p>
-                       <p className="text-xs text-text-secondary font-light leading-relaxed">{p?.effect_today}</p>
+                       <p className="text-xs text-text-secondary font-normal leading-relaxed">{p?.effect_today}</p>
                     </div>
                  ))}
               </div>

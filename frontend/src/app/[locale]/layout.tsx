@@ -8,7 +8,16 @@ import BottomNav from '@/components/BottomNav';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Footer from '@/components/Footer';
 import SidebarWrapper from '@/components/SidebarWrapper';
-import { Geist, Geist_Mono, Poppins, Inter, Noto_Sans_Devanagari, Noto_Sans_Bengali, Noto_Sans_Telugu, Noto_Sans_Tamil, Noto_Sans_Gujarati } from "next/font/google";
+import {
+  Plus_Jakarta_Sans,
+  Playfair_Display,
+  DM_Mono,
+  Noto_Sans_Devanagari,
+  Noto_Sans_Bengali,
+  Noto_Sans_Telugu,
+  Noto_Sans_Tamil,
+  Noto_Sans_Gujarati
+} from "next/font/google";
 import "../globals.css";
 import { Metadata } from 'next';
 
@@ -18,50 +27,60 @@ export const metadata: Metadata = {
   keywords: ["Vedic Astrology", "AI Astrology", "Kundali Matching", "NASA-grade Precision", "Daily Horoscope", "AstroPinch"],
 };
 
-const poppins = Poppins({
-  weight: ['300', '400', '500', '600', '700'],
+// ── Primary UI font: warm, modern, highly readable ──────────────────────────
+const plusJakarta = Plus_Jakarta_Sans({
+  weight: ['400', '500', '600', '700', '800'],
   subsets: ['latin'],
-  variable: '--font-poppins',
+  variable: '--font-sans',
+  display: 'swap',
 });
 
-const inter = Inter({
+// ── Serif/display font: elegant for titles & italic accents ─────────────────
+const playfair = Playfair_Display({
+  weight: ['400', '500', '600', '700', '800'],
+  style: ['normal', 'italic'],
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-serif',
+  display: 'swap',
 });
 
+// ── Mono font: clean for data, numbers, chart values ────────────────────────
+const dmMono = DM_Mono({
+  weight: ['400', '500'],
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+});
+
+// ── Indic script fonts ───────────────────────────────────────────────────────
 const notoDevanagari = Noto_Sans_Devanagari({
   subsets: ['devanagari'],
   variable: '--font-noto-devanagari',
+  display: 'swap',
 });
 
 const notoBengali = Noto_Sans_Bengali({
   subsets: ['bengali'],
   variable: '--font-noto-bengali',
+  display: 'swap',
 });
 
 const notoTelugu = Noto_Sans_Telugu({
   subsets: ['telugu'],
   variable: '--font-noto-telugu',
+  display: 'swap',
 });
 
 const notoTamil = Noto_Sans_Tamil({
   subsets: ['tamil'],
   variable: '--font-noto-tamil',
+  display: 'swap',
 });
 
 const notoGujarati = Noto_Sans_Gujarati({
   subsets: ['gujarati'],
   variable: '--font-noto-gujarati',
-});
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: 'swap',
 });
 
 export default async function LocaleLayout({
@@ -82,7 +101,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
  
   return (
-    <html lang={locale} className={`dark ${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${inter.variable} ${notoDevanagari.variable} ${notoBengali.variable} ${notoTelugu.variable} ${notoTamil.variable} ${notoGujarati.variable} antialiased`}>
+    <html lang={locale} className={`dark ${plusJakarta.variable} ${playfair.variable} ${dmMono.variable} ${notoDevanagari.variable} ${notoBengali.variable} ${notoTelugu.variable} ${notoTamil.variable} ${notoGujarati.variable} antialiased`}>
       <body>
         <CosmicBackground />
         <NextIntlClientProvider messages={messages}>

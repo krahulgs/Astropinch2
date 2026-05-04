@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { UserPlus, Trash2, Edit2, Shield, User, MapPin, Briefcase, Heart, Camera, Loader2, X, Star, ExternalLink, Calendar, Clock } from 'lucide-react';
 import AnimatedZodiacBackground from '@/components/AnimatedZodiacBackground';
 import Image from 'next/image';
+import { PROFESSION_CATEGORIES } from '@/constants/professions';
 
 interface UserProfile {
   id: number;
@@ -248,9 +249,13 @@ export default function AdminUsersPage() {
         setShowModal(false);
         resetForm();
         fetchUsers();
+      } else {
+        const errData = await response.json().catch(() => ({}));
+        alert(`Save failed: ${errData.detail || response.statusText}`);
       }
     } catch (err) {
       console.error(err);
+      alert('Network error. Please check if the backend is running.');
     }
   };
 
@@ -300,7 +305,7 @@ export default function AdminUsersPage() {
               <h1 className="text-4xl md:text-5xl font-serif italic tracking-tight">
                 {masterName ? `${masterName}'s ` : ''}Cosmic Community
               </h1>
-              <p className="text-text-secondary font-light">Oversee your celestial family and access their birth charts.</p>
+              <p className="text-text-secondary font-normal">Oversee your celestial family and access their birth charts.</p>
             </div>
             <button 
               onClick={() => { resetForm(); setShowModal(true); }}
@@ -476,7 +481,7 @@ export default function AdminUsersPage() {
                 <h2 className="text-2xl font-serif italic mb-1 tracking-tight">
                   {editingUser ? 'Edit Profile' : 'Manifest Profile'}
                 </h2>
-                <p className="text-[10px] text-text-secondary font-light">
+                <p className="text-[10px] text-text-secondary font-normal">
                   {editingUser ? 'Adjust the celestial path of this entity.' : 'Input details to calculate celestial destiny.'}
                 </p>
               </div>
@@ -543,12 +548,13 @@ export default function AdminUsersPage() {
                     <div className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary"><Briefcase size={14} /></div>
                     <select value={profession} onChange={(e) => setProfession(e.target.value)} className="w-full bg-surface border border-border rounded-xl py-3 pl-10 pr-4 text-xs focus:outline-none focus:border-primary/50 appearance-none transition-all">
                       <option value="">Select Profession</option>
-                      <option value="General">General</option>
-                      <option value="Developer">Developer / IT</option>
-                      <option value="Engineer">Engineering</option>
-                      <option value="Doctor">Healthcare / Medical</option>
-                      <option value="Business">Business / Entrepreneur</option>
-                      <option value="Sales">Sales & Marketing</option>
+                      {Object.entries(PROFESSION_CATEGORIES).map(([category, professions]) => (
+                        <optgroup key={category} label={category} className="bg-background text-primary font-bold">
+                          {professions.map(p => (
+                            <option key={p} value={p} className="bg-background text-foreground">{p}</option>
+                          ))}
+                        </optgroup>
+                      ))}
                     </select>
                   </div>
                 </div>

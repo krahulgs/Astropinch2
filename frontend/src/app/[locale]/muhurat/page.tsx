@@ -64,13 +64,13 @@ export default function MuhuratPage() {
           </div>
           <h1 className="text-3xl md:text-7xl font-medium tracking-tight leading-[1.1] italic font-serif text-foreground">
             Master Your Timeline.{' '}
-            <span className="block text-xl md:text-5xl text-text-secondary font-light mt-1">Command Your Success.</span>
+            <span className="block text-xl md:text-5xl text-text-secondary font-normal mt-1">Command Your Success.</span>
           </h1>
-          <p className="text-sm md:text-xl text-text-secondary max-w-3xl mx-auto font-light leading-relaxed hidden md:block">
+          <p className="text-sm md:text-xl text-text-secondary max-w-3xl mx-auto font-normal leading-relaxed hidden md:block">
             In Vedic astrology, doing the right thing at the wrong time is the recipe for failure. Our high-precision Muhurat Engine calculates the exact planetary windows when the cosmos is actively conspiring in your favor.
           </p>
           {/* Short version for mobile */}
-          <p className="text-xs text-text-secondary mx-auto font-light leading-relaxed md:hidden">
+          <p className="text-xs text-text-secondary mx-auto font-normal leading-relaxed md:hidden">
             Precision-calculated auspicious windows based on live planetary data.
           </p>
         </div>
@@ -190,7 +190,7 @@ export default function MuhuratPage() {
               </div>
             ))}
             {!loading && muhurats.length === 0 && (
-              <div className="p-12 md:p-20 text-center border border-dashed border-border rounded-[2rem] text-text-secondary italic font-light text-sm">
+              <div className="p-12 md:p-20 text-center border border-dashed border-border rounded-[2rem] text-text-secondary italic font-normal text-sm">
                 No major muhurat found in this window. Consult an expert for custom analysis.
               </div>
             )}
@@ -217,7 +217,7 @@ export default function MuhuratPage() {
                     </div>
                   </div>
                   <h3 className="text-xl md:text-3xl font-serif italic text-foreground">{selectedMuhurat.name} Muhurat</h3>
-                  <p className="text-xs text-text-secondary font-light truncate">{selectedMuhurat.date} | {selectedMuhurat.start_time} - {selectedMuhurat.end_time}</p>
+                  <p className="text-xs text-text-secondary font-normal truncate">{selectedMuhurat.date} | {selectedMuhurat.start_time} - {selectedMuhurat.end_time}</p>
                 </div>
                 <button onClick={() => setSelectedMuhurat(null)}
                   className="w-9 h-9 rounded-full border border-border flex items-center justify-center text-text-secondary hover:text-foreground transition-all flex-shrink-0">
@@ -262,7 +262,7 @@ export default function MuhuratPage() {
                     {selectedMuhurat.caution_notes && (
                       <div className="p-4 md:p-6 rounded-[1.5rem] bg-alert/5 border border-alert/10 space-y-2">
                         <h4 className="text-[10px] font-bold uppercase tracking-widest text-alert">Safety Checks</h4>
-                        <ul className="text-xs text-text-secondary space-y-1 font-light list-disc pl-4">
+                        <ul className="text-xs text-text-secondary space-y-1 font-normal list-disc pl-4">
                           {selectedMuhurat.caution_notes.map((note: string, idx: number) => <li key={idx}>{note}</li>)}
                         </ul>
                       </div>
@@ -270,12 +270,12 @@ export default function MuhuratPage() {
 
                     <div className="p-4 md:p-6 rounded-[1.5rem] bg-secondary/5 border border-secondary/10 space-y-2">
                       <h4 className="text-[10px] font-bold uppercase tracking-widest text-secondary">Astronomical Justification</h4>
-                      <p className="text-xs text-text-secondary leading-relaxed font-light">{selectedMuhurat.reason}</p>
+                      <p className="text-xs text-text-secondary leading-relaxed font-normal">{selectedMuhurat.reason}</p>
                     </div>
 
                     <div className="p-4 md:p-6 rounded-[1.5rem] bg-surface border border-border space-y-2">
                       <h4 className="text-[10px] font-bold uppercase tracking-widest text-foreground">Recommended Actions</h4>
-                      <ul className="text-xs text-text-secondary space-y-1.5 font-light list-disc pl-4">
+                      <ul className="text-xs text-text-secondary space-y-1.5 font-normal list-disc pl-4">
                         {(selectedMuhurat.recommendations || [
                           "Perform Ganesh Puja before commencing ceremonies.",
                           "Charity to local temples is highly recommended.",
@@ -361,7 +361,7 @@ export default function MuhuratPage() {
         {/* ── CTA ── */}
         <div className="p-6 md:p-12 rounded-[2rem] md:rounded-[3rem] bg-secondary/5 border border-secondary/10 backdrop-blur-sm text-center space-y-4 md:space-y-6">
           <h3 className="text-xl md:text-2xl font-serif italic text-foreground">Need a Custom Muhurat?</h3>
-          <p className="text-sm text-text-secondary max-w-xl mx-auto font-light">
+          <p className="text-sm text-text-secondary max-w-xl mx-auto font-normal">
             Our expert astrologers can calculate the perfect Muhurat based on your specific birth chart for maximum success.
           </p>
           <button className="px-8 md:px-10 py-3.5 md:py-4 bg-secondary text-background rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-foreground hover:text-background transition-all">

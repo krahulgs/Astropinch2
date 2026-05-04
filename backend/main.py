@@ -37,6 +37,7 @@ class ChatLogModel(BaseModel):
     session_id: str
     astrologer_id: str
     messages: List[ChatMessage]
+    profile_name: Optional[str] = None
 
 class ChatQueryModel(BaseModel):
     messages: List[ChatMessage]
@@ -90,6 +91,21 @@ class UserUpdate(BaseModel):
     profile_image: Optional[str] = None
     lat: Optional[str] = None
     lon: Optional[str] = None
+    mobile_number: Optional[str] = None
+
+class PublicUserRegister(BaseModel):
+    email: str
+    password: str
+    full_name: str
+    birth_date: str
+    birth_time: str
+    birth_place: str
+    lat: str
+    lon: str
+    profession: str
+    gender: str
+    mobile_number: str
+
 
 app = FastAPI(title="AstroPinch V2.0 Astrology Engine")
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -139,7 +155,7 @@ async def log_chat(data: ChatLogModel):
     return {"status": "success", "file": filename}
 
 @app.get("/consultation/history")
-async def get_all_history():
+async def get_all_history(profile_name: Optional[str] = None):
     from datetime import datetime
     import stat as stat_module
     log_dir = "logs/chat_sessions"
@@ -160,6 +176,10 @@ async def get_all_history():
         try:
             with open(full_path, "r") as f:
                 data = json.load(f)
+            
+            if profile_name and data.get("profile_name") != profile_name:
+                continue
+                
             msgs = data.get("messages", [])
 
             # ── Session datetime from file timestamps ────────────────────────
@@ -1139,8 +1159,15 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     return {"access_token": access_token, "token_type": "bearer", "role": user.role}
 
 @app.get("/users")
-async def list_users(db: Session = Depends(get_db), current_user: models.User = Depends(auth.get_master_user)):
-    users = db.query(models.User).all()
+async def list_users(db: Session = Depends(get_db), current_user_email: str = Depends(auth.get_current_user)):
+    current_user = db.query(models.User).filter(models.User.email == current_user_email).first()
+    if not current_user:
+        raise HTTPException(status_code=404, detail="User not found")
+        
+    if current_user.role == "master":
+        users = db.query(models.User).all()
+    else:
+        users = [current_user]
     return users # FastAPI will serialize the model objects to JSON automatically
 
 @app.post("/users")
@@ -1172,24 +1199,30 @@ async def create_user(user_data: UserCreate, db: Session = Depends(get_db), curr
     return {"status": "success", "user_id": new_user.id}
 
 @app.put("/users/{user_id}")
-async def update_user(user_id: int, user_data: UserUpdate, db: Session = Depends(get_db), current_user: models.User = Depends(auth.get_master_user)):
+async def update_user(user_id: int, user_data: UserUpdate, db: Session = Depends(get_db), current_user: models.User = Depends(auth.get_current_user_obj)):
+    # Allow master users to edit anyone; regular users can only edit themselves
+    if current_user.role != 'master' and current_user.id != user_id:
+        raise HTTPException(status_code=403, detail="Not authorized to edit this profile")
+
     user = db.query(models.User).filter(models.User.id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     
     if user_data.full_name is not None: user.full_name = user_data.full_name
-    if user_data.role is not None: user.role = user_data.role
+    if user_data.role is not None and current_user.role == 'master': user.role = user_data.role
     if user_data.is_active is not None: user.is_active = user_data.is_active
     if user_data.birth_place is not None: user.birth_place = user_data.birth_place
     if user_data.birth_date is not None: user.birth_date = user_data.birth_date
     if user_data.birth_time is not None: user.birth_time = user_data.birth_time
     if user_data.profession is not None: user.profession = user_data.profession
+    if user_data.gender is not None: user.gender = user_data.gender
     if user_data.marital_status is not None: user.marital_status = user_data.marital_status
     if user_data.profile_image is not None: user.profile_image = user_data.profile_image
     if user_data.lat is not None: user.lat = user_data.lat
     if user_data.lon is not None: user.lon = user_data.lon
     
     db.commit()
+    db.refresh(user)
     return {"status": "success"}
 
 @app.delete("/users/{user_id}")
@@ -1600,3 +1633,158 @@ async def reject_astrologer(app_id: int, db: Session = Depends(get_db)):
     app_db.status = "REJECTED"
     db.commit()
     return {"status": "success", "message": "Application rejected."}
+
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import random
+
+def send_welcome_email(to_email: str, full_name: str, otp: str):
+    sender_email = "genpinch@gmail.com"
+    sender_password = os.environ.get("GMAIL_APP_PASSWORD", "")
+    if not sender_password:
+        print("Warning: GMAIL_APP_PASSWORD not set in environment.")
+        return False
+        
+    msg = MIMEMultipart("alternative")
+    msg["Subject"] = "Welcome to AstroPinch V2.0 - Verification"
+    msg["From"] = sender_email
+    msg["To"] = to_email
+
+    html = f"""
+    <html>
+      <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;">
+        <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+          <div style="text-align: center; margin-bottom: 20px;">
+            <h1 style="color: #6366f1; margin: 0;">AstroPinch</h1>
+          </div>
+          <h2 style="color: #2c3e50; text-align: center;">Welcome to AstroPinch! 🌟</h2>
+          <p style="color: #34495e; font-size: 16px;">Dear {full_name},</p>
+          <p style="color: #34495e; font-size: 16px;">We are thrilled to have you join our cosmic community. Your journey into the stars begins now. To ensure the security of your account and complete your registration, please verify your email address.</p>
+          <div style="background-color: #f8f9fa; border-left: 4px solid #6366f1; padding: 15px; margin: 20px 0;">
+            <p style="margin: 0; font-size: 16px; color: #2c3e50;">Your One-Time Password (OTP) is:</p>
+            <h3 style="text-align: center; color: #e74c3c; font-size: 28px; letter-spacing: 4px; margin: 10px 0;">{otp}</h3>
+          </div>
+          <p style="color: #34495e; font-size: 14px;">This OTP is valid for the next 10 minutes. If you did not request this registration, please ignore this email.</p>
+          <p style="color: #34495e; font-size: 16px; margin-top: 30px;">Warm regards,<br><strong>The AstroPinch Team</strong></p>
+        </div>
+      </body>
+    </html>
+    """
+    
+    part = MIMEText(html, "html")
+    msg.attach(part)
+    
+    try:
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
+        server.login(sender_email, sender_password)
+        server.sendmail(sender_email, to_email, msg.as_string())
+        server.quit()
+        return True
+    except Exception as e:
+        print(f"Failed to send email: {e}")
+        return False
+
+PENDING_REGISTRATIONS = {}
+
+@app.post("/auth/register")
+async def register_public(user_data: PublicUserRegister, db: Session = Depends(get_db)):
+    existing = db.query(models.User).filter(models.User.email == user_data.email).first()
+    if existing:
+        raise HTTPException(status_code=400, detail="Email already registered")
+        
+    hashed_pwd = auth.get_password_hash(user_data.password)
+    otp = str(random.randint(100000, 999999))
+    
+    # Store temporarily instead of saving to DB
+    PENDING_REGISTRATIONS[user_data.email] = {
+        "user_data": user_data,
+        "hashed_pwd": hashed_pwd,
+        "otp": otp
+    }
+    
+    # Send email
+    email_sent = send_welcome_email(user_data.email, user_data.full_name, otp)
+    if not email_sent:
+        print("Warning: Email could not be sent. OTP:", otp)
+    
+    return {"status": "success", "message": "OTP generated and sent to email.", "email_sent": email_sent}
+
+class OTPVerify(BaseModel):
+    email: str
+    otp: str
+
+@app.post("/auth/verify-otp")
+async def verify_otp(data: OTPVerify, db: Session = Depends(get_db)):
+    if data.email not in PENDING_REGISTRATIONS:
+        raise HTTPException(status_code=404, detail="No pending registration found for this email")
+        
+    pending = PENDING_REGISTRATIONS[data.email]
+    if pending["otp"] != data.otp:
+        raise HTTPException(status_code=400, detail="Invalid OTP")
+        
+    # Validation passed, save to DB
+    user_data = pending["user_data"]
+    new_user = models.User(
+        email=user_data.email,
+        hashed_password=pending["hashed_pwd"],
+        full_name=user_data.full_name,
+        role="user",
+        birth_place=user_data.birth_place,
+        birth_date=user_data.birth_date,
+        birth_time=user_data.birth_time,
+        lat=user_data.lat,
+        lon=user_data.lon,
+        profession=user_data.profession,
+        gender=user_data.gender,
+        mobile_number=user_data.mobile_number,
+        is_active=True
+    )
+    db.add(new_user)
+    db.commit()
+    
+    # Create profile in profiles.json
+    import uuid
+    import json
+    import os
+    try:
+        profiles_file = "profiles.json"
+        profiles = []
+        if os.path.exists(profiles_file):
+            with open(profiles_file, "r") as f:
+                try:
+                    profiles = json.load(f)
+                except:
+                    pass
+                    
+        # Parse date and time
+        d_parts = user_data.birth_date.split("-")
+        t_parts = user_data.birth_time.split(":")
+        
+        new_profile = {
+            "name": user_data.full_name,
+            "year": int(d_parts[2]) if len(d_parts)==3 else 2000,
+            "month": int(d_parts[1]) if len(d_parts)==3 else 1,
+            "day": int(d_parts[0]) if len(d_parts)==3 else 1,
+            "hour": int(t_parts[0]) if len(t_parts)==2 else 0,
+            "minute": int(t_parts[1]) if len(t_parts)==2 else 0,
+            "lat": float(user_data.lat) if user_data.lat else 0.0,
+            "lon": float(user_data.lon) if user_data.lon else 0.0,
+            "profession": user_data.profession or "General",
+            "gender": user_data.gender or "Other",
+            "birth_place": user_data.birth_place or "",
+            "email": user_data.email or "",
+            "mobile_number": user_data.mobile_number or "",
+            "id": str(uuid.uuid4())
+        }
+        profiles.append(new_profile)
+        with open(profiles_file, "w") as f:
+            json.dump(profiles, f)
+    except Exception as e:
+        print(f"Failed to auto-create profile: {e}")
+    
+    # Remove from pending
+    del PENDING_REGISTRATIONS[data.email]
+    
+    return {"status": "success", "message": "Email verified and registration complete."}

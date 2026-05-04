@@ -12,7 +12,7 @@ export default function VedicSystemPage() {
           <h1 className="text-6xl font-serif italic text-foreground tracking-tight leading-[0.9]">
             The Vedic <br/> <span className="text-secondary">Standard.</span>
           </h1>
-          <p className="text-xl text-text-secondary max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-xl text-text-secondary max-w-2xl mx-auto font-normal leading-relaxed">
             Discover the ancient logic and modern precision behind the AstroPinch Vedic System.
           </p>
         </div>

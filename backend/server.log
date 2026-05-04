@@ -1,140 +1,1061 @@
-/Users/pranjay/Public/AstroPinchV2.0/backend/main.py:90: DeprecationWarning: 
-        on_event is deprecated, use lifespan event handlers instead.
-
-        Read more about it in the
-        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
-        
-  @app.on_event("startup")
 INFO:     Will watch for changes in these directories: ['/Users/pranjay/Public/AstroPinchV2.0/backend']
-INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [9873] using WatchFiles
-hora /Users/pranjay/Public added to system path ['/Users/pranjay/Public/AstroPinchV2.0/backend', '/opt/anaconda3/lib/python313.zip', '/opt/anaconda3/lib/python3.13', '/opt/anaconda3/lib/python3.13/lib-dynload', '/opt/anaconda3/lib/python3.13/site-packages', '/opt/anaconda3/lib/python3.13/site-packages/aeosa', '/Users/pranjay/Public']
-INFO:     Started server process [9875]
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [3454] using StatReload
+INFO:     Started server process [3456]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-INFO:     127.0.0.1:53891 - "GET /users HTTP/1.1" 200 OK
-WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+[Startup] .env loaded. OPENAI_API_KEY present: True
+hora /Users/pranjay/Public added to system path ['/Users/pranjay/Public/AstroPinchV2.0/backend', '/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/bin', '/opt/anaconda3/lib/python313.zip', '/opt/anaconda3/lib/python3.13', '/opt/anaconda3/lib/python3.13/lib-dynload', '/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages', '/Users/pranjay/Public']
+INFO:     127.0.0.1:53042 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53043 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53050 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53055 - "OPTIONS /matching_raw HTTP/1.1" 200 OK
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:AstroPinch.MarriageEngine:AI Guna Audit flagged an issue: CORRECTION: Gana score is 0 but total is 6; according to classical rules, if both are in the same Gana (both Deva/Manushya/Rakshasa), the score should be 6. Bride Bharani is Manushya Gana, Groom Dhanishta is Rakshasa Gana — this is a mismatch, so 0 is correct. However, the total for Gana should be 6, not 0/6 as shown. The score is correct but the display is misleading. Also, Nadi cancellation is incorrectly marked as 'cancelled: True' — Bride Bharani is Madhya Nadi, Groom Dhanishta is Antya Nadi; these are different, so Nadi Dosha is present and NOT cancelled.
+INFO:     127.0.0.1:53055 - "POST /matching_raw HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53064 - "GET /users HTTP/1.1" 200 OK
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+INFO:     127.0.0.1:53064 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53070 - "GET /users HTTP/1.1" 200 OK
+WARNING:AstroPinch.MarriageEngine:AI Guna Audit flagged an issue: CORRECTION: Gana score is 0 but total is 6; according to classical rules, if both are in the same Gana (both Deva/Manushya/Rakshasa), the score should be 6. Bride Bharani is Manushya Gana, Groom Dhanishta is Rakshasa Gana — this is a mismatch, so 0 is correct. However, the total for Gana should be 6, not 0/6 as shown. The score is correct but the display is misleading. Also, Nadi cancellation is incorrectly marked as 'cancelled: True' — Bride Bharani is Madhya Nadi, Groom Dhanishta is Antya Nadi; these are different, so Nadi Dosha is present and NOT cancelled.
+INFO:     127.0.0.1:53070 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53070 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53070 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53064 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53055 - "POST /matching_raw HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53104 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53104 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53120 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53121 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53121 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53121 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53120 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53121 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53121 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53121 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53121 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53120 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53134 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53135 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53172 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53173 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53178 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53179 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53184 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53185 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53195 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53199 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53200 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53203 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53216 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53217 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53224 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53225 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53238 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53239 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53239 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53239 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53239 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53238 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53248 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53249 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53305 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53306 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53306 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53305 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53313 - "OPTIONS /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53316 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53318 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53320 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53322 - "OPTIONS /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53323 - "OPTIONS /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53313 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53316 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53318 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53320 - "OPTIONS /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53322 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='Developer' gender='' language='en'
+INFO:     127.0.0.1:53316 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53320 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='Developer' gender='' language='en'
+INFO:     127.0.0.1:53320 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53323 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53322 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53316 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53313 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53313 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53316 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53313 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53316 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53318 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53320 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53343 - "OPTIONS /users/5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53343 - "PUT /users/5 HTTP/1.1" 403 Forbidden
+INFO:     127.0.0.1:53343 - "PUT /users/5 HTTP/1.1" 403 Forbidden
+INFO:     127.0.0.1:53343 - "PUT /users/5 HTTP/1.1" 403 Forbidden
+INFO:     127.0.0.1:53343 - "PUT /users/5 HTTP/1.1" 403 Forbidden
+INFO:     127.0.0.1:53343 - "PUT /users/5 HTTP/1.1" 403 Forbidden
+INFO:     127.0.0.1:53344 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53356 - "OPTIONS /matching_raw HTTP/1.1" 200 OK
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:AstroPinch.MarriageEngine:AI Guna Audit flagged an issue: CORRECTION: Gana score is incorrect. Bride is in Bharani (Manushya Gana), Groom is in Dhanishta (Rakshasa Gana). Manushya and Rakshasa Gana are neutral (0 points), not 0/6. The total for Gana should be 0, but the breakdown shows 'received': 0, 'total': 6, which is correct in value but the total points for Gana are 6, not 0/6 as a fraction. The score is mathematically correct (0 out of 6). However, the Gana Dosha cancellation is incorrectly flagged. Bride (Manushya) and Groom (Rakshasa) do not form a Dosha; they are neutral. Therefore, 'gana': {'present': True} is wrong. It should be False.
+INFO:     127.0.0.1:53356 - "POST /matching_raw HTTP/1.1" 200 OK
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:AstroPinch.MarriageEngine:AI Guna Audit flagged an issue: CORRECTION: Gana score is incorrect. Bride is in Bharani (Manushya Gana), Groom is in Dhanishta (Rakshasa Gana). Manushya and Rakshasa Gana are neutral (0 points), not 0/6 as shown (which implies a mismatch with no cancellation). The total should be 0, but the breakdown format is misleading; the received score of 0 is correct, but the total of 6 implies a maximum possible, which is fine. However, the Nadi cancellation is incorrect: Bride Bharani (Madhya Nadi) and Groom Dhanishta (Antya Nadi) are not the same Nadi, so Nadi Dosha is not present. The Dosha Status incorrectly flags Nadi as present.
+INFO:     127.0.0.1:53377 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53377 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53371 - "POST /matching_raw HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53385 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53387 - "POST /upload-avatar HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53389 - "GET /static/avatars/IMG_2247.jpeg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53397 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53399 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53399 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53399 - "GET /users HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'main.py'. Reloading...
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [9875]
-INFO:     Started server process [9895]
+INFO:     Finished server process [3456]
+INFO:     Started server process [3693]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-INFO:     127.0.0.1:54210 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54265 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54290 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:54840 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55776 - "POST /token HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55778 - "OPTIONS /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55779 - "OPTIONS /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55778 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55778 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55783 - "GET /static/avatars/IMG_0152.jpeg HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55776 - "OPTIONS /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55788 - "OPTIONS /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55776 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55776 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55793 - "GET /static/avatars/IMG_2249.jpeg HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55783 - "GET /static/avatars/IMG_1394.jpeg HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55794 - "GET /static/avatars/IMG_3814.jpeg HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55778 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55790 - "OPTIONS /api/profiles HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55823 - "OPTIONS /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55825 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55790 - "OPTIONS /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55827 - "OPTIONS /moon-chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55823 - "OPTIONS /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55829 - "POST /api/profiles HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55790 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55827 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55825 - "OPTIONS /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55830 - "POST /api/profiles HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55823 - "OPTIONS /moon-chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55829 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55830 - "POST /moon-chart HTTP/1.1" 200 OK
-Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='Developer' language='en'
-INFO:     127.0.0.1:55790 - "POST /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55827 - "POST /chart HTTP/1.1" 200 OK
-Guide Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='Developer' language='en'
-INFO:     127.0.0.1:55825 - "POST /ai/predict HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55823 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55829 - "POST /moon-chart HTTP/1.1" 200 OK
-WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+[Startup] .env loaded. OPENAI_API_KEY present: True
+hora /Users/pranjay/Public added to system path ['/Users/pranjay/Public/AstroPinchV2.0/backend', '/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/bin', '/opt/anaconda3/lib/python313.zip', '/opt/anaconda3/lib/python3.13', '/opt/anaconda3/lib/python3.13/lib-dynload', '/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages', '/Users/pranjay/Public']
+INFO:     127.0.0.1:53409 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53409 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53418 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53418 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53418 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53443 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53451 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53453 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53453 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53453 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53463 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53463 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53455 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53455 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53455 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53455 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='Developer' gender='Male' language='en'
+INFO:     127.0.0.1:53477 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53480 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='Developer' gender='Male' language='en'
+INFO:     127.0.0.1:53480 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53455 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53472 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53472 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53455 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53477 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53476 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53478 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53480 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53489 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53491 - "PUT /users/5 HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 56, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/applications.py", line 1159, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 96, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 154, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/main.py", line 1204, in update_user
+    if current_user.role != 'master' and current_user.id != user_id:
+       ^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'role'
+INFO:     127.0.0.1:53493 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53511 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53517 - "PUT /users/5 HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 56, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/applications.py", line 1159, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 96, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 154, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/main.py", line 1204, in update_user
+    if current_user.role != 'master' and current_user.id != user_id:
+       ^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'role'
+INFO:     127.0.0.1:53521 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53523 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53525 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53527 - "PUT /users/5 HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 56, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/applications.py", line 1159, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 96, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 154, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/main.py", line 1204, in update_user
+    if current_user.role != 'master' and current_user.id != user_id:
+       ^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'role'
+INFO:     127.0.0.1:53525 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53525 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53537 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53537 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53537 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53539 - "PUT /users/5 HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 56, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/applications.py", line 1159, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 96, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 154, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/main.py", line 1204, in update_user
+    if current_user.role != 'master' and current_user.id != user_id:
+       ^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'role'
+INFO:     127.0.0.1:53550 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53550 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53550 - "GET /users HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'auth.py'. Reloading...
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [9895]
-INFO:     Started server process [10121]
+INFO:     Finished server process [3693]
+INFO:     Started server process [3821]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-INFO:     127.0.0.1:55853 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55853 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55853 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55853 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55893 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55896 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55898 - "OPTIONS /year-book HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55900 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55902 - "POST /calculate HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55903 - "OPTIONS /year-book HTTP/1.1" 200 OK
-YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
-INFO:     127.0.0.1:55896 - "POST /year-book HTTP/1.1" 200 OK
-YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
-INFO:     127.0.0.1:55902 - "POST /year-book HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55973 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55997 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55998 - "POST /calculate HTTP/1.1" 200 OK
-YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
-INFO:     127.0.0.1:55999 - "POST /year-book HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55973 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55999 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55998 - "POST /calculate HTTP/1.1" 200 OK
-YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
-INFO:     127.0.0.1:55997 - "POST /year-book HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56002 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56004 - "POST /calculate HTTP/1.1" 200 OK
-YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
-INFO:     127.0.0.1:56005 - "POST /year-book HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55973 - "GET /users HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56005 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56004 - "POST /calculate HTTP/1.1" 200 OK
-YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
-INFO:     127.0.0.1:56002 - "POST /year-book HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55997 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55998 - "POST /calculate HTTP/1.1" 200 OK
-YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
-INFO:     127.0.0.1:55999 - "POST /year-book HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56005 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55998 - "POST /calculate HTTP/1.1" 200 OK
-YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
-INFO:     127.0.0.1:55997 - "POST /year-book HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55997 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55998 - "POST /calculate HTTP/1.1" 200 OK
-YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
-INFO:     127.0.0.1:56005 - "POST /year-book HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56005 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55997 - "POST /calculate HTTP/1.1" 200 OK
-YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
-INFO:     127.0.0.1:55998 - "POST /year-book HTTP/1.1" 200 OK
-INFO:     127.0.0.1:56002 - "POST /chart HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55999 - "POST /calculate HTTP/1.1" 200 OK
-YearBook Request: name='Anonymous' year=1997 month=10 day=17 hour=19 minute=55 lat=31.326 lon=75.5762 timezone='Asia/Kolkata' target_year=2026 profession='General' language='English'
-INFO:     127.0.0.1:56004 - "POST /year-book HTTP/1.1" 200 OK
-INFO:     127.0.0.1:55973 - "GET /users HTTP/1.1" 200 OK
-WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+[Startup] .env loaded. OPENAI_API_KEY present: True
+hora /Users/pranjay/Public added to system path ['/Users/pranjay/Public/AstroPinchV2.0/backend', '/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/bin', '/opt/anaconda3/lib/python313.zip', '/opt/anaconda3/lib/python3.13', '/opt/anaconda3/lib/python3.13/lib-dynload', '/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages', '/Users/pranjay/Public']
+INFO:     127.0.0.1:53559 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53562 - "PUT /users/5 HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/uvicorn/protocols/http/h11_impl.py", line 415, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/uvicorn/middleware/proxy_headers.py", line 56, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/applications.py", line 1159, in __call__
+    await super().__call__(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/applications.py", line 90, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 96, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/cors.py", line 154, in simple_response
+    await self.app(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/pranjay/Public/AstroPinchV2.0/backend/main.py", line 1204, in update_user
+    if current_user.role != 'master' and current_user.id != user_id:
+       ^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'role'
+INFO:     127.0.0.1:53559 - "GET /users HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'main.py'. Reloading...
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [10121]
-INFO:     Started server process [10212]
+INFO:     Finished server process [3821]
+INFO:     Started server process [3832]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
-INFO:     Shutting down
-INFO:     Waiting for application shutdown.
-INFO:     Application shutdown complete.
-INFO:     Finished server process [10212]
-INFO:     Started server process [10397]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
+[Startup] .env loaded. OPENAI_API_KEY present: True
+hora /Users/pranjay/Public added to system path ['/Users/pranjay/Public/AstroPinchV2.0/backend', '/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/bin', '/opt/anaconda3/lib/python313.zip', '/opt/anaconda3/lib/python3.13', '/opt/anaconda3/lib/python3.13/lib-dynload', '/Users/pranjay/Public/AstroPinchV2.0/backend/.venv/lib/python3.13/site-packages', '/Users/pranjay/Public']
+INFO:     127.0.0.1:53568 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "PUT /users/5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53583 - "POST /upload-avatar HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53581 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53585 - "GET /static/avatars/IMG_2247.jpeg HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53583 - "PUT /users/5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53583 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53587 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53591 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53591 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53600 - "GET /static/avatars/IMG_2247.jpeg HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:53603 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53603 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53603 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53603 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:53615 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53618 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:53618 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53603 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53605 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53613 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53615 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53618 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53617 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53635 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53647 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53649 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53691 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53695 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:53701 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53701 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53701 - "POST /calculate HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:53705 - "GET /static/avatars/IMG_2247.jpeg HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:53691 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53697 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53697 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53695 - "POST /chart HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:53697 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53697 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53706 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53699 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53695 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53701 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53702 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53697 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53756 - "GET /users HTTP/1.1" 200 OK
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+INFO:     127.0.0.1:53756 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53780 - "GET /static/avatars/IMG_2247.jpeg HTTP/1.1" 304 Not Modified
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:AstroPinch.MarriageEngine:AI Guna Audit flagged an issue: CORRECTION: Gana score is 0 but total is 6; according to classical rules, if both are in the same Gana (both Deva/Manushya/Rakshasa), the score should be 6. Bride Bharani is Manushya Gana, Groom Dhanishta is Rakshasa Gana — this is a mismatch, so 0 is correct. However, the total for Gana should be 6, not 0/6 as shown. The score is correct but the display is misleading. Also, Nadi cancellation is incorrectly marked as 'cancelled: True' — Bride Bharani is Madhya Nadi, Groom Dhanishta is Antya Nadi; these are different, so Nadi Dosha is present and NOT cancelled.
+WARNING:AstroPinch.MarriageEngine:AI Guna Audit flagged an issue: CORRECTION: Gana score is 0 but total is 6; according to classical rules, if both are in the same Gana (both Deva/Manushya/Rakshasa), the score should be 6. Bride Bharani is Manushya Gana, Groom Dhanishta is Rakshasa Gana — this is a mismatch, so 0 is correct. However, the total for Gana should be 6, not 0/6 as shown. The score is correct but the display is misleading. Also, Nadi cancellation is incorrectly marked as 'cancelled: True' — Bride Bharani is Madhya Nadi, Groom Dhanishta is Antya Nadi; these are different, so Nadi Dosha is present and NOT cancelled.
+WARNING:AstroPinch.MarriageEngine:AI Guna Audit flagged an issue: CORRECTION: Gana score is 0 but total is 6; according to classical rules, if both are in the same Gana (both Deva/Manushya/Rakshasa), the score should be 6. Bride Bharani is Manushya Gana, Groom Dhanishta is Rakshasa Gana — this is a mismatch, so 0 is correct. However, the total for Gana should be 6, not 0/6 as shown. The score is correct but the display is misleading. Also, Nadi cancellation is incorrectly marked as 'cancelled: True' — Bride Bharani is Madhya Nadi, Groom Dhanishta is Antya Nadi; these are different, so Nadi Dosha is present and NOT cancelled.
+INFO:     127.0.0.1:53756 - "GET /users HTTP/1.1" 200 OK
+WARNING:AstroPinch.MarriageEngine:AI Guna Audit flagged an issue: CORRECTION: Gana score is 0 but total is 6; according to classical rules, if both are Manushya Gana (Bharani is Manushya, Dhanishta is Manushya), the score should be 6, not 0. Also, Nadi score is 0 but total is 8; if Nadi dosha is present and cancelled, the score should be 8, not 0.
+WARNING:AstroPinch.MarriageEngine:AI Guna Audit flagged an issue: CORRECTION: Gana score is incorrect. Bride is in Bharani (Manushya Gana), Groom is in Dhanishta (Rakshasa Gana). Manushya and Rakshasa Gana are neutral (0 points), not 0/6 as shown (which implies a mismatch penalty). The total should be 0, but the breakdown format is misleading; the received score of 0 is correct, but the total of 6 implies maximum points are possible, which is not standard. Also, Nadi cancellation is incorrectly flagged as cancelled. Bride Bharani (Madhya Nadi) and Groom Dhanishta (Antya Nadi) are not the same Nadi, so no Nadi Dosha exists. Therefore, Nadi Dosha should not be marked as present.
+WARNING:AstroPinch.MarriageEngine:AI Guna Audit flagged an issue: CORRECTION: Gana score is 0 but total is 6; according to classical rules, if both are in the same Gana (both Deva/Manushya/Rakshasa), the score should be 6. Bride Bharani is Manushya Gana, Groom Dhanishta is Rakshasa Gana — this is a mismatch, so 0 is correct. However, the total for Gana should be 6, not 0/6 as shown. The score is correct but the display is misleading. Also, Nadi cancellation is incorrectly marked as 'cancelled: True' — Bride Bharani is Madhya Nadi, Groom Dhanishta is Antya Nadi; these are different, so Nadi Dosha is present and NOT cancelled.
+INFO:     127.0.0.1:53782 - "POST /matching_raw HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53786 - "POST /matching_raw HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53784 - "POST /matching_raw HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53811 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53814 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53814 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53816 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53816 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53878 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53878 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53880 - "GET /static/avatars/IMG_2247.jpeg HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:53889 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53891 - "OPTIONS /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53893 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53891 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53896 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53898 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53899 - "OPTIONS /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53891 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53896 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53898 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53899 - "OPTIONS /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53891 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53898 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53899 - "OPTIONS /calculate HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:53898 - "OPTIONS /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53899 - "POST /calculate HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:53896 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53896 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53889 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53902 - "POST /chart HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:53893 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53893 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53889 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53899 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53899 - "OPTIONS /matching_raw HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53899 - "OPTIONS /matching_raw HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53899 - "OPTIONS /matching_raw HTTP/1.1" 200 OK
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+INFO:     127.0.0.1:53891 - "POST /ai/predict HTTP/1.1" 200 OK
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+INFO:     127.0.0.1:53902 - "POST /ai/predict HTTP/1.1" 200 OK
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:AstroPinch.MarriageEngine:AI Guna Audit flagged an issue: CORRECTION: Gana score is incorrect. Bride is in Bharani (Manushya Gana), Groom is in Dhanishta (Rakshasa Gana). Manushya and Rakshasa Gana are not compatible, so the received score should be 0, not 0. The total is 6, so 0/6 is correct as shown. However, the Gana Dosha cancellation is incorrectly flagged as 'cancelled: True'. Gana Dosha is present (Manushya vs Rakshasa) and there is no standard cancellation for this pairing (e.g., same Nadi or specific exceptions do not apply here). Therefore, Gana Dosha should remain uncancelled.
+WARNING:AstroPinch.MarriageEngine:AI Guna Audit flagged an issue: CORRECTION: Gana score is 0 but total is 6; according to classical rules, if both are in the same Gana (both Deva/Manushya/Rakshasa), the score should be 6. Bride Bharani is Manushya Gana, Groom Dhanishta is Rakshasa Gana — this is a mismatch, so 0 is correct. However, the total for Gana should be 6, not 0/6 as shown. The score is correct but the display is misleading. Also, Nadi cancellation is incorrectly marked as 'cancelled: True' — Bride Bharani is Madhya Nadi, Groom Dhanishta is Antya Nadi; these are different, so Nadi Dosha is present and NOT cancelled.
+WARNING:AstroPinch.MarriageEngine:AI Guna Audit flagged an issue: CORRECTION: Gana score is 0 but total is 6; according to classical rules, if both are in the same Gana (both Deva/Manushya/Rakshasa), the score should be 6. Bride Bharani is Manushya Gana, Groom Dhanishta is Rakshasa Gana — this is a mismatch, so 0 is correct. However, the total for Gana should be 6, not 0/6 as shown. The score is correct but the display is misleading. Also, Nadi cancellation is incorrectly marked as 'cancelled: True' — Bride Bharani is Madhya Nadi, Groom Dhanishta is Antya Nadi; these are different, so Nadi Dosha is present and NOT cancelled.
+INFO:     127.0.0.1:53896 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53898 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53893 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53891 - "POST /matching_raw HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53899 - "POST /matching_raw HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53902 - "POST /matching_raw HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53942 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54168 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54257 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54262 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54266 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54266 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54254 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54267 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54254 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54275 - "GET /static/avatars/IMG_2247.jpeg HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54258 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54258 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54257 - "POST /chart HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54254 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54258 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54258 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54262 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54260 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54254 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54257 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54264 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54266 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54258 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54296 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54296 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54258 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54308 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54258 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54258 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54304 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54304 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54311 - "POST /chart HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54304 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54304 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54308 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54306 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54311 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54309 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54258 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54326 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54304 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54356 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54358 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54365 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54358 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54358 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54356 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54356 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54362 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54362 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54368 - "POST /chart HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54362 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54362 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54364 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54356 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54364 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54385 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54364 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54388 - "GET /static/avatars/IMG_2247.jpeg HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54364 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54390 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54390 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54381 - "POST /chart HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54390 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54390 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54383 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54385 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54381 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54364 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54386 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54390 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54402 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54411 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54411 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54425 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54426 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54426 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54435 - "GET /static/avatars/IMG_2247.jpeg HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54438 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54444 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54438 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54438 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54447 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54447 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54440 - "POST /chart HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54447 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54447 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54443 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54444 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54440 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54445 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54438 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54447 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54486 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54486 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54447 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54490 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54492 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54492 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54438 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54438 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54447 - "POST /chart HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54438 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54438 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54490 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54445 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54447 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54492 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54491 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54438 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54514 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54516 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54538 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54673 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54751 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54811 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54821 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54831 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54833 - "GET /static/avatars/IMG_2247.jpeg HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:54836 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54842 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54836 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54836 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54837 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54837 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54845 - "POST /chart HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54837 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54837 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54841 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54842 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54845 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54843 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54836 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54837 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54870 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54870 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54880 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54886 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54880 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54880 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54882 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54882 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54889 - "POST /chart HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54882 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54882 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54884 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54886 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54889 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54880 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54887 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54882 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54909 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54915 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='Male' language='en'
+INFO:     127.0.0.1:54921 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54917 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54909 - "OPTIONS /astropinch_daily HTTP/1.1" 200 OK
+DEBUG: Received Daily Horoscope request for Rahul Kumar
+INFO:     127.0.0.1:54919 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54922 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54909 - "POST /astropinch_daily HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54939 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54940 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54939 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54939 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54940 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54940 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54939 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54947 - "OPTIONS /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54948 - "GET /muhurat/vivah?year=2026&month=5&type=Vivah HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54950 - "OPTIONS /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54947 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54950 - "POST /panchang HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54952 - "GET /muhurat/vivah?year=2026&month=5&type=Vivah HTTP/1.1" 200 OK

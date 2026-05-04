@@ -13,7 +13,7 @@ export default function MangalDoshaPage() {
           <h1 className="text-6xl font-serif italic text-foreground tracking-tight">
             Understanding <br/> <span className="text-alert">Mangal Dosha.</span>
           </h1>
-          <p className="text-xl text-text-secondary max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-xl text-text-secondary max-w-2xl mx-auto font-normal leading-relaxed">
             The definitive guide to Kuja Dosha, its impact on marital harmony, and the science of Vedic cancellations (Parihara).
           </p>
         </div>

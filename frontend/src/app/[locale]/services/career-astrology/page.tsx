@@ -13,7 +13,7 @@ export default function CareerAstrologyPage() {
           <h1 className="text-6xl font-serif italic text-foreground tracking-tight">
             The Astrology <br/> <span className="text-primary">of Career.</span>
           </h1>
-          <p className="text-xl text-text-secondary max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-xl text-text-secondary max-w-2xl mx-auto font-normal leading-relaxed">
             Navigate your professional journey using the D-10 Dashamansha chart and the precision of Vedic timing.
           </p>
         </div>

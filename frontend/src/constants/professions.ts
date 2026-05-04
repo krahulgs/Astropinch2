@@ -1,81 +1,32 @@
-export const PROFESSION_CATEGORIES = {
-  "IT & TECHNOLOGY": [
-    "Software Engineer / IT Professional",
-    "Database Administrator",
-    "AI & Machine Learning engineer",
-    "CTO/CIO",
-    "Network Engineer"
-  ],
-  "BUSINESS & ENTREPRENEURSHIP": [
-    "Business Owner / Founder / Entrepreneur",
-    "Startup Founder",
-    "Trader (Commodity / Equity / Forex / Crypto)",
-    "Stock Market Investor",
-    "Real Estate Developer / Investor",
-    "Importer / Exporter",
-    "Retailer / Shop Owner",
-    "Manufacturer"
-  ],
-  "FINANCE & BANKING": [
-    "Investment Banker",
-    "Financial Analyst",
-    "Chartered Accountant / CPA",
-    "Insurance Professional",
-    "Loan / Credit Officer",
-    "Wealth Manager / Portfolio Manager"
-  ],
-  "CORPORATE & PROFESSIONALS": [
-    "Product Manager",
-    "Marketing / Sales Professional",
-    "HR Professional",
-    "Lawyer / Legal Consultant",
-    "Architect / Civil Engineer",
-    "Consultant (Management / Strategy)",
-    "Executive / Senior Manager / CXO"
-  ],
-  "HEALTHCARE & WELLNESS": [
-    "Doctor / Physician / Surgeon",
-    "Dentist",
-    "Psychologist / Therapist",
-    "Nurse / Healthcare Worker",
-    "Pharmacist",
-    "Ayurvedic / Naturopathy Practitioner",
-    "Yoga / Fitness Instructor"
-  ],
-  "CREATIVE & MEDIA": [
-    "Artist / Painter / Sculptor",
-    "Writer / Author / Journalist",
-    "Filmmaker / Director",
-    "Musician / Performer",
-    "Actor / Model",
-    "Graphic Designer / UI-UX Designer",
-    "Content Creator / Influencer",
-    "Photographer / Videographer"
-  ],
-  "EDUCATION & RESEARCH": [
-    "Student (School / College / Competitive Exam)",
-    "Teacher / Professor / Educator",
-    "Researcher / Scientist",
-    "Academic Administrator"
-  ],
-  "GOVERNMENT & PUBLIC SERVICE": [
-    "Government Employee / Civil Servant",
-    "Police / Military / Defence Personnel",
-    "Politician / Public Representative",
-    "Judge / Judicial Officer"
-  ],
-  "SPIRITUAL & ALTERNATIVE": [
-    "Astrologer / Jyotishi",
-    "Priest / Pandit / Religious Leader",
-    "Spiritual Coach / Healer"
-  ],
-  "SKILLED TRADES & OPERATIONS": [
-    "Driver / Pilot / Transport Professional",
-    "Contractor / Construction Worker",
-    "Farmer / Agricultural Professional",
-    "Chef / Restaurateur / Hospitality Professional",
-    "Technician / Mechanic / Engineer (Field)"
-  ]
-};
+// Vedic planet-based profession categories used across AstroPinch
+// Each category is stored as the profession value directly
 
-export const ALL_PROFESSIONS = Object.values(PROFESSION_CATEGORIES).flat();
+export const PROFESSION_OPTIONS = [
+  { group: '☀️ Sun — Authority & Power',     value: 'Government / Defence / Politics' },
+  { group: '☿ Mercury — Intellect & Commerce', value: 'Business / Trade / Sales' },
+  { group: '☿ Mercury — Intellect & Commerce', value: 'IT / Technology / Engineering' },
+  { group: '♂ Mars — Action & Surgery',       value: 'Medicine / Surgery / Healthcare' },
+  { group: '♂ Mars — Action & Surgery',       value: 'Real Estate / Construction' },
+  { group: '♃ Jupiter — Wisdom & Law',        value: 'Finance / Banking / Investments' },
+  { group: '♃ Jupiter — Wisdom & Law',        value: 'Law / Judiciary' },
+  { group: '♃ Jupiter — Wisdom & Law',        value: 'Education / Research / Writing' },
+  { group: '♀ Venus — Art & Beauty',          value: 'Art / Music / Entertainment' },
+  { group: '☽ Moon — Nurturing & Nature',     value: 'Agriculture / Nature / Environment' },
+  { group: '☽ Moon — Nurturing & Nature',     value: 'Homemaker' },
+  { group: '♄ Saturn — Labour & Structure',   value: 'Transportation / Logistics' },
+  { group: '☊ Ketu — Spirituality & Mysticism', value: 'Spirituality / Astrology / Religion' },
+  { group: 'Other',                            value: 'Student' },
+  { group: 'Other',                            value: 'Other' },
+];
+
+// Grouped version for <optgroup> rendering
+export const PROFESSION_CATEGORIES: Record<string, string[]> = PROFESSION_OPTIONS.reduce(
+  (acc, { group, value }) => {
+    if (!acc[group]) acc[group] = [];
+    acc[group].push(value);
+    return acc;
+  },
+  {} as Record<string, string[]>
+);
+
+export const ALL_PROFESSIONS = PROFESSION_OPTIONS.map(p => p.value);

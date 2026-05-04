@@ -94,7 +94,7 @@ export default function HelpCentrePage() {
                         </button>
                         {isOpen && (
                           <div className="px-8 pb-8 animate-in slide-in-from-top-4 duration-300">
-                            <p className="text-xs text-text-secondary leading-relaxed font-light">{item.a}</p>
+                            <p className="text-xs text-text-secondary leading-relaxed font-normal">{item.a}</p>
                           </div>
                         )}
                       </div>
@@ -112,7 +112,7 @@ export default function HelpCentrePage() {
             <MessageCircle size={32} />
           </div>
           <h3 className="text-3xl font-serif italic">Still need guidance?</h3>
-          <p className="text-sm text-white/80 max-w-md mx-auto font-light">
+          <p className="text-sm text-white/80 max-w-md mx-auto font-normal">
             Our support gurus are available 24/7 to help you with technical or astrological queries.
           </p>
           <button className="px-12 h-14 rounded-full bg-white text-primary text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all shadow-xl">

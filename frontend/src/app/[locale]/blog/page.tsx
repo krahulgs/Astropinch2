@@ -63,7 +63,7 @@ export default function BlogHubPage() {
                The Quantum <br/> <span className="text-primary italic">Jyotish Project.</span>
              </h1>
              
-             <p className="text-lg md:text-2xl opacity-80 font-light leading-relaxed max-w-2xl">
+             <p className="text-lg md:text-2xl opacity-80 font-normal leading-relaxed max-w-2xl">
                Exploring the intersection of quantum entanglement and the Vedic concept of planetary drishti (aspects).
              </p>
              
@@ -115,7 +115,7 @@ export default function BlogHubPage() {
                       {post.title}
                     </h3>
                     
-                    <p className="text-sm text-text-secondary leading-relaxed font-light line-clamp-3">
+                    <p className="text-sm text-text-secondary leading-relaxed font-normal line-clamp-3">
                       {post.excerpt}
                     </p>
                     
@@ -146,7 +146,7 @@ export default function BlogHubPage() {
               <h2 className="text-4xl md:text-6xl font-serif italic text-foreground tracking-tight leading-tight">
                 Join the <span className="text-primary">Cosmic Weekly.</span>
               </h2>
-              <p className="text-lg text-text-secondary font-light leading-relaxed">
+              <p className="text-lg text-text-secondary font-normal leading-relaxed">
                 Join 50,000+ seekers who receive our AI-driven transit updates and research summaries every Sunday.
               </p>
               

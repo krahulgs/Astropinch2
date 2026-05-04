@@ -131,7 +131,7 @@ export default function SoulboundResultPage() {
             <h1 className="text-5xl md:text-7xl font-serif italic text-foreground tracking-tight">
               Verdict: <span className="text-pink-500">{data.verdict}</span>
             </h1>
-            <p className="text-xl md:text-2xl text-text-secondary font-light max-w-2xl mx-auto leading-relaxed italic">
+            <p className="text-xl md:text-2xl text-text-secondary font-normal max-w-2xl mx-auto leading-relaxed italic">
               "{data.verdict_tagline}"
             </p>
           </div>
@@ -171,7 +171,7 @@ export default function SoulboundResultPage() {
                <Heart size={32} />
              </div>
              <h2 className="text-4xl md:text-5xl font-serif italic text-foreground">The Celestial Synthesis</h2>
-             <p className="text-xl md:text-3xl text-foreground/80 font-light leading-relaxed max-w-4xl mx-auto font-serif italic">
+             <p className="text-xl md:text-3xl text-foreground/80 font-normal leading-relaxed max-w-4xl mx-auto font-serif italic">
                {data.romantic_summary}
              </p>
            </div>
@@ -189,7 +189,7 @@ export default function SoulboundResultPage() {
                <p className="text-3xl font-serif italic text-pink-500">{data.vedic.guna_score}</p>
                <p className="text-[10px] font-bold uppercase tracking-widest text-pink-500/60 mt-1">Total Compatibility</p>
              </div>
-             <p className="text-text-secondary text-sm leading-relaxed font-light">{data.vedic.summary}</p>
+             <p className="text-text-secondary text-sm leading-relaxed font-normal">{data.vedic.summary}</p>
            </div>
 
            {/* Astrology Section */}
@@ -202,7 +202,7 @@ export default function SoulboundResultPage() {
                <p className="text-lg font-medium text-blue-500">{data.astrology.element_match}</p>
                <p className="text-[10px] font-bold uppercase tracking-widest text-blue-500/60 mt-1">Element Synergy</p>
              </div>
-             <p className="text-text-secondary text-sm leading-relaxed font-light">{data.astrology.summary}</p>
+             <p className="text-text-secondary text-sm leading-relaxed font-normal">{data.astrology.summary}</p>
            </div>
 
            {/* Numerology Section */}
@@ -221,7 +221,7 @@ export default function SoulboundResultPage() {
                   <p className="text-[8px] font-bold uppercase tracking-widest text-purple-500/60">Partner 2</p>
                 </div>
              </div>
-             <p className="text-text-secondary text-sm leading-relaxed font-light">{data.numerology.summary}</p>
+             <p className="text-text-secondary text-sm leading-relaxed font-normal">{data.numerology.summary}</p>
            </div>
 
            {/* Psych Section */}
@@ -254,7 +254,7 @@ export default function SoulboundResultPage() {
                {(data.strengths || []).map((s, i) => (
                  <li key={i} className="flex gap-4 items-start group">
                    <span className="text-green-500 mt-1">•</span>
-                   <p className="text-text-secondary font-light group-hover:text-foreground transition-colors">{s}</p>
+                   <p className="text-text-secondary font-normal group-hover:text-foreground transition-colors">{s}</p>
                  </li>
                ))}
              </ul>
@@ -268,7 +268,7 @@ export default function SoulboundResultPage() {
                {(data.challenges || []).map((c, i) => (
                  <li key={i} className="flex gap-4 items-start group">
                    <span className="text-red-500 mt-1">•</span>
-                   <p className="text-text-secondary font-light group-hover:text-foreground transition-colors">{c}</p>
+                   <p className="text-text-secondary font-normal group-hover:text-foreground transition-colors">{c}</p>
                  </li>
                ))}
              </ul>
@@ -279,13 +279,13 @@ export default function SoulboundResultPage() {
         <div className="p-12 md:p-16 rounded-[4rem] bg-surface border border-border space-y-12">
           <div className="text-center space-y-4">
             <h2 className="text-4xl font-serif italic text-foreground">Guided Relationship Path</h2>
-            <p className="text-text-secondary font-light">Practical wisdom to nurture your unique celestial bond.</p>
+            <p className="text-text-secondary font-normal">Practical wisdom to nurture your unique celestial bond.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {(data.advice || []).map((a, i) => (
               <div key={i} className="p-8 rounded-[2.5rem] bg-foreground/5 space-y-4 hover:bg-foreground/10 transition-all border border-transparent hover:border-pink-500/20">
                 <span className="text-2xl font-serif italic text-pink-500">0{i+1}</span>
-                <p className="text-sm text-foreground leading-relaxed font-light">{a}</p>
+                <p className="text-sm text-foreground leading-relaxed font-normal">{a}</p>
               </div>
             ))}
           </div>

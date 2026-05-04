@@ -2,9 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from '@/i18n/routing';
-import { Clock, MessageSquare, ChevronRight, ArrowLeft, Calendar, User } from 'lucide-react';
+import { Clock, MessageSquare, ChevronRight, ArrowLeft, Calendar, User, ChevronDown } from 'lucide-react';
+import { useActiveProfile } from '@/hooks/useActiveProfile';
 
 export default function HistoryPage() {
+  const { profiles, activeProfileId, setActiveProfileId, parsedActive, isLoggedIn, loading: profileLoading } = useActiveProfile();
   const [history, setHistory] = useState<any[]>([]);
   const [selectedSession, setSelectedSession] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
@@ -20,12 +22,19 @@ export default function HistoryPage() {
   };
 
   useEffect(() => {
-    fetchHistory();
-  }, []);
+    if (!profileLoading) {
+      fetchHistory();
+    }
+  }, [profileLoading, activeProfileId]);
 
   const fetchHistory = async () => {
+    setLoading(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/consultation/history`);
+      const url = new URL(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/consultation/history`);
+      if (parsedActive?.name) {
+        url.searchParams.append('profile_name', parsedActive.name);
+      }
+      const res = await fetch(url.toString());
       const data = await res.json();
       setHistory(data);
     } catch (e) {
@@ -72,8 +81,26 @@ export default function HistoryPage() {
             </h1>
           </div>
           {!selectedSession && (
-             <div className="px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-widest">
-                {history.length} Saved Sessions
+             <div className="flex items-center gap-4">
+                {isLoggedIn && profiles.length > 0 && (
+                  <div className="relative">
+                    <select
+                      value={activeProfileId || ''}
+                      onChange={(e) => setActiveProfileId(parseInt(e.target.value))}
+                      className="h-10 pl-4 pr-10 rounded-full bg-surface border border-border text-xs font-bold text-foreground focus:border-primary outline-none transition-all appearance-none cursor-pointer"
+                    >
+                      <option value="">All Consultations</option>
+                      {profiles.map(p => {
+                        const pp = JSON.parse(p.profile_data || '{}');
+                        return <option key={p.id} value={p.id} className="bg-background">{pp.name || 'Unknown'}</option>;
+                      })}
+                    </select>
+                    <ChevronDown size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none" />
+                  </div>
+                )}
+                <div className="px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-widest hidden md:block">
+                  {history.length} Saved
+                </div>
              </div>
           )}
         </div>
@@ -168,7 +195,7 @@ export default function HistoryPage() {
                         <p className="text-[9px] font-medium text-text-secondary/60 mt-0.5">{item.session_time || ''}</p>
                       </div>
                     </div>
-                    <p className="text-sm text-text-secondary line-clamp-1 mt-1 italic font-light">"{item.last_message}"</p>
+                    <p className="text-sm text-text-secondary line-clamp-1 mt-1 italic font-normal">"{item.last_message}"</p>
 
                     <div className="flex items-center gap-3 mt-3 flex-wrap">
                       <div className="flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest text-primary">

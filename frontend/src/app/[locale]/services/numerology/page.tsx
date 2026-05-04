@@ -13,7 +13,7 @@ export default function NumerologyPage() {
           <h1 className="text-6xl font-serif italic text-foreground tracking-tight">
             The Geometry of <br/> <span className="text-secondary">Numbers.</span>
           </h1>
-          <p className="text-xl text-text-secondary max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-xl text-text-secondary max-w-2xl mx-auto font-normal leading-relaxed">
             Unlock the hidden vibration of your name and birth date through the ancient Pythagorean and Chaldean systems.
           </p>
         </div>

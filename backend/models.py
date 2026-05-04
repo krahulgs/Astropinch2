@@ -19,6 +19,8 @@ class User(Base):
     marital_status = Column(String, nullable=True)
     profile_image = Column(String, nullable=True) # URL or path to image
     is_active = Column(Boolean, default=True)
+    mobile_number = Column(String, nullable=True)
+    otp = Column(String, nullable=True)
 
 class AstrologerApplication(Base):
     __tablename__ = "astrologer_applications"

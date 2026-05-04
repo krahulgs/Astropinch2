@@ -123,14 +123,14 @@ export default function KundaliResultPage() {
       <div key={label} className={`relative p-5 rounded-[1.8rem] border ${bg} space-y-3 hover:scale-[1.01] transition-transform overflow-hidden`}>
         <div className={`flex items-center gap-2 ${color}`}>{icon}<span className="text-[8px] font-bold uppercase tracking-widest">{label}</span></div>
         {isLocked ? (
-          <p className="text-xs text-foreground leading-relaxed font-light">
+          <p className="text-xs text-foreground leading-relaxed font-normal">
             <span>{firstSentence} </span>
             <span className="blur-[4px] select-none opacity-60">
               {restOfValue.length > 10 ? restOfValue : "Discover the profound impact of this aspect on your life by unlocking AstroPinch premium access today."}
             </span>
           </p>
         ) : (
-          <p className="text-xs text-foreground leading-relaxed font-light">{value}</p>
+          <p className="text-xs text-foreground leading-relaxed font-normal">{value}</p>
         )}
         {isLocked && (
           <div className="absolute inset-0 top-10 flex flex-col items-center justify-center bg-gradient-to-t from-background/90 via-background/50 to-transparent z-10 pt-4">
@@ -469,7 +469,7 @@ export default function KundaliResultPage() {
                     <div className="flex items-center justify-between border-b border-border/50 pb-4">
                       <div>
                         <h3 className="text-sm font-bold text-foreground uppercase tracking-widest">Shadbala</h3>
-                        <p className="text-xs text-text-secondary font-light mt-1">Intrinsic Planetary Strength</p>
+                        <p className="text-xs text-text-secondary font-normal mt-1">Intrinsic Planetary Strength</p>
                       </div>
                       <Activity size={18} className="text-primary opacity-50" />
                     </div>
@@ -509,7 +509,7 @@ export default function KundaliResultPage() {
                           <div className="space-y-3 mt-auto">
                             <div className="flex items-start gap-2">
                               <Activity size={12} className="text-text-secondary mt-0.5 shrink-0" />
-                              <p className="text-[11px] text-foreground font-light leading-relaxed">{data.impact}</p>
+                              <p className="text-[11px] text-foreground font-normal leading-relaxed">{data.impact}</p>
                             </div>
                             <div className="flex items-start gap-2">
                               <Leaf size={12} className="text-highlight mt-0.5 shrink-0" />
@@ -528,7 +528,7 @@ export default function KundaliResultPage() {
                       <div className="flex items-center justify-between border-b border-border/50 pb-4">
                         <div>
                           <h3 className="text-sm font-bold text-foreground uppercase tracking-widest">Ashtakavarga</h3>
-                          <p className="text-xs text-text-secondary font-light mt-1">Maximum Supported Houses</p>
+                          <p className="text-xs text-text-secondary font-normal mt-1">Maximum Supported Houses</p>
                         </div>
                         <Compass size={18} className="text-secondary opacity-50" />
                       </div>
@@ -566,7 +566,7 @@ export default function KundaliResultPage() {
                         <h3 className="text-sm font-bold text-foreground uppercase tracking-widest flex items-center gap-2 mb-1">
                           <Leaf size={16} className="text-secondary" /> Nadi Karmic Task
                         </h3>
-                        <p className="text-xs text-text-secondary font-light mb-6">Based on your planetary trines</p>
+                        <p className="text-xs text-text-secondary font-normal mb-6">Based on your planetary trines</p>
                         
                         <div className="space-y-4">
                           {(calculations.advanced_metrics.nadi_karma || []).slice(0, 2).map((karma: any, idx: number) => (
@@ -600,7 +600,7 @@ export default function KundaliResultPage() {
                       <p className="text-[10px] uppercase tracking-widest text-text-secondary font-bold">15+ Yrs Exp · Vedic Expert</p>
                     </div>
                   </div>
-                  <p className="text-xs text-text-secondary font-light">Specializes in career transitions, marriage timing, and deep Dosha analysis.</p>
+                  <p className="text-xs text-text-secondary font-normal">Specializes in career transitions, marriage timing, and deep Dosha analysis.</p>
                   <button className="w-full py-3 rounded-xl bg-foreground text-background text-[10px] font-bold uppercase tracking-widest hover:bg-primary transition-all">
                     Book Session (Free)
                   </button>
@@ -614,7 +614,7 @@ export default function KundaliResultPage() {
                       <p className="text-[10px] uppercase tracking-widest text-text-secondary font-bold">Gold Medalist · Numerologist</p>
                     </div>
                   </div>
-                  <p className="text-xs text-text-secondary font-light">Expert in name correction, Muhurat calculation, and emotional healing.</p>
+                  <p className="text-xs text-text-secondary font-normal">Expert in name correction, Muhurat calculation, and emotional healing.</p>
                   <button className="w-full py-3 rounded-xl bg-foreground text-background text-[10px] font-bold uppercase tracking-widest hover:bg-primary transition-all">
                     Book Session (Free)
                   </button>

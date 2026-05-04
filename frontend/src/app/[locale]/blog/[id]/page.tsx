@@ -356,7 +356,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ id: string 
         <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 opacity-50" />
         <div className="relative z-10 max-w-2xl mx-auto space-y-8">
            <h2 className="text-4xl md:text-6xl font-serif italic tracking-tight">Ready for a deeper dive?</h2>
-           <p className="text-lg opacity-70 font-light">Join our community of 50,000+ researchers and receive exclusive Vedic insights weekly.</p>
+           <p className="text-lg opacity-70 font-normal">Join our community of 50,000+ researchers and receive exclusive Vedic insights weekly.</p>
            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <input 
                 type="email" 

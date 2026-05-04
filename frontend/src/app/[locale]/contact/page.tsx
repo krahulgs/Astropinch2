@@ -12,7 +12,7 @@ export default function ContactPage() {
           <h1 className="text-6xl font-serif italic text-foreground tracking-tight">
             Connect With the <br/> <span className="text-primary">Cosmos.</span>
           </h1>
-          <p className="text-lg text-text-secondary max-w-xl mx-auto font-light">
+          <p className="text-lg text-text-secondary max-w-xl mx-auto font-normal">
             Whether you're a user with a question or an astrologer looking to join our marketplace, we're here to help.
           </p>
         </div>
@@ -26,7 +26,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <h4 className="text-lg font-bold text-foreground">Email Support</h4>
-                <p className="text-text-secondary font-light">support@astropinch.com</p>
+                <p className="text-text-secondary font-normal">support@astropinch.com</p>
                 <p className="text-[10px] text-primary font-bold uppercase tracking-widest mt-1">24/7 Response Time</p>
               </div>
             </div>
@@ -37,7 +37,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <h4 className="text-lg font-bold text-foreground">Partnership Inquiries</h4>
-                <p className="text-text-secondary font-light">partners@astropinch.com</p>
+                <p className="text-text-secondary font-normal">partners@astropinch.com</p>
               </div>
             </div>
 
@@ -47,7 +47,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <h4 className="text-lg font-bold text-foreground">Headquarters</h4>
-                <p className="text-text-secondary font-light">Cosmic Square, Sector 44<br/>Gurugram, HR 122003, India</p>
+                <p className="text-text-secondary font-normal">Cosmic Square, Sector 44<br/>Gurugram, HR 122003, India</p>
               </div>
             </div>
           </div>

@@ -76,3 +76,29 @@ def get_master_user(token: str = Depends(oauth2_scheme)):
         raise HTTPException(status_code=403, detail="Not authorized")
     return user
 
+def get_current_user_obj(token: str = Depends(oauth2_scheme)):
+    """Returns the full User DB object for any authenticated user (any role)."""
+    from database import SessionLocal
+    import models
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        email: str = payload.get("sub")
+        if email is None:
+            raise credentials_exception
+    except JWTError:
+        raise credentials_exception
+
+    db = SessionLocal()
+    try:
+        user = db.query(models.User).filter(models.User.email == email).first()
+    finally:
+        db.close()
+
+    if user is None:
+        raise credentials_exception
+    return user

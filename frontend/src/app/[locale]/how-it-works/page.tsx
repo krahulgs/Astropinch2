@@ -13,7 +13,7 @@ export default function HowItWorksPage() {
           <h1 className="text-6xl md:text-8xl font-serif italic text-foreground tracking-tight leading-[0.9]">
             The Science <br/> <span className="text-primary">of Certainty.</span>
           </h1>
-          <p className="text-xl text-text-secondary max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-xl text-text-secondary max-w-2xl mx-auto font-normal leading-relaxed">
             AstroPinch replaces generic horoscopes with a multi-layered calculation engine that blends ancient Vedic manuscripts with modern data science.
           </p>
         </div>

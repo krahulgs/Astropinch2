@@ -13,7 +13,7 @@ export default function PlanetaryEffectsPage() {
           <h1 className="text-6xl font-serif italic text-foreground tracking-tight leading-[0.9]">
             Planetary <br/> <span className="text-secondary">Dynamics.</span>
           </h1>
-          <p className="text-xl text-text-secondary max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-xl text-text-secondary max-w-2xl mx-auto font-normal leading-relaxed">
             Understand how the Navagrahas exert their influence through strength, aspects, and motion.
           </p>
         </div>
@@ -26,7 +26,7 @@ export default function PlanetaryEffectsPage() {
                <div className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary"><Star size={24} /></div>
                <h2 className="text-3xl font-serif italic text-foreground">Exaltation & Debilitation</h2>
             </div>
-            <p className="text-text-secondary leading-relaxed font-light">
+            <p className="text-text-secondary leading-relaxed font-normal">
               Planets gain or lose strength based on the sign they occupy. <strong>Exaltation (Ucha)</strong> is when a planet is at its peak power, acting with maximum positivity. <strong>Debilitation (Neecha)</strong> is when a planet is weakened, often requiring remedial measures to harmonize its energy.
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -50,7 +50,7 @@ export default function PlanetaryEffectsPage() {
           {/* Section 2: Aspects */}
           <section className="space-y-8">
             <h2 className="text-4xl font-serif italic text-foreground">Planetary Aspects (Drishti)</h2>
-            <div className="prose prose-invert max-w-none text-text-secondary font-light">
+            <div className="prose prose-invert max-w-none text-text-secondary font-normal">
               <p>In Vedic astrology, planets don't just affect the house they sit in—they 'look' at other houses too. All planets aspect the 7th house from their position. However, some have special aspects:</p>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
@@ -74,7 +74,7 @@ export default function PlanetaryEffectsPage() {
              <div className="relative z-10 space-y-6">
                <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-white"><Zap size={24} /></div>
                <h2 className="text-3xl font-serif italic">The Mystery of Retrograde (Vakra)</h2>
-               <p className="text-sm opacity-80 leading-relaxed font-light max-w-2xl">
+               <p className="text-sm opacity-80 leading-relaxed font-normal max-w-2xl">
                  When a planet appears to move backward, it is in 'Vakra' motion. In Vedic logic, a retrograde planet becomes exceptionally strong and carries deep karmic significance. It often indicates areas where you have 'unfinished business' from past lives.
                </p>
              </div>

@@ -67,9 +67,9 @@ export default function PricingPage() {
           </div>
           <h1 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1] italic font-serif text-foreground mb-6">
             Stop Guessing. <br className="hidden md:block" />
-            <span className="text-text-secondary font-light text-4xl md:text-5xl">Start Architecting Your Life.</span>
+            <span className="text-text-secondary font-normal text-4xl md:text-5xl">Start Architecting Your Life.</span>
           </h1>
-          <p className="text-lg md:text-xl text-text-secondary max-w-3xl mx-auto font-light leading-relaxed">
+          <p className="text-lg md:text-xl text-text-secondary max-w-3xl mx-auto font-normal leading-relaxed">
             Most people react to their destiny; the elite prepare for it. Unlock NASA-grade planetary tracking, unlimited AI consultations, and deep Karmic analysis to stay permanently ahead of life's curve.
           </p>
         </div>
@@ -92,21 +92,21 @@ export default function PricingPage() {
                   {React.cloneElement(plan.icon as React.ReactElement<{ className?: string }>, { className: 'w-5 h-5' })}
                 </div>
                 <h2 className="text-2xl font-serif italic mb-1">{plan.name}</h2>
-                <p className="text-text-secondary text-[13px] font-light leading-snug h-8">
+                <p className="text-text-secondary text-[13px] font-normal leading-snug h-8">
                   {plan.description}
                 </p>
               </div>
 
               <div className="mb-8 flex items-baseline gap-1.5">
                 <span className="text-4xl font-bold font-serif italic text-foreground">₹{plan.price}</span>
-                <span className="text-text-secondary text-xs font-light">/monthly</span>
+                <span className="text-text-secondary text-xs font-normal">/monthly</span>
               </div>
 
               <div className="flex-grow">
                 <p className="text-[9px] font-bold uppercase tracking-widest text-primary mb-4">Plan Includes</p>
                 <ul className="space-y-3.5 mb-8">
                   {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-2.5 text-[13px] text-text-secondary font-light">
+                    <li key={feature} className="flex items-start gap-2.5 text-[13px] text-text-secondary font-normal">
                       <div className="mt-1">
                         <Star size={10} className="text-primary fill-primary" />
                       </div>
@@ -138,7 +138,7 @@ export default function PricingPage() {
 
         <div className="max-w-4xl mx-auto mt-24 text-center">
           <div className="p-8 rounded-[2rem] bg-surface/50 border border-border backdrop-blur-sm">
-            <p className="text-text-secondary text-sm font-light leading-relaxed italic">
+            <p className="text-text-secondary text-sm font-normal leading-relaxed italic">
               "The stars incline, they do not determine. Use these tools as a guide for your free will."
             </p>
             <div className="mt-4 flex items-center justify-center gap-2 text-yellow-500/50">

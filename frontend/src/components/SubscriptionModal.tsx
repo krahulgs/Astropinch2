@@ -37,7 +37,7 @@ export default function SubscriptionModal({ isOpen, onClose }: SubscriptionModal
           
           <div>
             <h2 className="text-2xl font-serif italic text-foreground mt-2">Unlock AstroPinch+</h2>
-            <p className="text-sm text-text-secondary font-light mt-1">
+            <p className="text-sm text-text-secondary font-normal mt-1">
               Go beyond the math. Get unlimited access to DeepSeek-powered astrological synthesis.
             </p>
           </div>
@@ -59,7 +59,7 @@ export default function SubscriptionModal({ isOpen, onClose }: SubscriptionModal
               </div>
               <div>
                 <h4 className="text-[11px] font-bold uppercase tracking-widest text-foreground">{benefit.title}</h4>
-                <p className="text-xs text-text-secondary font-light mt-0.5">{benefit.desc}</p>
+                <p className="text-xs text-text-secondary font-normal mt-0.5">{benefit.desc}</p>
               </div>
             </div>
           ))}

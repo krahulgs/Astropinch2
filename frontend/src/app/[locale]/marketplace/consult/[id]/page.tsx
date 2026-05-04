@@ -151,6 +151,7 @@ export default function ConsultationPage({ params }: { params: Promise<{ id: str
         body: JSON.stringify({
           session_id: sessionId.current,
           astrologer_id: id,
+          profile_name: profileName,
           messages: [...apiMessages, { role: 'assistant', text: reply, time: now }]
         })
       }).catch(() => {});

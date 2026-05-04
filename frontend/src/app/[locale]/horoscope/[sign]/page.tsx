@@ -144,7 +144,7 @@ export default function SignPage({ params }: { params: Promise<{ sign: string }>
                          {title}
                        </h3>
                      </div>
-                     <p className="text-base text-text-secondary leading-relaxed font-light">
+                     <p className="text-base text-text-secondary leading-relaxed font-normal">
                        {body}
                      </p>
                    </div>
@@ -163,7 +163,7 @@ export default function SignPage({ params }: { params: Promise<{ sign: string }>
                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-secondary">Dasha & Transit Themes</p>
              </div>
            </div>
-           <p className="text-lg text-text-secondary leading-relaxed font-light">
+           <p className="text-lg text-text-secondary leading-relaxed font-normal">
              {data?.modules.current_season}
            </p>
         </div>
@@ -336,7 +336,7 @@ export default function SignPage({ params }: { params: Promise<{ sign: string }>
               {/* Rationale - Full Width on small, 1/3 on large */}
               <div className="md:col-span-2 lg:col-span-1 p-6 rounded-[2rem] bg-surface border border-border space-y-2">
                 <p className="text-[10px] font-black uppercase tracking-widest text-text-secondary">Investment Rationale</p>
-                <p className="text-sm text-foreground/80 leading-relaxed font-light">{data.modules.market_intelligence.rationale}</p>
+                <p className="text-sm text-foreground/80 leading-relaxed font-normal">{data.modules.market_intelligence.rationale}</p>
               </div>
             </div>
 
@@ -386,7 +386,7 @@ export default function SignPage({ params }: { params: Promise<{ sign: string }>
                         {value.level}
                       </span>
                     </div>
-                    <p className="text-sm text-foreground/80 leading-relaxed font-light">
+                    <p className="text-sm text-foreground/80 leading-relaxed font-normal">
                       {value.explanation}
                     </p>
                   </div>

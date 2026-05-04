@@ -15,9 +15,9 @@ export default function AboutPage() {
           </div>
           <h1 className="text-6xl md:text-8xl font-serif italic text-foreground tracking-tight leading-[0.9]">
             Ancient Wisdom. <br className="hidden md:block" />
-            <span className="text-text-secondary font-light text-5xl md:text-7xl">NASA-Grade Precision.</span>
+            <span className="text-text-secondary font-normal text-5xl md:text-7xl">NASA-Grade Precision.</span>
           </h1>
-          <p className="text-xl md:text-2xl text-text-secondary max-w-3xl mx-auto font-light leading-relaxed mt-6">
+          <p className="text-xl md:text-2xl text-text-secondary max-w-3xl mx-auto font-normal leading-relaxed mt-6">
             We were tired of generic horoscopes that told 1/12th of humanity they were going to "meet someone special today." So we built the world's most advanced Vedic calculation engine to give you absolute, mathematical clarity on your destiny.
           </p>
         </div>
@@ -29,7 +29,7 @@ export default function AboutPage() {
               <Compass size={24} />
             </div>
             <h3 className="text-2xl font-bold text-foreground">The 0.001° Standard</h3>
-            <p className="text-text-secondary leading-relaxed font-light">
+            <p className="text-text-secondary leading-relaxed font-normal">
               While most platforms use approximate formulas, AstroPinch utilizes the Swiss Ephemeris (NASA JPL standard) to calculate planetary positions with 0.001-degree precision.
             </p>
           </div>
@@ -39,7 +39,7 @@ export default function AboutPage() {
               <Zap size={24} />
             </div>
             <h3 className="text-2xl font-bold text-foreground">AI That Reads Charts</h3>
-            <p className="text-text-secondary leading-relaxed font-light">
+            <p className="text-text-secondary leading-relaxed font-normal">
               We don't just show you signs. Our proprietary AI synthesizes complex planetary aspects, Nakshatra transits, and Dasha periods to provide human-like guidance.
             </p>
           </div>

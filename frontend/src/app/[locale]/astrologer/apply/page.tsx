@@ -74,7 +74,7 @@ export default function AstrologerApplyPage() {
             <CheckCircle2 size={40} className="text-green-500" />
           </div>
           <h2 className="text-3xl font-serif italic mb-4">Application Received</h2>
-          <p className="text-text-secondary font-light mb-8">
+          <p className="text-text-secondary font-normal mb-8">
             Thank you for applying to join the AstroPinch network. Our backoffice team will review your credentials and get back to you within 48 hours.
           </p>
           <Link href="/" className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white rounded-full font-bold uppercase tracking-widest text-[10px] hover:scale-105 transition-all shadow-xl shadow-primary/20">
@@ -95,7 +95,7 @@ export default function AstrologerApplyPage() {
             <Sparkles size={14} /> Join India's Most Premium Astrologer Network
           </div>
           <h1 className="text-5xl md:text-6xl font-serif italic tracking-tight">Become an AstroPinch Guru</h1>
-          <p className="text-xl text-text-secondary font-light max-w-2xl mx-auto">
+          <p className="text-xl text-text-secondary font-normal max-w-2xl mx-auto">
             Bring your Vedic wisdom to millions of seekers worldwide. Fill out the application below to get verified.
           </p>
         </div>

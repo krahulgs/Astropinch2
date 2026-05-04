@@ -13,7 +13,7 @@ export default function YogasDashaPage() {
           <h1 className="text-6xl font-serif italic text-foreground tracking-tight leading-[0.9]">
             Yogas & <br/> <span className="text-primary">The Dasha.</span>
           </h1>
-          <p className="text-xl text-text-secondary max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-xl text-text-secondary max-w-2xl mx-auto font-normal leading-relaxed">
             The blueprint of your destiny and the precise timing of its unfolding.
           </p>
         </div>
@@ -24,7 +24,7 @@ export default function YogasDashaPage() {
             <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary"><Crown size={24} /></div>
             <h2 className="text-4xl font-serif italic text-foreground">Planetary Yogas</h2>
           </div>
-          <p className="text-text-secondary leading-relaxed font-light">
+          <p className="text-text-secondary leading-relaxed font-normal">
             In Vedic astrology, a 'Yoga' is a specific planetary combination that yields a particular result. Your chart might contain hundreds of Yogas, some promising wealth, others spiritual growth or professional authority.
           </p>
           <div className="grid md:grid-cols-2 gap-8">
@@ -51,7 +51,7 @@ export default function YogasDashaPage() {
             <div className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary"><Clock size={24} /></div>
             <h2 className="text-4xl font-serif italic text-foreground">The Time-Lords (Dasha)</h2>
           </div>
-          <div className="prose prose-invert max-w-none text-text-secondary font-light space-y-6">
+          <div className="prose prose-invert max-w-none text-text-secondary font-normal space-y-6">
             <p className="text-lg">If the birth chart is the 'Map', the Dasha system is the 'Clock'. It tells us <strong>when</strong> a particular promise in your chart will manifest.</p>
             <p>AstroPinch utilizes the 120-year <strong>Vimshottari Dasha</strong> system, which is the most widely trusted method for timing life events in Vedic astrology.</p>
           </div>
@@ -76,7 +76,7 @@ export default function YogasDashaPage() {
         {/* CTA */}
         <div className="p-12 rounded-[4rem] bg-surface border border-border text-center space-y-8">
            <h3 className="text-3xl font-serif italic text-foreground">Identify Your Active Dasha</h3>
-           <p className="text-sm text-text-secondary max-w-md mx-auto font-light">Understand which planetary time-lord is currently governing your life and how to align with its energy.</p>
+           <p className="text-sm text-text-secondary max-w-md mx-auto font-normal">Understand which planetary time-lord is currently governing your life and how to align with its energy.</p>
            <button className="px-12 h-14 rounded-full bg-primary text-white text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-all">
              View My Timeline
            </button>

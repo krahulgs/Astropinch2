@@ -226,7 +226,7 @@ export default function MatchingResultPage() {
               <h1 className="text-4xl md:text-6xl font-serif italic text-foreground tracking-tight leading-tight">
                 A Union of <span className="text-secondary">Destiny</span> & Resonance
               </h1>
-              <p className="text-lg md:text-xl text-text-secondary font-light leading-relaxed italic opacity-90 border-l-2 border-secondary/20 pl-6">
+              <p className="text-lg md:text-xl text-text-secondary font-normal leading-relaxed italic opacity-90 border-l-2 border-secondary/20 pl-6">
                 {data.narrative_summary}
               </p>
               
@@ -496,7 +496,7 @@ export default function MatchingResultPage() {
 
                     <div className="p-8 rounded-[2.5rem] bg-highlight/5 border border-highlight/20 flex flex-col justify-center">
                       <h4 className="text-[10px] font-black uppercase tracking-widest text-highlight mb-4">Cosmic Synchronization</h4>
-                      <p className="text-sm text-foreground/80 leading-relaxed font-light italic">
+                      <p className="text-sm text-foreground/80 leading-relaxed font-normal italic">
                         Mangal Dosha is a significant factor in Vedic matching. When both partners are Mangalik, the intense energies of Mars are said to neutralize each other, creating a "Balanced Dosha" which is considered auspicious for long-term stability.
                       </p>
                     </div>
@@ -518,7 +518,7 @@ export default function MatchingResultPage() {
                       <Calendar size={24} />
                     </div>
                     <h2 className="text-3xl font-serif italic text-foreground">Auspicious Marriage Windows</h2>
-                    <p className="text-sm text-text-secondary font-light leading-relaxed">
+                    <p className="text-sm text-text-secondary font-normal leading-relaxed">
                       Favorable periods for marriage calculated using planetary transits, specifically Jupiter's movement, and the activation of the 7th house in the Vimshottari Dasha system.
                     </p>
                   </div>
@@ -555,7 +555,7 @@ export default function MatchingResultPage() {
                    {data.remedies.map((rem, i) => (
                      <div key={i} className="flex gap-6 items-start p-6 rounded-3xl bg-foreground/5 group hover:bg-secondary/10 transition-all border border-transparent hover:border-secondary/20">
                        <span className="text-secondary font-serif italic text-2xl">0{i+1}</span>
-                       <p className="text-sm text-text-secondary group-hover:text-foreground transition-colors font-light leading-relaxed">{rem}</p>
+                       <p className="text-sm text-text-secondary group-hover:text-foreground transition-colors font-normal leading-relaxed">{rem}</p>
                      </div>
                    ))}
                 </div>

@@ -40,7 +40,7 @@ export default function HomePage() {
             {t('hero.title')}
           </h1>
           
-          <p className="text-base md:text-xl text-text-secondary max-w-3xl mx-auto font-light leading-relaxed px-4 md:px-0">
+          <p className="text-base md:text-xl text-text-secondary max-w-3xl mx-auto font-normal leading-relaxed px-4 md:px-0">
             {t('hero.subtitle')}
           </p>
 
@@ -97,7 +97,7 @@ export default function HomePage() {
                 <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-secondary">{feature.title}</h3>
                 <div className="space-y-2">
                   <p className="text-2xl font-serif italic text-foreground leading-tight">{feature.tagline}</p>
-                  <p className="text-text-secondary text-sm leading-relaxed font-light">{feature.desc}</p>
+                  <p className="text-text-secondary text-sm leading-relaxed font-normal">{feature.desc}</p>
                 </div>
               </div>
             </div>
@@ -111,7 +111,7 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12 group">
             <div className="flex-1 space-y-6">
               <h2 className="text-3xl md:text-5xl font-serif italic text-foreground leading-tight">Your Day. Your Planets. Your Edge.</h2>
-              <p className="text-lg text-text-secondary leading-relaxed font-light">
+              <p className="text-lg text-text-secondary leading-relaxed font-normal">
                 Forget sun-sign columns written for 1/12th of humanity. Your daily horoscope on AstroPinch is generated from your actual birth chart — your lagna, your current dasha, your transits — every single day. Start each morning knowing what the cosmos has written specifically for you.
               </p>
               <Link href="/horoscope/daily" className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-white rounded-full font-bold uppercase tracking-widest text-[10px] hover:scale-105 transition-all shadow-xl shadow-primary/20">
@@ -130,7 +130,7 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-8 md:gap-12 group">
             <div className="flex-1 space-y-6">
               <h2 className="text-3xl md:text-5xl font-serif italic text-foreground leading-tight">Your Life&apos;s Blueprint. Finally Decoded.</h2>
-              <p className="text-lg text-text-secondary leading-relaxed font-light">
+              <p className="text-lg text-text-secondary leading-relaxed font-normal">
                 Your Kundali is the most precise map of your life ever created — drawn at the exact second you were born. AstroPinch generates all 16 divisional charts (Shodasvarga), calculates your Vimshottari Dasha timeline, and explains every placement in plain language. No Pandit appointment needed. No waiting.
               </p>
               <div className="space-y-4">
@@ -154,7 +154,7 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12 group">
             <div className="flex-1 space-y-6">
               <h2 className="text-3xl md:text-5xl font-serif italic text-foreground leading-tight">Before You Say Yes — Let the Stars Speak.</h2>
-              <p className="text-lg text-text-secondary leading-relaxed font-light">
+              <p className="text-lg text-text-secondary leading-relaxed font-normal">
                 Marriage is the biggest decision of your life. Our Kundali Matching goes beyond the 36-gun score to analyze Mangal Dosha, Nadi compatibility, Bhakoot, and Rajju — with a full AI explanation of what each compatibility point means for your specific relationship. Used by 11,000+ couples before their wedding.
               </p>
               <div className="space-y-4">
@@ -212,7 +212,7 @@ export default function HomePage() {
                   <p className="text-xl md:text-2xl text-foreground font-medium">
                     Stop guessing in the dark. Know instantly if they are your soulmate or a lesson waiting to happen.
                   </p>
-                  <p className="text-lg text-text-secondary leading-relaxed font-light">
+                  <p className="text-lg text-text-secondary leading-relaxed font-normal">
                     Dating profiles show you their best angles, but AstroPinch shows you their blueprint. Our advanced AI Love Match engine analyzes your Venus-Mars alignments and emotional wiring to reveal exactly how you'll love, fight, forgive, and grow together. Because your heart deserves absolute clarity, not vague promises.
                   </p>
                 </div>
@@ -233,7 +233,7 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12 group">
             <div className="flex-1 space-y-6">
               <h2 className="text-3xl md:text-5xl font-serif italic text-foreground leading-tight">Every Day Has Energy. Know How to Use It.</h2>
-              <p className="text-lg text-text-secondary leading-relaxed font-light">
+              <p className="text-lg text-text-secondary leading-relaxed font-normal">
                 Tithi, Vara, Nakshatra, Yoga, Karana — the five elements of Vedic time-keeping that determine the energy of every moment. Whether you&apos;re launching a business, signing a contract, or starting a new chapter, AstroPinch Panchang tells you the right moment to act. Updated daily at midnight.
               </p>
               <Link href="/panchang" className="inline-flex items-center gap-3 px-8 py-4 bg-foreground text-background rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-secondary transition-all">
@@ -252,7 +252,7 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-8 md:gap-12 group">
             <div className="flex-1 space-y-6">
               <h2 className="text-3xl md:text-5xl font-serif italic text-foreground leading-tight">12 Months. Laid Out. No Surprises.</h2>
-              <p className="text-lg text-text-secondary leading-relaxed font-light">
+              <p className="text-lg text-text-secondary leading-relaxed font-normal">
                 What if you could see the peaks and valleys of your year before they happened? Your AstroPinch Year Book maps your Dasha periods, major transits, and auspicious windows across all 12 months — career, love, health, finance. Plan smarter. Move at the right time.
               </p>
               <div className="space-y-4">
@@ -276,7 +276,7 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12 group">
             <div className="flex-1 space-y-6">
               <h2 className="text-3xl md:text-5xl font-serif italic text-foreground leading-tight">A Jyotishi Who Knows Your Chart. Always On.</h2>
-              <p className="text-lg text-text-secondary leading-relaxed font-light">
+              <p className="text-lg text-text-secondary leading-relaxed font-normal">
                 Ask anything. &quot;When should I change jobs?&quot; &quot;Is 2025 good for my marriage?&quot; &quot;Why do I keep facing problems in relationships?&quot; Our AI has read your full Kundali, your current dasha, and your planetary transits — and answers based on YOUR chart, not generic astrology rules.
               </p>
               <div className="space-y-4">
@@ -300,7 +300,7 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-8 md:gap-12 group">
             <div className="flex-1 space-y-6">
               <h2 className="text-3xl md:text-5xl font-serif italic text-foreground leading-tight">The Right Moment Changes Everything.</h2>
-              <p className="text-lg text-text-secondary leading-relaxed font-light">
+              <p className="text-lg text-text-secondary leading-relaxed font-normal">
                 In Vedic tradition, timing isn&apos;t superstition — it&apos;s strategy. AstroPinch Muhurat calculates the most auspicious time for marriage, griha pravesh, business launch, travel, or any major event using your personal chart and classical Muhurat criteria. Get the window the stars open for you.
               </p>
               <Link href="/muhurat" className="inline-flex items-center gap-3 px-8 py-4 bg-foreground text-background rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-secondary transition-all">
@@ -327,7 +327,7 @@ export default function HomePage() {
               <h2 className="text-4xl md:text-6xl font-serif text-foreground">
                 Trust in the <span className="italic text-primary">Cosmos</span>
               </h2>
-              <p className="text-lg text-text-secondary leading-relaxed font-light max-w-lg">
+              <p className="text-lg text-text-secondary leading-relaxed font-normal max-w-lg">
                 Join a community of over 2 million seekers who rely on our precision-guided celestial insights for clarity in an uncertain world.
               </p>
             </div>
@@ -380,7 +380,7 @@ export default function HomePage() {
                   <Star size={12} className="fill-yellow-500" />
                   <Star size={12} className="fill-yellow-500" />
                 </div>
-                <p className="text-sm text-foreground leading-relaxed font-light italic relative z-10">"{review.text}"</p>
+                <p className="text-sm text-foreground leading-relaxed font-normal italic relative z-10">"{review.text}"</p>
                 <div className="flex items-center gap-3 pt-2 relative z-10">
                   <div className="w-10 h-10 rounded-full overflow-hidden relative border border-border/50">
                     <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-[10px] font-black text-primary">
@@ -433,7 +433,7 @@ export default function HomePage() {
                 <h2 className="text-3xl md:text-4xl font-serif italic text-white leading-tight">
                   Your Future, <span className="text-white/80 italic">Decoded.</span>
                 </h2>
-                <p className="text-sm md:text-base text-white/90 font-light leading-relaxed">
+                <p className="text-sm md:text-base text-white/90 font-normal leading-relaxed">
                   Connect with our grand-master AI Jyotish Guru for absolute clarity on your career, relationships, and health. No waiting, just wisdom.
                 </p>
               </div>

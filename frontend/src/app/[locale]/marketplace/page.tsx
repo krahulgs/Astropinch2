@@ -117,8 +117,8 @@ export default function MarketplacePage() {
         </div>
 
         {/* ── Astrologer Grid ── */}
-        {/* Mobile: single column list cards. md+: 2 col. lg+: 4 col */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Grid: 1 column on mobile, 2 columns on desktop for spacious horizontal cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
           {filteredAstrologers.map((astro) => (
             <div key={astro.id} className="relative group">
               {astro.isPremium && (
@@ -127,25 +127,24 @@ export default function MarketplacePage() {
                 </div>
               )}
 
-              {/* Mobile: horizontal card layout. sm+: vertical */}
-              <div className="p-4 rounded-[1.5rem] bg-surface/40 backdrop-blur-2xl border border-border hover:border-primary/40 transition-all duration-500 flex flex-row sm:flex-col gap-4 relative overflow-hidden group-hover:shadow-2xl group-hover:shadow-primary/5 group-hover:-translate-y-1 h-full">
+              {/* Card Container: horizontal on all sizes for better image visibility */}
+              <div className="p-4 rounded-[2rem] bg-surface/40 backdrop-blur-2xl border border-border hover:border-primary/40 transition-all duration-500 flex flex-row gap-5 md:gap-8 relative overflow-hidden group-hover:shadow-2xl group-hover:shadow-primary/5 group-hover:-translate-y-1 h-full">
 
-                {/* Avatar — fixed size on mobile */}
-                <div className="relative flex-shrink-0">
+                <div className="relative flex-shrink-0 self-start sm:self-stretch">
                   <div className={`absolute -inset-1 rounded-2xl blur-sm opacity-40 ${astro.status === 'Online' ? 'bg-highlight animate-pulse' : 'bg-transparent'}`} />
-                  <div className="relative w-20 h-20 sm:w-full sm:aspect-[4/3] rounded-2xl overflow-hidden border border-border shadow-inner">
+                  <div className="relative w-28 h-28 sm:w-40 sm:h-40 lg:w-56 lg:h-56 rounded-3xl overflow-hidden border border-border shadow-inner">
                     <img
                       src={astro.image}
                       alt={astro.name}
-                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     {/* Status pill */}
-                    <div className={`absolute bottom-1.5 left-1.5 flex items-center gap-1 px-2 py-0.5 rounded-full text-[7px] font-black uppercase tracking-wider ${
+                    <div className={`absolute bottom-2 left-2 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[8px] font-black uppercase tracking-wider ${
                       astro.status === 'Online' ? 'bg-highlight/90 text-white' :
                       astro.status === 'Busy'   ? 'bg-secondary/90 text-white' :
-                                                  'bg-black/40 text-white/70'
+                                                  'bg-black/60 text-white/70'
                     }`}>
-                      <span className="w-1.5 h-1.5 rounded-full bg-current" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
                       {astro.status}
                     </div>
                   </div>
@@ -158,7 +157,7 @@ export default function MarketplacePage() {
                       <Star size={9} fill="currentColor" /> {astro.rating}
                       <span className="text-text-secondary/50 lowercase font-medium">({astro.reviews})</span>
                     </div>
-                    <h3 className="text-base font-serif italic text-foreground leading-tight truncate">{astro.name}</h3>
+                    <h3 className="text-xl md:text-3xl font-serif italic text-foreground leading-tight">{astro.name}</h3>
                     <p className="text-[9px] font-black uppercase tracking-widest text-text-secondary/60 flex items-center gap-1">
                       <TrendingUp size={9} /> {astro.exp}
                     </p>
@@ -204,7 +203,7 @@ export default function MarketplacePage() {
           <h2 className="text-2xl md:text-5xl font-serif italic text-foreground leading-tight">
             Can't decide who to consult?
           </h2>
-          <p className="text-xs md:text-sm text-text-secondary max-w-xl mx-auto font-light">
+          <p className="text-xs md:text-sm text-text-secondary max-w-xl mx-auto font-normal">
             Our AI engine can match you with the best astrologer based on your current planetary transits. Start a free query with our AI Oracle first.
           </p>
           <button
@@ -230,7 +229,7 @@ export default function MarketplacePage() {
                 <p className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">AI Oracle</p>
               </div>
               <h3 className="text-xl md:text-2xl font-serif italic text-foreground">Find Your Perfect Guru</h3>
-              <p className="text-xs text-text-secondary font-light">Tell us what's on your mind. Our AI will analyze your planetary timing and recommend the best match.</p>
+              <p className="text-xs text-text-secondary font-normal">Tell us what's on your mind. Our AI will analyze your planetary timing and recommend the best match.</p>
             </div>
             <button onClick={() => setShowMatchModal(false)} className="w-9 h-9 rounded-xl bg-surface border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-all flex-shrink-0">
               <X size={15} />
@@ -245,7 +244,7 @@ export default function MarketplacePage() {
                 onChange={e => setMatchConcern(e.target.value)}
                 placeholder="e.g. I want guidance on my career change, or leave blank for a planetary-based match..."
                 rows={3}
-                className="w-full px-4 py-3 rounded-2xl bg-surface border border-border text-foreground text-sm placeholder:text-text-secondary/50 focus:outline-none focus:border-primary/50 resize-none font-light"
+                className="w-full px-4 py-3 rounded-2xl bg-surface border border-border text-foreground text-sm placeholder:text-text-secondary/50 focus:outline-none focus:border-primary/50 resize-none font-normal"
               />
               <button
                 id="ai-oracle-match-btn"
@@ -275,7 +274,7 @@ export default function MarketplacePage() {
                     )}
                   </div>
                 </div>
-                <p className="text-sm text-text-secondary font-light italic leading-relaxed px-1">"{matchResult.reason}"</p>
+                <p className="text-sm text-text-secondary font-normal italic leading-relaxed px-1">"{matchResult.reason}"</p>
                 <div className="flex gap-3">
                   <button
                     onClick={() => { setShowMatchModal(false); setMatchResult(null); setMatchConcern(''); }}

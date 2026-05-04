@@ -40,7 +40,7 @@ const DivorceRiskDashboard: React.FC<Props> = ({ data }) => {
             <div className="inline-block px-6 py-2 rounded-full bg-red-500/10 border border-red-500/20 text-red-500 text-xs font-black uppercase tracking-widest">
               {data.band}
             </div>
-            <p className="text-xl text-text-secondary font-light italic leading-relaxed">
+            <p className="text-xl text-text-secondary font-normal italic leading-relaxed">
               "{data.statistical_comparison}"
             </p>
           </div>
@@ -85,7 +85,7 @@ const DivorceRiskDashboard: React.FC<Props> = ({ data }) => {
               <span className="text-xl font-serif italic text-red-500">+{val.points}</span>
             </div>
             <h4 className="text-lg font-serif italic text-foreground capitalize mb-2">{key.replace('_', ' ')}</h4>
-            <p className="text-xs text-text-secondary font-light leading-relaxed">
+            <p className="text-xs text-text-secondary font-normal leading-relaxed">
               {val.cancelled ? 'Significant cancellations detected in your profile.' : 'Direct affliction with no mitigating factors found.'}
             </p>
           </div>
@@ -102,7 +102,7 @@ const DivorceRiskDashboard: React.FC<Props> = ({ data }) => {
             <div key={i} className="flex-shrink-0 w-64 p-8 rounded-[2rem] bg-surface border border-border space-y-4">
               <span className="text-secondary font-serif italic text-2xl">0{i+1}</span>
               <p className="text-sm font-bold text-foreground">{period}</p>
-              <p className="text-xs text-text-secondary font-light leading-relaxed">Celestial transit alignment suggesting heightened emotional friction.</p>
+              <p className="text-xs text-text-secondary font-normal leading-relaxed">Celestial transit alignment suggesting heightened emotional friction.</p>
             </div>
           ))}
         </div>
@@ -121,7 +121,7 @@ const DivorceRiskDashboard: React.FC<Props> = ({ data }) => {
                   <span className="text-2xl">{rem.icon}</span>
                   <div className="space-y-2">
                     <h5 className="font-bold text-foreground">{rem.title}</h5>
-                    <p className="text-xs text-text-secondary font-light leading-relaxed">{rem.desc}</p>
+                    <p className="text-xs text-text-secondary font-normal leading-relaxed">{rem.desc}</p>
                   </div>
                 </div>
               </div>
@@ -133,7 +133,7 @@ const DivorceRiskDashboard: React.FC<Props> = ({ data }) => {
           <h3 className="text-xl font-serif italic text-foreground flex items-center gap-3">
             <Info className="text-secondary" /> Relationship Synthesis
           </h3>
-          <p className="text-base text-text-secondary font-light leading-relaxed italic">
+          <p className="text-base text-text-secondary font-normal leading-relaxed italic">
             {data.narrative}
           </p>
           <div className="pt-6 border-t border-border space-y-4">

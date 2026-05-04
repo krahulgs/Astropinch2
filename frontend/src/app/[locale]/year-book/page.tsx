@@ -116,9 +116,9 @@ export default function YearBookPage() {
               </div>
               <h1 className="text-3xl md:text-7xl font-medium tracking-tight leading-[1.1] italic font-serif text-foreground">
                 Your Future Is Written.{' '}
-                <span className="block text-xl md:text-5xl text-text-secondary font-light mt-1">Read The Script.</span>
+                <span className="block text-xl md:text-5xl text-text-secondary font-normal mt-1">Read The Script.</span>
               </h1>
-              <p className="text-sm md:text-xl text-text-secondary max-w-3xl mx-auto font-light leading-relaxed hidden md:block">
+              <p className="text-sm md:text-xl text-text-secondary max-w-3xl mx-auto font-normal leading-relaxed hidden md:block">
                 Generate your month-by-month cosmic roadmap to navigate the upcoming year with unfair foresight.
               </p>
             </div>
@@ -236,9 +236,9 @@ export default function YearBookPage() {
           </div>
           <h1 className="text-3xl md:text-7xl font-medium tracking-tight leading-[1.1] italic font-serif text-foreground">
             Your Future Is Written.{' '}
-            <span className="block text-xl md:text-5xl text-text-secondary font-light mt-1">Read The Script.</span>
+            <span className="block text-xl md:text-5xl text-text-secondary font-normal mt-1">Read The Script.</span>
           </h1>
-          <p className="text-sm md:text-xl text-text-secondary max-w-3xl mx-auto font-light leading-relaxed hidden md:block">
+          <p className="text-sm md:text-xl text-text-secondary max-w-3xl mx-auto font-normal leading-relaxed hidden md:block">
             Our predictive Year Book combines Dasha timelines with major planetary transits to give you a month-by-month roadmap. Navigate with unfair foresight.
           </p>
           <p className="text-xs text-primary font-bold uppercase tracking-widest inline-flex items-center gap-2 bg-primary/5 px-4 py-2 rounded-full border border-primary/20">

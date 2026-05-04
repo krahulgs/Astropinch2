@@ -30,9 +30,9 @@ export default function HoroscopePage() {
         </div>
         <h1 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1] italic font-serif text-foreground mb-6">
           The Stars Speak. <br className="hidden md:block" />
-          <span className="text-text-secondary font-light text-4xl md:text-5xl">Are You Listening?</span>
+          <span className="text-text-secondary font-normal text-4xl md:text-5xl">Are You Listening?</span>
         </h1>
-        <p className="text-lg md:text-xl text-text-secondary font-light leading-relaxed mb-10">
+        <p className="text-lg md:text-xl text-text-secondary font-normal leading-relaxed mb-10">
           Every day, the planetary alignments shift—opening new doorways to wealth, love, and spiritual growth while closing others. Don't leave your day to chance. Tap into your sun sign below to uncover today's cosmic blueprint and step into your highest potential.
         </p>
       </div>

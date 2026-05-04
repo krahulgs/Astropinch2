@@ -42,31 +42,13 @@ export default function UnifiedMatchingPage() {
     if (qCtx)  setMatchContext(qCtx as any);
   }, [searchParams]);
 
-  // Derive p1 from profile when logged in, or use manual form
-  const [p1Manual, setP1Manual] = useState({ ...EMPTY_PARTNER });
+  // Manual forms for both partners
+  const [p1, setP1] = useState({ ...EMPTY_PARTNER, love_language: 'Quality Time' });
   useEffect(() => {
     const savedP1 = localStorage.getItem('unified_match_p1');
-    if (savedP1 && !isLoggedIn) setP1Manual(JSON.parse(savedP1));
-  }, [isLoggedIn]);
-  useEffect(() => { if (!isLoggedIn) localStorage.setItem('unified_match_p1', JSON.stringify(p1Manual)); }, [p1Manual, isLoggedIn]);
-
-  const p1 = isLoggedIn && parsedActive
-    ? {
-        name: parsedActive.name,
-        day: parsedActive.day,
-        month: parsedActive.month,
-        year: parsedActive.year,
-        hour: parsedActive.hour,
-        minute: parsedActive.minute,
-        place: parsedActive.place,
-        lat: parsedActive.lat,
-        lon: parsedActive.lon,
-        profession: parsedActive.profession,
-        gender: parsedActive.gender || '',
-        mbti: 'NOT_SURE',
-        love_language: 'Quality Time',
-      }
-    : p1Manual;
+    if (savedP1) setP1(JSON.parse(savedP1));
+  }, []);
+  useEffect(() => { localStorage.setItem('unified_match_p1', JSON.stringify(p1)); }, [p1]);
 
   const completeProfiles = profiles.map(parseProfile).filter(Boolean);
 
@@ -78,15 +60,17 @@ export default function UnifiedMatchingPage() {
     }
     setLoading(true);
 
+    const groomProfile = p1;
+    const brideProfile = p2;
+
     const query = new URLSearchParams({
-      // p1 is Groom in marriage context, p2 is Bride
-      g_name: p1.name, g_day: p1.day, g_month: p1.month, g_year: p1.year,
-      g_hour: p1.hour, g_minute: p1.minute, g_lat: p1.lat.toString(), g_lon: p1.lon.toString(),
-      g_prof: p1.profession, g_gender: (p1 as any).gender, g_mbti: (p1 as any).mbti || 'NOT_SURE', g_love: (p1 as any).love_language || 'Quality Time',
+      g_name: groomProfile.name, g_day: groomProfile.day, g_month: groomProfile.month, g_year: groomProfile.year,
+      g_hour: groomProfile.hour, g_minute: groomProfile.minute, g_lat: groomProfile.lat.toString(), g_lon: groomProfile.lon.toString(),
+      g_prof: groomProfile.profession, g_gender: matchContext === 'marriage' ? 'Male' : ((groomProfile as any).gender || 'Male'), g_mbti: (groomProfile as any).mbti || 'NOT_SURE', g_love: (groomProfile as any).love_language || 'Quality Time',
       
-      b_name: p2.name, b_day: p2.day, b_month: p2.month, b_year: p2.year,
-      b_hour: p2.hour, b_minute: p2.minute, b_lat: p2.lat.toString(), b_lon: p2.lon.toString(),
-      b_prof: p2.profession, b_gender: p2.gender, b_mbti: p2.mbti, b_love: p2.love_language,
+      b_name: brideProfile.name, b_day: brideProfile.day, b_month: brideProfile.month, b_year: brideProfile.year,
+      b_hour: brideProfile.hour, b_minute: brideProfile.minute, b_lat: brideProfile.lat.toString(), b_lon: brideProfile.lon.toString(),
+      b_prof: brideProfile.profession, b_gender: matchContext === 'marriage' ? 'Female' : ((brideProfile as any).gender || 'Female'), b_mbti: brideProfile.mbti, b_love: brideProfile.love_language,
       
       context: matchContext
     }).toString();
@@ -98,81 +82,11 @@ export default function UnifiedMatchingPage() {
     }, 1500);
   };
 
-  // ── Person 1 card: logged-in profile selector ─────────────────────────────
-  const renderP1Card = () => {
-    const label = matchContext === 'marriage' ? t('labels.groom') : t('labels.p1');
+  // ── Partner forms ─────────────────────────────────────────  // ── Partner 2 form: always manual ─────────────────────────────────────────
+  const renderPartnerForm = (data: any, setData: any, label: string, allowedGender?: string) => {
+    const allowedProfiles = completeProfiles.filter(p => !allowedGender || p.gender === allowedGender);
 
-    if (isLoggedIn && completeProfiles.length > 0) {
-      return (
-        <div className="p-4 md:p-6 rounded-[1.5rem] md:rounded-[2rem] bg-surface/50 backdrop-blur-xl border border-primary/30 space-y-4 shadow-2xl animate-in fade-in zoom-in duration-700 relative overflow-hidden">
-          {/* "You" badge */}
-          <div className="absolute top-4 right-4">
-            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary text-white text-[8px] font-black uppercase tracking-widest">
-              <CheckCircle2 size={10} /> {t('labels.your_profile')}
-            </span>
-          </div>
-
-          <div className="flex items-center gap-4 border-b border-border pb-4">
-            <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
-              {parsedActive?.profile_image ? (
-                <img src={parsedActive.profile_image} alt={parsedActive.name} className="w-full h-full object-cover rounded-2xl" />
-              ) : (
-                <User size={20} />
-              )}
-            </div>
-            <div>
-              <h3 className="text-lg font-serif italic text-foreground leading-none">{label}</h3>
-              <span className="text-[8px] font-black uppercase tracking-widest text-text-secondary mt-1 block">{t('labels.auto_filled')}</span>
-            </div>
-          </div>
-
-          {/* Profile Switcher */}
-          {completeProfiles.length > 1 && (
-            <div className="space-y-1">
-              <label className="text-[8px] font-black uppercase tracking-widest text-text-secondary ml-3 block">{t('labels.switch_profile')}</label>
-              <div className="relative">
-                <select
-                  value={activeProfileId ?? ''}
-                  onChange={(e) => selectProfile(parseInt(e.target.value))}
-                  className="w-full h-10 pl-5 pr-10 rounded-xl bg-foreground/5 border border-transparent text-xs text-foreground focus:border-primary focus:bg-transparent outline-none transition-all appearance-none cursor-pointer"
-                >
-                  {completeProfiles.map((p) => p && (
-                    <option key={p.id} value={p.id} className="bg-background">
-                      {p.name}{p.role === 'master' ? ' (Master)' : ''}
-                    </option>
-                  ))}
-                </select>
-                <ChevronDown size={12} className="absolute right-4 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none" />
-              </div>
-            </div>
-          )}
-
-          {/* Profile detail pills */}
-          {parsedActive && (
-            <div className="grid grid-cols-2 gap-2">
-              {[
-                { label: t('labels.full_name'), value: parsedActive.name },
-                { label: t('labels.birth_date'), value: `${parsedActive.day}/${parsedActive.month}/${parsedActive.year}` },
-                { label: t('labels.birth_time'), value: `${parsedActive.hour}:${parsedActive.minute}` },
-                { label: t('labels.birth_place'), value: parsedActive.place || 'N/A' },
-              ].map((item) => (
-                <div key={item.label} className="p-3 rounded-xl bg-foreground/5 border border-border space-y-0.5">
-                  <p className="text-[7px] font-black uppercase tracking-widest text-text-secondary">{item.label}</p>
-                  <p className="text-[10px] font-medium text-foreground truncate">{item.value}</p>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      );
-    }
-
-    // Guest fallback
-    return renderPartnerForm(p1Manual, setP1Manual, label);
-  };
-
-  // ── Partner 2 form: always manual ─────────────────────────────────────────
-  const renderPartnerForm = (data: any, setData: any, label: string) => (
+    return (
     <div className="p-4 md:p-6 rounded-[1.5rem] md:rounded-[2rem] bg-surface/50 backdrop-blur-xl border border-border space-y-4 shadow-2xl animate-in fade-in zoom-in duration-700">
       <div className="flex items-center gap-4 border-b border-border pb-4">
         <div className="w-12 h-12 rounded-2xl bg-foreground/5 flex items-center justify-center text-primary">
@@ -183,6 +97,38 @@ export default function UnifiedMatchingPage() {
           <span className="text-[8px] font-black uppercase tracking-widest text-text-secondary mt-1 block">{t('labels.signature')}</span>
         </div>
       </div>
+
+      {isLoggedIn && allowedProfiles.length > 0 && (
+        <div className="space-y-1 mb-4">
+          <label className="text-[8px] font-black uppercase tracking-widest text-text-secondary ml-3 block">{t('labels.switch_profile') || 'Autofill from Profile'}</label>
+          <div className="relative">
+            <select
+              className="w-full h-10 pl-5 pr-10 rounded-xl bg-primary/10 border border-primary/20 text-xs text-primary focus:border-primary focus:bg-transparent outline-none transition-all appearance-none cursor-pointer"
+              onChange={(e) => {
+                if (!e.target.value) return;
+                const id = parseInt(e.target.value);
+                const prof = allowedProfiles.find(p => p.id === id);
+                if (prof) {
+                  setData({
+                    ...data,
+                    name: prof.name,
+                    day: prof.day, month: prof.month, year: prof.year,
+                    hour: prof.hour, minute: prof.minute,
+                    place: prof.place, lat: prof.lat, lon: prof.lon,
+                    profession: prof.profession, gender: prof.gender || ''
+                  });
+                }
+              }}
+            >
+              <option value="">-- Select Profile --</option>
+              {allowedProfiles.map(p => (
+                <option key={p.id} value={p.id} className="bg-background text-foreground">{p.name}</option>
+              ))}
+            </select>
+            <ChevronDown size={12} className="absolute right-4 top-1/2 -translate-y-1/2 text-primary pointer-events-none" />
+          </div>
+        </div>
+      )}
 
       <div className="space-y-4">
         <div className="space-y-1">
@@ -215,25 +161,27 @@ export default function UnifiedMatchingPage() {
           />
         </div>
 
-        <div className="space-y-1">
-          <label className="text-[8px] font-black uppercase tracking-widest text-text-secondary ml-3 block">GENDER</label>
-          <div className="grid grid-cols-3 gap-2">
-            {['Male', 'Female', 'Other'].map(g => (
-              <button
-                key={g}
-                type="button"
-                onClick={() => setData({ ...data, gender: g })}
-                className={`h-10 rounded-xl text-xs font-bold transition-all border ${
-                  data.gender === g
-                    ? 'bg-primary text-white border-primary shadow-lg'
-                    : 'bg-foreground/5 border-transparent text-text-secondary hover:border-primary/30'
-                }`}
-              >
-                {g}
-              </button>
-            ))}
+        {matchContext !== 'marriage' && (
+          <div className="space-y-1">
+            <label className="text-[8px] font-black uppercase tracking-widest text-text-secondary ml-3 block">GENDER</label>
+            <div className="grid grid-cols-2 gap-2">
+              {['Male', 'Female'].map(g => (
+                <button
+                  key={g}
+                  type="button"
+                  onClick={() => setData({ ...data, gender: g })}
+                  className={`h-10 rounded-xl text-xs font-bold transition-all border ${
+                    data.gender === g
+                      ? 'bg-primary text-white border-primary shadow-lg'
+                      : 'bg-foreground/5 border-transparent text-text-secondary hover:border-primary/30'
+                  }`}
+                >
+                  {g}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         {matchMode !== 'vedic' && (
           <div className="space-y-4 animate-in fade-in slide-in-from-top-4">
@@ -296,7 +244,8 @@ export default function UnifiedMatchingPage() {
         )}
       </div>
     </div>
-  );
+    );
+  };
 
   if (profileLoading) {
     return (
@@ -389,8 +338,8 @@ export default function UnifiedMatchingPage() {
                 {matchContext === 'marriage' ? <Gem size={24} className="text-secondary" /> : <Heart size={24} className="text-primary fill-primary/20" />}
               </div>
 
-              {renderP1Card()}
-              {renderPartnerForm(p2, setP2, matchContext === 'marriage' ? t('labels.bride') : t('labels.p2'))}
+              {renderPartnerForm(p1, setP1, matchContext === 'marriage' ? t('labels.groom') : t('labels.p1'), matchContext === 'marriage' ? 'Male' : undefined)}
+              {renderPartnerForm(p2, setP2, matchContext === 'marriage' ? t('labels.bride') : t('labels.p2'), matchContext === 'marriage' ? 'Female' : undefined)}
             </div>
 
             {error && (
@@ -420,7 +369,7 @@ export default function UnifiedMatchingPage() {
               <div key={i} className="p-5 md:p-8 rounded-[1.5rem] md:rounded-[2rem] bg-surface/50 border border-border text-center space-y-2 md:space-y-3 hover:bg-surface transition-all shadow-sm">
                 <div className="text-primary flex justify-center">{f.icon}</div>
                 <h4 className="text-[9px] md:text-[10px] font-black uppercase tracking-widest">{f.title}</h4>
-                <p className="text-[10px] md:text-[11px] text-text-secondary font-light">{f.desc}</p>
+                <p className="text-[10px] md:text-[11px] text-text-secondary font-normal">{f.desc}</p>
               </div>
             ))}
           </div>

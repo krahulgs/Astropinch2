@@ -129,7 +129,7 @@ export default function KundaliPage() {
           <h1 className="text-4xl md:text-5xl font-medium tracking-tight leading-[0.9] italic font-serif text-foreground">
             {activeTab === 'kundali' ? t('title') : 'Daily Astrology Guide'}
           </h1>
-          <p className="text-sm text-text-secondary max-w-xl mx-auto font-light leading-relaxed">
+          <p className="text-sm text-text-secondary max-w-xl mx-auto font-normal leading-relaxed">
             {activeTab === 'kundali'
               ? t('subtitle')
               : 'Precision Jyotish analysis mapped to your birth chart and profession.'}
