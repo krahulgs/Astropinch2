@@ -84,7 +84,7 @@ export default function LoginPage() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="master@astropinch.com"
+                  placeholder="Enter your email"
                   className="w-full bg-background/50 border border-border rounded-full py-4 pl-14 pr-6 text-sm focus:outline-none focus:border-primary/50 transition-all placeholder:text-text-secondary/50"
                   required
                 />
@@ -118,13 +118,7 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <div className="mt-10 pt-8 border-t border-border flex flex-col items-center gap-4">
-            <p className="text-xs text-text-secondary">Default Master Creds:</p>
-            <div className="bg-background/40 p-3 rounded-xl border border-border text-[10px] font-mono text-text-secondary flex flex-col gap-1">
-              <span>User: master@astropinch.com</span>
-              <span>Pass: master123</span>
-            </div>
-          </div>
+          {/* Credentials section removed for security */}
         </div>
       </div>
     </div>
