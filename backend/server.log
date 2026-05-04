@@ -1120,3 +1120,24 @@ INFO:     127.0.0.1:55165 - "POST /matching_raw HTTP/1.1" 200 OK
 INFO:     127.0.0.1:55339 - "GET /horoscope/sign?sign=cancer HTTP/1.1" 200 OK
 INFO:     127.0.0.1:55339 - "GET /horoscope/sign?sign=cancer HTTP/1.1" 200 OK
 INFO:     127.0.0.1:55382 - "GET /horoscope/sign?sign=cancer HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56069 - "POST /token HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56070 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56071 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56071 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56070 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56071 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56073 - "GET /static/avatars/IMG_2247.jpeg HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:56071 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56069 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56075 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56069 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56075 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56071 - "GET /users HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'migrate_db.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [3832]
+INFO:     Started server process [5395]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.

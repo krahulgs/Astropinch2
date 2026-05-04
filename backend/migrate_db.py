@@ -1,4 +1,4 @@
-from sqlalchemy import create_all, inspect, text
+from sqlalchemy import inspect, text
 from database import engine, Base
 import models
 
