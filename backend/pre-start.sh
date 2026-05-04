@@ -7,13 +7,13 @@ echo "Running pre-start checks..."
 mkdir -p static/avatars
 
 # Run database migrations (or create tables) with retries
-echo "Initializing database..."
+echo "Initializing/Migrating database..."
 for i in {1..20}; do
-  if python -c "from main import app; import models; from database import engine; models.Base.metadata.create_all(bind=engine)"; then
-    echo "Database initialized successfully."
+  if python migrate_db.py; then
+    echo "Database initialized/migrated successfully."
     break
   else
-    echo "Database not ready yet (Attempt $i/10). Waiting 5s..."
+    echo "Database not ready yet (Attempt $i/20). Waiting 5s..."
     sleep 5
   fi
 done
