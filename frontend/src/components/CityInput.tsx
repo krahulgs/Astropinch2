@@ -41,7 +41,8 @@ const CityInput: React.FC<CityInputProps> = ({ value, onChange, label, placehold
 
     setIsSearching(true);
     try {
-      const res = await fetch(`http://localhost:8000/geo/search?q=${encodeURIComponent(query)}`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const res = await fetch(`${apiUrl}/geo/search?q=${encodeURIComponent(query)}`, {
         signal: abortControllerRef.current.signal
       });
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
