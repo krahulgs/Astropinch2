@@ -40,14 +40,12 @@
   --color-highlight: var(--highlight);
   --color-alert: var(--alert);
 
-  /* ── Font stack ─────────────────────────────────────────────────────────── */
-  --font-sans:  var(--font-sans), system-ui, sans-serif;
-  --font-serif: var(--font-serif), Georgia, serif;
-  --font-mono:  var(--font-mono), 'Courier New', monospace;
-  --font-hindi:    var(--font-noto-devanagari);
-  --font-bengali:  var(--font-noto-bengali);
-  --font-telugu:   var(--font-noto-telugu);
-  --font-tamil:    var(--font-noto-tamil);
+  --font-sans: var(--font-inter), var(--font-poppins), var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-hindi: var(--font-noto-devanagari);
+  --font-bengali: var(--font-noto-bengali);
+  --font-telugu: var(--font-noto-telugu);
+  --font-tamil: var(--font-noto-tamil);
   --font-gujarati: var(--font-noto-gujarati);
 
   --animate-pulse-slow: pulse-slow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
@@ -73,19 +71,13 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 1.65;
-  letter-spacing: 0.01em;
+  font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
 }
 
-/* Serif utility class used across headings & italic titles */
 .font-serif {
-  font-family: var(--font-serif) !important;
+  font-family: var(--font-serif), Georgia, serif;
 }
 
 /* Accessibility & Interaction Defaults */
@@ -104,36 +96,7 @@ button:active, a:active {
   transform: scale(0.97);
 }
 
-/* ── Global Font Size Correction ──────────────────────────────────────────────
-   The app uses many tiny arbitrary sizes (7px–11px) for labels, tags and pills.
-   We clamp them all to a minimum readable size without touching 537 individual
-   class names. These overrides only affect rendered size, not layout structure.
-   ──────────────────────────────────────────────────────────────────────────── */
-
-/* 7px → 11px */
-[class*="text-[7px]"] { font-size: 11px !important; }
-/* 8px → 11px */
-[class*="text-[8px]"] { font-size: 11px !important; }
-/* 9px → 12px */
-[class*="text-[9px]"] { font-size: 12px !important; }
-/* 10px → 12px */
-[class*="text-[10px]"] { font-size: 12px !important; }
-/* 11px → 12px */
-[class*="text-[11px]"] { font-size: 12px !important; }
-
-/* Inputs, selects, textareas: minimum 14px for no-zoom on iOS */
-input, select, textarea {
-  font-size: 14px !important;
-  font-family: var(--font-sans);
-}
-
-/* Labels: never below 12px */
-label {
-  font-size: 12px;
-}
-
 /* Prevent transitions from exceeding 400ms */
-
 * {
   transition-duration: min(300ms, inherit);
 }

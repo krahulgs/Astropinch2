@@ -1059,3 +1059,64 @@ INFO:     127.0.0.1:54950 - "OPTIONS /panchang HTTP/1.1" 200 OK
 INFO:     127.0.0.1:54947 - "POST /panchang HTTP/1.1" 200 OK
 INFO:     127.0.0.1:54950 - "POST /panchang HTTP/1.1" 200 OK
 INFO:     127.0.0.1:54952 - "GET /muhurat/vivah?year=2026&month=5&type=Vivah HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55032 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55032 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55032 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55036 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55038 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='' language='en'
+INFO:     127.0.0.1:55044 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55048 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='' language='en'
+INFO:     127.0.0.1:55048 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55038 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55042 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55044 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55043 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55048 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55047 - "POST /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55105 - "OPTIONS /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55107 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55110 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55111 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55105 - "OPTIONS /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55107 - "OPTIONS /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55110 - "OPTIONS /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55111 - "OPTIONS /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55114 - "OPTIONS /moon-chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55115 - "OPTIONS /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55105 - "POST /api/profiles HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='' language='en'
+INFO:     127.0.0.1:55111 - "POST /calculate HTTP/1.1" 200 OK
+Guide Request: name='Anonymous' year=1976 month=11 day=12 hour=18 minute=20 lat=23.6693 lon=86.1511 timezone='Asia/Kolkata' target_year=2026 profession='IT / Technology / Engineering' gender='' language='en'
+INFO:     127.0.0.1:55105 - "POST /calculate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55107 - "POST /chart HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55107 - "POST /api/profiles HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55110 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55115 - "POST /ai/predict HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55165 - "OPTIONS /matching_raw HTTP/1.1" 200 OK
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:AstroPinch.MarriageEngine:AI Guna Audit flagged an issue: CORRECTION: Gana score is 0 but total is 6; according to classical rules, if both are in the same Gana (both Deva/Manushya/Rakshasa), the score should be 6. Bride Bharani is Manushya Gana, Groom Dhanishta is Rakshasa Gana — this is a mismatch, so 0 is correct. However, the total for Gana should be 6, not 0/6 as shown. The score is correct but the display is misleading. Also, Nadi cancellation is incorrectly marked as 'cancelled: True' — Bride Bharani is Madhya Nadi, Groom Dhanishta is Antya Nadi; these are different, so Nadi Dosha is present and NOT cancelled.
+INFO:     127.0.0.1:55165 - "POST /matching_raw HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55339 - "GET /horoscope/sign?sign=cancer HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55339 - "GET /horoscope/sign?sign=cancer HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55382 - "GET /horoscope/sign?sign=cancer HTTP/1.1" 200 OK

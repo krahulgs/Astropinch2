@@ -8,16 +8,7 @@ import BottomNav from '@/components/BottomNav';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Footer from '@/components/Footer';
 import SidebarWrapper from '@/components/SidebarWrapper';
-import {
-  Plus_Jakarta_Sans,
-  Playfair_Display,
-  DM_Mono,
-  Noto_Sans_Devanagari,
-  Noto_Sans_Bengali,
-  Noto_Sans_Telugu,
-  Noto_Sans_Tamil,
-  Noto_Sans_Gujarati
-} from "next/font/google";
+import { DM_Sans, DM_Serif_Display, Noto_Sans_Devanagari, Noto_Sans_Bengali, Noto_Sans_Telugu, Noto_Sans_Tamil, Noto_Sans_Gujarati } from "next/font/google";
 import "../globals.css";
 import { Metadata } from 'next';
 
@@ -27,32 +18,21 @@ export const metadata: Metadata = {
   keywords: ["Vedic Astrology", "AI Astrology", "Kundali Matching", "NASA-grade Precision", "Daily Horoscope", "AstroPinch"],
 };
 
-// ── Primary UI font: warm, modern, highly readable ──────────────────────────
-const plusJakarta = Plus_Jakarta_Sans({
-  weight: ['400', '500', '600', '700', '800'],
+const dmSans = DM_Sans({
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap',
+  axes: ['opsz'],
 });
 
-// ── Serif/display font: elegant for titles & italic accents ─────────────────
-const playfair = Playfair_Display({
-  weight: ['400', '500', '600', '700', '800'],
+const dmSerif = DM_Serif_Display({
+  weight: ['400'],
   style: ['normal', 'italic'],
   subsets: ['latin'],
   variable: '--font-serif',
   display: 'swap',
 });
 
-// ── Mono font: clean for data, numbers, chart values ────────────────────────
-const dmMono = DM_Mono({
-  weight: ['400', '500'],
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
-});
-
-// ── Indic script fonts ───────────────────────────────────────────────────────
 const notoDevanagari = Noto_Sans_Devanagari({
   subsets: ['devanagari'],
   variable: '--font-noto-devanagari',
@@ -101,7 +81,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
  
   return (
-    <html lang={locale} className={`dark ${plusJakarta.variable} ${playfair.variable} ${dmMono.variable} ${notoDevanagari.variable} ${notoBengali.variable} ${notoTelugu.variable} ${notoTamil.variable} ${notoGujarati.variable} antialiased`}>
+    <html lang={locale} className={`dark ${dmSans.variable} ${dmSerif.variable} ${notoDevanagari.variable} ${notoBengali.variable} ${notoTelugu.variable} ${notoTamil.variable} ${notoGujarati.variable} antialiased`}>
       <body>
         <CosmicBackground />
         <NextIntlClientProvider messages={messages}>
