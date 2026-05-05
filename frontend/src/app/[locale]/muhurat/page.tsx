@@ -34,7 +34,7 @@ export default function MuhuratPage() {
   const fetchPanchang = async () => {
     try {
       const now = new Date();
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/panchang`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000"}/panchang`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate(), hour: now.getHours(), minute: now.getMinutes(), lat: 28.6139, lon: 77.2090 })
@@ -46,7 +46,7 @@ export default function MuhuratPage() {
   const fetchMuhurats = async (year: number, month: number, type: string) => {
     setLoading(true);
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
       const res = await fetch(`${apiUrl}/muhurat/vivah?year=${year}&month=${month}&type=${type}`);
       setMuhurats(await res.json());
     } catch (err) { console.error("Failed to fetch muhurats:", err); }

@@ -58,7 +58,7 @@ export default function KundaliResultPage() {
   };
 
   useEffect(() => {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
     const post = (url: string) => {
       return fetch(`${apiUrl}${url}`, { 
         method: 'POST', 
@@ -120,7 +120,7 @@ export default function KundaliResultPage() {
     const restOfValue = value.substring(firstSentence.length).trim();
     
     return (
-      <div key={label} className={`relative p-5 rounded-[1.8rem] border ${bg} space-y-3 hover:scale-[1.01] transition-transform overflow-hidden`}>
+      <div key={label} className={`relative p-5 rounded-[1.8rem] border ${bg} space-y-3 hover:scale-[1.01] transition-transform`}>
         <div className={`flex items-center gap-2 ${color}`}>{icon}<span className="text-[8px] font-bold uppercase tracking-widest">{label}</span></div>
         {isLocked ? (
           <p className="text-xs text-foreground leading-relaxed font-normal">
@@ -283,16 +283,16 @@ export default function KundaliResultPage() {
               <div className="overflow-hidden rounded-[2rem] border border-border bg-surface shadow-sm">
                 <table className="w-full text-left">
                   <thead>
-                    <tr className="border-b border-border text-[8px] uppercase tracking-widest text-text-secondary bg-foreground/5">
-                      <th className="px-5 py-3">{t('result.planets.headers.planet')}</th>
-                      <th className="px-5 py-3">{t('result.planets.headers.sign')}</th>
-                      <th className="px-5 py-3 text-center">{t('result.planets.headers.degree')}</th>
-                      <th className="px-5 py-3 text-center">Lagna H</th>
-                      <th className="px-5 py-3 text-center text-secondary">Moon H</th>
-                      <th className="px-5 py-3">{t('result.planets.headers.status')}</th>
+                    <tr className="border-b border-border text-[11px] uppercase tracking-wider text-text-secondary bg-foreground/5">
+                      <th className="px-5 py-3 font-semibold">{t('result.planets.headers.planet')}</th>
+                      <th className="px-5 py-3 font-semibold">{t('result.planets.headers.sign')}</th>
+                      <th className="px-5 py-3 text-center font-semibold">{t('result.planets.headers.degree')}</th>
+                      <th className="px-5 py-3 text-center font-semibold">Lagna H</th>
+                      <th className="px-5 py-3 text-center font-semibold text-secondary">Moon H</th>
+                      <th className="px-5 py-3 font-semibold">{t('result.planets.headers.status')}</th>
                     </tr>
                   </thead>
-                  <tbody className="text-[11px]">
+                  <tbody className="text-sm">
                     {data.planets.map(p => {
                       const isRetro = p.is_retrograde || p.name === 'Rahu' || p.name === 'Ketu';
                       const moonH = moonChartData?.chandra_lagna_planets?.find((cp: any) => cp.name === p.name)?.house;
@@ -303,7 +303,7 @@ export default function KundaliResultPage() {
                           <td className="px-5 py-3 text-center font-mono text-text-secondary">{p.degree.toFixed(2)}°</td>
                           <td className="px-5 py-3 text-center text-text-secondary">{p.house}</td>
                           <td className="px-5 py-3 text-center font-bold text-secondary">{moonH ?? '—'}</td>
-                          <td className={`px-5 py-3 text-[8px] font-bold uppercase tracking-widest ${isRetro ? 'text-alert' : 'text-highlight'}`}>
+                          <td className={`px-5 py-3 text-[11px] font-bold uppercase tracking-wider ${isRetro ? 'text-alert' : 'text-highlight'}`}>
                             {isRetro ? t('result.planets.status.Retro') : t('result.planets.status.Direct')}
                           </td>
                         </tr>
@@ -322,77 +322,113 @@ export default function KundaliResultPage() {
               </div>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
                 {[
-                  { label: t('result.analysis.lagna'),        value: calculations?.ascendant || lagnaSign,                          color: 'text-primary' },
-                  { label: t('result.analysis.rashi'),         value: calculations?.moon_sign || moonSign,                           color: 'text-secondary' },
-                  { label: t('result.analysis.nakshatra'),     value: moonNakshatra,                                                  color: 'text-foreground' },
-                  { label: t('result.analysis.sade_sati'),    value: calculations?.sade_sati?.is_under_sade_sati ? calculations.sade_sati.phase : t('result.analysis.none'), color: calculations?.sade_sati?.is_under_sade_sati ? 'text-alert' : 'text-highlight' },
-                  { label: t('result.analysis.moolank'),      value: calculations?.numerology?.moolank,                              color: 'text-primary' },
-                  { label: t('result.analysis.bhagyank'),     value: calculations?.numerology?.bhagyank,                             color: 'text-secondary' },
+                  { label: t('result.analysis.lagna'),     value: calculations?.ascendant || lagnaSign,                          color: 'text-primary' },
+                  { label: t('result.analysis.rashi'),      value: calculations?.moon_sign || moonSign,                           color: 'text-secondary' },
+                  { label: t('result.analysis.nakshatra'),  value: moonNakshatra,                                                  color: 'text-foreground' },
+                  { label: t('result.analysis.sade_sati'), value: calculations?.sade_sati?.is_under_sade_sati ? calculations.sade_sati.phase : t('result.analysis.none'), color: calculations?.sade_sati?.is_under_sade_sati ? 'text-alert' : 'text-highlight' },
+                  { label: t('result.analysis.moolank'),   value: calculations?.numerology?.moolank,                              color: 'text-primary' },
+                  { label: t('result.analysis.bhagyank'),  value: calculations?.numerology?.bhagyank,                             color: 'text-secondary' },
                 ].map(item => (
-                  <div key={item.label} className="p-4 rounded-2xl bg-surface border border-border text-center shadow-sm">
-                    <p className="text-[7px] font-bold uppercase tracking-[0.15em] text-text-secondary mb-1">{item.label}</p>
-                    {loadingCalculations ? <Skeleton className="h-5 w-12 mx-auto" /> : <p className={`font-serif italic text-sm ${item.color}`}>{item.value}</p>}
+                  <div key={item.label} className="p-5 rounded-2xl bg-surface border border-border text-center shadow-sm hover:shadow-md transition-shadow">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-text-secondary mb-2">{item.label}</p>
+                    {loadingCalculations
+                      ? <Skeleton className="h-6 w-16 mx-auto" />
+                      : <p className={`font-serif italic text-base font-medium ${item.color}`}>{item.value}</p>}
                   </div>
                 ))}
               </div>
 
               {/* Jatak + Dasha + Manglik Dosha in one row */}
               <div className="grid md:grid-cols-3 gap-4">
+
+                {/* Jatak */}
                 <div className="p-5 rounded-2xl bg-surface border border-border space-y-3">
-                  <p className="text-[8px] font-bold uppercase tracking-widest text-text-secondary">{t('result.analysis.title')} · Jatak</p>
+                  <p className="text-[11px] font-semibold uppercase tracking-widest text-text-secondary">{t('result.analysis.title')} · Jatak</p>
                   <div className="flex flex-wrap gap-2">
                     {['yoni', 'gana', 'nadi', 'varna'].map(key => (
                       <div key={key} className="px-3 py-1.5 rounded-full bg-foreground/5 border border-border flex items-center gap-2">
-                        <span className="text-[8px] font-bold uppercase tracking-tighter text-text-secondary">{t(`result.analysis.${key}`)}:</span>
-                        <span className="text-[10px] font-bold text-foreground">{calculations?.jatak?.[key] || '...'}</span>
+                        <span className="text-[11px] font-semibold text-text-secondary">{t(`result.analysis.${key}`)}:</span>
+                        <span className="text-[13px] font-bold text-foreground">{calculations?.jatak?.[key] || '...'}</span>
                       </div>
                     ))}
                   </div>
                 </div>
+
+                {/* Current Dasha */}
                 <div className="p-5 rounded-2xl bg-surface border border-border space-y-3">
-                  <p className="text-[8px] font-bold uppercase tracking-widest text-text-secondary">{t('result.dasha.title')}</p>
+                  <p className="text-[11px] font-semibold uppercase tracking-widest text-text-secondary">{t('result.dasha.title')}</p>
                   {loadingCalculations ? <Skeleton className="h-10 w-full" /> : calculations?.dasha ? (
                     <div className="flex items-center gap-6">
                       <div>
                         <span className="text-xl font-serif italic text-secondary">{calculations.dasha.mahadasha}</span>
-                        <span className="text-[8px] text-text-secondary ml-2 uppercase font-bold tracking-widest">{t('result.dasha.mahadasha')}</span>
-                        <p className="text-[9px] text-text-secondary">{t('result.dasha.ends')} {calculations.dasha.ends_year}</p>
+                        <span className="text-[10px] text-text-secondary ml-2 uppercase font-semibold tracking-wider">{t('result.dasha.mahadasha')}</span>
+                        <p className="text-[11px] text-text-secondary mt-0.5">{t('result.dasha.ends')} {calculations.dasha.ends_year}</p>
                       </div>
                       <div className="w-px h-10 bg-border" />
                       <div>
                         <span className="text-base font-serif italic text-primary">{calculations.dasha.antardasha}</span>
-                        <span className="text-[8px] text-text-secondary ml-2 uppercase font-bold tracking-widest">{t('result.dasha.antardasha')}</span>
-                        <p className="text-[9px] text-highlight">{t('result.dasha.active')}</p>
+                        <span className="text-[10px] text-text-secondary ml-2 uppercase font-semibold tracking-wider">{t('result.dasha.antardasha')}</span>
+                        <p className="text-[11px] text-highlight mt-0.5">{t('result.dasha.active')}</p>
                       </div>
                     </div>
-                  ) : <p className="text-xs text-text-secondary">{t('result.dasha.unavailable')}</p>}
+                  ) : <p className="text-sm text-text-secondary">{t('result.dasha.unavailable')}</p>}
                 </div>
+
+                {/* Mangal Dosha */}
                 <div className="p-5 rounded-2xl bg-surface border border-border space-y-3">
                   <div className="flex items-center justify-between">
-                    <p className="text-[8px] font-bold uppercase tracking-widest text-text-secondary">Mangal Dosha Status</p>
-                    <span className="text-[7px] font-bold uppercase tracking-widest text-primary bg-primary/10 px-2 py-0.5 rounded-full border border-primary/20 flex items-center gap-1"><Sparkles size={8}/> AI Verified</span>
+                    <p className="text-[11px] font-semibold uppercase tracking-widest text-text-secondary">Mangal Dosha Status</p>
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-primary bg-primary/10 px-2 py-0.5 rounded-full border border-primary/20 flex items-center gap-1"><Sparkles size={9}/> AI Verified</span>
                   </div>
-                  {loadingCalculations ? <Skeleton className="h-10 w-full" /> : (
-                    <div>
+                  {loadingCalculations ? <Skeleton className="h-10 w-full" /> : (() => {
+                    const m = calculations?.manglik;
+                    const isManglik   = m?.is_manglik && !m?.is_parihara;
+                    const severity    = (m?.severity || '').toLowerCase();
+                    const isHigh      = isManglik && severity === 'high';
+                    const isModerate  = isManglik && severity === 'moderate';
+                    const isLow       = isManglik && severity === 'low';
+
+                    // Color tokens
+                    const iconColor   = isHigh ? 'text-red-500'    : isModerate ? 'text-amber-500' : 'text-highlight';
+                    const textColor   = isHigh ? 'text-red-500'    : isModerate ? 'text-amber-500' : 'text-highlight';
+                    const bgTint      = isHigh ? 'bg-red-500/5 border-red-500/20'
+                                      : isModerate ? 'bg-amber-500/5 border-amber-500/20'
+                                      : 'bg-highlight/5 border-highlight/20';
+                    const dotColor    = isHigh ? 'bg-red-500'      : isModerate ? 'bg-amber-500'   : 'bg-highlight';
+                    const dotLabel    = isHigh ? 'High'            : isModerate ? 'Moderate'        : isLow ? 'Low' : 'None';
+                    const statusText  = !m?.is_manglik
+                      ? 'Non-Manglik'
+                      : m?.is_parihara
+                      ? 'Non-Manglik (Neutralized)'
+                      : `Manglik (${m.severity})`;
+                    const IconEl      = (isHigh || isModerate) ? Flame : Shield;
+
+                    return (
+                      <div className={`rounded-xl border p-3 ${bgTint}`}>
                         <div className="flex items-center gap-2 mb-2">
-                           {calculations?.manglik?.is_manglik && !calculations?.manglik?.is_parihara ? <span className="text-alert"><Flame size={16}/></span> : <span className="text-highlight"><Shield size={16}/></span>}
-                           <span className="text-lg font-serif italic text-foreground">
-                               {calculations?.manglik?.is_manglik ? (calculations?.manglik?.is_parihara ? 'Non-Manglik (Neutralized)' : `Manglik (${calculations.manglik.severity})`) : 'Non-Manglik'}
-                           </span>
+                          <span className={iconColor}><IconEl size={18}/></span>
+                          <span className={`text-lg font-serif italic ${textColor}`}>{statusText}</span>
+                          <span className={`ml-auto flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full border ${bgTint}`}>
+                            <span className={`w-1.5 h-1.5 rounded-full ${dotColor}`} />
+                            <span className={textColor}>{dotLabel}</span>
+                          </span>
                         </div>
-                        <p className="text-[10px] text-text-secondary leading-relaxed">
-                            {calculations?.manglik?.description}
+                        <p className="text-[12px] text-text-secondary leading-relaxed">
+                          {m?.description}
                         </p>
-                        {calculations?.manglik?.cancellation_logic && calculations.manglik.cancellation_logic.length > 0 && (
-                            <div className="mt-3 p-2.5 bg-highlight/10 border border-highlight/20 rounded-xl">
-                                <p className="text-[8px] font-bold uppercase tracking-widest text-highlight mb-1">DeepSeek Validation</p>
-                                <p className="text-[9px] text-foreground font-medium">{calculations.manglik.cancellation_logic[0]}</p>
-                            </div>
+                        {m?.cancellation_logic?.length > 0 && (
+                          <div className="mt-3 p-2.5 bg-highlight/10 border border-highlight/20 rounded-xl">
+                            <p className="text-[10px] font-bold uppercase tracking-widest text-highlight mb-1">DeepSeek Validation</p>
+                            <p className="text-[12px] text-foreground font-medium">{m.cancellation_logic[0]}</p>
+                          </div>
                         )}
-                    </div>
-                  )}
+                      </div>
+                    );
+                  })()}
                 </div>
+
               </div>
+
             </section>
 
             {/* ── SECTION 4: INSIGHTS SIDE BY SIDE ── */}
@@ -441,7 +477,9 @@ export default function KundaliResultPage() {
                           { key: 'Relationships & Family', icon: <Compass size={13}/>,  color: 'text-highlight',  bg: 'bg-highlight/5 border-highlight/15' },
                           { key: 'Mind & Mental Health',   icon: <Activity size={13}/>, color: 'text-primary',    bg: 'bg-primary/5 border-primary/15' },
                           { key: 'Home & Comfort',         icon: <Leaf size={13}/>,     color: 'text-alert',      bg: 'bg-alert/5 border-alert/15' },
-                        ].map(({ key, icon, color, bg }) => insightCard(key, moonChartData.moon_prediction[key] || '—', icon, color, bg))}
+                        ].map(({ key, icon, color, bg }) =>
+                          insightCard(key, moonChartData.moon_prediction[key] || '—', icon, color, bg)
+                        )}
                       </div>
                     ) : <p className="text-sm text-text-secondary">Moon insights unavailable.</p>}
                 </div>
@@ -465,60 +503,109 @@ export default function KundaliResultPage() {
 
                 <div className="grid lg:grid-cols-12 gap-8">
                   {/* Shadbala Strength Meter (Takes 7 columns on Desktop) */}
-                  <div className="lg:col-span-7 p-8 rounded-[2.5rem] bg-surface border border-border shadow-2xl shadow-foreground/5 space-y-6">
-                    <div className="flex items-center justify-between border-b border-border/50 pb-4">
+                  <div className="lg:col-span-7 p-6 md:p-8 rounded-[2.5rem] bg-surface border border-border shadow-2xl shadow-foreground/5 space-y-5">
+
+                    {/* ── Header ── */}
+                    <div className="flex items-start justify-between pb-4 border-b border-border/50">
                       <div>
-                        <h3 className="text-sm font-bold text-foreground uppercase tracking-widest">Shadbala</h3>
-                        <p className="text-xs text-text-secondary font-normal mt-1">Intrinsic Planetary Strength</p>
+                        <div className="flex items-center gap-2 mb-1">
+                          <Activity size={15} className="text-primary" />
+                          <h3 className="text-sm font-bold text-foreground uppercase tracking-widest">Shadbala</h3>
+                          <span className="text-[8px] font-bold uppercase tracking-widest text-primary bg-primary/10 px-2 py-0.5 rounded-full border border-primary/20">Six-Fold Strength</span>
+                        </div>
+                        <p className="text-[10px] text-text-secondary font-normal">Intrinsic planetary power score — higher Rupas = stronger influence on your life</p>
                       </div>
-                      <Activity size={18} className="text-primary opacity-50" />
+                      {/* Legend */}
+                      <div className="hidden md:flex flex-col gap-1 shrink-0">
+                        {[
+                          { label: 'Strong', color: 'bg-primary', text: 'text-primary' },
+                          { label: 'Moderate', color: 'bg-amber-500', text: 'text-amber-500' },
+                          { label: 'Weak', color: 'bg-alert', text: 'text-alert' },
+                        ].map(l => (
+                          <div key={l.label} className="flex items-center gap-1.5">
+                            <span className={`w-2 h-2 rounded-full ${l.color}`} />
+                            <span className={`text-[9px] font-bold uppercase tracking-widest ${l.text}`}>{l.label}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    
-                    <div className="grid md:grid-cols-2 gap-4">
+
+                    {/* ── Planet Rows ── */}
+                    <div className="space-y-3">
                       {Object.entries(calculations.advanced_metrics.shadbala || {})
                         .sort(([, a]: any, [, b]: any) => b.percentage - a.percentage)
-                        .map(([planet, data]: any) => (
-                        <div key={planet} className="group relative flex flex-col p-5 rounded-3xl bg-surface/40 backdrop-blur-md border border-border/60 hover:bg-surface hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300 overflow-hidden">
-                          {/* Subtle background glow for strong planets */}
-                          {data.is_strong && <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl -z-10 transition-opacity opacity-50 group-hover:opacity-100" />}
-                          
-                          <div className="flex items-start justify-between mb-4">
-                            <div className="flex items-center gap-3">
-                              <div className={`w-8 h-8 rounded-full flex items-center justify-center border ${data.is_strong ? 'bg-primary/10 border-primary/20 text-primary' : data.is_weak ? 'bg-alert/10 border-alert/20 text-alert' : 'bg-foreground/5 border-border text-text-secondary'}`}>
-                                <Sparkles size={12} className={data.is_strong ? "animate-pulse" : ""} />
-                              </div>
-                              <div>
-                                <span className="text-sm font-bold text-foreground block">
-                                  {t(`result.planets.names.${planet}`)}
-                                </span>
-                                <span className={`text-[9px] font-bold uppercase tracking-widest ${data.is_strong ? 'text-primary' : data.is_weak ? 'text-alert' : 'text-text-secondary'}`}>
-                                  {data.strength_label}
-                                </span>
-                              </div>
-                            </div>
-                            <div className="text-right">
-                              <span className="text-lg font-serif italic text-foreground block leading-none">{data.rupas}</span>
-                              <span className="text-[8px] font-bold uppercase tracking-widest text-text-secondary">Rupas</span>
-                            </div>
-                          </div>
-                          
-                          <div className="relative h-1.5 w-full bg-foreground/5 rounded-full overflow-visible mb-5">
-                            <div className={`absolute top-0 left-0 h-full rounded-full transition-all duration-1000 ${data.is_strong ? 'bg-gradient-to-r from-primary/60 to-primary shadow-[0_0_8px_rgba(91,33,182,0.6)]' : data.is_weak ? 'bg-gradient-to-r from-alert/60 to-alert' : 'bg-gradient-to-r from-text-secondary/60 to-text-secondary'}`} style={{ width: `${data.percentage}%` }} />
-                          </div>
+                        .map(([planet, data]: any, rank: number) => {
+                          const isStrong   = data.is_strong;
+                          const isWeak     = data.is_weak;
+                          const barColor   = isStrong ? 'from-primary/80 to-primary' : isWeak ? 'from-rose-500/80 to-rose-500' : 'from-amber-500/80 to-amber-400';
+                          const glowColor  = isStrong ? 'shadow-primary/40' : isWeak ? 'shadow-rose-500/30' : 'shadow-amber-500/30';
+                          const ringColor  = isStrong ? 'border-primary/40 bg-primary/10 text-primary' : isWeak ? 'border-rose-500/40 bg-rose-500/10 text-rose-400' : 'border-amber-500/40 bg-amber-500/10 text-amber-500';
+                          const badgeColor = isStrong ? 'bg-primary/10 text-primary border-primary/20' : isWeak ? 'bg-rose-500/10 text-rose-400 border-rose-500/20' : 'bg-amber-500/10 text-amber-500 border-amber-500/20';
 
-                          <div className="space-y-3 mt-auto">
-                            <div className="flex items-start gap-2">
-                              <Activity size={12} className="text-text-secondary mt-0.5 shrink-0" />
-                              <p className="text-[11px] text-foreground font-normal leading-relaxed">{data.impact}</p>
+                          return (
+                            <div key={planet} className="group relative rounded-2xl border border-border/60 bg-background/40 hover:bg-surface hover:border-border transition-all duration-300 overflow-hidden px-4 py-3">
+                              {/* Glow for strong planets */}
+                              {isStrong && <div className="absolute inset-0 bg-primary/3 pointer-events-none" />}
+
+                              {/* Row top: rank + name + badge + rupas */}
+                              <div className="flex items-center gap-3 mb-2">
+                                {/* Rank ring */}
+                                <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center shrink-0 font-black text-[11px] ${ringColor}`}>
+                                  {rank + 1}
+                                </div>
+
+                                {/* Planet name + label */}
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-2 flex-wrap">
+                                    <span className="text-sm font-bold text-foreground">
+                                      {t(`result.planets.names.${planet}`)}
+                                    </span>
+                                    <span className={`text-[8px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full border ${badgeColor}`}>
+                                      {data.strength_label}
+                                    </span>
+                                  </div>
+                                </div>
+
+                                {/* Rupas */}
+                                <div className="text-right shrink-0">
+                                  <span className="text-base font-serif italic text-foreground leading-none">{data.rupas}</span>
+                                  <span className="text-[8px] font-bold uppercase tracking-widest text-text-secondary ml-1">Rupas</span>
+                                </div>
+
+                                {/* Percentage */}
+                                <div className="w-10 text-right shrink-0">
+                                  <span className="text-[10px] font-bold text-text-secondary">{data.percentage}%</span>
+                                </div>
+                              </div>
+
+                              {/* Strength bar */}
+                              <div className="relative h-1.5 w-full bg-foreground/5 rounded-full overflow-hidden mb-2 ml-11">
+                                <div
+                                  className={`absolute top-0 left-0 h-full rounded-full bg-gradient-to-r ${barColor} shadow-lg ${glowColor} transition-all duration-1000`}
+                                  style={{ width: `${data.percentage}%` }}
+                                />
+                              </div>
+
+                              {/* Impact + Remedy collapsed row */}
+                              <div className="ml-11 grid md:grid-cols-2 gap-x-4 gap-y-0.5">
+                                <div className="flex items-start gap-1.5">
+                                  <Activity size={10} className="text-text-secondary mt-0.5 shrink-0" />
+                                  <p className="text-[10px] text-text-secondary leading-snug">{data.impact}</p>
+                                </div>
+                                <div className="flex items-start gap-1.5">
+                                  <Leaf size={10} className="text-highlight mt-0.5 shrink-0" />
+                                  <p className="text-[10px] text-foreground font-semibold leading-snug">{data.solution}</p>
+                                </div>
+                              </div>
                             </div>
-                            <div className="flex items-start gap-2">
-                              <Leaf size={12} className="text-highlight mt-0.5 shrink-0" />
-                              <p className="text-[11px] text-foreground font-semibold leading-relaxed">{data.solution}</p>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
+                          );
+                        })}
                     </div>
+
+                    {/* Footer note */}
+                    <p className="text-[9px] text-text-secondary italic pt-2 border-t border-border/40">
+                      Shadbala is computed using six classical sub-strengths: Sthana, Dig, Kala, Chesta, Naisargika &amp; Drik bala per BPHS.
+                    </p>
                   </div>
 
                   {/* Nadi Karmic Tasks & Ashtakavarga (Takes 5 columns) */}
@@ -639,7 +726,13 @@ export default function KundaliResultPage() {
               year: searchParams.get('year') || '',
               hour: searchParams.get('hour') || '0',
               minute: searchParams.get('minute') || searchParams.get('min') || '0',
-              place: '',
+              place: (() => {
+                try {
+                  const saved = typeof window !== 'undefined' ? localStorage.getItem('astropinch_profile') : null;
+                  if (saved) return JSON.parse(saved).birth_place || '';
+                } catch {}
+                return '';
+              })(),
               profession: searchParams.get('profession') || '',
               lat: parseFloat(searchParams.get('lat') || '0'),
               lon: parseFloat(searchParams.get('lon') || '0'),

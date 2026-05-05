@@ -78,8 +78,21 @@ export function useActiveProfile() {
       const res = await fetch(`${apiUrl}/users`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      if (!res.ok) throw new Error('Failed to fetch profiles');
+      if (!res.ok) {
+        localStorage.removeItem('token');
+        setIsLoggedIn(false);
+        throw new Error('Failed to fetch profiles');
+      }
       const data: UserProfile[] = await res.json();
+      
+      if (!data || data.length === 0) {
+        localStorage.removeItem('token');
+        setIsLoggedIn(false);
+        setProfiles([]);
+        setActiveProfileId(null);
+        return;
+      }
+
       setProfiles(data);
 
       // Restore previously selected profile, or default to master
@@ -94,7 +107,10 @@ export function useActiveProfile() {
       const master = data.find((u) => u.role === 'master') ?? data[0];
       if (master) setActiveProfileId(master.id);
     } catch {
-      // ignore
+      localStorage.removeItem('token');
+      setIsLoggedIn(false);
+      setProfiles([]);
+      setActiveProfileId(null);
     } finally {
       setLoading(false);
     }

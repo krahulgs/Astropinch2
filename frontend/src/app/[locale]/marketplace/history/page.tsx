@@ -30,7 +30,7 @@ export default function HistoryPage() {
   const fetchHistory = async () => {
     setLoading(true);
     try {
-      const url = new URL(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/consultation/history`);
+      const url = new URL(`${process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000"}/consultation/history`);
       if (parsedActive?.name) {
         url.searchParams.append('profile_name', parsedActive.name);
       }
@@ -46,7 +46,7 @@ export default function HistoryPage() {
 
   const fetchSessionDetails = async (sessionId: string) => {
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
       const res = await fetch(`${apiUrl}/consultation/history/${sessionId}`);
       const data = await res.json();
       setSelectedSession(data);

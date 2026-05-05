@@ -1711,3 +1711,74 @@ INFO:     127.0.0.1:56585 - "OPTIONS /users HTTP/1.1" 200 OK
 INFO:     127.0.0.1:56759 - "OPTIONS /users HTTP/1.1" 200 OK
 INFO:     127.0.0.1:56585 - "GET /users HTTP/1.1" 200 OK
 INFO:     127.0.0.1:56759 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56775 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56776 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56778 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56791 - "GET /geo/search?q=jalan HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56795 - "GET /geo/search?q=jalandha HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56791 - "GET /geo/search?q=Jalandhar HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56804 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56806 - "OPTIONS /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56806 - "POST /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56806 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56810 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56811 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56817 - "OPTIONS /matching_raw HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56818 - "OPTIONS /matching_raw HTTP/1.1" 200 OK
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+WARNING:root:
+********
+NO GEONAMES USERNAME SET!
+Using the default geonames username is not recommended, please set a custom one!
+You can get one for free here:
+https://www.geonames.org/login
+You can set the username via the KERYKEION_GEONAMES_USERNAME environment variable
+or by passing the geonames_username parameter.
+Keep in mind that the default username is limited to 2000 requests per hour and is shared with everyone else using this library.
+********
+INFO:     127.0.0.1:56818 - "POST /matching_raw HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56817 - "POST /matching_raw HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56843 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56844 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56854 - "OPTIONS /matching/lovers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56855 - "OPTIONS /matching/lovers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56854 - "POST /matching/lovers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56855 - "POST /matching/lovers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56864 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56865 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57165 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57166 - "GET /users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57182 - "POST /matching/lovers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57183 - "POST /matching/lovers HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57409 - "GET /geo/search?q=hyde HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57458 - "OPTIONS /auth/register HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57458 - "POST /auth/register HTTP/1.1" 200 OK

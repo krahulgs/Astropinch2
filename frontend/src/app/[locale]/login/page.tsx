@@ -23,14 +23,23 @@ export default function LoginPage() {
       params.append('username', email);
       params.append('password', password);
 
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-      const response = await fetch(`${apiUrl}/token`, {
-        method: 'POST',
-        body: params,
-      });
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+      let response: Response;
+      try {
+        response = await fetch(`${apiUrl}/token`, {
+          method: 'POST',
+          body: params,
+        });
+      } catch {
+        throw new Error('Cannot connect to server. Please ensure the backend is running.');
+      }
 
+      if (response.status === 401) {
+        throw new Error('Invalid email or password. Please try again.');
+      }
       if (!response.ok) {
-        throw new Error('Invalid credentials');
+        const errBody = await response.json().catch(() => ({}));
+        throw new Error(errBody.detail || `Login failed (${response.status}).`);
       }
 
       const data = await response.json();

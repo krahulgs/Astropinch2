@@ -129,6 +129,18 @@ export default function DailyGuideTab({ initialProfile }: { initialProfile?: Ini
 
   const hasFetched = React.useRef(false);
 
+  // Sync form fields if initialProfile is updated after mount (e.g. Suspense)
+  useEffect(() => {
+    if (initialProfile?.place && !formData.lat) {
+      setFormData(prev => ({
+        ...prev,
+        place: initialProfile.place,
+        lat:   initialProfile.lat,
+        lon:   initialProfile.lon,
+      }));
+    }
+  }, [initialProfile?.place]);
+
   useEffect(() => {
     const loadProfile = () => {
       if (hasFetched.current) return;

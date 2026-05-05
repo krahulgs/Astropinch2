@@ -13,6 +13,16 @@ const nextConfig: NextConfig = {
         port: '8000',
         pathname: '/static/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'astropinch-api-56j9.onrender.com',
+        pathname: '/static/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.onrender.com',
+        pathname: '/static/**',
+      },
     ],
   },
 };

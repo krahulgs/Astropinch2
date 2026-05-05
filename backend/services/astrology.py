@@ -365,7 +365,11 @@ class AstrologyEngine:
         }
 
     def check_manglik(self, planets, ascendant):
-        """Checks for Mangal Dosha (Mars in 1, 4, 7, 8, 12 houses) from Lagna and Moon with authentic Parihara (cancellation) logic."""
+        """Checks for Mangal Dosha (Mars in 1, 2, 4, 7, 8, 12 houses) from Lagna and Moon with authentic Parihara.
+        
+        NOTE: Mars in own sign (Aries/Scorpio) or exaltation (Capricorn) does NOT cancel Mangal Dosha.
+        Per BPHS, it actually intensifies the Dosha. Only specific house+sign combos provide Parihara.
+        """
         mars_lon = planets["Mars"]["longitude"]
         asc_lon = ascendant["longitude"]
         moon_lon = planets["Moon"]["longitude"]
@@ -373,30 +377,31 @@ class AstrologyEngine:
         house_lagna = self.get_house_number(mars_lon, asc_lon)
         house_moon = self.get_house_number(mars_lon, moon_lon)
         
-        is_manglik_lagna = house_lagna in [1, 4, 7, 8, 12]
-        is_manglik_moon = house_moon in [1, 4, 7, 8, 12]
+        # Classical Manglik houses: 1, 2, 4, 7, 8, 12 (Parashari school includes H2)
+        MANGLIK_HOUSES = [1, 2, 4, 7, 8, 12]
+        is_manglik_lagna = house_lagna in MANGLIK_HOUSES
+        is_manglik_moon = house_moon in MANGLIK_HOUSES
         
         # Parihara (Cancellation) Logic - Authentic Vedic Rules
         mars_sign = int(mars_lon // 30) + 1 # 1-12
         parihara_reasons = []
         
-        # Rule 1: Mars in own sign (Aries/Scorpio) or Exaltation (Capricorn)
-        if mars_sign in [1, 8, 10]:
-            parihara_reasons.append("Mars is in its own or exalted sign.")
-            
-        # Rule 2: Specific House-Sign Cancellations
-        if house_lagna == 4 and mars_sign == 8: # Scorpio in 4th
+        # ── Authentic Parihara Rules (per BPHS & Parashari tradition) ──────────
+        # REMOVED: Mars in own/exalted sign is NOT a cancellation. It strengthens Dosha.
+        
+        # Rule 1: Specific house+sign combinations that provide Parihara
+        if house_lagna == 4 and mars_sign == 8:   # Mars in Scorpio (own) in 4th
             parihara_reasons.append("Mars in Scorpio in the 4th house cancels the Dosha.")
-        if house_lagna == 7 and mars_sign in [10, 12]: # Cap/Pisces in 7th
-            parihara_reasons.append("Mars in Capricorn or Pisces in the 7th house cancels the Dosha.")
-        if house_lagna == 8 and mars_sign in [4, 9]: # Cancer/Sag in 8th
-            parihara_reasons.append("Mars in Cancer or Sagittarius in the 8th house cancels the Dosha.")
-        if house_lagna == 12 and mars_sign in [3, 6, 9, 12]: # Mercury/Jupiter signs in 12th
-            parihara_reasons.append("Mars in a dual sign in the 12th house is neutralized.")
-            
-        # Rule 3: Mars in Jupiter's signs (Sagittarius or Pisces) reduces aggression
-        if mars_sign in [9, 12] and not any("Sagittarius" in r or "Pisces" in r for r in parihara_reasons):
-            parihara_reasons.append("Mars is in a friendly and dharmic sign (ruled by Jupiter), which significantly reduces its aggression, resulting in a Mild/Cancelled Dosha.")
+        if house_lagna == 7 and mars_sign == 10:  # Mars exalted (Capricorn) in 7th
+            parihara_reasons.append("Mars exalted in Capricorn in the 7th house neutralizes Dosha.")
+        if house_lagna == 7 and mars_sign == 12:  # Mars in Pisces in 7th
+            parihara_reasons.append("Mars in Pisces in the 7th house reduces Dosha significantly.")
+        if house_lagna == 8 and mars_sign == 4:   # Mars debilitated (Cancer) in 8th
+            parihara_reasons.append("Mars is debilitated in Cancer in the 8th — Dosha is cancelled.")
+        if house_lagna == 8 and mars_sign == 9:   # Mars in Sagittarius in 8th
+            parihara_reasons.append("Mars in Sagittarius in the 8th house cancels the Dosha.")
+        if house_lagna == 12 and mars_sign in [3, 6, 9, 12]:  # Dual signs in 12th
+            parihara_reasons.append("Mars in a dual (Dwiswabhava) sign in the 12th house is neutralized.")
 
         # Lagna Sandhi Check (Ascendant on the cusp)
         asc_degree_in_sign = asc_lon % 30
@@ -410,12 +415,12 @@ class AstrologyEngine:
         # Overall status
         is_manglik = (is_manglik_lagna or is_manglik_moon)
         
-        if is_parihara and is_manglik:
+        if is_manglik and not is_parihara:
+            severity = "High" if (house_lagna in [7, 8] or house_moon in [7, 8]) else "Moderate"
+            status_desc = f"Mars is in House {house_lagna} from Lagna and House {house_moon} from Moon. No authentic cancellation found."
+        elif is_manglik and is_parihara:
             severity = "Low / Mild (Cancelled)"
             status_desc = "Neutralized: " + " ".join(parihara_reasons)
-        elif is_manglik:
-            severity = "High" if (house_lagna in [7, 8] or house_moon in [7, 8]) else "Moderate"
-            status_desc = f"Mars is in {house_lagna} from Lagna and {house_moon} from Moon. No direct cancellation found."
         else:
             severity = "None"
             status_desc = "No Mangal Dosha detected in the birth chart."

@@ -74,7 +74,7 @@ export default function YearBookReportPage() {
       target_year: parseInt(getParam('targetYear', '2026'))
     };
 
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
 
     // Phase 1: Fast calls — show page immediately
     const fetchFast = async () => {

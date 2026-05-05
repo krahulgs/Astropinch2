@@ -496,16 +496,29 @@ except Exception as e:
     print(f"Error loading cities data: {e}")
     INDIAN_CITIES = []
 
+# ── In-process geo cache: { query -> (results, timestamp) } ──
+import time as _time
+GEO_CACHE: dict = {}
+GEO_CACHE_TTL = 3600   # 1 hour
+GEO_CACHE_MAX = 500    # max entries before LRU eviction
+
 @app.get("/geo/search")
 async def geo_search(q: str = Query(...)):
     """
-    Search for locations using Photon API (OpenStreetMap) with a local fallback.
+    Search for Indian locations. Uses in-process cache → local data → Photon fallback.
     """
     query = q.lower().strip()
-    if not query:
+    if len(query) < 2:
         return []
 
-    # 1. Search in local data first (for speed and specific Indian cities)
+    # ── 1. Serve from cache ──
+    cached = GEO_CACHE.get(query)
+    if cached:
+        results, ts = cached
+        if _time.time() - ts < GEO_CACHE_TTL:
+            return results
+
+    # ── 2. Local dataset (O(n), 245 cities — fast) ──
     results = []
     for city in INDIAN_CITIES:
         search_target = f"{city['name']} {city['state']} {city.get('pincode', '')}".lower()
@@ -513,45 +526,52 @@ async def geo_search(q: str = Query(...)):
             display_name = f"{city['name']}, {city['state']}, India"
             if "pincode" in city:
                 display_name = f"{city['name']} ({city['pincode']}), {city['state']}, India"
-                
             results.append({
                 "display_name": display_name,
                 "lat": str(city["lat"]),
                 "lon": str(city["lon"])
             })
-            if len(results) >= 10:
-                return results
+            if len(results) >= 8:
+                break
 
-    # 2. Fallback to Photon API if local results are few
-    try:
-        async with httpx.AsyncClient() as client:
-            # Photon is a free geocoding API based on OSM data
-            response = await client.get(
-                f"https://photon.komoot.io/api/?q={query}&limit=10",
-                timeout=5.0
-            )
-            if response.status_code == 200:
-                data = response.json()
-                for feature in data.get("features", []):
-                    props = feature.get("properties", {})
-                    coords = feature.get("geometry", {}).get("coordinates", [])
-                    
-                    if not coords: continue
-                    
-                    name = props.get("name", "")
-                    city = props.get("city", props.get("state", ""))
-                    country = props.get("country", "")
-                    
-                    display_name = f"{name}, {city}, {country}".strip(", ")
-                    
-                    results.append({
-                        "display_name": display_name,
-                        "lat": str(coords[1]),
-                        "lon": str(coords[0])
-                    })
-    except Exception as e:
-        print(f"External Geocoding Error: {e}")
-    
+    # ── 3. Photon fallback (only when local has < 3 results) ──
+    if len(results) < 3:
+        try:
+            async with httpx.AsyncClient(timeout=4.0) as client:
+                response = await client.get(
+                    f"https://photon.komoot.io/api/",
+                    params={"q": query, "limit": 8, "lang": "en", "countrycode": "in"},
+                )
+                if response.status_code == 200:
+                    data = response.json()
+                    seen = {r["display_name"] for r in results}
+                    for feature in data.get("features", []):
+                        props = feature.get("properties", {})
+                        coords = feature.get("geometry", {}).get("coordinates", [])
+                        if not coords:
+                            continue
+                        name    = props.get("name", "")
+                        city    = props.get("city", props.get("county", props.get("state", "")))
+                        country = props.get("country", "India")
+                        display_name = f"{name}, {city}, {country}".strip(", ")
+                        if display_name not in seen:
+                            results.append({
+                                "display_name": display_name,
+                                "lat": str(coords[1]),
+                                "lon": str(coords[0])
+                            })
+                            seen.add(display_name)
+                        if len(results) >= 8:
+                            break
+        except Exception as e:
+            print(f"Photon geocoding error: {e}")
+
+    # ── 4. Write to cache (evict oldest if full) ──
+    if len(GEO_CACHE) >= GEO_CACHE_MAX:
+        oldest_key = next(iter(GEO_CACHE))
+        del GEO_CACHE[oldest_key]
+    GEO_CACHE[query] = (results, _time.time())
+
     return results
 
 @app.get("/health")
@@ -1648,17 +1668,18 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import random
 
-def send_welcome_email(to_email: str, full_name: str, otp: str):
+def _send_email_sync(to_email: str, full_name: str, otp: str) -> bool:
+    """Blocking SMTP call — always run inside a thread via asyncio.to_thread."""
     sender_email = "genpinch@gmail.com"
     sender_password = os.environ.get("GMAIL_APP_PASSWORD", "")
     if not sender_password:
-        print("Warning: GMAIL_APP_PASSWORD not set in environment.")
+        print("Warning: GMAIL_APP_PASSWORD not set.")
         return False
-        
+
     msg = MIMEMultipart("alternative")
-    msg["Subject"] = "Welcome to AstroPinch V2.0 - Verification"
-    msg["From"] = sender_email
-    msg["To"] = to_email
+    msg["Subject"] = "Welcome to AstroPinch - Verify Your Email"
+    msg["From"]    = sender_email
+    msg["To"]      = to_email
 
     html = f"""
     <html>
@@ -1667,58 +1688,59 @@ def send_welcome_email(to_email: str, full_name: str, otp: str):
           <div style="text-align: center; margin-bottom: 20px;">
             <h1 style="color: #6366f1; margin: 0;">AstroPinch</h1>
           </div>
-          <h2 style="color: #2c3e50; text-align: center;">Welcome to AstroPinch! 🌟</h2>
+          <h2 style="color: #2c3e50; text-align: center;">Welcome! 🌟</h2>
           <p style="color: #34495e; font-size: 16px;">Dear {full_name},</p>
-          <p style="color: #34495e; font-size: 16px;">We are thrilled to have you join our cosmic community. Your journey into the stars begins now. To ensure the security of your account and complete your registration, please verify your email address.</p>
+          <p style="color: #34495e; font-size: 16px;">Your verification OTP is:</p>
           <div style="background-color: #f8f9fa; border-left: 4px solid #6366f1; padding: 15px; margin: 20px 0;">
-            <p style="margin: 0; font-size: 16px; color: #2c3e50;">Your One-Time Password (OTP) is:</p>
             <h3 style="text-align: center; color: #e74c3c; font-size: 28px; letter-spacing: 4px; margin: 10px 0;">{otp}</h3>
           </div>
-          <p style="color: #34495e; font-size: 14px;">This OTP is valid for the next 10 minutes. If you did not request this registration, please ignore this email.</p>
+          <p style="color: #34495e; font-size: 14px;">Valid for 10 minutes.</p>
           <p style="color: #34495e; font-size: 16px; margin-top: 30px;">Warm regards,<br><strong>The AstroPinch Team</strong></p>
         </div>
       </body>
     </html>
     """
-    
-    part = MIMEText(html, "html")
-    msg.attach(part)
-    
+    msg.attach(MIMEText(html, "html"))
+
     try:
-        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server = smtplib.SMTP("smtp.gmail.com", 587, timeout=10)
         server.starttls()
         server.login(sender_email, sender_password)
         server.sendmail(sender_email, to_email, msg.as_string())
         server.quit()
         return True
     except Exception as e:
-        print(f"Failed to send email: {e}")
+        print(f"Email send failed: {e}")
         return False
+
+async def send_welcome_email(to_email: str, full_name: str, otp: str) -> bool:
+    """Non-blocking wrapper — offloads SMTP to thread pool."""
+    import asyncio
+    return await asyncio.to_thread(_send_email_sync, to_email, full_name, otp)
 
 PENDING_REGISTRATIONS = {}
 
 @app.post("/auth/register")
 async def register_public(user_data: PublicUserRegister, db: Session = Depends(get_db)):
+    import asyncio
     existing = db.query(models.User).filter(models.User.email == user_data.email).first()
     if existing:
         raise HTTPException(status_code=400, detail="Email already registered")
-        
+
     hashed_pwd = auth.get_password_hash(user_data.password)
     otp = str(random.randint(100000, 999999))
-    
+
     # Store temporarily instead of saving to DB
     PENDING_REGISTRATIONS[user_data.email] = {
         "user_data": user_data,
         "hashed_pwd": hashed_pwd,
         "otp": otp
     }
-    
-    # Send email
-    email_sent = send_welcome_email(user_data.email, user_data.full_name, otp)
-    if not email_sent:
-        print("Warning: Email could not be sent. OTP:", otp)
-    
-    return {"status": "success", "message": "OTP generated and sent to email.", "email_sent": email_sent}
+
+    # ── Fire-and-forget: return response IMMEDIATELY, email sends in background ──
+    asyncio.create_task(send_welcome_email(user_data.email, user_data.full_name, otp))
+
+    return {"status": "success", "message": "OTP sent to your email.", "email_sent": True}
 
 class OTPVerify(BaseModel):
     email: str

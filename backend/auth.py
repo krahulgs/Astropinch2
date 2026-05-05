@@ -13,7 +13,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 600
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 def get_password_hash(password: str) -> str:
-    salt = bcrypt.gensalt()
+    salt = bcrypt.gensalt(rounds=10)   # 10 rounds = OWASP minimum, ~4x faster than default 12
     hashed = bcrypt.hashpw(password.encode('utf-8'), salt)
     return hashed.decode('utf-8')
 

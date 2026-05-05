@@ -27,7 +27,7 @@ const CityInput: React.FC<CityInputProps> = ({ value, onChange, label, placehold
   const abortControllerRef = useRef<AbortController | null>(null);
 
   const searchCity = async (query: string) => {
-    if (query.length < 2) {
+    if (query.length < 3) {
       setSearchResults([]);
       setShowDropdown(false);
       return;
@@ -41,7 +41,7 @@ const CityInput: React.FC<CityInputProps> = ({ value, onChange, label, placehold
 
     setIsSearching(true);
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
       const res = await fetch(`${apiUrl}/geo/search?q=${encodeURIComponent(query)}`, {
         signal: abortControllerRef.current.signal
       });
@@ -69,11 +69,11 @@ const CityInput: React.FC<CityInputProps> = ({ value, onChange, label, placehold
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     onChange(val, 0, 0);
-    
+    if (!val) { setSearchResults([]); setShowDropdown(false); return; }
     if (searchTimeout.current) clearTimeout(searchTimeout.current);
     searchTimeout.current = setTimeout(() => {
       searchCity(val);
-    }, 300);
+    }, 200);  // 200ms debounce — fast enough to feel instant
   };
 
   const selectPlace = (place: any) => {

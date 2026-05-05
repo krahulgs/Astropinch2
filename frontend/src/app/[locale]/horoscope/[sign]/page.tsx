@@ -41,7 +41,7 @@ export default function SignPage({ params }: { params: Promise<{ sign: string }>
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
         const res = await fetch(`${apiUrl}/horoscope/sign?sign=${sign}`);
         if (!res.ok) throw new Error('Failed to fetch horoscope data');
         const result = await res.json();

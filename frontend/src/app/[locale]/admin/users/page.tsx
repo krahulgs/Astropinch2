@@ -78,14 +78,20 @@ export default function AdminUsersPage() {
     }
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
       const response = await fetch(`${apiUrl}/users`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (response.ok) {
         const data = await response.json();
+        if (!data || data.length === 0) {
+          localStorage.removeItem('token');
+          router.push('/login');
+          return;
+        }
         setUsers(data);
       } else {
+        localStorage.removeItem('token');
         router.push('/login');
       }
     } catch (err) {
@@ -104,7 +110,7 @@ export default function AdminUsersPage() {
     formData.append('file', file);
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
       const response = await fetch(`${apiUrl}/upload-avatar`, {
         method: 'POST',
         body: formData,
@@ -130,7 +136,7 @@ export default function AdminUsersPage() {
     searchTimeout.current = setTimeout(async () => {
       setIsSearching(true);
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
         const res = await fetch(`${apiUrl}/geo/search?q=${encodeURIComponent(query)}`);
         const data = await res.json();
         setSuggestions(data);
@@ -231,7 +237,7 @@ export default function AdminUsersPage() {
     };
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
       const url = editingUser 
         ? `${apiUrl}/users/${editingUser.id}` 
         : `${apiUrl}/users`;
@@ -264,7 +270,7 @@ export default function AdminUsersPage() {
     const token = localStorage.getItem('token');
     
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
       const response = await fetch(`${apiUrl}/users/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
@@ -444,109 +450,157 @@ export default function AdminUsersPage() {
         </div>
       </main>
 
-      {/* Manifest/Edit Profile Modal (Same as before but compact) */}
+      {/* ── Edit / Manifest Profile Modal ── */}
       {showModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-background/90 backdrop-blur-sm animate-in fade-in duration-300">
-          <div className="bg-surface border border-border rounded-[2.5rem] w-full max-w-xl p-8 shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] -mr-32 -mt-32 pointer-events-none"></div>
-            
-            <button onClick={() => setShowModal(false)} className="absolute top-6 right-6 text-text-secondary hover:text-foreground hover:rotate-90 transition-all duration-300">
-              <X size={20} />
-            </button>
-            
-            <div className="flex gap-6 mb-6">
-              <div 
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 bg-background/80 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="bg-surface border border-border rounded-3xl w-full max-w-lg shadow-2xl flex flex-col max-h-[92vh]">
+
+            {/* ── Header ── */}
+            <div className="flex items-center gap-4 p-6 border-b border-border shrink-0">
+              {/* Avatar picker */}
+              <div
                 onClick={() => fileInputRef.current?.click()}
-                className="w-20 h-20 rounded-[1.5rem] bg-background/50 border-2 border-dashed border-border flex flex-col items-center justify-center text-text-secondary cursor-pointer hover:border-primary/50 hover:text-primary transition-all relative overflow-hidden group"
+                className="w-14 h-14 rounded-2xl bg-foreground/5 border-2 border-dashed border-border flex flex-col items-center justify-center text-text-secondary cursor-pointer hover:border-primary/60 hover:text-primary transition-all relative overflow-hidden group shrink-0"
               >
                 {uploading ? (
-                  <Loader2 size={24} className="animate-spin" />
+                  <Loader2 size={20} className="animate-spin" />
                 ) : profileImage ? (
                   <>
                     <Image src={profileImage} alt="Preview" fill className="object-cover" />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-                      <Camera size={20} className="text-white" />
+                      <Camera size={16} className="text-white" />
                     </div>
                   </>
                 ) : (
                   <>
-                    <Camera size={24} className="mb-1" />
-                    <span className="text-[8px] font-bold uppercase">Add Photo</span>
+                    <Camera size={18} className="mb-0.5" />
+                    <span className="text-[7px] font-bold uppercase">Photo</span>
                   </>
                 )}
                 <input type="file" ref={fileInputRef} onChange={handleImageUpload} className="hidden" accept="image/*" />
               </div>
-              
-              <div className="flex-1 pt-2">
-                <h2 className="text-2xl font-serif italic mb-1 tracking-tight">
+
+              <div className="flex-1 min-w-0">
+                <h2 className="text-xl font-serif italic tracking-tight text-foreground">
                   {editingUser ? 'Edit Profile' : 'Manifest Profile'}
                 </h2>
-                <p className="text-[10px] text-text-secondary font-normal">
+                <p className="text-[11px] text-text-secondary mt-0.5">
                   {editingUser ? 'Adjust the celestial path of this entity.' : 'Input details to calculate celestial destiny.'}
                 </p>
               </div>
+
+              <button
+                onClick={() => setShowModal(false)}
+                className="w-8 h-8 rounded-full flex items-center justify-center text-text-secondary hover:text-foreground hover:bg-foreground/10 hover:rotate-90 transition-all duration-300 shrink-0"
+              >
+                <X size={18} />
+              </button>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* ── Scrollable Form Body ── */}
+            <form onSubmit={handleSubmit} className="flex flex-col flex-1 min-h-0">
+              <div className="flex-1 overflow-y-auto p-6 space-y-4">
+
+                {/* Full Name */}
                 <div className="space-y-1.5">
-                  <label className="text-[9px] font-bold uppercase tracking-[0.1em] text-text-secondary ml-3">Full Name</label>
-                  <div className="relative group">
-                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary"><User size={14} /></div>
-                    <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Full Name" className="w-full bg-surface border border-border rounded-xl py-3 pl-10 pr-4 text-xs focus:outline-none focus:border-primary/50 transition-all" required />
+                  <label className="text-[11px] font-semibold uppercase tracking-wider text-text-secondary block">Full Name</label>
+                  <div className="relative">
+                    <User size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none" />
+                    <input
+                      type="text"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      placeholder="e.g. Priya Sharma"
+                      className="w-full bg-background border border-border rounded-2xl py-3.5 pl-11 pr-4 text-sm text-foreground placeholder:text-text-secondary/50 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all"
+                      required
+                    />
                   </div>
                 </div>
 
-                <div className="space-y-1.5 relative">
-                  <label className="text-[9px] font-bold uppercase tracking-[0.1em] text-text-secondary ml-3">Birth Place (India)</label>
-                  <div className="relative group">
-                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary"><MapPin size={14} /></div>
-                    <input 
-                      type="text" 
-                      value={birthPlace} 
-                      onChange={(e) => handleCitySearch(e.target.value)} 
-                      placeholder="Search city/taluka" 
-                      className="w-full bg-surface border border-border rounded-xl py-3 pl-10 pr-4 text-xs focus:outline-none focus:border-primary/50 transition-all" 
-                      required 
+                {/* Birth Place */}
+                <div className="space-y-1.5" style={{ position: 'relative', zIndex: 50 }}>
+                  <label className="text-[11px] font-semibold uppercase tracking-wider text-text-secondary block">Birth Place (India)</label>
+                  <div className="relative">
+                    <MapPin size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none" />
+                    <input
+                      type="text"
+                      value={birthPlace}
+                      onChange={(e) => handleCitySearch(e.target.value)}
+                      placeholder="Search city or taluka…"
+                      className="w-full bg-background border border-border rounded-2xl py-3.5 pl-11 pr-4 text-sm text-foreground placeholder:text-text-secondary/50 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all"
+                      required
                     />
                   </div>
                   {suggestions.length > 0 && (
-                    <div className="absolute z-20 left-0 right-0 mt-1 bg-surface border border-border rounded-xl shadow-2xl max-h-40 overflow-y-auto backdrop-blur-xl">
+                    <div className="absolute left-0 right-0 top-full mt-1 bg-surface border border-border rounded-2xl shadow-2xl max-h-44 overflow-y-auto" style={{ zIndex: 300 }}>
                       {suggestions.map((city, i) => (
-                        <button key={i} type="button" onClick={() => selectCity(city)} className="w-full text-left px-5 py-2.5 text-[11px] hover:bg-primary/10 transition-colors border-b border-border/50 last:border-0">
-                          {city.display_name}
+                        <button
+                          key={i}
+                          type="button"
+                          onClick={() => selectCity(city)}
+                          className="w-full text-left px-4 py-3 text-sm hover:bg-primary/10 transition-colors border-b border-border/40 last:border-0 first:rounded-t-2xl last:rounded-b-2xl"
+                        >
+                          <p className="font-medium text-foreground text-[13px]">{city.display_name.split(',')[0]}</p>
+                          <p className="text-[11px] text-text-secondary truncate">{city.display_name}</p>
                         </button>
                       ))}
                     </div>
                   )}
                 </div>
-              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Birth Date + Time — single full-width row, nothing clips */}
                 <div className="space-y-1.5">
-                  <label className="text-[9px] font-bold uppercase tracking-[0.1em] text-text-secondary ml-3">Birth Date</label>
-                  <div className="flex gap-2">
-                    <input type="text" maxLength={2} value={day} onChange={(e) => setDay(e.target.value)} placeholder="DD" className="w-14 bg-surface border border-border rounded-xl py-3 text-center text-xs focus:outline-none focus:border-primary/50" required />
-                    <input type="text" maxLength={2} value={month} onChange={(e) => setMonth(e.target.value)} placeholder="MM" className="w-14 bg-surface border border-border rounded-xl py-3 text-center text-xs focus:outline-none focus:border-primary/50" required />
-                    <input type="text" maxLength={4} value={year} onChange={(e) => setYear(e.target.value)} placeholder="YYYY" className="flex-1 bg-surface border border-border rounded-xl py-3 text-center text-xs focus:outline-none focus:border-primary/50" required />
+                  <div className="flex gap-4">
+                    <div className="flex-1 space-y-1.5">
+                      <label className="text-[11px] font-semibold uppercase tracking-wider text-text-secondary block">Birth Date</label>
+                      <div className="flex gap-1.5">
+                        <input type="text" inputMode="numeric" pattern="[0-9]*" maxLength={2} value={day}   onChange={(e) => setDay(e.target.value.replace(/\D/g,''))}   placeholder="DD"   className="w-0 flex-1 bg-background border border-border rounded-xl py-3.5 text-center text-sm text-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all min-w-0" required />
+                        <input type="text" inputMode="numeric" pattern="[0-9]*" maxLength={2} value={month} onChange={(e) => setMonth(e.target.value.replace(/\D/g,''))} placeholder="MM"   className="w-0 flex-1 bg-background border border-border rounded-xl py-3.5 text-center text-sm text-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all min-w-0" required />
+                        <input type="text" inputMode="numeric" pattern="[0-9]*" maxLength={4} value={year}  onChange={(e) => setYear(e.target.value.replace(/\D/g,''))}  placeholder="YYYY" className="w-0 flex-[1.8] bg-background border border-border rounded-xl py-3.5 text-center text-sm text-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all min-w-0" required />
+                      </div>
+                    </div>
+                    <div className="shrink-0 space-y-1.5">
+                      <label className="text-[11px] font-semibold uppercase tracking-wider text-text-secondary block">Birth Time</label>
+                      <div className="flex items-center gap-1.5">
+                        <input type="text" inputMode="numeric" pattern="[0-9]*" maxLength={2} value={hour}   onChange={(e) => setHour(e.target.value.replace(/\D/g,''))}   placeholder="HH" className="w-16 bg-background border border-border rounded-xl py-3.5 text-center text-sm text-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all" required />
+                        <span className="text-text-secondary font-bold text-base">:</span>
+                        <input type="text" inputMode="numeric" pattern="[0-9]*" maxLength={2} value={minute} onChange={(e) => setMinute(e.target.value.replace(/\D/g,''))} placeholder="MM" className="w-16 bg-background border border-border rounded-xl py-3.5 text-center text-sm text-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all" required />
+                      </div>
+                    </div>
                   </div>
                 </div>
 
+                {/* Gender */}
                 <div className="space-y-1.5">
-                  <label className="text-[9px] font-bold uppercase tracking-[0.1em] text-text-secondary ml-3">Birth Time</label>
-                  <div className="flex gap-2">
-                    <input type="text" maxLength={2} value={hour} onChange={(e) => setHour(e.target.value)} placeholder="HH" className="flex-1 bg-surface border border-border rounded-xl py-3 text-center text-xs focus:outline-none focus:border-primary/50" required />
-                    <input type="text" maxLength={2} value={minute} onChange={(e) => setMinute(e.target.value)} placeholder="MM" className="flex-1 bg-surface border border-border rounded-xl py-3 text-center text-xs focus:outline-none focus:border-primary/50" required />
+                  <label className="text-[11px] font-semibold uppercase tracking-wider text-text-secondary block">Gender</label>
+                  <div className="grid grid-cols-3 gap-2">
+                    {['Male', 'Female', 'Other'].map(g => (
+                      <button
+                        key={g}
+                        type="button"
+                        onClick={() => setGender(g)}
+                        className={`py-3 rounded-2xl text-sm font-semibold transition-all border ${
+                          gender === g
+                            ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20'
+                            : 'bg-background border-border text-text-secondary hover:border-primary/40 hover:text-foreground'
+                        }`}
+                      >
+                        {g}
+                      </button>
+                    ))}
                   </div>
                 </div>
-              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Profession */}
                 <div className="space-y-1.5">
-                  <label className="text-[9px] font-bold uppercase tracking-[0.1em] text-text-secondary ml-3">Profession</label>
-                  <div className="relative group">
-                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary"><Briefcase size={14} /></div>
-                    <select value={profession} onChange={(e) => setProfession(e.target.value)} className="w-full bg-surface border border-border rounded-xl py-3 pl-10 pr-4 text-xs focus:outline-none focus:border-primary/50 appearance-none transition-all">
+                  <label className="text-[11px] font-semibold uppercase tracking-wider text-text-secondary block">Profession</label>
+                  <div className="relative">
+                    <Briefcase size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none" />
+                    <select
+                      value={profession}
+                      onChange={(e) => setProfession(e.target.value)}
+                      className="w-full bg-background border border-border rounded-2xl py-3.5 pl-11 pr-4 text-sm text-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 appearance-none transition-all"
+                    >
                       <option value="">Select Profession</option>
                       {Object.entries(PROFESSION_CATEGORIES).map(([category, professions]) => (
                         <optgroup key={category} label={category} className="bg-background text-primary font-bold">
@@ -559,45 +613,37 @@ export default function AdminUsersPage() {
                   </div>
                 </div>
 
+                {/* Marital Status */}
                 <div className="space-y-1.5">
-                  <label className="text-[9px] font-bold uppercase tracking-[0.1em] text-text-secondary ml-3">Gender</label>
-                  <div className="grid grid-cols-3 gap-2">
-                    {['Male', 'Female', 'Other'].map(g => (
-                      <button
-                        key={g}
-                        type="button"
-                        onClick={() => setGender(g)}
-                        className={`py-3 rounded-xl text-xs font-bold transition-all border ${
-                          gender === g
-                            ? 'bg-primary text-white border-primary shadow-lg'
-                            : 'bg-surface border-border text-text-secondary hover:border-primary/30'
-                        }`}
-                      >
-                        {g}
-                      </button>
-                    ))}
+                  <label className="text-[11px] font-semibold uppercase tracking-wider text-text-secondary block">Marital Status</label>
+                  <div className="relative">
+                    <Heart size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none" />
+                    <select
+                      value={maritalStatus}
+                      onChange={(e) => setMaritalStatus(e.target.value)}
+                      className="w-full bg-background border border-border rounded-2xl py-3.5 pl-11 pr-4 text-sm text-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 appearance-none transition-all"
+                    >
+                      <option value="">Select Status</option>
+                      <option value="Single">Single</option>
+                      <option value="Married">Married</option>
+                      <option value="Divorced">Divorced</option>
+                    </select>
                   </div>
                 </div>
+
               </div>
 
-              <div className="space-y-1.5">
-                <label className="text-[9px] font-bold uppercase tracking-[0.1em] text-text-secondary ml-3">Marital Status</label>
-                <div className="relative group">
-                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary"><Heart size={14} /></div>
-                  <select value={maritalStatus} onChange={(e) => setMaritalStatus(e.target.value)} className="w-full bg-surface border border-border rounded-xl py-3 pl-10 pr-4 text-xs focus:outline-none focus:border-primary/50 appearance-none transition-all">
-                    <option value="">Select Status</option>
-                    <option value="Single">Single</option>
-                    <option value="Married">Married</option>
-                    <option value="Divorced">Divorced</option>
-                  </select>
-                </div>
+              {/* ── Sticky Footer ── */}
+              <div className="p-4 border-t border-border shrink-0">
+                <button
+                  type="submit"
+                  className="w-full py-4 bg-primary text-white rounded-2xl font-bold uppercase tracking-[0.15em] text-[12px] hover:bg-primary/90 active:scale-[0.98] transition-all duration-300 shadow-lg shadow-primary/25 flex items-center justify-center gap-2"
+                >
+                  {editingUser ? 'Update Profile' : 'Manifest Celestial Profile'}
+                </button>
               </div>
-
-
-              <button type="submit" className="w-full py-4 bg-foreground text-background rounded-xl font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-primary transition-all duration-500 shadow-xl shadow-foreground/5 mt-2">
-                {editingUser ? 'Update Profile' : 'Manifest Celestial Profile'}
-              </button>
             </form>
+
           </div>
         </div>
       )}

@@ -8,7 +8,7 @@ import BottomNav from '@/components/BottomNav';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import Footer from '@/components/Footer';
 import SidebarWrapper from '@/components/SidebarWrapper';
-import { DM_Sans, DM_Serif_Display, Noto_Sans_Devanagari, Noto_Sans_Bengali, Noto_Sans_Telugu, Noto_Sans_Tamil, Noto_Sans_Gujarati } from "next/font/google";
+import { Inter, DM_Serif_Display, Noto_Sans_Devanagari, Noto_Sans_Bengali, Noto_Sans_Telugu, Noto_Sans_Tamil, Noto_Sans_Gujarati } from "next/font/google";
 import "../globals.css";
 import { Metadata } from 'next';
 
@@ -18,11 +18,11 @@ export const metadata: Metadata = {
   keywords: ["Vedic Astrology", "AI Astrology", "Kundali Matching", "NASA-grade Precision", "Daily Horoscope", "AstroPinch"],
 };
 
-const dmSans = DM_Sans({
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap',
-  axes: ['opsz'],
+  weight: ['300', '400', '500', '600', '700'],
 });
 
 const dmSerif = DM_Serif_Display({
@@ -81,7 +81,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
  
   return (
-    <html lang={locale} className={`dark ${dmSans.variable} ${dmSerif.variable} ${notoDevanagari.variable} ${notoBengali.variable} ${notoTelugu.variable} ${notoTamil.variable} ${notoGujarati.variable} antialiased`}>
+    <html lang={locale} className={`dark ${inter.variable} ${dmSerif.variable} ${notoDevanagari.variable} ${notoBengali.variable} ${notoTelugu.variable} ${notoTamil.variable} ${notoGujarati.variable} antialiased`}>
       <body>
         <CosmicBackground />
         <NextIntlClientProvider messages={messages}>
